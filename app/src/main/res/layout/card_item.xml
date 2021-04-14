@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+
+    >
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        app:cardCornerRadius="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:id="@+id/label_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:text="星期六还有"
+                android:textColor="#191414"
+                android:maxLines="1"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:paddingStart="15dp"
+                android:background="#f3f5f6"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                />
+
+            <TextView
+                android:id="@+id/label_day"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:textSize="25sp"
+                android:text="8"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:layout_weight="0.8"
+                android:gravity="center"
+                android:background="#b2e486"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:textSize="20sp"
+                android:text="天"
+                android:textColor="@color/white"
+                android:maxLines="1"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:background="@color/colorPrimaryDark"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                />
+
+
+        </LinearLayout>
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>
