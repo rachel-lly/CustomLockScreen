@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.NoteListFragment">
+
+    <RelativeLayout
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <RelativeLayout
+            android:id="@+id/header_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            >
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                >
+
+                <TextView
+                    android:id="@+id/home_header_label_chosen_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Year"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/home_header_label_chosen_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/home_header_label_chosen_text"
+                    android:text="目标：2022-1-1 星期六"
+
+                    />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/home_header_label_chosen_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="246"
+                android:textColor="#000"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="50dp"
+                />
+
+            <ImageView
+                android:id="@+id/icon_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/day"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
+                />
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#33b4bcc0"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_below="@id/header_layout"
+            />
+
+
+        <RelativeLayout
+            android:id="@+id/home_label_list_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/header_layout"
+            >
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/home_swipeRefreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                >
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>
