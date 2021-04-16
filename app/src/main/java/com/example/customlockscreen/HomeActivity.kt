@@ -3,12 +3,17 @@ package com.example.customlockscreen
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.customlockscreen.Fragment.AddNoteFragment
 
 import com.example.customlockscreen.Fragment.NoteListFragment
 import com.example.customlockscreen.databinding.ActivityHomeBinding
+
+private const val LINEAR_LIST = "LINEAR_LIST"
+private const val GRID_LIST = "GRID_LIST"
+
 
 class HomeActivity : AppCompatActivity() {
 
@@ -20,7 +25,9 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
 
         setSupportActionBar(binding.homeToolbar)
+
         binding.homeToolbar.setNavigationIcon(R.mipmap.menu)
+
         binding.homeNavigationView.inflateMenu(R.menu.home_navigation_view)
         binding.homeNavigationView.setOnNavigationItemSelectedListener {
             // TODO: 2021/4/15 目前是2 记得改
@@ -29,6 +36,7 @@ class HomeActivity : AppCompatActivity() {
                     binding.homeViewPager.currentItem = i
                 }
             }
+
 
             return@setOnNavigationItemSelectedListener true
         }
@@ -51,10 +59,5 @@ class HomeActivity : AppCompatActivity() {
 
 
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
-        menuInflater.inflate(R.menu.home_toolbar,menu)
-        return true
-
-    }
 }

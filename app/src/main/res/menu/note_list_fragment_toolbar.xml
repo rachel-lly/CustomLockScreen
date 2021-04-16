@@ -3,9 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/grid_note"
+        android:icon="@mipmap/grid"
+        android:title="grid_note"
+        app:showAsAction="ifRoom"
+        />
+
+
+    <item
         android:id="@+id/add_note"
         android:icon="@mipmap/add"
-        android:title="add"
+        android:title="add_note"
         app:showAsAction="ifRoom"
         />
 

@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.NoteListFragment">
+
+
+
 
     <RelativeLayout
         android:id="@+id/content_layout"
@@ -34,6 +38,7 @@
                     android:layout_height="wrap_content"
                     android:text="New Year"
                     android:textStyle="bold"
+                    android:textSize="26sp"
                     />
 
                 <TextView
@@ -42,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/home_header_label_chosen_text"
                     android:text="目标：2022-1-1 星期六"
-
+                    android:textSize="15sp"
                     />
 
             </RelativeLayout>
@@ -54,8 +59,8 @@
                 android:layout_height="wrap_content"
                 android:text="246"
                 android:textColor="#000"
-                android:textSize="40sp"
-                android:textStyle="bold"
+                android:textSize="50sp"
+                android:textStyle="italic|bold"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="50dp"
                 />
@@ -103,6 +108,8 @@
                     android:padding="10dp"
                     />
 
+
+
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
@@ -112,4 +119,4 @@
 
     </RelativeLayout>
 
-</FrameLayout>
+</RelativeLayout>
