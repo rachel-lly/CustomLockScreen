@@ -20,7 +20,6 @@ class LabelLinearAdapter(val context: Context, val labelList:List<Label>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LabelLinearAdapter.ViewHolder {
         binding =  CardItemLinearBinding.inflate(LayoutInflater.from(context))
-//        val view = LayoutInflater.from(context).inflate(R.layout.card_item,parent,false)
 
         val holder = ViewHolder(binding)
         holder.itemView.setOnClickListener {

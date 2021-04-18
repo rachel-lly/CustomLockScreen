@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.customlockscreen.Fragment.AddNoteFragment
-
 import com.example.customlockscreen.Fragment.NoteListFragment
 import com.example.customlockscreen.databinding.ActivityHomeBinding
 

@@ -4,8 +4,6 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
-import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.customlockscreen.databinding.ActivityDetailBinding
@@ -28,11 +26,7 @@ class DetailActivity : AppCompatActivity() {
         setSupportActionBar(binding.detailToolbar)
         binding.detailToolbar.setTitleTextColor(Color.WHITE)
 
-
         steepStatusBar()
-
-
-
 
 
         binding.detailToolbar.setNavigationIcon(R.mipmap.back)
