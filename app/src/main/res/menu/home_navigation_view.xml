@@ -3,25 +3,25 @@
 
     <item
         android:id="@+id/item_home"
-        android:title="item_home"
+        android:title="home"
         android:icon="@mipmap/candidate_black"
         />
 
     <item
         android:id="@+id/item_note"
-        android:title="item_note"
+        android:title="note"
         android:icon="@mipmap/menu_black"
         />
 
     <item
         android:id="@+id/item_mine"
-        android:title="item_mine"
+        android:title="mine"
         android:icon="@mipmap/mine_black"
         />
 
     <item
         android:id="@+id/item_more"
-        android:title="item_more"
+        android:title="more"
         android:icon="@mipmap/more_black"
         />
 </menu>

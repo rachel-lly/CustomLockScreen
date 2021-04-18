@@ -1,6 +1,7 @@
 package com.example.customlockscreen
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -24,13 +25,14 @@ class LabelLinearAdapter(val context: Context, val labelList:List<Label>) :
         val holder = ViewHolder(binding)
         holder.itemView.setOnClickListener {
             val position = holder.adapterPosition
-            val Label = labelList[position]
-            // TODO: 2021/4/14 点击便签跳转详细页面 
-//            val intent = Intent(context,HomeActivity::class.java).apply {
-//                putExtra(LabelActivity.Label_NAME,Label.LabelName)
-//                putExtra(LabelActivity.Label_IMAGE_ID,Label.LabelImageId)
-//            }
-//            context.startActivity(intent)
+            val label = labelList[position]
+
+            val intent = Intent(context,DetailActivity::class.java).apply {
+                putExtra(LABEL_TEXT,label.text)
+                putExtra(LABEL_DAY, label.day.toString())
+                putExtra(LABEL_DATE, label.date)
+            }
+            context.startActivity(intent)
         }
 
         return holder

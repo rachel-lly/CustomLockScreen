@@ -2,18 +2,12 @@ package com.example.customlockscreen
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.customlockscreen.Fragment.AddNoteFragment
 
 import com.example.customlockscreen.Fragment.NoteListFragment
 import com.example.customlockscreen.databinding.ActivityHomeBinding
-
-private const val LINEAR_LIST = "LINEAR_LIST"
-private const val GRID_LIST = "GRID_LIST"
-
 
 class HomeActivity : AppCompatActivity() {
 
