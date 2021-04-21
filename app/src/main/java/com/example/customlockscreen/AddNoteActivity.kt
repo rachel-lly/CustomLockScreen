@@ -15,6 +15,9 @@ import java.text.SimpleDateFormat
 import javax.security.auth.callback.Callback
 import kotlin.time.ExperimentalTime
 
+const val SORT_NOTE_TEXT = "SORT_NOTE_TEXT"
+
+
 class AddNoteActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityAddNoteBinding
@@ -35,8 +38,7 @@ class AddNoteActivity : AppCompatActivity() {
 
         binding = ActivityAddNoteBinding.inflate(layoutInflater)
 
-        var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
+        binding.chooseSortTv.text = intent?.getStringExtra(SORT_NOTE_TEXT)
 
 
         val datePicker = MaterialDatePicker.Builder.datePicker()
@@ -96,32 +98,13 @@ class AddNoteActivity : AppCompatActivity() {
             }
         }
 
-        // TODO: 2021/4/19 分类事件的点击：弹出弹窗几个分类，新增分类跳转activity 
+
         binding.chooseSortNoteLayout.setOnClickListener {
-
-            if(bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED){
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
-            }else{
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
-            }
-
+            val intent = Intent(this, SortNoteActivity::class.java)
+            startActivity(intent)
         }
 
-        // TODO: 2021/4/21 选择分类
-        binding.sortLifeLayout.setOnClickListener {
-            binding.chooseSortTv.text = "生活"
-            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
-        }
 
-        binding.sortWorkLayout.setOnClickListener {
-            binding.chooseSortTv.text = "工作"
-            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
-        }
-
-        binding.sortAnniversaryLayout.setOnClickListener {
-            binding.chooseSortTv.text = "纪念日"
-            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
-        }
 
         setContentView(binding.root)
     }

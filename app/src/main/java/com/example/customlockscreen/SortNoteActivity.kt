@@ -14,8 +14,8 @@ class SortNoteActivity : AppCompatActivity() {
 
         binding = ActivitySortNoteBinding.inflate(layoutInflater)
 
-        binding.addNoteToolbar.setNavigationIcon(R.mipmap.back)
-        binding.addNoteToolbar.setNavigationOnClickListener {
+        binding.sortNoteToolbar.setNavigationIcon(R.mipmap.back)
+        binding.sortNoteToolbar.setNavigationOnClickListener {
             finish()
         }
 
