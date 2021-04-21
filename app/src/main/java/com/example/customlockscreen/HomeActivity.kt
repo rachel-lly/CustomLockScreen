@@ -5,14 +5,19 @@ import android.os.Bundle
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import com.example.customlockscreen.Fragment.AddNoteFragment
+import com.example.customlockscreen.Fragment.MineFragment
+import com.example.customlockscreen.Fragment.NoteFragment
 import com.example.customlockscreen.Fragment.NoteListFragment
+import com.example.customlockscreen.Fragment.SettingFragment
+import com.example.customlockscreen.adapter.PagerAdapter
 import com.example.customlockscreen.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var  binding : ActivityHomeBinding
-    private val itemIdArray :IntArray = intArrayOf(R.id.item_home,R.id.item_note,R.id.item_mine,R.id.item_more)
+    private val itemIdArray :IntArray = intArrayOf(R.id.item_home,R.id.item_note,R.id.item_mine,R.id.item_setting)
+
+    private var fragmentList = ArrayList<Fragment>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,10 +40,26 @@ class HomeActivity : AppCompatActivity() {
             true
         }
 
+
+
+
+        fragmentList.add(NoteListFragment())
+        fragmentList.add(NoteFragment())
+        fragmentList.add(MineFragment())
+        fragmentList.add(SettingFragment())
+        binding.homeViewPager.adapter = PagerAdapter(this,fragmentList)
+        binding.homeViewPager.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                binding.homeNavigationView.selectedItemId = itemIdArray[position]
+            }
+        })
+
+
         binding.homeNavigationView.inflateMenu(R.menu.home_navigation_view)
         binding.homeNavigationView.setOnNavigationItemSelectedListener {
-            // TODO: 2021/4/15 目前是2 记得改
-            for(i in 0..2){
+
+            for(i in 0..fragmentList.size-1){
                 if(it.itemId == itemIdArray[i]){
                     binding.homeViewPager.currentItem = i
                 }
@@ -47,17 +68,6 @@ class HomeActivity : AppCompatActivity() {
 
             return@setOnNavigationItemSelectedListener true
         }
-
-        var fragmentList = ArrayList<Fragment>()
-        fragmentList.add(NoteListFragment())
-        fragmentList.add(AddNoteFragment())
-        binding.homeViewPager.adapter = PagerAdapter(this,fragmentList)
-        binding.homeViewPager.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                binding.homeNavigationView.selectedItemId = itemIdArray[position]
-            }
-        })
 
 
         setContentView(binding.root)

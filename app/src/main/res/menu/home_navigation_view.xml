@@ -20,8 +20,8 @@
         />
 
     <item
-        android:id="@+id/item_more"
-        android:title="more"
-        android:icon="@mipmap/more_black"
+        android:id="@+id/item_setting"
+        android:title="setting"
+        android:icon="@mipmap/setting"
         />
 </menu>

@@ -6,6 +6,8 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.*
+import com.example.customlockscreen.adapter.LabelGridAdapter
+import com.example.customlockscreen.adapter.LabelLinearAdapter
 import com.example.customlockscreen.databinding.FragmentNoteListBinding
 
 // TODO: Rename parameter arguments, choose names that match

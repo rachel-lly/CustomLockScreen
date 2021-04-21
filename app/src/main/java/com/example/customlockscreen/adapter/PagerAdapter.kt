@@ -1,4 +1,4 @@
-package com.example.customlockscreen
+package com.example.customlockscreen.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
