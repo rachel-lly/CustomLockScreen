@@ -12,6 +12,8 @@
     <color name="colorPrimaryDark">#7AAB4F</color>
     <color name="colorAccent">#8fdd4b</color>
 
+    <color name="color_passed">#dfb09f</color>
+
     <color name="color_unpressed">#78c931</color>
     <color name="color_pressed">#7AAB4F</color>
 </resources>

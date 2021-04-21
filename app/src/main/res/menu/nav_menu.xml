@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:title="事件分类"
+                android:icon="@mipmap/star">
+            <menu>
+                <item
+                    android:id="@+id/all"
+                    android:title="全部事件"
+                    android:icon="@mipmap/all" />
+
+                <item
+                    android:id="@+id/life"
+                    android:title="生活"
+                    android:icon="@mipmap/life"
+                    />
+
+                <item
+                    android:id="@+id/work"
+                    android:title="工作"
+                    android:icon="@mipmap/work"
+                    />
+
+                <item
+                    android:id="@+id/anniversary"
+                    android:title="纪念日"
+                    android:icon="@mipmap/anniversary"
+                    />
+            </menu>
+        </item>
+
+
+
+    </group>
+
+
+</menu>

@@ -2,6 +2,7 @@ package com.example.customlockscreen
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.customlockscreen.Fragment.AddNoteFragment
@@ -19,7 +20,20 @@ class HomeActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.homeToolbar)
 
-        binding.homeToolbar.setNavigationIcon(R.mipmap.menu)
+        supportActionBar?.let {
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setHomeAsUpIndicator(R.mipmap.menu)
+        }
+
+        binding.homeToolbar.setNavigationOnClickListener {
+            binding.drawerLayout.openDrawer(Gravity.LEFT)
+        }
+
+        binding.navigationView.setNavigationItemSelectedListener {
+            // TODO: 2021/4/21 侧拉栏点击事件
+            binding.drawerLayout.closeDrawers()
+            true
+        }
 
         binding.homeNavigationView.inflateMenu(R.menu.home_navigation_view)
         binding.homeNavigationView.setOnNavigationItemSelectedListener {
