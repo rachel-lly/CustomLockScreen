@@ -176,14 +176,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="生活"
-                            android:textStyle="italic"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="18sp"
                             android:layout_marginStart="10dp"
 
-                            android:layout_gravity="bottom"
-                            android:layout_centerVertical="true"
-                            />
+                            android:layout_gravity="bottom" />
 
                         <ImageView
 

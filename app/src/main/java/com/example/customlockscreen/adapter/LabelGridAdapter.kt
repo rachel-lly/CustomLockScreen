@@ -6,8 +6,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.customlockscreen.*
+import com.example.customlockscreen.activity.DetailActivity
+import com.example.customlockscreen.activity.LABEL_DATE
+import com.example.customlockscreen.activity.LABEL_DAY
+import com.example.customlockscreen.activity.LABEL_TEXT
 import com.example.customlockscreen.databinding.CardItemGridBinding
+import com.example.customlockscreen.model.Label
 
 
 class LabelGridAdapter(val context: Context, val labelList:List<Label>) :

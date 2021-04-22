@@ -1,13 +1,13 @@
-package com.example.customlockscreen
+package com.example.customlockscreen.activity
 
 import android.graphics.Color
 import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import androidx.appcompat.app.AppCompatActivity
+import com.example.customlockscreen.R
 import com.example.customlockscreen.databinding.ActivityDetailBinding
-
 
 const val LABEL_DAY = "LABEL_DAY"
 const val LABEL_TEXT = "LABEL_TEXT"
@@ -46,7 +46,7 @@ class DetailActivity : AppCompatActivity() {
     private fun steepStatusBar() {
 
 
-        var release=Build.MODEL
+        var release= Build.MODEL
         if (release!=null){
             if (release.contains("HUAWEI")){
 

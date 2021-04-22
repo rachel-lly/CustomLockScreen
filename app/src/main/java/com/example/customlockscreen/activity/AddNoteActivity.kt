@@ -1,18 +1,15 @@
-package com.example.customlockscreen
+package com.example.customlockscreen.activity
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import com.example.customlockscreen.R
 import com.example.customlockscreen.databinding.ActivityAddNoteBinding
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
-import javax.security.auth.callback.Callback
 import kotlin.time.ExperimentalTime
 
 const val SORT_NOTE_TEXT = "SORT_NOTE_TEXT"
@@ -78,7 +75,7 @@ class AddNoteActivity : AppCompatActivity() {
                 if(chooseDay<today){
                     binding.endTimeDate.setTextColor(ContextCompat.getColor(this,R.color.color_passed))
                 }else{
-                    binding.endTimeDate.setTextColor(ContextCompat.getColor(this,R.color.colorPrimaryDark))
+                    binding.endTimeDate.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
                 }
             }
         }

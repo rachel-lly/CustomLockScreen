@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.customlockscreen.*
+import com.example.customlockscreen.activity.AddNoteActivity
+import com.example.customlockscreen.activity.SORT_NOTE_TEXT
 import com.example.customlockscreen.databinding.SortNoteCardItemBinding
+import com.example.customlockscreen.model.SortNote
 
 class SortNoteAdapter (val context: Context, val sortNoteList:List<SortNote>) :
         RecyclerView.Adapter<SortNoteAdapter.ViewHolder>() {

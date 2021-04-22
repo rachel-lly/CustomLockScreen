@@ -1,4 +1,4 @@
-package com.example.customlockscreen
+package com.example.customlockscreen.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,13 +9,14 @@ import com.example.customlockscreen.Fragment.MineFragment
 import com.example.customlockscreen.Fragment.NoteFragment
 import com.example.customlockscreen.Fragment.NoteListFragment
 import com.example.customlockscreen.Fragment.SettingFragment
+import com.example.customlockscreen.R
 import com.example.customlockscreen.adapter.PagerAdapter
 import com.example.customlockscreen.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var  binding : ActivityHomeBinding
-    private val itemIdArray :IntArray = intArrayOf(R.id.item_home,R.id.item_note,R.id.item_mine,R.id.item_setting)
+    private val itemIdArray :IntArray = intArrayOf(R.id.item_home, R.id.item_note, R.id.item_mine, R.id.item_setting)
 
     private var fragmentList = ArrayList<Fragment>()
 

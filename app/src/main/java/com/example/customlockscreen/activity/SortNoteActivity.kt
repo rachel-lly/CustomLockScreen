@@ -1,7 +1,8 @@
-package com.example.customlockscreen
+package com.example.customlockscreen.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.customlockscreen.R
 import com.example.customlockscreen.databinding.ActivitySortNoteBinding
 
 class SortNoteActivity : AppCompatActivity() {
