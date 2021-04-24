@@ -14,7 +14,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        app:cardCornerRadius="15dp"
+        app:cardCornerRadius="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         >
@@ -37,8 +37,8 @@
                 android:gravity="center"
                 android:paddingStart="15dp"
                 android:background="#f3f5f6"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
                 />
 
             <TextView
