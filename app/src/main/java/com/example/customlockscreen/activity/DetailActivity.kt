@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import androidx.annotation.RequiresApi
 import com.example.customlockscreen.R
 import com.example.customlockscreen.databinding.ActivityDetailBinding
+import java.text.SimpleDateFormat
 
 const val LABEL_DAY = "LABEL_DAY"
 const val LABEL_TEXT = "LABEL_TEXT"
@@ -17,7 +19,10 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityDetailBinding
 
+    private val format = SimpleDateFormat("yyyy-MM-dd-EE")
 
+
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,9 +40,35 @@ class DetailActivity : AppCompatActivity() {
             finish()
         }
 
+        
+
+
         binding.detailCard.labelText.text = intent?.getStringExtra(LABEL_TEXT)
-        binding.detailCard.labelDate.text = intent?.getStringExtra(LABEL_DATE)
-        binding.detailCard.labelDay.text = intent?.getStringExtra(LABEL_DAY)
+
+        var date = intent?.getLongExtra(LABEL_DATE,0)
+        var day = intent?.getLongExtra(LABEL_DAY,0)
+        if(date!=null){
+            binding.detailCard.labelDate.text = format.format(date)
+        }
+
+
+        if (day != null) {
+            binding.detailCard.labelDay.text = Math.abs(day).toString()
+            if(day>=0){
+
+                binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_future_dark,theme))
+            }else{
+
+                binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_history_dark,theme))
+            }
+        }
+
+
+
+
+
+
+
 
 
         setContentView(binding.root)

@@ -41,7 +41,7 @@ class LabelGridAdapter(val context: Context, val labelList:List<Label>) :
 
             val intent = Intent(context, DetailActivity::class.java).apply {
                 putExtra(LABEL_TEXT,label.text)
-                putExtra(LABEL_DAY, label.getDay().toString())
+                putExtra(LABEL_DAY, label.day)
                 putExtra(LABEL_DATE, label.date)
             }
             context.startActivity(intent)
@@ -55,12 +55,10 @@ class LabelGridAdapter(val context: Context, val labelList:List<Label>) :
         val label = labelList[position]
         holder.LabelText.text = label.text
         holder.LabelDate.text = format.format(label.date)
-
-        if(label.getDay()>=0){
-            holder.LabelDay.text = label.getDay().toString()
+        holder.LabelDay.text = Math.abs(label.day).toString()
+        if(label.day>=0){
             holder.LabelText.setBackgroundColor(context.resources.getColor(R.color.note_list_future_dark,context.theme))
         }else{
-            holder.LabelDay.text = Math.abs(label.getDay()).toString()
             holder.LabelText.setBackgroundColor(context.resources.getColor(R.color.note_list_history_dark,context.theme))
         }
 

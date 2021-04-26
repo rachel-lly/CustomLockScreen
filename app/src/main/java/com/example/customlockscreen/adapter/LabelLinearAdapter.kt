@@ -2,7 +2,6 @@ package com.example.customlockscreen.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -38,7 +37,9 @@ class LabelLinearAdapter(val context: Context, val labelList:List<Label>) :
 
             val intent = Intent(context, DetailActivity::class.java).apply {
                 putExtra(LABEL_TEXT,label.text)
-                putExtra(LABEL_DAY, label.getDay().toString())
+
+                putExtra(LABEL_DAY, label.day)
+
                 putExtra(LABEL_DATE, label.date)
             }
             context.startActivity(intent)
@@ -51,13 +52,11 @@ class LabelLinearAdapter(val context: Context, val labelList:List<Label>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val label = labelList[position]
         holder.LabelText.text = label.text
-
-        if(label.getDay()>=0){
-            holder.LabelDay.text = label.getDay().toString()
+        holder.LabelDay.text = Math.abs(label.day).toString()
+        if(label.day>=0){
             holder.LabelDay.setBackgroundColor(context.resources.getColor(R.color.note_list_future_light,context.theme))
             holder.labelJustText.setBackgroundColor(context.resources.getColor(R.color.note_list_future_dark,context.theme))
         }else{
-            holder.LabelDay.text = Math.abs(label.getDay()).toString()
             holder.LabelDay.setBackgroundColor(context.resources.getColor(R.color.note_list_history_light,context.theme))
             holder.labelJustText.setBackgroundColor(context.resources.getColor(R.color.note_list_history_dark,context.theme))
         }
