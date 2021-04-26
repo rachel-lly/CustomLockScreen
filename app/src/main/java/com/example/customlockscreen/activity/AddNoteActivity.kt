@@ -36,7 +36,7 @@ class AddNoteActivity : AppCompatActivity() {
         binding = ActivityAddNoteBinding.inflate(layoutInflater)
 
         binding.chooseSortTv.text = intent?.getStringExtra(SORT_NOTE_TEXT)
-
+        if(binding.chooseSortTv.text.isEmpty()) binding.chooseSortTv.text = "生活"
 
         val datePicker = MaterialDatePicker.Builder.datePicker()
                 .setTitleText("Select date")

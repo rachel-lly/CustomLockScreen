@@ -2,10 +2,14 @@ package com.example.customlockscreen.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import com.example.customlockscreen.R
 import com.example.customlockscreen.activity.DetailActivity
 import com.example.customlockscreen.activity.LABEL_DATE
 import com.example.customlockscreen.activity.LABEL_DAY
@@ -21,6 +25,7 @@ class LabelLinearAdapter(val context: Context, val labelList:List<Label>) :
     inner class ViewHolder(binding:  CardItemLinearBinding) : RecyclerView.ViewHolder(binding.root) {
         val LabelText : TextView = binding.labelText
         val LabelDay : TextView = binding.labelDay
+        val labelJustText:TextView = binding.dayJustText
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,7 +38,7 @@ class LabelLinearAdapter(val context: Context, val labelList:List<Label>) :
 
             val intent = Intent(context, DetailActivity::class.java).apply {
                 putExtra(LABEL_TEXT,label.text)
-                putExtra(LABEL_DAY, label.day.toString())
+                putExtra(LABEL_DAY, label.getDay().toString())
                 putExtra(LABEL_DATE, label.date)
             }
             context.startActivity(intent)
@@ -42,10 +47,22 @@ class LabelLinearAdapter(val context: Context, val labelList:List<Label>) :
         return holder
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val label = labelList[position]
         holder.LabelText.text = label.text
-        holder.LabelDay.text = label.day.toString()
+
+        if(label.getDay()>=0){
+            holder.LabelDay.text = label.getDay().toString()
+            holder.LabelDay.setBackgroundColor(context.resources.getColor(R.color.note_list_future_light,context.theme))
+            holder.labelJustText.setBackgroundColor(context.resources.getColor(R.color.note_list_future_dark,context.theme))
+        }else{
+            holder.LabelDay.text = Math.abs(label.getDay()).toString()
+            holder.LabelDay.setBackgroundColor(context.resources.getColor(R.color.note_list_history_light,context.theme))
+            holder.labelJustText.setBackgroundColor(context.resources.getColor(R.color.note_list_history_dark,context.theme))
+        }
+
+
     }
 
     override fun getItemCount() = labelList.size

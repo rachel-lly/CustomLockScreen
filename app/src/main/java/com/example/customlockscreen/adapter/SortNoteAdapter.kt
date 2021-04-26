@@ -43,7 +43,8 @@ class SortNoteAdapter (val context: Context, val sortNoteList:List<SortNote>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val sortNote = sortNoteList[position]
         holder.sortNoteText.text = sortNote.name
-        holder.sortNoteIcon.setImageResource(sortNote.icon)
+        var iconId:Int = context.resources.getIdentifier(sortNote.iconName,"mipmap",context.packageName)
+        holder.sortNoteIcon.setImageResource(iconId)
     }
 
     override fun getItemCount() = sortNoteList.size

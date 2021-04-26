@@ -16,4 +16,13 @@
 
     <color name="color_unpressed">#78c931</color>
     <color name="color_pressed">#7AAB4F</color>
+
+    <color name="color_background_gray">#f3f3f1</color>
+    
+    <color name="note_list_future_light">#b2e486</color>
+    <color name="note_list_future_dark">#7AAB4F</color>
+
+    <color name="note_list_history_light">#fdb45e</color>
+    <color name="note_list_history_dark">#f67404</color>
+    
 </resources>

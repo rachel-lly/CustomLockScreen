@@ -34,7 +34,7 @@
                 android:textSize="22sp"
                 android:text="星期六还有"
                 android:textColor="#fff"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/note_list_future_dark"
                 android:maxLines="1"
                 android:layout_alignParentTop="true"
                 />

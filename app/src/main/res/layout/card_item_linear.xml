@@ -52,13 +52,14 @@
                 android:maxLines="1"
                 android:layout_weight="0.8"
                 android:gravity="center"
-                android:background="#b2e486"
+                android:background="@color/note_list_future_light"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 />
 
 
             <TextView
+                android:id="@+id/day_just_text"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:textSize="20sp"
@@ -67,7 +68,7 @@
                 android:maxLines="1"
                 android:layout_weight="0.5"
                 android:gravity="center"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/note_list_future_dark"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
                 />

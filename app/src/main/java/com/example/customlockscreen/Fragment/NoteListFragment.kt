@@ -42,10 +42,16 @@ class NoteListFragment : Fragment() {
 
 
         labelList= ArrayList<Label>()
-        labelList.add(Label("星期六",8,"2020-08-04"))
-        labelList.add(Label("星期五",9,"2021-01-04"))
-        labelList.add(Label("距离考试",18,"2021-05-04"))
-        labelList.add(Label("哈哈哈哈哈哈",118,"2020-11-30"))
+//        labelList.add(Label("星期六",8,"2020-08-04"))
+//        labelList.add(Label("星期五",9,"2021-01-04"))
+//        labelList.add(Label("距离考试",18,"2021-05-04"))
+//        labelList.add(Label("哈哈哈哈哈哈",118,"2020-11-30"))
+        labelList.add(Label("3/26",1616762869000))
+        labelList.add(Label("2020/3/26",1585226869000))
+        labelList.add(Label("2021/01/01",1609505269000))
+        labelList.add(Label("2021/08/31",1630414069000))
+
+
 
         binding.homeRecyclerview.adapter = this.context?.let { LabelLinearAdapter(it, labelList) }
         binding.homeRecyclerview.layoutManager = GridLayoutManager(this.context, 1)
