@@ -6,8 +6,8 @@ import android.view.Gravity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.customlockscreen.Fragment.MineFragment
-import com.example.customlockscreen.Fragment.NoteFragment
 import com.example.customlockscreen.Fragment.NoteListFragment
+import com.example.customlockscreen.Fragment.NoteSortFragment
 import com.example.customlockscreen.Fragment.SettingFragment
 import com.example.customlockscreen.R
 import com.example.customlockscreen.adapter.PagerAdapter
@@ -45,7 +45,7 @@ class HomeActivity : AppCompatActivity() {
 
 
         fragmentList.add(NoteListFragment())
-        fragmentList.add(NoteFragment())
+        fragmentList.add(NoteSortFragment())
         fragmentList.add(MineFragment())
         fragmentList.add(SettingFragment())
         binding.homeViewPager.adapter = PagerAdapter(this,fragmentList)
