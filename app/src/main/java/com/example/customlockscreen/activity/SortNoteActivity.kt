@@ -1,5 +1,6 @@
 package com.example.customlockscreen.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
@@ -30,6 +31,11 @@ class SortNoteActivity : AppCompatActivity() {
 
         binding.sortNoteRecycleview.adapter = SortNoteAdapter(this,list)
         binding.sortNoteRecycleview.layoutManager = GridLayoutManager(this,1)
+
+        binding.addNoteSure.setOnClickListener {
+            var intent = Intent(this,AddSortNoteActivity::class.java)
+            startActivity(intent)
+        }
 
         setContentView(binding.root)
     }
