@@ -1,21 +1,25 @@
 package com.example.customlockscreen.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.customlockscreen.activity.AddNoteActivity
-import com.example.customlockscreen.activity.SORT_NOTE_TEXT
 import com.example.customlockscreen.databinding.SortNoteCardItemBinding
 import com.example.customlockscreen.model.SortNote
 
-class SortNoteAdapter (val context: Context, val sortNoteList:List<SortNote>) :
+class SortNoteAdapter (val context: Context, val sortNoteList:List<SortNote>,val clickListener:ClickListener) :
         RecyclerView.Adapter<SortNoteAdapter.ViewHolder>() {
 
+    public interface ClickListener{
+        fun onClick(SortNoteName:String)
+    }
+
     private lateinit var  binding : SortNoteCardItemBinding
+
+    private var mClickListener: ClickListener = clickListener
+
 
     inner class ViewHolder(binding: SortNoteCardItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val sortNoteText : TextView = binding.sortTx
@@ -31,10 +35,9 @@ class SortNoteAdapter (val context: Context, val sortNoteList:List<SortNote>) :
 
             val sortNote = sortNoteList[position]
 
-            val intent = Intent(context, AddNoteActivity::class.java).apply {
-                putExtra(SORT_NOTE_TEXT,sortNote.name)
-            }
-            context.startActivity(intent)
+            //todo 点击确定分类本
+            mClickListener.onClick(sortNote.name)
+
         }
 
         return holder

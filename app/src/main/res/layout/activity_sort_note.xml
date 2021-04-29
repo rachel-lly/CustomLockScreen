@@ -15,7 +15,7 @@
         android:background="@color/colorPrimaryDark"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/OverflowMenuStyle"
-        app:title="事件分类"
+        app:title="选择事件分类"
         />
 
     <androidx.recyclerview.widget.RecyclerView

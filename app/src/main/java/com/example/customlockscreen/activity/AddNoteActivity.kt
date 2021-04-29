@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat
 import kotlin.time.ExperimentalTime
 
 const val SORT_NOTE_TEXT = "SORT_NOTE_TEXT"
+const val RESULT_CODE = 0
 
 
 class AddNoteActivity : AppCompatActivity() {
@@ -29,14 +30,17 @@ class AddNoteActivity : AppCompatActivity() {
 
     private val today = format.format(MaterialDatePicker.todayInUtcMilliseconds())
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        binding.chooseSortTv.text =data?.getStringExtra(SORT_NOTE_TEXT)
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
     @ExperimentalTime
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityAddNoteBinding.inflate(layoutInflater)
 
-        binding.chooseSortTv.text = intent?.getStringExtra(SORT_NOTE_TEXT)
-        if(binding.chooseSortTv.text.isEmpty()) binding.chooseSortTv.text = "生活"
 
         val datePicker = MaterialDatePicker.Builder.datePicker()
                 .setTitleText("Select date")
@@ -98,7 +102,7 @@ class AddNoteActivity : AppCompatActivity() {
 
         binding.chooseSortNoteLayout.setOnClickListener {
             val intent = Intent(this, SortNoteActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, RESULT_CODE)
         }
 
 
