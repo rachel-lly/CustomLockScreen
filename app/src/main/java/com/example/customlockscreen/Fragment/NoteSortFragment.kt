@@ -1,5 +1,6 @@
 package com.example.customlockscreen.Fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,7 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.R
+import com.example.customlockscreen.activity.RESULT_CODE
+import com.example.customlockscreen.activity.SORT_NOTE_TEXT
 import com.example.customlockscreen.adapter.SortNoteAdapter
+import com.example.customlockscreen.adapter.SortNoteListAdapter
 import com.example.customlockscreen.databinding.FragmentNoteListBinding
 import com.example.customlockscreen.databinding.FragmentNoteSortBinding
 import com.example.customlockscreen.model.SortNote
@@ -30,6 +34,8 @@ class NoteSortFragment : Fragment() {
     private lateinit var binding: FragmentNoteSortBinding
     private var list = ArrayList<SortNote>()
 
+    private lateinit var onClickListener: SortNoteListAdapter.ClickListener
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        arguments?.let {
@@ -38,6 +44,27 @@ class NoteSortFragment : Fragment() {
 //        }
 
         binding = FragmentNoteSortBinding.inflate(LayoutInflater.from(this.context))
+
+        list.add(SortNote("全部",resources.getResourceEntryName(R.mipmap.all_color)))
+        list.add(SortNote("纪念日",resources.getResourceEntryName(R.mipmap.anniverity_color)))
+        list.add(SortNote("工作",resources.getResourceEntryName(R.mipmap.work_color)))
+        list.add(SortNote("生活",resources.getResourceEntryName(R.mipmap.life_color)))
+
+        onClickListener =object: SortNoteListAdapter.ClickListener{
+            override fun onClick(sortNoteName: String) {
+                // TODO: 2021/4/30 获取点击的分类本
+//                var intent = Intent()
+//                intent.putExtra(SORT_NOTE_TEXT,sortNoteName)
+//                setResult(RESULT_CODE,intent)
+//                finish()
+            }
+
+        }
+        
+        
+        var adapter = context?.let { SortNoteListAdapter(it,list,onClickListener) }
+        binding.fragmentSortNoteRecycleview.adapter = adapter
+        binding.fragmentSortNoteRecycleview.layoutManager = GridLayoutManager(context,1)
 
 
     }
