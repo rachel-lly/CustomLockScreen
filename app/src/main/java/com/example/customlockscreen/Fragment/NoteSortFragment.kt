@@ -2,14 +2,16 @@ package com.example.customlockscreen.Fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.R
+import com.example.customlockscreen.activity.AddNoteActivity
+import com.example.customlockscreen.activity.AddSortNoteActivity
 import com.example.customlockscreen.activity.RESULT_CODE
 import com.example.customlockscreen.activity.SORT_NOTE_TEXT
+import com.example.customlockscreen.adapter.LabelGridAdapter
+import com.example.customlockscreen.adapter.LabelLinearAdapter
 import com.example.customlockscreen.adapter.SortNoteAdapter
 import com.example.customlockscreen.adapter.SortNoteListAdapter
 import com.example.customlockscreen.databinding.FragmentNoteListBinding
@@ -43,6 +45,8 @@ class NoteSortFragment : Fragment() {
 //            param2 = it.getString(ARG_PARAM2)
 //        }
 
+        setHasOptionsMenu(true)
+
         binding = FragmentNoteSortBinding.inflate(LayoutInflater.from(this.context))
 
         list.add(SortNote("全部",resources.getResourceEntryName(R.mipmap.all_color)))
@@ -68,6 +72,25 @@ class NoteSortFragment : Fragment() {
 
 
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.sort_note_fragment_toolbar,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+       //新建分类本
+        when(item.itemId){
+
+            R.id.add_sort_note ->{
+                val intent = Intent(context, AddSortNoteActivity::class.java)
+                context?.startActivity(intent)
+            }
+        }
+
+        return false
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
