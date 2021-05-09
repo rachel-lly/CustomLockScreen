@@ -1,11 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.SettingFragment">
+    tools:context=".Fragment.SettingFragment"
+    android:background="@color/color_background_gray"
+    android:orientation="vertical">
 
 
+    <RelativeLayout
+        android:id="@+id/setting_sort_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:paddingStart="30dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        >
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/sort_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/sort"
+            />
+
+        <TextView
+            android:id="@+id/sort_tx"
+            android:text="排序方式"
+            android:layout_toEndOf="@+id/sort_icon"
+            style="@style/linear_item_text_behind_icon_10"
+            />
+
+        <TextView
+            android:id="@+id/sort_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="按事件时间"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="italic"
+            android:textSize="18sp"
+            android:layout_marginStart="20dp"
+            android:layout_alignParentEnd="true"
+            />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_color_gray"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        />
+
+
+</LinearLayout>

@@ -95,12 +95,9 @@
                         />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/linear_item_text_behind_icon_10"
                         android:text="目标日"
                         android:layout_gravity="bottom"
-                        android:textSize="20sp"
-                        android:layout_marginStart="10dp"
                         />
 
                     <TextView
@@ -153,11 +150,8 @@
                     <TextView
                         android:id="@+id/sort_text"
                         android:layout_toEndOf="@id/sort_iv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:text="分类"
-                        android:textSize="20sp"
-                        android:layout_marginStart="10dp"
+                        style="@style/linear_item_text_behind_icon_10"
                         android:layout_gravity="bottom"
                         />
 
@@ -223,13 +217,9 @@
                         />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/linear_item_text_behind_icon_10"
                         android:layout_toEndOf="@id/to_top_iv"
                         android:text="置顶"
-                        android:textSize="20sp"
-                        android:layout_marginStart="10dp"
-
                         />
 
                     <androidx.appcompat.widget.SwitchCompat
@@ -275,13 +265,9 @@
 
                 <TextView
                     android:id="@+id/end_time_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/linear_item_text_behind_icon_10"
                     android:layout_toEndOf="@id/end_time_iv"
                     android:text="结束时间"
-                    android:textSize="20sp"
-                    android:layout_marginStart="10dp"
-
                     />
 
                 <androidx.appcompat.widget.SwitchCompat
