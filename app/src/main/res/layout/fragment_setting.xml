@@ -10,10 +10,11 @@
 
 
     <RelativeLayout
+        android:layout_marginTop="10dp"
         android:id="@+id/setting_sort_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
+        android:background="@drawable/item_pressed_state"
         android:paddingStart="30dp"
         android:paddingEnd="20dp"
         android:paddingTop="20dp"
@@ -49,6 +50,41 @@
     </RelativeLayout>
 
     <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_color_gray"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        />
+
+    <RelativeLayout
+        android:id="@+id/setting_clock_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_pressed_state"
+        android:paddingStart="30dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        >
+
+        <ImageView
+            android:id="@+id/clock_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/clock"
+            />
+
+        <TextView
+            android:id="@+id/clock_tx"
+            android:text="提醒时间设置"
+            android:layout_toEndOf="@+id/clock_icon"
+            style="@style/linear_item_text_behind_icon_10"
+            />
+
+    </RelativeLayout>
+
+    <View
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -56,6 +92,35 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         />
+
+
+    <RelativeLayout
+        android:id="@+id/setting_backup_data_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_pressed_state"
+        android:paddingStart="30dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:layout_marginTop="20dp"
+        >
+
+        <ImageView
+            android:id="@+id/backup_data_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@mipmap/backup_data"
+            />
+
+        <TextView
+            android:id="@+id/backup_data_tx"
+            android:text="备份数据管理"
+            android:layout_toEndOf="@+id/backup_data_icon"
+            style="@style/linear_item_text_behind_icon_10"
+            />
+
+    </RelativeLayout>
 
 
 </LinearLayout>
