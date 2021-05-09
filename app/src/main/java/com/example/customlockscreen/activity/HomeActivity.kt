@@ -1,8 +1,11 @@
 package com.example.customlockscreen.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.example.customlockscreen.Fragment.MineFragment
@@ -31,9 +34,6 @@ class HomeActivity : AppCompatActivity() {
             it.setHomeAsUpIndicator(R.mipmap.menu)
         }
 
-        binding.homeToolbar.setNavigationOnClickListener {
-            binding.drawerLayout.openDrawer(Gravity.LEFT)
-        }
 
         binding.navigationView.setNavigationItemSelectedListener {
             // TODO: 2021/4/21 侧拉栏点击事件
@@ -41,6 +41,9 @@ class HomeActivity : AppCompatActivity() {
             true
         }
 
+        binding.homeToolbar.setNavigationOnClickListener {
+            binding.drawerLayout.openDrawer(Gravity.LEFT)
+        }
 
 
 
@@ -48,11 +51,31 @@ class HomeActivity : AppCompatActivity() {
         fragmentList.add(NoteSortFragment())
         fragmentList.add(MineFragment())
         fragmentList.add(SettingFragment())
+
+
+
         binding.homeViewPager.adapter = PagerAdapter(this,fragmentList)
         binding.homeViewPager.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 binding.homeNavigationView.selectedItemId = itemIdArray[position]
+                when(position){
+                    0->{
+                        binding.homeToolbar.title = "主页"
+                    }
+
+                    1->{
+                        binding.homeToolbar.title = "分类管理"
+                    }
+
+                    2->{
+                        binding.homeToolbar.title = "我的"
+                    }
+
+                    3->{
+                        binding.homeToolbar.title = "设置"
+                    }
+                }
             }
         })
 
@@ -73,7 +96,6 @@ class HomeActivity : AppCompatActivity() {
 
         setContentView(binding.root)
     }
-
 
 
 

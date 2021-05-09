@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.*
 import com.example.customlockscreen.activity.AddNoteActivity
+import com.example.customlockscreen.activity.HomeActivity
 import com.example.customlockscreen.adapter.LabelGridAdapter
 import com.example.customlockscreen.adapter.LabelLinearAdapter
 import com.example.customlockscreen.databinding.FragmentNoteListBinding
@@ -38,8 +39,6 @@ class NoteListFragment : Fragment() {
         binding = FragmentNoteListBinding.inflate(LayoutInflater.from(this.context))
 
         setHasOptionsMenu(true)
-
-
 
         labelList= ArrayList<Label>()
         labelList.add(Label("3/26",1616762869000))
@@ -128,7 +127,7 @@ class NoteListFragment : Fragment() {
         fun newInstance(listState:String) =
             NoteListFragment().apply {
                 arguments = Bundle().apply {
-                    putString(listState,state)
+
                 }
 
             }

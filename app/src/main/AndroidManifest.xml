@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.AddSortNoteActivity"></activity>
+        <activity android:name=".activity.AddSortNoteActivity" />
         <activity android:name=".activity.AddNoteActivity" />
         <activity android:name=".activity.DetailActivity" />
         <activity android:name=".activity.SortNoteActivity" />

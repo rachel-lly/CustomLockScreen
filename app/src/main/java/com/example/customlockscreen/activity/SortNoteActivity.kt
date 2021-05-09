@@ -34,7 +34,7 @@ class SortNoteActivity : AppCompatActivity() {
 
         onClickListener =object: SortNoteAdapter.ClickListener{
             override fun onClick(sortNoteName: String) {
-                var intent = Intent()
+                val intent = Intent()
                 intent.putExtra(SORT_NOTE_TEXT,sortNoteName)
                 setResult(RESULT_CODE,intent)
                 finish()
@@ -50,7 +50,7 @@ class SortNoteActivity : AppCompatActivity() {
 
 
         binding.addNoteSure.setOnClickListener {
-            var intent = Intent(this,AddSortNoteActivity::class.java)
+            val intent = Intent(this,AddSortNoteActivity::class.java)
             startActivity(intent)
         }
 
