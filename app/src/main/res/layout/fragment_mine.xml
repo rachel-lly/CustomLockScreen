@@ -94,6 +94,14 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/line_color_gray"
+                />
+
             <LinearLayout
                 android:layout_weight="1"
                 android:layout_width="0dp"
@@ -130,6 +138,14 @@
 
 
             </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/line_color_gray"
+                />
 
             <LinearLayout
                 android:layout_weight="1"

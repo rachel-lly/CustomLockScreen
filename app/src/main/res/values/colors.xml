@@ -26,5 +26,6 @@
     <color name="note_list_history_dark">#f67404</color>
 
     <color name="text_bg_gray">#b0b1b6</color>
+    <color name="line_color_gray">#33b4bcc0</color>
     
 </resources>
