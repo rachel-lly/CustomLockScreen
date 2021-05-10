@@ -74,21 +74,15 @@
             android:layout_centerVertical="true"
             />
 
+
+
     </RelativeLayout>
 
-
-
-
-
     <View
-        android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/line_color_gray"
-        android:layout_alignBottom="@+id/card_sort_note_layout"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        style="@style/horizon_line"
+        android:layout_below="@+id/card_sort_note_layout"
         />
+
 
 
 </RelativeLayout>

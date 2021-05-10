@@ -72,9 +72,7 @@
                 </LinearLayout>
 
                 <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="#33b4bcc0"
+                    style="@style/horizon_line"
                     android:layout_marginTop="10dp"
                     />
 
@@ -123,9 +121,7 @@
                     />
 
                 <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="#33b4bcc0"
+                    style="@style/horizon_line"
                     android:layout_marginTop="20dp"
                     />
 
@@ -192,9 +188,7 @@
                 </RelativeLayout>
 
                 <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="#33b4bcc0"
+                    style="@style/horizon_line"
                     android:layout_marginTop="10dp"
                     />
 

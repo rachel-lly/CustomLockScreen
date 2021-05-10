@@ -97,11 +97,10 @@
             </LinearLayout>
 
             <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
+                style="@style/vertical_line"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="@color/line_color_gray"
+
                 />
 
             <LinearLayout
@@ -142,11 +141,9 @@
             </LinearLayout>
 
             <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
+                style="@style/vertical_line"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:background="@color/line_color_gray"
                 />
 
             <LinearLayout

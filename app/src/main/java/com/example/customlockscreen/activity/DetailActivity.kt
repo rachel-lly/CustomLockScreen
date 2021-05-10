@@ -120,7 +120,7 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         super.onOptionsItemSelected(item)
-        // TODO: 2021/5/10 详细事件页面 编辑、分享功能 
+        // TODO: 2021/5/10 详细事件页面 编辑、分享功能
         when(item.itemId){
             R.id.edit->{
 
