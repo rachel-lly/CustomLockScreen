@@ -13,6 +13,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/detail_toolbar"
         android:layout_width="match_parent"
+        app:title="事件详情"
         android:layout_height="?android:attr/actionBarSize"
         />
 

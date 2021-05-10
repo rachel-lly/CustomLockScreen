@@ -1,5 +1,6 @@
 package com.example.customlockscreen.Fragment
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.*
@@ -8,6 +9,7 @@ import android.widget.PopupMenu
 import androidx.annotation.MenuRes
 import androidx.annotation.RequiresApi
 import com.example.customlockscreen.R
+import com.example.customlockscreen.activity.TimeRemindActivity
 import com.example.customlockscreen.databinding.FragmentSettingBinding
 
 //// TODO: Rename parameter arguments, choose names that match
@@ -42,7 +44,8 @@ class SettingFragment : Fragment() {
         }
         
         binding.settingClockLayout.setOnClickListener {
-            // TODO: 2021/5/9 提醒时间
+            val intent = Intent(context,TimeRemindActivity::class.java)
+            startActivity(intent)
         }
         
         binding.settingBackupDataLayout.setOnClickListener {

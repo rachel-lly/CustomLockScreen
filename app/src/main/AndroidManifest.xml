@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.TimeRemindActivity"></activity>
         <activity android:name=".activity.AddSortNoteActivity" />
         <activity android:name=".activity.AddNoteActivity" />
         <activity android:name=".activity.DetailActivity" />

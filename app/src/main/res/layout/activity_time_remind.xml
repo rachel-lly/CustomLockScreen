@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_background_gray"
+    tools:context=".activity.TimeRemindActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/detail_toolbar"
+        android:layout_width="match_parent"
+        app:title="设置提醒方式"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/colorPrimaryDark"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        />
+
+    <RelativeLayout
+        android:id="@+id/today_event_time_remind_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        >
+        <RelativeLayout
+            android:id="@+id/today_event_time_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="10dp"
+
+            >
+
+            <ImageView
+                android:id="@+id/remind_today_event_time_iv"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@mipmap/remind"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                style="@style/linear_item_text_behind_icon_10"
+                android:layout_toEndOf="@id/remind_today_event_time_iv"
+                android:text="当日事件提醒时间"
+                />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/today_event_time_switch"
+                android:layout_width="55dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/today_event_time_date_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/today_event_time_layout"
+            >
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@mipmap/time"
+                android:layout_gravity="center_vertical"
+                />
+
+            <TextView
+                android:id="@+id/today_event_time_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9：00"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="italic"
+                android:layout_marginStart="20dp"
+                />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/future_event_time_remind_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:layout_marginTop="10dp"
+        >
+        <RelativeLayout
+            android:id="@+id/future_event_time_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="10dp"
+
+            >
+
+            <ImageView
+                android:id="@+id/future_today_event_time_iv"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@mipmap/remind"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                style="@style/linear_item_text_behind_icon_10"
+                android:layout_toEndOf="@id/future_today_event_time_iv"
+                android:text="未来事件提醒时间"
+                />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/future_event_time_switch"
+                android:layout_width="55dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/future_event_time_date_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/future_event_time_layout"
+            >
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@mipmap/time"
+                android:layout_gravity="center_vertical"
+                />
+
+            <TextView
+                android:id="@+id/future_event_time_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9：00"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="italic"
+                android:layout_marginStart="20dp"
+                />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>
