@@ -70,6 +70,7 @@ class NoteListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // TODO: 2021/4/16 菜单选择控制
+        super.onOptionsItemSelected(item)
         when(item.itemId){
             R.id.grid_note -> {
 
@@ -99,7 +100,7 @@ class NoteListFragment : Fragment() {
             }
         }
 
-        return false
+        return true
     }
 
 

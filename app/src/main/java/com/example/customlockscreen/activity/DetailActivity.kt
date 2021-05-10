@@ -4,6 +4,8 @@ import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
@@ -20,6 +22,8 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var binding : ActivityDetailBinding
 
     private val format = SimpleDateFormat("yyyy-MM-dd-EE")
+
+
 
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -107,4 +111,28 @@ class DetailActivity : AppCompatActivity() {
         }
 
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.activity_detail_menu,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        super.onOptionsItemSelected(item)
+        // TODO: 2021/5/10 详细事件页面 编辑、分享功能 
+        when(item.itemId){
+            R.id.edit->{
+
+            }
+
+            R.id.share->{
+
+            }
+        }
+
+        return true
+    }
+
+
 }
