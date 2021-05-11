@@ -2,9 +2,11 @@ package com.example.customlockscreen.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.customlockscreen.R
 import com.example.customlockscreen.databinding.ActivityTimeRemindBinding
-
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 
 
 class TimeRemindActivity : AppCompatActivity() {
@@ -29,24 +31,48 @@ class TimeRemindActivity : AppCompatActivity() {
         }
 
 
+        val picker =
+            MaterialTimePicker.Builder()
+                .setTimeFormat(TimeFormat.CLOCK_24H)
+                .setHour(9)
+                .setMinute(0)
+                .setTitleText("Select time")
+                .build()
+
+        picker.addOnPositiveButtonClickListener {
+
+            if(picker.hour<10){
+                hour = "0${picker.hour}"
+            }else{
+                hour = picker.hour.toString()
+            }
+            if(picker.minute<10){
+                minute = "0${picker.minute}"
+            }else{
+                minute = picker.minute.toString()
+            }
+
+            when(picker.tag){
+                TODAY_EVENT_TIME_TAG ->{
+                    binding.todayEventTimeDate.text = "$hour:$minute"
+                }
+
+                FUTURE_EVENT_TIME_TAG ->{
+                    binding.futureEventTimeDate.text = "$hour:$minute"
+                }
+            }
+        }
 
 
-//        binding.todayEventTimeDate.setOnClickListener {
-//
-//            picker.show(this.supportFragmentManager,TODAY_EVENT_TIME_TAG)
-//            picker.addOnPositiveButtonClickListener {
-//                if(picker.hour<10){
-//                    hour = "0${picker.hour}"
-//                }
-//                if(picker.minute<10){
-//                    minute = "0${picker.minute}"
-//                }
-//                binding.todayEventTimeDate.text = "$hour:$minute"
-//            }
-//            picker.clearOnPositiveButtonClickListeners()
-//
-//        }
 
+        binding.todayEventTimeDate.setOnClickListener {
+            picker.show(this.supportFragmentManager,TODAY_EVENT_TIME_TAG)
+        }
+
+
+        binding.futureEventTimeDate.setOnClickListener {
+            picker.show(this.supportFragmentManager,FUTURE_EVENT_TIME_TAG)
+        }
 
 
 
