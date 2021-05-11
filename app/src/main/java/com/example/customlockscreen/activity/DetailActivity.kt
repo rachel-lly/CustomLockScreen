@@ -1,5 +1,6 @@
 package com.example.customlockscreen.activity
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -120,10 +121,11 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         super.onOptionsItemSelected(item)
-        // TODO: 2021/5/10 详细事件页面 编辑、分享功能
+        // TODO: 2021/5/10 详细事件页面 分享功能
         when(item.itemId){
             R.id.edit->{
-
+                val intent = Intent(this,EditNoteAttributeActivity::class.java)
+                startActivity(intent)
             }
 
             R.id.share->{

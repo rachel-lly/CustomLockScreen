@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -25,6 +25,7 @@
         android:background="#fff"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
+        android:layout_below="@+id/detail_toolbar"
         >
         <RelativeLayout
             android:id="@+id/today_event_time_layout"
@@ -100,6 +101,7 @@
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
         android:layout_marginTop="10dp"
+        android:layout_below="@+id/today_event_time_remind_layout"
         >
         <RelativeLayout
             android:id="@+id/future_event_time_layout"
@@ -166,5 +168,4 @@
 
 
     </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>

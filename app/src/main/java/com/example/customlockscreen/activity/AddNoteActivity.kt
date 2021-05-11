@@ -31,7 +31,7 @@ class AddNoteActivity : AppCompatActivity() {
     private val today = format.format(MaterialDatePicker.todayInUtcMilliseconds())
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        binding.chooseSortTv.text =data?.getStringExtra(SORT_NOTE_TEXT)
+        binding.noteAttributeLayout.chooseSortTv.text =data?.getStringExtra(SORT_NOTE_TEXT)
         super.onActivityResult(requestCode, resultCode, data)
     }
 
@@ -48,7 +48,7 @@ class AddNoteActivity : AppCompatActivity() {
                 .build()
 
 
-        binding.endTimeDate.visibility = View.GONE
+        binding.noteAttributeLayout.endTimeDate.visibility = View.GONE
 
         setSupportActionBar(binding.addNoteToolbar)
 
@@ -58,41 +58,41 @@ class AddNoteActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.endTimeSwitch.setOnClickListener {
+        binding.noteAttributeLayout.endTimeSwitch.setOnClickListener {
 
             if(isFirst){
-                binding.endTimeDate.visibility = View.VISIBLE
+                binding.noteAttributeLayout.endTimeDate.visibility = View.VISIBLE
                 isFirst = false
             }else{
-                binding.endTimeDate.visibility = View.GONE
+                binding.noteAttributeLayout.endTimeDate.visibility = View.GONE
                 isFirst = true
             }
 
         }
 
         // TODO: 2021/4/19 获取选择的时间 
-        binding.endTimeDate.setOnClickListener {
+        binding.noteAttributeLayout.endTimeDate.setOnClickListener {
            datePicker.show(this.supportFragmentManager,END_TIME_TAG)
             datePicker.addOnPositiveButtonClickListener {
                 val chooseDay = format.format(it)
-                binding.endTimeDate.text = chooseDay
+                binding.noteAttributeLayout.endTimeDate.text = chooseDay
                 if(chooseDay<today){
-                    binding.endTimeDate.setTextColor(ContextCompat.getColor(this,R.color.color_passed))
+                    binding.noteAttributeLayout.endTimeDate.setTextColor(ContextCompat.getColor(this,R.color.color_passed))
                 }else{
-                    binding.endTimeDate.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
+                    binding.noteAttributeLayout.endTimeDate.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
                 }
             }
         }
 
-        binding.addNoteDate.setOnClickListener {
+        binding.noteAttributeLayout.addNoteDate.setOnClickListener {
             datePicker.show(this.supportFragmentManager,ADD_NOTE_TIME_TAG)
             datePicker.addOnPositiveButtonClickListener {
                 val chooseDay = format.format(it)
-                binding.addNoteDate.text = chooseDay
+                binding.noteAttributeLayout.addNoteDate.text = chooseDay
                 if(chooseDay<today){
-                    binding.addNoteDate.setTextColor(ContextCompat.getColor(this,R.color.color_passed))
+                    binding.noteAttributeLayout.addNoteDate.setTextColor(ContextCompat.getColor(this,R.color.color_passed))
                 }else{
-                    binding.addNoteDate.setTextColor(ContextCompat.getColor(this,R.color.colorPrimaryDark))
+                    binding.noteAttributeLayout.addNoteDate.setTextColor(ContextCompat.getColor(this,R.color.colorPrimaryDark))
                 }
 
 
@@ -100,7 +100,7 @@ class AddNoteActivity : AppCompatActivity() {
         }
 
 
-        binding.chooseSortNoteLayout.setOnClickListener {
+        binding.noteAttributeLayout.chooseSortNoteLayout.setOnClickListener {
             val intent = Intent(this, SortNoteActivity::class.java)
             startActivityForResult(intent, RESULT_CODE)
         }
