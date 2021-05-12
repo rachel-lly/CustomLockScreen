@@ -1,15 +1,19 @@
 package com.example.customlockscreen.activity
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.Rect
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import androidx.annotation.RequiresApi
+import androidx.core.view.drawToBitmap
 import com.example.customlockscreen.R
 import com.example.customlockscreen.databinding.ActivityDetailBinding
 import java.text.SimpleDateFormat
@@ -130,10 +134,37 @@ class DetailActivity : AppCompatActivity() {
 
             R.id.share->{
 
+                screenShot()
+
             }
         }
 
         return true
+    }
+
+    private fun screenShot() {
+        //获取全屏截图（包括状态栏、标题栏和底部）
+        val screenView = window.decorView
+        val bitmap = screenView.drawToBitmap()
+
+        //获取状态栏高度
+        val frame = Rect()
+        screenView.getWindowVisibleDisplayFrame(frame)
+        val statusbarHeight = frame.top
+
+        //获取标题栏高度(toolbar里有menu，需要截掉)
+        val typeValue = TypedValue()
+        theme.resolveAttribute(android.R.attr.actionBarSize,typeValue,true)
+        val toolbarHeight = TypedValue.complexToDimensionPixelSize(typeValue.data,resources.displayMetrics)
+
+
+        //获取屏幕长宽
+        val width = screenView.width
+        val height = screenView.height
+
+        //去掉状态栏和标题栏
+        val screenShot = Bitmap.createBitmap(bitmap,0,toolbarHeight+statusbarHeight,width,height-toolbarHeight-statusbarHeight)
+
     }
 
 

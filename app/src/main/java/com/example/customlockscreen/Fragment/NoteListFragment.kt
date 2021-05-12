@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.*
 import com.example.customlockscreen.activity.AddNoteActivity
-import com.example.customlockscreen.activity.HomeActivity
 import com.example.customlockscreen.adapter.LabelGridAdapter
 import com.example.customlockscreen.adapter.LabelLinearAdapter
 import com.example.customlockscreen.databinding.FragmentNoteListBinding

@@ -6,15 +6,8 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.R
-import com.example.customlockscreen.activity.AddNoteActivity
 import com.example.customlockscreen.activity.AddSortNoteActivity
-import com.example.customlockscreen.activity.RESULT_CODE
-import com.example.customlockscreen.activity.SORT_NOTE_TEXT
-import com.example.customlockscreen.adapter.LabelGridAdapter
-import com.example.customlockscreen.adapter.LabelLinearAdapter
-import com.example.customlockscreen.adapter.SortNoteAdapter
 import com.example.customlockscreen.adapter.SortNoteListAdapter
-import com.example.customlockscreen.databinding.FragmentNoteListBinding
 import com.example.customlockscreen.databinding.FragmentNoteSortBinding
 import com.example.customlockscreen.model.SortNote
 
