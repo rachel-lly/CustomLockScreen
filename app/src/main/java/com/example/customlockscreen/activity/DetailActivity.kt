@@ -2,6 +2,7 @@ package com.example.customlockscreen.activity
 
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Rect
 import android.os.Build
@@ -15,6 +16,7 @@ import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.core.view.drawToBitmap
 import com.example.customlockscreen.R
+import com.example.customlockscreen.Util.ShotShareUtil
 import com.example.customlockscreen.databinding.ActivityDetailBinding
 import java.text.SimpleDateFormat
 
@@ -144,6 +146,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun screenShot() {
         //获取全屏截图（包括状态栏、标题栏和底部）
+
         val screenView = window.decorView
         val bitmap = screenView.drawToBitmap()
 
@@ -164,6 +167,11 @@ class DetailActivity : AppCompatActivity() {
 
         //去掉状态栏和标题栏
         val screenShot = Bitmap.createBitmap(bitmap,0,toolbarHeight+statusbarHeight,width,height-toolbarHeight-statusbarHeight)
+
+
+
+        val shot = ShotShareUtil(this).shotShare(this,screenShot)
+
 
     }
 
