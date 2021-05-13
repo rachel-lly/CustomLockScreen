@@ -1,11 +1,14 @@
 package com.example.customlockscreen.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.customlockscreen.activity.EditSortNoteActivity
+import com.example.customlockscreen.activity.SORT_NOTE
 import com.example.customlockscreen.databinding.SortNoteListItemBinding
 import com.example.customlockscreen.model.SortNote
 
@@ -18,7 +21,7 @@ class SortNoteListAdapter(val context: Context, val sortNoteList:List<SortNote>,
 
     private lateinit var  binding : SortNoteListItemBinding
 
-    private var mClickListener: ClickListener = clickListener
+
 
 
     inner class ViewHolder(binding: SortNoteListItemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -42,8 +45,10 @@ class SortNoteListAdapter(val context: Context, val sortNoteList:List<SortNote>,
         holder.itemView.setOnClickListener {
             val position = holder.adapterPosition
             val sortNote = sortNoteList[position]
-            mClickListener.onClick(sortNote.name)
 
+            val intent = Intent(context,EditSortNoteActivity::class.java)
+            intent.putExtra(SORT_NOTE,sortNote)
+            context.startActivity(intent)
         }
 
         return holder

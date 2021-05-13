@@ -37,7 +37,7 @@ class SortNoteAdapter (val context: Context, val sortNoteList:List<SortNote>,val
         holder.itemView.setOnClickListener {
             val position = holder.adapterPosition
             val sortNote = sortNoteList[position]
-            mClickListener.onClick(sortNote.name)
+            sortNote.name?.let { it -> mClickListener.onClick(it) }
 
         }
 
