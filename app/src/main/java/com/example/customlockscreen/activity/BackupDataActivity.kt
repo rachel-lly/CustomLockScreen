@@ -54,11 +54,16 @@ class BackupDataActivity : AppCompatActivity() {
     private fun deleteAllFile(bitmapDir: String) {
 
         val fileDir = File(bitmapDir)
-        delete(fileDir)
-        fileDir.delete()
         if(!fileDir.exists()){
-            Toast.makeText(this,"清除缓存图片成功",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"暂无缓存图片",Toast.LENGTH_SHORT).show()
+        }else{
+            delete(fileDir)
+            fileDir.delete()
+            if(!fileDir.exists()){
+                Toast.makeText(this,"清除缓存图片成功",Toast.LENGTH_SHORT).show()
+            }
         }
+
 
     }
 
@@ -68,7 +73,7 @@ class BackupDataActivity : AppCompatActivity() {
 
         if(files!=null){
             for(index in 0..files.size-1){
-                var deleteFile = files[index]
+                val deleteFile = files[index]
                 if(deleteFile.isFile){
                     deleteFile.delete()
                 }else if(deleteFile.isDirectory){
