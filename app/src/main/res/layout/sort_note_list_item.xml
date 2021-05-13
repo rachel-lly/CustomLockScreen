@@ -21,8 +21,7 @@
 
             <ImageView
                 android:id="@+id/sort_icon"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                style="@style/linear_item_icon"
                 android:src="@mipmap/anniverity_color"
                 />
 

@@ -9,8 +9,11 @@ import android.widget.PopupMenu
 import androidx.annotation.MenuRes
 import androidx.annotation.RequiresApi
 import com.example.customlockscreen.R
+import com.example.customlockscreen.Util.ShotShareUtil
+import com.example.customlockscreen.activity.BackupDataActivity
 import com.example.customlockscreen.activity.TimeRemindActivity
 import com.example.customlockscreen.databinding.FragmentSettingBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
  * A simple [Fragment] subclass.
@@ -20,6 +23,8 @@ import com.example.customlockscreen.databinding.FragmentSettingBinding
 class SettingFragment : Fragment() {
 
     private lateinit var binding:FragmentSettingBinding
+
+
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,11 +42,15 @@ class SettingFragment : Fragment() {
         }
         
         binding.settingBackupDataLayout.setOnClickListener {
-            // TODO: 2021/5/9 备份数据管理 
-            
+            val intent = Intent(context,BackupDataActivity::class.java)
+            startActivity(intent)
         }
         
     }
+
+
+
+
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun showMenu(v:View, @MenuRes menuRes: Int) {

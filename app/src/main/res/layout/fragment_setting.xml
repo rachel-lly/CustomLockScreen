@@ -23,9 +23,8 @@
 
         <ImageView
             android:id="@+id/sort_icon"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
             android:src="@mipmap/sort"
+            style="@style/linear_item_icon"
             />
 
         <TextView
@@ -68,9 +67,8 @@
 
         <ImageView
             android:id="@+id/clock_icon"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
             android:src="@mipmap/clock"
+            style="@style/linear_item_icon"
             />
 
         <TextView
@@ -101,9 +99,8 @@
 
         <ImageView
             android:id="@+id/backup_data_icon"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
             android:src="@mipmap/backup_data"
+            style="@style/linear_item_icon"
             />
 
         <TextView

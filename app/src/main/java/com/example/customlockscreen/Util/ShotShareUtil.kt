@@ -5,14 +5,20 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
-import android.os.Environment
 import androidx.core.content.FileProvider
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
 
+
 class ShotShareUtil(context: Context){
+
+    companion object{
+        fun getBitmapCacheDir(context: Context):String{
+            return "${context.getExternalFilesDir(null)?.absolutePath}/BitmapCache"
+        }
+    }
 
     private val BITMAP_DIR = "${context.getExternalFilesDir(null)?.absolutePath}/BitmapCache"
 
@@ -25,7 +31,7 @@ class ShotShareUtil(context: Context){
 
         bitmapName = "${System.currentTimeMillis()}"
 
-        bitmapPath = "$BITMAP_DIR/$bitmapName.png"
+        bitmapPath = "${getBitmapCacheDir(context)}/$bitmapName.png"
 
         SaveBitmap(bitmap)
 

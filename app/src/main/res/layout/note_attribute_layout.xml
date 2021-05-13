@@ -117,10 +117,8 @@
 
                 <ImageView
                     android:id="@+id/sort_iv"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
                     android:src="@mipmap/sort_note"
-                    android:layout_gravity="center"
+                    style="@style/linear_item_icon"
                     />
 
                 <TextView
@@ -184,10 +182,8 @@
 
                 <ImageView
                     android:id="@+id/to_top_iv"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
                     android:src="@mipmap/to_top"
-                    android:layout_centerVertical="true"
+                    style="@style/linear_item_icon"
                     />
 
                 <TextView
