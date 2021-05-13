@@ -1,24 +1,27 @@
 package com.example.customlockscreen.activity
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Rect
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import android.graphics.*
+import android.hardware.display.DisplayManager
+import android.media.Image
+import android.media.ImageReader
+import android.media.projection.MediaProjection
+import android.media.projection.MediaProjectionManager
+import android.os.*
+import android.util.DisplayMetrics
+import android.util.Log
 import android.util.TypedValue
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.view.WindowManager
+import android.view.*
 import androidx.annotation.RequiresApi
-import androidx.core.view.drawToBitmap
+import androidx.appcompat.app.AppCompatActivity
 import com.example.customlockscreen.R
 import com.example.customlockscreen.Util.ShotShareUtil
 import com.example.customlockscreen.databinding.ActivityDetailBinding
+import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
+
 
 const val LABEL_DAY = "LABEL_DAY"
 const val LABEL_TEXT = "LABEL_TEXT"
@@ -26,14 +29,79 @@ const val LABEL_DATE = "LABEL_DATE"
 
 class DetailActivity : AppCompatActivity() {
 
+
+    val EVENT_SCREENSHOT = 22 //截图事件
+
+    private var mediaProjectionManager: MediaProjectionManager? = null
+    private var mediaProjection: MediaProjection? = null
+    private var image: Image? = null
+
+    private fun takeScreenShot() {
+        mediaProjectionManager = application.getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
+        startActivityForResult(mediaProjectionManager!!.createScreenCaptureIntent(), EVENT_SCREENSHOT)
+    }
+
+    @SuppressLint("WrongConstant")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        if (requestCode == EVENT_SCREENSHOT) {
+            super.onActivityResult(requestCode, resultCode, data)
+
+            val displayMetrics = DisplayMetrics()
+            val windowManager = this.getSystemService(WINDOW_SERVICE) as WindowManager
+            windowManager.defaultDisplay.getMetrics(displayMetrics)
+            val width = displayMetrics.widthPixels
+            val height = displayMetrics.heightPixels
+
+            val mImageReader: ImageReader = ImageReader.newInstance(width, height, PixelFormat.RGBA_8888, 2)
+            mediaProjection = mediaProjectionManager!!.getMediaProjection(resultCode, data!!)
+            val virtualDisplay = mediaProjection!!.createVirtualDisplay("screen-mirror", width, height,
+                    displayMetrics.densityDpi, DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, mImageReader.getSurface(), null, null)
+            Handler(Looper.myLooper()!!).postDelayed({
+                try {
+                    image = mImageReader.acquireLatestImage()
+                    if (image != null) {
+                        val planes: Array<Image.Plane> = image!!.getPlanes()
+                        val buffer: ByteBuffer = planes[0].getBuffer()
+                        val width: Int = image!!.getWidth()
+                        val height: Int = image!!.getHeight()
+
+                        val pixelStride: Int = planes[0].getPixelStride()
+                        val rowStride: Int = planes[0].getRowStride()
+                        val rowPadding = rowStride - pixelStride * width
+                        var bitmap = Bitmap.createBitmap(width + rowPadding / pixelStride, height, Bitmap.Config.ARGB_8888)
+                        bitmap!!.copyPixelsFromBuffer(buffer)
+                        bitmap = Bitmap.createScaledBitmap(bitmap, bitmap.width, bitmap.height, false)
+                        if (bitmap != null) {
+
+
+                            cutScreenShot(bitmap)
+
+
+                        }
+                        bitmap.recycle()
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                } finally {
+                    image?.close()
+                    mImageReader.close()
+                    virtualDisplay?.release()
+                    //必须代码，否则出现BufferQueueProducer: [ImageReader] dequeueBuffer: BufferQueue has been abandoned
+                    mImageReader.setOnImageAvailableListener(null, null)
+                    mediaProjection!!.stop()
+                }
+            }, 100)
+        }
+    }
+
     private lateinit var binding : ActivityDetailBinding
 
+    @SuppressLint("SimpleDateFormat")
     private val format = SimpleDateFormat("yyyy-MM-dd-EE")
 
 
-
-
-    @RequiresApi(Build.VERSION_CODES.M)
+        @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -56,8 +124,8 @@ class DetailActivity : AppCompatActivity() {
 
         binding.detailCard.labelText.text = intent?.getStringExtra(LABEL_TEXT)
 
-        var date = intent?.getLongExtra(LABEL_DATE,0)
-        var day = intent?.getLongExtra(LABEL_DAY,0)
+        var date = intent?.getLongExtra(LABEL_DATE, 0)
+        var day = intent?.getLongExtra(LABEL_DAY, 0)
         if(date!=null){
             binding.detailCard.labelDate.text = format.format(date)
         }
@@ -66,15 +134,11 @@ class DetailActivity : AppCompatActivity() {
         if (day != null) {
             binding.detailCard.labelDay.text = Math.abs(day).toString()
             if(day>=0){
-
-                binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_future_dark,theme))
+                binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_future_dark, theme))
             }else{
-
-                binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_history_dark,theme))
+                binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_history_dark, theme))
             }
         }
-
-
 
 
 
@@ -102,9 +166,7 @@ class DetailActivity : AppCompatActivity() {
 
             var  decorView = window.decorView
             //两个 flag 要结合使用，表示让应用的主体内容占用系统状态栏的空间
-            var option = (View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    or View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
-            decorView.systemUiVisibility = option
+            decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             window.statusBarColor = Color.TRANSPARENT
         } else {
@@ -121,7 +183,7 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
-        menuInflater.inflate(R.menu.activity_detail_menu,menu)
+        menuInflater.inflate(R.menu.activity_detail_menu, menu)
         return true
     }
 
@@ -129,14 +191,14 @@ class DetailActivity : AppCompatActivity() {
         super.onOptionsItemSelected(item)
         // TODO: 2021/5/10 详细事件页面 分享功能
         when(item.itemId){
-            R.id.edit->{
-                val intent = Intent(this,EditNoteAttributeActivity::class.java)
+            R.id.edit -> {
+                val intent = Intent(this, EditNoteAttributeActivity::class.java)
                 startActivity(intent)
             }
 
-            R.id.share->{
+            R.id.share -> {
 
-                screenShot()
+                takeScreenShot()
 
             }
         }
@@ -144,11 +206,12 @@ class DetailActivity : AppCompatActivity() {
         return true
     }
 
-    private fun screenShot() {
-        //获取全屏截图（包括状态栏、标题栏和底部）
+
+
+    private fun cutScreenShot(bitmap: Bitmap) {
 
         val screenView = window.decorView
-        val bitmap = screenView.drawToBitmap()
+
 
         //获取状态栏高度
         val frame = Rect()
@@ -157,8 +220,8 @@ class DetailActivity : AppCompatActivity() {
 
         //获取标题栏高度(toolbar里有menu，需要截掉)
         val typeValue = TypedValue()
-        theme.resolveAttribute(android.R.attr.actionBarSize,typeValue,true)
-        val toolbarHeight = TypedValue.complexToDimensionPixelSize(typeValue.data,resources.displayMetrics)
+        theme.resolveAttribute(android.R.attr.actionBarSize, typeValue, true)
+        val toolbarHeight = TypedValue.complexToDimensionPixelSize(typeValue.data, resources.displayMetrics)
 
 
         //获取屏幕长宽
@@ -166,14 +229,15 @@ class DetailActivity : AppCompatActivity() {
         val height = screenView.height
 
         //去掉状态栏和标题栏
-        val screenShot = Bitmap.createBitmap(bitmap,0,toolbarHeight+statusbarHeight,width,height-toolbarHeight-statusbarHeight)
+        val screenShot = bitmap.let { Bitmap.createBitmap(it, 0, toolbarHeight + statusbarHeight, width, height - toolbarHeight - statusbarHeight) }
 
 
-
-        val shot = ShotShareUtil(this).shotShare(this,screenShot)
-
-
+        if (screenShot != null) {
+            ShotShareUtil(this).shotShare(this, screenShot)
+        }
     }
+
+
 
 
 }
