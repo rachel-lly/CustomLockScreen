@@ -12,15 +12,11 @@ import com.example.customlockscreen.activity.SORT_NOTE
 import com.example.customlockscreen.databinding.SortNoteListItemBinding
 import com.example.customlockscreen.model.SortNote
 
-class SortNoteListAdapter(val context: Context, val sortNoteList:List<SortNote>, val clickListener:ClickListener) :
+class SortNoteListAdapter(val context: Context, val sortNoteList:List<SortNote>) :
         RecyclerView.Adapter<SortNoteListAdapter.ViewHolder>() {
 
-    interface ClickListener{
-        fun onClick(SortNoteName:String)
-    }
 
     private lateinit var  binding : SortNoteListItemBinding
-
 
 
 

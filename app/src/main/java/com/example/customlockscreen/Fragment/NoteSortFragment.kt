@@ -29,7 +29,6 @@ class NoteSortFragment : Fragment() {
     private lateinit var binding: FragmentNoteSortBinding
     private var list = ArrayList<SortNote>()
 
-    private lateinit var onClickListener: SortNoteListAdapter.ClickListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,19 +46,10 @@ class NoteSortFragment : Fragment() {
         list.add(SortNote("工作",resources.getResourceEntryName(R.mipmap.work_color)))
         list.add(SortNote("生活",resources.getResourceEntryName(R.mipmap.life_color)))
 
-        onClickListener =object: SortNoteListAdapter.ClickListener{
-            override fun onClick(sortNoteName: String) {
-                // TODO: 2021/4/30 获取点击的分类本
-//                var intent = Intent()
-//                intent.putExtra(SORT_NOTE_TEXT,sortNoteName)
-//                setResult(RESULT_CODE,intent)
-//                finish()
-            }
 
-        }
         
         
-        var adapter = context?.let { SortNoteListAdapter(it,list,onClickListener) }
+        var adapter = context?.let { SortNoteListAdapter(it,list) }
         binding.fragmentSortNoteRecycleview.adapter = adapter
         binding.fragmentSortNoteRecycleview.layoutManager = GridLayoutManager(context,1)
 
