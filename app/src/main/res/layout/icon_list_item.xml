@@ -11,7 +11,17 @@
         android:src="@mipmap/cat"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:padding="5dp"
+        android:layout_margin="5dp"
         />
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="25dp"
+        android:layout_height="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:clickable="false"
+        android:visibility="gone"/>
+
 
 </RelativeLayout>

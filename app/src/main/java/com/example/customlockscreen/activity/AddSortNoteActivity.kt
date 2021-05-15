@@ -2,6 +2,7 @@ package com.example.customlockscreen.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.R
 import com.example.customlockscreen.adapter.IconListAdapter
@@ -11,7 +12,6 @@ class AddSortNoteActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityAddSortNoteBinding
 
-    private lateinit var onClickListener: IconListAdapter.ClickListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,14 +23,47 @@ class AddSortNoteActivity : AppCompatActivity() {
             finish()
         }
 
-        onClickListener = object :IconListAdapter.ClickListener{
-            override fun onClick(iconName: String) {
-                // TODO: 2021/5/15 获取点击得到的iconName
-            }
-        }
 
-        binding.addSortNoteCard.recycleView.adapter = IconListAdapter(this,onClickListener)
+
+        binding.addSortNoteCard.recycleView.adapter = IconListAdapter(this)
         binding.addSortNoteCard.recycleView.layoutManager = GridLayoutManager(this,6)
+
+        val adapter = IconListAdapter(this)
+
+
+        binding.addSortNoteCard.recycleView.adapter = adapter
+        binding.addSortNoteCard.recycleView.layoutManager = GridLayoutManager(this,6)
+
+        binding.addNoteSure.setOnClickListener {
+            val checkBoxMap = adapter.positionMap
+            val iconList = adapter.iconList
+
+
+
+            var chooseCount = 0
+            var choosePosition = -1
+
+            for(i in 0..checkBoxMap.size-1){
+                if(checkBoxMap.get(i)==true){
+                    chooseCount++
+                    choosePosition = i
+                }
+            }
+
+            if(chooseCount==1){
+                // TODO: 2021/5/15 保存信息
+                val iconName = resources.getResourceEntryName(iconList[choosePosition])
+
+
+            }else{
+                Toast.makeText(this,"请选择一个图标", Toast.LENGTH_SHORT).show()
+            }
+
+
+
+
+
+        }
 
 
         setContentView(binding.root)
