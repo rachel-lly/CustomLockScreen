@@ -12,6 +12,10 @@ class AddSortNoteActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityAddSortNoteBinding
 
+    private lateinit var clickListener: IconListAdapter.ClickListener
+
+    private var mPosition:Int = -1
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,39 +28,34 @@ class AddSortNoteActivity : AppCompatActivity() {
         }
 
 
+        clickListener = object :IconListAdapter.ClickListener{
+            override fun onClick(position: Int) {
+                mPosition = position
+            }
 
-        binding.addSortNoteCard.recycleView.adapter = IconListAdapter(this)
-        binding.addSortNoteCard.recycleView.layoutManager = GridLayoutManager(this,6)
+        }
 
-        val adapter = IconListAdapter(this)
+
+        val adapter = IconListAdapter(this,clickListener)
+        val layoutManager = GridLayoutManager(this,6)
+
 
 
         binding.addSortNoteCard.recycleView.adapter = adapter
-        binding.addSortNoteCard.recycleView.layoutManager = GridLayoutManager(this,6)
+        binding.addSortNoteCard.recycleView.layoutManager = layoutManager
+
 
         binding.addNoteSure.setOnClickListener {
-            val checkBoxMap = adapter.positionMap
+
             val iconList = adapter.iconList
 
-
-
-            var chooseCount = 0
-            var choosePosition = -1
-
-            for(i in 0..checkBoxMap.size-1){
-                if(checkBoxMap.get(i)==true){
-                    chooseCount++
-                    choosePosition = i
-                }
-            }
-
-            if(chooseCount==1){
+            if(mPosition!=-1){
                 // TODO: 2021/5/15 保存信息
-                val iconName = resources.getResourceEntryName(iconList[choosePosition])
-
+                val iconName = resources.getResourceEntryName(iconList[mPosition])
+                Toast.makeText(this,"$iconName",Toast.LENGTH_SHORT).show()
 
             }else{
-                Toast.makeText(this,"请选择一个图标", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"请选择一个图标",Toast.LENGTH_SHORT).show()
             }
 
 
@@ -64,7 +63,6 @@ class AddSortNoteActivity : AppCompatActivity() {
 
 
         }
-
 
         setContentView(binding.root)
     }

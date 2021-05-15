@@ -12,7 +12,7 @@ import com.example.customlockscreen.model.SortNote
 class SortNoteAdapter (val context: Context, val sortNoteList:List<SortNote>,clickListener:ClickListener) :
         RecyclerView.Adapter<SortNoteAdapter.ViewHolder>() {
 
-    public interface ClickListener{
+    interface ClickListener{
         fun onClick(SortNoteName:String)
     }
 

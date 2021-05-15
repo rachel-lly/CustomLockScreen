@@ -14,9 +14,11 @@ const val SORT_NOTE = "SORT_NOTE"
 
 class EditSortNoteActivity : AppCompatActivity() {
 
+    private var mPosition:Int = -1
+
     private lateinit var binding : ActivityEditSortNoteBinding
 
-
+    private lateinit var clickListener: IconListAdapter.ClickListener
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,34 +39,31 @@ class EditSortNoteActivity : AppCompatActivity() {
         }
 
 
+        clickListener = object :IconListAdapter.ClickListener{
+            override fun onClick(position: Int) {
+                mPosition = position
+            }
+
+        }
 
 
-        val adapter = IconListAdapter(this)
+        val adapter = IconListAdapter(this,clickListener)
+        val layoutManager = GridLayoutManager(this,6)
+
 
 
         binding.editSortNoteCard.recycleView.adapter = adapter
-        binding.editSortNoteCard.recycleView.layoutManager = GridLayoutManager(this,6)
+        binding.editSortNoteCard.recycleView.layoutManager = layoutManager
+
 
         binding.editNoteSure.setOnClickListener {
-            val checkBoxMap = adapter.positionMap
+
             val iconList = adapter.iconList
 
-
-
-                var chooseCount = 0
-                var choosePosition = -1
-
-                for(i in 0..checkBoxMap.size-1){
-                    if(checkBoxMap.get(i)==true){
-                        chooseCount++
-                        choosePosition = i
-                    }
-                }
-
-                if(chooseCount==1){
+                if(mPosition!=-1){
                     // TODO: 2021/5/15 保存信息
-                    val iconName = resources.getResourceEntryName(iconList[choosePosition])
-
+                    val iconName = resources.getResourceEntryName(iconList[mPosition])
+                    Toast.makeText(this,"$iconName",Toast.LENGTH_SHORT).show()
 
                 }else{
                     Toast.makeText(this,"请选择一个图标",Toast.LENGTH_SHORT).show()
