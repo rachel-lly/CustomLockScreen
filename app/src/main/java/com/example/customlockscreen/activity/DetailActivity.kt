@@ -11,7 +11,6 @@ import android.media.projection.MediaProjection
 import android.media.projection.MediaProjectionManager
 import android.os.*
 import android.util.DisplayMetrics
-import android.util.Log
 import android.util.TypedValue
 import android.view.*
 import androidx.annotation.RequiresApi

@@ -9,24 +9,24 @@
                 <item
                     android:id="@+id/all"
                     android:title="全部事件"
-                    android:icon="@mipmap/all" />
+                    android:icon="@mipmap/earth" />
 
                 <item
                     android:id="@+id/life"
                     android:title="生活"
-                    android:icon="@mipmap/life"
+                    android:icon="@mipmap/life_color"
                     />
 
                 <item
                     android:id="@+id/work"
                     android:title="工作"
-                    android:icon="@mipmap/work"
+                    android:icon="@mipmap/work_color"
                     />
 
                 <item
                     android:id="@+id/anniversary"
                     android:title="纪念日"
-                    android:icon="@mipmap/anniversary"
+                    android:icon="@mipmap/anniverity_color"
                     />
             </menu>
         </item>

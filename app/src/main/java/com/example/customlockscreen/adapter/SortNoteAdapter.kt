@@ -7,9 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.customlockscreen.databinding.SortNoteCardItemBinding
-import com.example.customlockscreen.model.SortNote
+import com.example.customlockscreen.model.bean.SortNote
 
-class SortNoteAdapter (val context: Context, val sortNoteList:List<SortNote>,clickListener:ClickListener) :
+class SortNoteAdapter (val context: Context, val sortNoteList:List<SortNote>, clickListener:ClickListener) :
         RecyclerView.Adapter<SortNoteAdapter.ViewHolder>() {
 
     interface ClickListener{

@@ -10,7 +10,7 @@ import com.example.customlockscreen.activity.AddNoteActivity
 import com.example.customlockscreen.adapter.LabelGridAdapter
 import com.example.customlockscreen.adapter.LabelLinearAdapter
 import com.example.customlockscreen.databinding.FragmentNoteListBinding
-import com.example.customlockscreen.model.Label
+import com.example.customlockscreen.model.bean.Label
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,10 +40,10 @@ class NoteListFragment : Fragment() {
         setHasOptionsMenu(true)
 
         labelList= ArrayList<Label>()
-        labelList.add(Label("3/26",1616762869000))
-        labelList.add(Label("2020/3/26",1585226869000))
-        labelList.add(Label("2021/01/01",1609505269000))
-        labelList.add(Label("2021/08/31",1630414069000))
+        labelList.add(Label("3/26",1616762869000,System.currentTimeMillis()))
+        labelList.add(Label("2020/3/26",1585226869000,System.currentTimeMillis()))
+        labelList.add(Label("2021/01/01",1609505269000,System.currentTimeMillis()))
+        labelList.add(Label("2021/08/31",1630414069000,System.currentTimeMillis()))
 
 
 

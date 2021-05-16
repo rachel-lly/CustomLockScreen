@@ -9,7 +9,8 @@ import com.example.customlockscreen.R
 import com.example.customlockscreen.activity.AddSortNoteActivity
 import com.example.customlockscreen.adapter.SortNoteListAdapter
 import com.example.customlockscreen.databinding.FragmentNoteSortBinding
-import com.example.customlockscreen.model.SortNote
+import com.example.customlockscreen.model.bean.SortNote
+import com.example.customlockscreen.model.db.DataBase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +28,10 @@ class NoteSortFragment : Fragment() {
 //    private var param2: String? = null
 
     private lateinit var binding: FragmentNoteSortBinding
-    private var list = ArrayList<SortNote>()
+    private lateinit var list:List<SortNote>
+
+
+    private val sortNoteDao = DataBase.dataBase.sortNoteDao()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,13 +45,7 @@ class NoteSortFragment : Fragment() {
 
         binding = FragmentNoteSortBinding.inflate(LayoutInflater.from(this.context))
 
-        list.add(SortNote("全部",resources.getResourceEntryName(R.mipmap.all_color)))
-        list.add(SortNote("纪念日",resources.getResourceEntryName(R.mipmap.anniverity_color)))
-        list.add(SortNote("工作",resources.getResourceEntryName(R.mipmap.work_color)))
-        list.add(SortNote("生活",resources.getResourceEntryName(R.mipmap.life_color)))
-
-
-        
+        list = sortNoteDao.getAllSortNotes()
         
         var adapter = context?.let { SortNoteListAdapter(it,list) }
         binding.fragmentSortNoteRecycleview.adapter = adapter

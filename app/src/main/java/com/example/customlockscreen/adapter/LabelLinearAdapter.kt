@@ -14,7 +14,7 @@ import com.example.customlockscreen.activity.LABEL_DATE
 import com.example.customlockscreen.activity.LABEL_DAY
 import com.example.customlockscreen.activity.LABEL_TEXT
 import com.example.customlockscreen.databinding.CardItemLinearBinding
-import com.example.customlockscreen.model.Label
+import com.example.customlockscreen.model.bean.Label
 
 class LabelLinearAdapter(val context: Context, val labelList:List<Label>) :
     RecyclerView.Adapter<LabelLinearAdapter.ViewHolder>() {
@@ -40,7 +40,7 @@ class LabelLinearAdapter(val context: Context, val labelList:List<Label>) :
 
                 putExtra(LABEL_DAY, label.day)
 
-                putExtra(LABEL_DATE, label.date)
+                putExtra(LABEL_DATE, label.targetDate)
             }
             context.startActivity(intent)
         }

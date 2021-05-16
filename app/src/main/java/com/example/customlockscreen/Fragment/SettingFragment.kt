@@ -9,11 +9,9 @@ import android.widget.PopupMenu
 import androidx.annotation.MenuRes
 import androidx.annotation.RequiresApi
 import com.example.customlockscreen.R
-import com.example.customlockscreen.Util.ShotShareUtil
 import com.example.customlockscreen.activity.BackupDataActivity
 import com.example.customlockscreen.activity.TimeRemindActivity
 import com.example.customlockscreen.databinding.FragmentSettingBinding
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
  * A simple [Fragment] subclass.

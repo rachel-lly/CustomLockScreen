@@ -1,17 +1,25 @@
-package com.example.customlockscreen.model
+package com.example.customlockscreen.model.bean
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity(tableName = "SORT_NOTE_TABLE")
+data class SortNote(
 
-data class SortNote(var name: String?, var iconName: String?):Parcelable{
+        @PrimaryKey var name: String,
+        @ColumnInfo var iconName: String
+
+        ):Parcelable{
     //var iconName:String = resources.getResourceEntryName(R.mipmap.anniversary)
     //获取的时候
     //var iconId:Int = context.resources.getIdentifier(sortNote.iconName,"mipmap",context.packageName)
 
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString()
+            parcel.readString()!!,
+            parcel.readString()!!
     ) {
     }
 

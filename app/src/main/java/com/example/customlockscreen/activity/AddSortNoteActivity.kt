@@ -7,18 +7,27 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.R
 import com.example.customlockscreen.adapter.IconListAdapter
 import com.example.customlockscreen.databinding.ActivityAddSortNoteBinding
+import com.example.customlockscreen.model.bean.SortNote
+import com.example.customlockscreen.model.db.DataBase
+import com.example.customlockscreen.model.db.SortNoteDao
+
 
 class AddSortNoteActivity : AppCompatActivity() {
+
 
     private lateinit var binding:ActivityAddSortNoteBinding
 
     private lateinit var clickListener: IconListAdapter.ClickListener
+
+    private val sortNoteDao = DataBase.dataBase.sortNoteDao()
 
     private var mPosition:Int = -1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
 
         binding = ActivityAddSortNoteBinding.inflate(layoutInflater)
 
@@ -50,9 +59,17 @@ class AddSortNoteActivity : AppCompatActivity() {
             val iconList = adapter.iconList
 
             if(mPosition!=-1){
-                // TODO: 2021/5/15 保存信息
+
+                // TODO: 2021/5/16 保存数据 
                 val iconName = resources.getResourceEntryName(iconList[mPosition])
-                Toast.makeText(this,"$iconName",Toast.LENGTH_SHORT).show()
+                if(binding.addSortNoteCard.addSortNoteEt.text.isEmpty()){
+                    Toast.makeText(this,"分类本文字不能为空",Toast.LENGTH_SHORT).show()
+                }else{
+                    val sortNoteName = binding.addSortNoteCard.addSortNoteEt.text.toString()
+                    sortNoteDao.insertSortNote(SortNote(sortNoteName,iconName))
+                    Toast.makeText(this,"保存数据成功--$sortNoteName:$iconName",Toast.LENGTH_SHORT).show()
+                }
+
 
             }else{
                 Toast.makeText(this,"请选择一个图标",Toast.LENGTH_SHORT).show()

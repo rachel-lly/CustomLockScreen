@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -15,6 +16,15 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions{
+            annotationProcessorOptions{
+                arguments = [
+                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
+                        "room.incremental"     : "true",
+                        "room.expandProjection": "true"]
+            }
+        }
     }
 
     buildTypes {
@@ -34,6 +44,12 @@ android {
     viewBinding{
         enabled = true
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
 }
 
 dependencies {
@@ -52,10 +68,13 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-    implementation 'androidx.room:room-runtime:2.2.5'
+
 
     implementation 'org.greenrobot:eventbus:3.2.0'
 
     implementation 'com.google.android.material:material:1.4.0-alpha01'
+
+    implementation 'androidx.room:room-runtime:2.2.5'
+    kapt "androidx.room:room-compiler:2.2.5"
 
 }

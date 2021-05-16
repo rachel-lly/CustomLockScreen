@@ -23,7 +23,7 @@
             android:id="@+id/sort_icon"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@mipmap/anniversary"
+            android:src="@mipmap/anniverity_color"
             />
 
         <TextView
