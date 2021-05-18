@@ -18,7 +18,12 @@ interface LabelDao {
     @Query("SELECT * FROM label_table")
     fun getAllLabels():List<Label>
 
+    @Query("SELECT text FROM label_table")
+    fun getAllLabelsName():List<String>
 
+
+    @Query("SELECT * FROM label_table WHERE sortNote =:sortNoteName ")
+    fun getSameSortNoteLabelList(sortNoteName:String):List<Label>
 
 
 }

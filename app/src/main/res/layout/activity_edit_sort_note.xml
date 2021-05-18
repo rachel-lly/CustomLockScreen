@@ -29,17 +29,40 @@
         android:layout_below="@+id/edit_sort_note_toolbar"
         />
 
-    <Button
-        android:id="@+id/edit_note_sure"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="保存"
+        android:orientation="horizontal"
         android:layout_below="@id/edit_sort_note_card"
         android:layout_marginTop="30dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:background="@color/colorPrimaryDark"
-        />
+        >
+
+        <Button
+            android:id="@+id/edit_note_delete"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="删除"
+            android:layout_marginEnd="10dp"
+            android:background="@color/colorPrimaryDark"
+            />
+
+        <Button
+            android:id="@+id/edit_note_sure"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="保存"
+            android:layout_marginStart="10dp"
+            android:background="@color/colorPrimaryDark"
+            />
+
+
+
+    </LinearLayout>
+
 
 
 

@@ -18,4 +18,6 @@ interface SortNoteDao {
     @Query("SELECT * FROM sort_note_table")
     fun getAllSortNotes():List<SortNote>
 
+    @Query("SELECT name FROM sort_note_table")
+    fun getAllSortNotesName():List<String>
 }

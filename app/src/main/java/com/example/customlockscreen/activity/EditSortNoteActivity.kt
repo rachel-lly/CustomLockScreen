@@ -27,11 +27,15 @@ class EditSortNoteActivity : AppCompatActivity() {
 
     private lateinit var adapter: IconListAdapter
 
+    private var sortNote:SortNote? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityEditSortNoteBinding.inflate(layoutInflater)
+
+        setSupportActionBar(binding.editSortNoteToolbar)
 
         binding.editSortNoteToolbar.setNavigationIcon(R.mipmap.back)
         binding.editSortNoteToolbar.setNavigationOnClickListener {
@@ -40,10 +44,11 @@ class EditSortNoteActivity : AppCompatActivity() {
 
 
 
-        var sortNote = intent?.getParcelableExtra<SortNote>(SORT_NOTE)
+        sortNote = intent?.getParcelableExtra<SortNote>(SORT_NOTE)
+
 
         if (sortNote != null) {
-            binding.editSortNoteCard.addSortNoteEt.text = SpannableStringBuilder(sortNote.name)
+            binding.editSortNoteCard.addSortNoteEt.text = SpannableStringBuilder(sortNote!!.name)
 
         }
 
@@ -66,31 +71,16 @@ class EditSortNoteActivity : AppCompatActivity() {
 
 
         binding.editNoteSure.setOnClickListener {
+            updateSortNote()
+        }
 
-            val iconList = adapter.iconList
+        binding.editNoteDelete.setOnClickListener {
 
-                if(mPosition!=-1){
-
-                    val iconName = resources.getResourceEntryName(iconList[mPosition])
-                    if(binding.editSortNoteCard.addSortNoteEt.text.isEmpty()){
-                        Toast.makeText(this,"分类本文字不能为空",Toast.LENGTH_SHORT).show()
-                    }else{
-
-                        // TODO: 2021/5/16 更新数据 
-                        val sortNoteName = binding.editSortNoteCard.addSortNoteEt.text.toString()
-                        sortNoteDao.updateSortNote(SortNote(sortNoteName,iconName))
-                        Toast.makeText(this,"保存数据成功--$sortNoteName:$iconName",Toast.LENGTH_SHORT).show()
-                    }
-
-
-                }else{
-                    Toast.makeText(this,"请选择一个图标",Toast.LENGTH_SHORT).show()
-                }
-
-
-
-
-
+            if(sortNote!=null){
+                sortNoteDao.deleteSortNote(sortNote!!)
+                Toast.makeText(this,"删除分类本成功",Toast.LENGTH_SHORT).show()
+                finish()
+            }
         }
 
         setContentView(binding.root)
@@ -107,22 +97,55 @@ class EditSortNoteActivity : AppCompatActivity() {
 
         when(item.itemId){
             R.id.save_data ->{
-
-
-                val iconList = adapter.iconList
-
-                if(mPosition!=-1){
-                    // TODO: 2021/5/15 保存信息
-                    val iconName = resources.getResourceEntryName(iconList[mPosition])
-                    Toast.makeText(this,"$iconName",Toast.LENGTH_SHORT).show()
-
-                }else{
-                    Toast.makeText(this,"请选择一个图标",Toast.LENGTH_SHORT).show()
-                }
-
+                updateSortNote()
             }
         }
 
         return true
+    }
+
+    private fun updateSortNote() {
+        val iconList = adapter.iconList
+
+        if(mPosition!=-1){
+
+            val iconName = resources.getResourceEntryName(iconList[mPosition])
+            if(binding.editSortNoteCard.addSortNoteEt.text.isEmpty()){
+                Toast.makeText(this,"分类本文字不能为空",Toast.LENGTH_SHORT).show()
+            }else{
+                val sortNoteName = binding.editSortNoteCard.addSortNoteEt.text.toString()
+
+                if(sortNote!=null){
+
+
+                    val nameList = sortNoteDao.getAllSortNotesName()
+
+
+                    var flag = false
+
+                    for(name in nameList){
+                        if(name.equals(sortNoteName)){
+                            flag = true
+                            break
+                        }
+                    }
+
+                    if(flag){
+                        Toast.makeText(this,"该分类本已存在",Toast.LENGTH_SHORT).show()
+                    }else{
+                        sortNoteDao.deleteSortNote(sortNote!!)
+                        sortNoteDao.insertSortNote(SortNote(sortNoteName,iconName))
+                        Toast.makeText(this,"保存数据成功--$sortNoteName:$iconName",Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+                }
+
+
+            }
+
+
+        }else{
+            Toast.makeText(this,"请选择一个图标",Toast.LENGTH_SHORT).show()
+        }
     }
 }

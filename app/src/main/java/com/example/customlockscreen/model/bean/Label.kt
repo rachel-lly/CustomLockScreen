@@ -9,7 +9,7 @@ data class Label(
         @PrimaryKey var text : String,
         @ColumnInfo var targetDate: Long,
         @ColumnInfo var addNoteTime:Long
-        ){
+        ) : Comparable<Any> {
 
         @ColumnInfo var day = (targetDate-System.currentTimeMillis())/(1000*3600*24)
 
@@ -24,6 +24,13 @@ data class Label(
         @ColumnInfo var endDate:Long = 1000000L
 
 
+        override fun compareTo(other: Any): Int {
+              if(this.day<(other as Label).day){
+                      return 1
+              }else{
+                      return -1
+              }
+        }
 }
 
 

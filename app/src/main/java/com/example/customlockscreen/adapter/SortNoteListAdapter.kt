@@ -10,7 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.customlockscreen.activity.EditSortNoteActivity
 import com.example.customlockscreen.activity.SORT_NOTE
 import com.example.customlockscreen.databinding.SortNoteListItemBinding
+import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.bean.SortNote
+import com.example.customlockscreen.model.db.DataBase
+import java.util.*
 
 class SortNoteListAdapter(val context: Context, val sortNoteList:List<SortNote>) :
         RecyclerView.Adapter<SortNoteListAdapter.ViewHolder>() {
@@ -18,13 +21,13 @@ class SortNoteListAdapter(val context: Context, val sortNoteList:List<SortNote>)
 
     private lateinit var  binding : SortNoteListItemBinding
 
-
+    private val labelDao = DataBase.dataBase.labelDao()
 
     inner class ViewHolder(binding: SortNoteListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val sortNoteText : TextView = binding.sortTx
         val sortNoteIcon : ImageView = binding.sortIcon
 
-        // TODO: 2021/4/30 分类本 事件个数、最近事件名字和天数 
+
         val sortNoteCount : TextView = binding.sortCount
         val latestNoteName :TextView = binding.sortNoteName
         val latestNoteDay :TextView = binding.sortNoteDay
@@ -55,6 +58,14 @@ class SortNoteListAdapter(val context: Context, val sortNoteList:List<SortNote>)
         holder.sortNoteText.text = sortNote.name
         var iconId:Int = context.resources.getIdentifier(sortNote.iconName,"mipmap",context.packageName)
         holder.sortNoteIcon.setImageResource(iconId)
+
+        val sameSortNoteLabelList = labelDao.getSameSortNoteLabelList(sortNote.name)
+
+        holder.sortNoteCount.text = sameSortNoteLabelList.size.toString()
+        // TODO: 2021/5/18 添加完label再弄 
+//        val minLabel:Label = Collections.min(sameSortNoteLabelList)
+//        holder.latestNoteName.text = minLabel.text
+//        holder.latestNoteDay.text = minLabel.day.toString()
     }
 
     override fun getItemCount() = sortNoteList.size

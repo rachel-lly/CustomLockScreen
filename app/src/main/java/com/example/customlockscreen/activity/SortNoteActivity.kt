@@ -8,14 +8,17 @@ import com.example.customlockscreen.R
 import com.example.customlockscreen.adapter.SortNoteAdapter
 import com.example.customlockscreen.databinding.ActivitySortNoteBinding
 import com.example.customlockscreen.model.bean.SortNote
+import com.example.customlockscreen.model.db.DataBase
 
 class SortNoteActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivitySortNoteBinding
 
-    private var list = ArrayList<SortNote>()
+    private lateinit var list:List<SortNote>
 
     private lateinit var onClickListener: SortNoteAdapter.ClickListener
+
+    private val sortNoteDao = DataBase.dataBase.sortNoteDao()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,9 +31,7 @@ class SortNoteActivity : AppCompatActivity() {
             finish()
         }
 
-        list.add(SortNote("纪念日",resources.getResourceEntryName(R.mipmap.anniverity_color)))
-        list.add(SortNote("工作",resources.getResourceEntryName(R.mipmap.work_color)))
-        list.add(SortNote("生活",resources.getResourceEntryName(R.mipmap.life_color)))
+        list = sortNoteDao.getAllSortNotes()
 
         onClickListener =object: SortNoteAdapter.ClickListener{
             override fun onClick(sortNoteName: String) {
