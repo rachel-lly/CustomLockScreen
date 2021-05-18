@@ -28,11 +28,10 @@
         <include
             android:id="@+id/note_attribute_layout"
             layout="@layout/note_attribute_layout"
-            android:layout_below="@+id/add_note_toolbar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"/>
-
-
+            android:layout_below="@+id/add_note_toolbar"
+            android:layout_marginTop="0dp" />
 
         <Button
             android:id="@+id/add_note_sure"

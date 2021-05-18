@@ -3,6 +3,7 @@ package com.example.customlockscreen.adapter
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -62,10 +63,18 @@ class SortNoteListAdapter(val context: Context, val sortNoteList:List<SortNote>)
         val sameSortNoteLabelList = labelDao.getSameSortNoteLabelList(sortNote.name)
 
         holder.sortNoteCount.text = sameSortNoteLabelList.size.toString()
-        // TODO: 2021/5/18 添加完label再弄 
-//        val minLabel:Label = Collections.min(sameSortNoteLabelList)
-//        holder.latestNoteName.text = minLabel.text
-//        holder.latestNoteDay.text = minLabel.day.toString()
+        // TODO: 2021/5/18 添加完label再弄
+        if(sameSortNoteLabelList.size!=0){
+            val minLabel:Label = Collections.min(sameSortNoteLabelList)
+            holder.latestNoteName.text = minLabel.text
+            holder.latestNoteDay.text = "还有 ${minLabel.day} 天"
+
+        }else{
+            holder.latestNoteName.visibility = View.GONE
+            holder.latestNoteDay.visibility = View.GONE
+        }
+
+
     }
 
     override fun getItemCount() = sortNoteList.size

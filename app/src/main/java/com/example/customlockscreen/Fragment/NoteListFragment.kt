@@ -11,22 +11,14 @@ import com.example.customlockscreen.adapter.LabelGridAdapter
 import com.example.customlockscreen.adapter.LabelLinearAdapter
 import com.example.customlockscreen.databinding.FragmentNoteListBinding
 import com.example.customlockscreen.model.bean.Label
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val LIST_STATE = "LIST_STATE"
+import com.example.customlockscreen.model.db.DataBase
 
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [NoteListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class NoteListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var state:String?=null
-    private lateinit var labelList :ArrayList<Label>
+
+    private lateinit var labelList :List<Label>
+
+    private val labelDao = DataBase.dataBase.labelDao()
 
     private var isFirst:Boolean = true
 
@@ -39,23 +31,12 @@ class NoteListFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
-        labelList= ArrayList<Label>()
-        labelList.add(Label("3/26",1616762869000,System.currentTimeMillis()))
-        labelList.add(Label("2020/3/26",1585226869000,System.currentTimeMillis()))
-        labelList.add(Label("2021/01/01",1609505269000,System.currentTimeMillis()))
-        labelList.add(Label("2021/08/31",1630414069000,System.currentTimeMillis()))
-
-
+        labelList = labelDao.getAllLabels()
 
         binding.homeRecyclerview.adapter = this.context?.let { LabelLinearAdapter(it, labelList) }
         binding.homeRecyclerview.layoutManager = GridLayoutManager(this.context, 1)
 
 
-
-        arguments?.let {
-            state = it.getString(LIST_STATE)
-
-        }
 
 
     }
@@ -111,29 +92,6 @@ class NoteListFragment : Fragment() {
         return binding.root
     }
 
-
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment NoteListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(listState:String) =
-            NoteListFragment().apply {
-                arguments = Bundle().apply {
-
-                }
-
-            }
-
-
-    }
 
 }
 
