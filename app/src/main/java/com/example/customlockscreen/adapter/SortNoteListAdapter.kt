@@ -67,7 +67,13 @@ class SortNoteListAdapter(val context: Context, val sortNoteList:List<SortNote>)
         if(sameSortNoteLabelList.size!=0){
             val minLabel:Label = Collections.min(sameSortNoteLabelList)
             holder.latestNoteName.text = minLabel.text
-            holder.latestNoteDay.text = "还有 ${minLabel.day} 天"
+
+            if(minLabel.day>0){
+                holder.latestNoteDay.text = "还有 ${minLabel.day} 天"
+            }else{
+                holder.latestNoteDay.text = "已经 ${Math.abs(minLabel.day)} 天"
+            }
+
 
         }else{
             holder.latestNoteName.visibility = View.GONE

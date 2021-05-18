@@ -32,11 +32,17 @@ class NoteListFragment : Fragment() {
         setHasOptionsMenu(true)
 
         labelList = labelDao.getAllLabels()
+        val adapter = this.context?.let { LabelLinearAdapter(it, labelList) }
 
-        binding.homeRecyclerview.adapter = this.context?.let { LabelLinearAdapter(it, labelList) }
+        binding.homeRecyclerview.adapter = adapter
         binding.homeRecyclerview.layoutManager = GridLayoutManager(this.context, 1)
 
-
+        binding.homeSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark)
+        binding.homeSwipeRefreshLayout.setOnRefreshListener {
+            adapter!!.labelList = labelDao.getAllLabels()
+            adapter!!.notifyDataSetChanged()
+            binding.homeSwipeRefreshLayout.isRefreshing = false
+        }
 
 
     }

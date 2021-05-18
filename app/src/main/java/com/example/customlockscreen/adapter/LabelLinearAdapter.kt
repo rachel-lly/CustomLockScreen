@@ -14,7 +14,7 @@ import com.example.customlockscreen.activity.LABEL_TEXT
 import com.example.customlockscreen.databinding.CardItemLinearBinding
 import com.example.customlockscreen.model.bean.Label
 
-class LabelLinearAdapter(val context: Context, val labelList:List<Label>) :
+class LabelLinearAdapter(val context: Context, var labelList:List<Label>) :
     RecyclerView.Adapter<LabelLinearAdapter.ViewHolder>() {
 
     private lateinit var  binding : CardItemLinearBinding
