@@ -18,22 +18,69 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.customlockscreen.R
 import com.example.customlockscreen.Util.ShotShareUtil
 import com.example.customlockscreen.databinding.ActivityDetailBinding
+import com.example.customlockscreen.model.bean.Label
+import com.example.customlockscreen.model.db.DataBase
 import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
+import java.util.*
 
-
-const val LABEL_DAY = "LABEL_DAY"
 const val LABEL_TEXT = "LABEL_TEXT"
-const val LABEL_DATE = "LABEL_DATE"
 
 class DetailActivity : AppCompatActivity() {
-
 
     val EVENT_SCREENSHOT = 22 //截图事件
 
     private var mediaProjectionManager: MediaProjectionManager? = null
     private var mediaProjection: MediaProjection? = null
     private var image: Image? = null
+
+    private lateinit var binding : ActivityDetailBinding
+
+
+    private val format = SimpleDateFormat("yyyy-MM-dd-EE", Locale.CHINESE)
+
+    private val labelDao = DataBase.dataBase.labelDao()
+
+    private lateinit var label: Label
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+
+            binding = ActivityDetailBinding.inflate(layoutInflater)
+
+            setSupportActionBar(binding.detailToolbar)
+            binding.detailToolbar.setTitleTextColor(Color.WHITE)
+
+            steepStatusBar()
+
+            binding.detailToolbar.setNavigationIcon(R.mipmap.back)
+            binding.detailToolbar.setNavigationOnClickListener {
+                finish()
+            }
+
+            val labelText = intent!!.getStringExtra(LABEL_TEXT)
+
+
+            label = labelText!!.let { labelDao.getLabelByName(it) }
+
+            binding.detailCard.labelText.text = labelText
+            binding.detailCard.labelDate.text = format.format(label!!.targetDate)
+
+            val day = label!!.day
+
+
+            binding.detailCard.labelDay.text = Math.abs(day).toString()
+            if(day>=0){
+                binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_future_dark, theme))
+            }else{
+                binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_history_dark, theme))
+            }
+
+
+
+            setContentView(binding.root)
+    }
 
     private fun takeScreenShot() {
         mediaProjectionManager = application.getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
@@ -94,60 +141,6 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private lateinit var binding : ActivityDetailBinding
-
-    @SuppressLint("SimpleDateFormat")
-    private val format = SimpleDateFormat("yyyy-MM-dd-EE")
-
-
-        @RequiresApi(Build.VERSION_CODES.M)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        binding = ActivityDetailBinding.inflate(layoutInflater)
-
-        setSupportActionBar(binding.detailToolbar)
-        binding.detailToolbar.setTitleTextColor(Color.WHITE)
-
-        steepStatusBar()
-
-
-        binding.detailToolbar.setNavigationIcon(R.mipmap.back)
-
-        binding.detailToolbar.setNavigationOnClickListener {
-            finish()
-        }
-
-        
-
-
-        binding.detailCard.labelText.text = intent?.getStringExtra(LABEL_TEXT)
-
-        var date = intent?.getLongExtra(LABEL_DATE, 0)
-        var day = intent?.getLongExtra(LABEL_DAY, 0)
-        if(date!=null){
-            binding.detailCard.labelDate.text = format.format(date)
-        }
-
-
-        if (day != null) {
-            binding.detailCard.labelDay.text = Math.abs(day).toString()
-            if(day>=0){
-                binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_future_dark, theme))
-            }else{
-                binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_history_dark, theme))
-            }
-        }
-
-
-
-
-
-
-
-        setContentView(binding.root)
-    }
-
     private fun steepStatusBar() {
 
 
@@ -192,6 +185,7 @@ class DetailActivity : AppCompatActivity() {
         when(item.itemId){
             R.id.edit -> {
                 val intent = Intent(this, EditNoteAttributeActivity::class.java)
+                intent.putExtra(LABEL,label)
                 startActivity(intent)
             }
 

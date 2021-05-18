@@ -13,6 +13,7 @@ import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.db.DataBase
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.time.ExperimentalTime
 
 const val SORT_NOTE_TEXT = "SORT_NOTE_TEXT"
@@ -28,10 +29,12 @@ class AddNoteActivity : AppCompatActivity() {
 
     private var isFirst = true
 
-    @SuppressLint("SimpleDateFormat")
-    private val format = SimpleDateFormat("yyyy-MM-dd-EE")
+
+    private val format = SimpleDateFormat("yyyy-MM-dd-EE", Locale.CHINESE)
 
     private var targetDayTime:Long = MaterialDatePicker.todayInUtcMilliseconds()
+
+    private var endTime:Long ?= null
 
     private val today = format.format(targetDayTime)
 
@@ -59,12 +62,15 @@ class AddNoteActivity : AppCompatActivity() {
 
         // TODO: 2021/5/11 获取选取的时间
         datePicker.addOnPositiveButtonClickListener {
-            targetDayTime = it
+
             val chooseDay = format.format(it)
 
             when(datePicker.tag){
 
                 END_TIME_TAG ->{
+
+                    endTime = it
+
                     binding.noteAttributeLayout.endTimeDate.text = chooseDay
                     if(chooseDay<today){
                         binding.noteAttributeLayout.endTimeDate.setTextColor(ContextCompat.getColor(this,R.color.color_passed))
@@ -74,6 +80,9 @@ class AddNoteActivity : AppCompatActivity() {
                 }
 
                 ADD_NOTE_TIME_TAG ->{
+
+                    targetDayTime = it
+
                     binding.noteAttributeLayout.addNoteDate.text = chooseDay
                     if(chooseDay<today){
                         binding.noteAttributeLayout.addNoteDate.setTextColor(ContextCompat.getColor(this,R.color.color_passed))
@@ -132,6 +141,13 @@ class AddNoteActivity : AppCompatActivity() {
                 var todayTime = MaterialDatePicker.todayInUtcMilliseconds()
                 val addLabel = Label(noteText,targetDayTime,todayTime)
 
+                if(endTime!=null){
+                    addLabel.isEnd = binding.noteAttributeLayout.endTimeSwitch.isChecked
+                    if(addLabel.isEnd){
+                        addLabel.endDate = endTime as Long
+                    }
+                }
+
                 var sortNoteName = binding.noteAttributeLayout.chooseSortTv.text.toString()
                 if(!sortNoteName.isEmpty()){
                     addLabel.sortNote = sortNoteName
@@ -142,7 +158,7 @@ class AddNoteActivity : AppCompatActivity() {
                 var flag = false
 
                 for(name in nameList){
-                    if(name.equals(sortNoteName)){
+                    if(name.equals(noteText)){
                         flag = true
                         break
                     }

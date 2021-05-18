@@ -25,6 +25,8 @@ class EditSortNoteActivity : AppCompatActivity() {
 
     private val sortNoteDao = DataBase.dataBase.sortNoteDao()
 
+    private val labelDao = DataBase.dataBase.labelDao()
+
     private lateinit var adapter: IconListAdapter
 
     private var sortNote:SortNote? = null
@@ -77,9 +79,16 @@ class EditSortNoteActivity : AppCompatActivity() {
         binding.editNoteDelete.setOnClickListener {
 
             if(sortNote!=null){
-                sortNoteDao.deleteSortNote(sortNote!!)
-                Toast.makeText(this,"删除分类本成功",Toast.LENGTH_SHORT).show()
-                finish()
+
+                if(labelDao.getSameSortNoteLabelList(sortNote!!.name).size!=0){
+                    Toast.makeText(this,"该分类本下有事件，删除失败",Toast.LENGTH_SHORT).show()
+                }else{
+                    sortNoteDao.deleteSortNote(sortNote!!)
+                    Toast.makeText(this,"删除分类本成功",Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+
+
             }
         }
 
@@ -117,29 +126,36 @@ class EditSortNoteActivity : AppCompatActivity() {
 
                 if(sortNote!=null){
 
+                    val addSortNote = SortNote(sortNoteName,iconName)
 
-                    val nameList = sortNoteDao.getAllSortNotesName()
+                    if(sortNote!!.name.equals(sortNoteName)){
+                        sortNoteDao.updateSortNote(addSortNote)
+                        Toast.makeText(this,"修改数据成功--$sortNoteName:$iconName",Toast.LENGTH_SHORT).show()
+                        finish()
+                    }else{
+                        val nameList = sortNoteDao.getAllSortNotesName()
 
+                        var flag = false
 
-                    var flag = false
+                        for(name in nameList){
+                            if(name.equals(sortNoteName)){
+                                flag = true
+                                break
+                            }
+                        }
 
-                    for(name in nameList){
-                        if(name.equals(sortNoteName)){
-                            flag = true
-                            break
+                        if(flag){
+                            Toast.makeText(this,"该分类本已存在",Toast.LENGTH_SHORT).show()
+                        }else{
+                            sortNoteDao.deleteSortNote(sortNote!!)
+                            sortNoteDao.insertSortNote(addSortNote)
+                            Toast.makeText(this,"修改数据成功--$sortNoteName:$iconName",Toast.LENGTH_SHORT).show()
+                            finish()
                         }
                     }
 
-                    if(flag){
-                        Toast.makeText(this,"该分类本已存在",Toast.LENGTH_SHORT).show()
-                    }else{
-                        sortNoteDao.deleteSortNote(sortNote!!)
-                        sortNoteDao.insertSortNote(SortNote(sortNoteName,iconName))
-                        Toast.makeText(this,"保存数据成功--$sortNoteName:$iconName",Toast.LENGTH_SHORT).show()
-                        finish()
-                    }
-                }
 
+                }
 
             }
 

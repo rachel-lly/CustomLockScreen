@@ -10,8 +10,6 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.customlockscreen.R
 import com.example.customlockscreen.activity.DetailActivity
-import com.example.customlockscreen.activity.LABEL_DATE
-import com.example.customlockscreen.activity.LABEL_DAY
 import com.example.customlockscreen.activity.LABEL_TEXT
 import com.example.customlockscreen.databinding.CardItemLinearBinding
 import com.example.customlockscreen.model.bean.Label
@@ -37,10 +35,6 @@ class LabelLinearAdapter(val context: Context, val labelList:List<Label>) :
 
             val intent = Intent(context, DetailActivity::class.java).apply {
                 putExtra(LABEL_TEXT,label.text)
-
-                putExtra(LABEL_DAY, label.day)
-
-                putExtra(LABEL_DATE, label.targetDate)
             }
             context.startActivity(intent)
         }
