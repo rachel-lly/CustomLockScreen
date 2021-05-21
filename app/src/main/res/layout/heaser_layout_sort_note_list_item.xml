@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:background="@drawable/item_pressed_state"
+    >
+
+    <RelativeLayout
+        android:id="@+id/card_sort_note_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingEnd="20dp"
+        >
+
+
+        <ImageView
+            android:id="@+id/sort_icon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/anniverity_color"
+            />
+
+        <TextView
+            android:id="@+id/sort_tx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:textSize="12sp"
+            android:text="纪念日"
+            android:layout_toEndOf="@id/sort_icon"
+            />
+
+        <TextView
+            android:id="@+id/sort_count"
+            android:layout_width="22dp"
+            android:layout_height="15dp"
+            android:text="11"
+            android:textSize="10sp"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/header_count_bg"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+</RelativeLayout>

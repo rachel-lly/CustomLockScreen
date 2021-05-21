@@ -3,35 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:title="事件分类"
-                android:icon="@mipmap/star">
+
+
+        <item android:title="事件分类">
             <menu>
                 <item
-                    android:id="@+id/all"
-                    android:title="全部事件"
-                    android:icon="@mipmap/earth" />
-
-                <item
-                    android:id="@+id/life"
-                    android:title="生活"
-                    android:icon="@mipmap/life_color"
-                    />
+                    android:id="@+id/生活"
+                    android:title="生活" />
 
                 <item
                     android:id="@+id/work"
-                    android:title="工作"
-                    android:icon="@mipmap/work_color"
-                    />
+                    android:title="工作" />
 
-                <item
-                    android:id="@+id/anniversary"
-                    android:title="纪念日"
-                    android:icon="@mipmap/anniverity_color"
-                    />
             </menu>
+
         </item>
-
-
 
     </group>
 

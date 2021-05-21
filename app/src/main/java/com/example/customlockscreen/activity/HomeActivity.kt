@@ -4,14 +4,18 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.customlockscreen.Fragment.MineFragment
 import com.example.customlockscreen.Fragment.NoteListFragment
 import com.example.customlockscreen.Fragment.NoteSortFragment
 import com.example.customlockscreen.Fragment.SettingFragment
 import com.example.customlockscreen.R
+import com.example.customlockscreen.adapter.HeaderSortNoteListAdapter
 import com.example.customlockscreen.adapter.PagerAdapter
 import com.example.customlockscreen.databinding.ActivityHomeBinding
+import com.example.customlockscreen.model.db.DataBase
 
 class HomeActivity : AppCompatActivity() {
 
@@ -19,6 +23,10 @@ class HomeActivity : AppCompatActivity() {
     private val itemIdArray :IntArray = intArrayOf(R.id.item_home, R.id.item_note, R.id.item_mine, R.id.item_setting)
 
     private var fragmentList = ArrayList<Fragment>()
+
+    private val sortNoteDao = DataBase.dataBase.sortNoteDao()
+
+    private lateinit var adapter:HeaderSortNoteListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,13 +40,44 @@ class HomeActivity : AppCompatActivity() {
         }
 
 
+
+
+
+
+
         binding.navigationView.setNavigationItemSelectedListener {
             // TODO: 2021/4/21 侧拉栏点击事件
             binding.drawerLayout.closeDrawers()
+//            when(it.itemId){
+//                R.id.life ->{
+//
+//                }
+//
+//                R.id.work ->{
+//
+//                }
+//            }
+
             true
         }
 
+
+        val list = sortNoteDao.getAllSortNotes()
+
+        adapter = HeaderSortNoteListAdapter(this,list)
+
+        val headerLayout = binding.navigationView.inflateHeaderView(R.layout.header_layout)
+        val recycleView = headerLayout.findViewById<RecyclerView>(R.id.drawlayout_headerlayout_recycleview)
+        recycleView.adapter = adapter
+        recycleView.layoutManager = GridLayoutManager(this, 1)
+
+
         binding.homeToolbar.setNavigationOnClickListener {
+
+            val list = sortNoteDao.getAllSortNotes()
+            adapter.sortNoteList = list
+            adapter.notifyDataSetChanged()
+
             binding.drawerLayout.openDrawer(Gravity.LEFT)
         }
 
@@ -89,6 +128,8 @@ class HomeActivity : AppCompatActivity() {
 
             return@setOnNavigationItemSelectedListener true
         }
+
+
 
 
         setContentView(binding.root)

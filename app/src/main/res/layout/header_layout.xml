@@ -2,32 +2,60 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:paddingTop="40dp"
-    android:paddingBottom="10dp"
-    android:paddingStart="20dp"
+    android:layout_height="wrap_content"
+    >
 
-    android:background="@color/colorPrimaryDark">
+    <RelativeLayout
+        android:id="@+id/drawlayout_header"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="10dp"
+        android:paddingStart="20dp"
+        android:background="@color/colorPrimaryDark"
+        >
+        <ImageView
+            android:id="@+id/top_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@mipmap/top_icon"
+            />
 
-
-    <ImageView
-        android:id="@+id/top_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@mipmap/top_icon"
-
-        />
+        <TextView
+            android:id="@+id/top_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/drawer_top_text"
+            android:textSize="20sp"
+            android:textColor="#fff"
+            android:layout_toEndOf="@+id/top_icon"
+            android:layout_marginStart="20dp"
+            />
+    </RelativeLayout>
 
     <TextView
-        android:id="@+id/top_text"
+        android:id="@+id/title_label_list"
+       android:layout_below="@id/drawlayout_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/drawer_top_text"
-        android:textSize="20sp"
-        android:textColor="#fff"
-        android:layout_toEndOf="@+id/top_icon"
-        android:layout_marginStart="20dp"
-
+        android:text="首页事件"
+        android:textSize="13sp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         />
+
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/drawlayout_headerlayout_recycleview"
+        android:layout_below="@id/title_label_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+
 
 </RelativeLayout>
