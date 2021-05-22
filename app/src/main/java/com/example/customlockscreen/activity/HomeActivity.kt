@@ -3,6 +3,7 @@ package com.example.customlockscreen.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -46,24 +47,8 @@ class HomeActivity : AppCompatActivity() {
         }
 
 
-
-
-
-
-
         binding.navigationView.setNavigationItemSelectedListener {
-            // TODO: 2021/4/21 侧拉栏点击事件
             binding.drawerLayout.closeDrawers()
-//            when(it.itemId){
-//                R.id.life ->{
-//
-//                }
-//
-//                R.id.work ->{
-//
-//                }
-//            }
-
             true
         }
 
@@ -82,14 +67,32 @@ class HomeActivity : AppCompatActivity() {
 
         val headerLayout = binding.navigationView.inflateHeaderView(R.layout.header_layout)
         val recycleView = headerLayout.findViewById<RecyclerView>(R.id.drawlayout_headerlayout_recycleview)
+        recycleView.adapter = adapter
+        recycleView.layoutManager = GridLayoutManager(this, 1)
 
         val textView = headerLayout.findViewById<TextView>(R.id.all_labels_count)
         headerLayout.findViewById<RelativeLayout>(R.id.all_labels_layout).setOnClickListener {
-            // TODO: 2021/5/22 选择全部事件显示
+            binding.drawerLayout.closeDrawers()
+            binding.homeViewPager.currentItem = 0
         }
 
-        recycleView.adapter = adapter
-        recycleView.layoutManager = GridLayoutManager(this, 1)
+        headerLayout.findViewById<LinearLayout>(R.id.sort_note_manager_layout).setOnClickListener {
+            binding.drawerLayout.closeDrawers()
+            binding.homeViewPager.currentItem = 1
+
+        }
+
+        headerLayout.findViewById<LinearLayout>(R.id.mine_layout).setOnClickListener {
+            binding.drawerLayout.closeDrawers()
+            binding.homeViewPager.currentItem = 2
+        }
+
+        headerLayout.findViewById<LinearLayout>(R.id.setting_layout).setOnClickListener {
+            binding.drawerLayout.closeDrawers()
+            binding.homeViewPager.currentItem = 3
+        }
+
+
 
 
         binding.homeToolbar.setNavigationOnClickListener {
@@ -103,14 +106,19 @@ class HomeActivity : AppCompatActivity() {
             binding.drawerLayout.openDrawer(Gravity.LEFT)
         }
 
+        fragmentControl()
 
+        setContentView(binding.root)
+    }
 
-        fragmentList.add(NoteListFragment())
+    private fun fragmentControl() {
+
+        val noteListFragment = NoteListFragment()
+
+        fragmentList.add(noteListFragment)
         fragmentList.add(NoteSortFragment())
         fragmentList.add(MineFragment())
         fragmentList.add(SettingFragment())
-
-
 
         binding.homeViewPager.adapter = PagerAdapter(this,fragmentList)
         binding.homeViewPager.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
@@ -151,13 +159,7 @@ class HomeActivity : AppCompatActivity() {
             return@setOnNavigationItemSelectedListener true
         }
 
-
-
-
-        setContentView(binding.root)
     }
-
-
 
 
 }
