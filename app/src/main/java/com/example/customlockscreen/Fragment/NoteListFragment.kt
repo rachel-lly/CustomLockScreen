@@ -11,7 +11,11 @@ import com.example.customlockscreen.adapter.LabelGridAdapter
 import com.example.customlockscreen.adapter.LabelLinearAdapter
 import com.example.customlockscreen.databinding.FragmentNoteListBinding
 import com.example.customlockscreen.model.bean.Label
+import com.example.customlockscreen.model.bean.MessageEvent
 import com.example.customlockscreen.model.db.DataBase
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 
 class NoteListFragment : Fragment() {
@@ -22,7 +26,9 @@ class NoteListFragment : Fragment() {
 
     private var isFirst:Boolean = true
 
-    private lateinit var binding: FragmentNoteListBinding;
+    private lateinit var binding: FragmentNoteListBinding
+
+    private lateinit var adapter:LabelLinearAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +38,7 @@ class NoteListFragment : Fragment() {
         setHasOptionsMenu(true)
 
         labelList = labelDao.getAllLabels()
-        val adapter = this.context?.let { LabelLinearAdapter(it, labelList) }
+        adapter = this.context?.let { LabelLinearAdapter(it, labelList) }!!
 
         binding.homeRecyclerview.adapter = adapter
         binding.homeRecyclerview.layoutManager = GridLayoutManager(this.context, 1)
@@ -55,7 +61,7 @@ class NoteListFragment : Fragment() {
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // TODO: 2021/4/16 菜单选择控制
+
         super.onOptionsItemSelected(item)
         when(item.itemId){
             R.id.grid_note -> {
@@ -95,10 +101,31 @@ class NoteListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        EventBus.getDefault().register(this)
+
         return binding.root
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(messageEvent:MessageEvent){
+
+        val sortName = messageEvent.msg
+
+        if(messageEvent.msg.equals("全部")){
+            labelList = labelDao.getAllLabels()
+        }else{
+            labelList = labelDao.getSameSortNoteLabelList(sortName)
+        }
+
+        adapter.labelList = labelList
+        adapter!!.notifyDataSetChanged()
+    }
 }
 
 

@@ -18,7 +18,9 @@ import com.example.customlockscreen.R
 import com.example.customlockscreen.adapter.HeaderSortNoteListAdapter
 import com.example.customlockscreen.adapter.PagerAdapter
 import com.example.customlockscreen.databinding.ActivityHomeBinding
+import com.example.customlockscreen.model.bean.MessageEvent
 import com.example.customlockscreen.model.db.DataBase
+import org.greenrobot.eventbus.EventBus
 
 class HomeActivity : AppCompatActivity() {
 
@@ -57,8 +59,9 @@ class HomeActivity : AppCompatActivity() {
 
         clickListener =object :HeaderSortNoteListAdapter.OnClickListener{
             override fun onClick(sortNoteName: String) {
-                // TODO: 2021/5/22 获取点击的分类本并显示
-
+               EventBus.getDefault().post(MessageEvent(sortNoteName))
+                binding.drawerLayout.closeDrawers()
+                binding.homeViewPager.currentItem = 0
             }
 
         }
@@ -73,6 +76,7 @@ class HomeActivity : AppCompatActivity() {
         val textView = headerLayout.findViewById<TextView>(R.id.all_labels_count)
         headerLayout.findViewById<RelativeLayout>(R.id.all_labels_layout).setOnClickListener {
             binding.drawerLayout.closeDrawers()
+            EventBus.getDefault().post(MessageEvent("全部"))
             binding.homeViewPager.currentItem = 0
         }
 
