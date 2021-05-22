@@ -37,6 +37,7 @@
             android:layout_marginStart="20dp"
             android:textSize="12sp"
             android:text="纪念日"
+            android:textColor="#000"
             android:layout_toEndOf="@id/sort_icon"
             />
 
@@ -46,6 +47,7 @@
             android:layout_height="15dp"
             android:text="11"
             android:textSize="10sp"
+            android:textColor="#000"
             android:gravity="center"
             android:layout_gravity="center_vertical"
             android:background="@drawable/header_count_bg"

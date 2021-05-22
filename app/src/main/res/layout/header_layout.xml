@@ -35,13 +35,14 @@
 
     <TextView
         android:id="@+id/title_label_list"
-       android:layout_below="@id/drawlayout_header"
+        android:layout_below="@id/drawlayout_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="首页事件分类"
-        android:textSize="13sp"
+        android:textColor="#000"
+        android:textSize="14sp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
         />
 
@@ -82,6 +83,7 @@
                 android:layout_marginStart="20dp"
                 android:textSize="12sp"
                 android:text="全部事件"
+                android:textColor="#000"
                 android:layout_toEndOf="@id/all_labels_icon"
                 />
 
@@ -91,6 +93,7 @@
                 android:layout_height="15dp"
                 android:text="11"
                 android:textSize="10sp"
+                android:textColor="#000"
                 android:gravity="center"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/header_count_bg"
@@ -107,7 +110,128 @@
         android:layout_below="@id/all_labels_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         />
+
+
+
+    <LinearLayout
+        android:id="@+id/other_layout"
+        android:layout_below="@id/drawlayout_headerlayout_recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <View
+            style="@style/header_layout_horizon_line"
+            />
+
+        <LinearLayout
+            android:id="@+id/sort_note_manager_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/item_pressed_state"
+            >
+
+            <ImageView
+                android:id="@+id/sort_note_icon"
+                android:layout_width="20dp"
+                android:layout_height="23dp"
+                android:src="@mipmap/sort_note_black"
+                android:layout_gravity="center_vertical"
+                />
+
+            <TextView
+                android:id="@+id/sort_tx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:textSize="14sp"
+                android:text="管理分类本"
+                android:textColor="#000"
+                android:layout_gravity="center_vertical"
+                />
+        </LinearLayout>
+
+        <View
+            style="@style/header_layout_horizon_line"
+            />
+
+
+        <LinearLayout
+            android:id="@+id/mine_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/item_pressed_state"
+            >
+
+            <ImageView
+                android:id="@+id/mine_icon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@mipmap/mine_black"
+                android:layout_gravity="center_vertical"
+                />
+
+            <TextView
+                android:id="@+id/mine_tx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:textSize="14sp"
+                android:text="我的"
+                android:textColor="#000"
+                android:layout_gravity="center_vertical"
+                />
+        </LinearLayout>
+
+        <View
+            style="@style/header_layout_horizon_line"
+            />
+
+
+        <LinearLayout
+            android:id="@+id/setting_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/item_pressed_state"
+            >
+
+            <ImageView
+                android:id="@+id/setting_icon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@mipmap/setting"
+                android:layout_gravity="center_vertical"
+                />
+
+            <TextView
+                android:id="@+id/setting_tx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:textSize="14sp"
+                android:text="设置"
+                android:textColor="#000"
+                android:layout_gravity="center_vertical"
+                />
+        </LinearLayout>
+
+        <View
+            style="@style/header_layout_horizon_line"
+            />
+
+    </LinearLayout>
 
 
 

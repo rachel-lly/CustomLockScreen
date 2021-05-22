@@ -41,4 +41,10 @@
         <item name="android:layout_centerVertical">true</item>
     </style>
 
+    <style name="header_layout_horizon_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">#dddddd</item>
+    </style>
+
 </resources>

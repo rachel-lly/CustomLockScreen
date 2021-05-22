@@ -98,7 +98,7 @@ class HomeActivity : AppCompatActivity() {
             adapter.sortNoteList = list
             adapter.notifyDataSetChanged()
 
-            textView.text = list.size.toString()
+            textView.text = labelDao.getAllLabelsName().size.toString()
 
             binding.drawerLayout.openDrawer(Gravity.LEFT)
         }
