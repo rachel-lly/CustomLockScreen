@@ -3,6 +3,8 @@ package com.example.customlockscreen.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
+import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,7 +28,11 @@ class HomeActivity : AppCompatActivity() {
 
     private val sortNoteDao = DataBase.dataBase.sortNoteDao()
 
+    private val labelDao = DataBase.dataBase.labelDao()
+
     private lateinit var adapter:HeaderSortNoteListAdapter
+
+    private lateinit var clickListener: HeaderSortNoteListAdapter.OnClickListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,10 +70,24 @@ class HomeActivity : AppCompatActivity() {
 
         val list = sortNoteDao.getAllSortNotes()
 
-        adapter = HeaderSortNoteListAdapter(this,list)
+        clickListener =object :HeaderSortNoteListAdapter.OnClickListener{
+            override fun onClick(sortNoteName: String) {
+                // TODO: 2021/5/22 获取点击的分类本并显示
+
+            }
+
+        }
+
+        adapter = HeaderSortNoteListAdapter(this,list,clickListener)
 
         val headerLayout = binding.navigationView.inflateHeaderView(R.layout.header_layout)
         val recycleView = headerLayout.findViewById<RecyclerView>(R.id.drawlayout_headerlayout_recycleview)
+
+        val textView = headerLayout.findViewById<TextView>(R.id.all_labels_count)
+        headerLayout.findViewById<RelativeLayout>(R.id.all_labels_layout).setOnClickListener {
+            // TODO: 2021/5/22 选择全部事件显示
+        }
+
         recycleView.adapter = adapter
         recycleView.layoutManager = GridLayoutManager(this, 1)
 
@@ -77,6 +97,8 @@ class HomeActivity : AppCompatActivity() {
             val list = sortNoteDao.getAllSortNotes()
             adapter.sortNoteList = list
             adapter.notifyDataSetChanged()
+
+            textView.text = list.size.toString()
 
             binding.drawerLayout.openDrawer(Gravity.LEFT)
         }

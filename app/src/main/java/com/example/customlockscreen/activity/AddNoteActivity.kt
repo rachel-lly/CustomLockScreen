@@ -59,8 +59,6 @@ class AddNoteActivity : AppCompatActivity() {
                 .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
                 .build()
 
-
-        // TODO: 2021/5/11 获取选取的时间
         datePicker.addOnPositiveButtonClickListener {
 
             val chooseDay = format.format(it)

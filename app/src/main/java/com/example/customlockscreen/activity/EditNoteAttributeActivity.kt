@@ -172,15 +172,16 @@ class EditNoteAttributeActivity : AppCompatActivity() {
                     var flag = false
 
                     for(name in nameList){
-                        if(name.equals(sortNoteName)){
+                        if(name.equals(noteText)){
                             flag = true
                             break
                         }
                     }
 
-                    if(flag&&!label.text.equals(addLabel.text)){
+                    if(flag){
                         Toast.makeText(this,"该事件已存在", Toast.LENGTH_SHORT).show()
                     }else{
+                        labelDao.deleteLabel(label)
                         labelDao.insertLabel(addLabel)
                         Toast.makeText(this,"修改数据成功--$addLabel", Toast.LENGTH_SHORT).show()
                         finish()

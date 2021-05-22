@@ -17,13 +17,19 @@ import com.example.customlockscreen.model.bean.SortNote
 import com.example.customlockscreen.model.db.DataBase
 import java.util.*
 
-class HeaderSortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>) :
+class HeaderSortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>,onClickListener: OnClickListener) :
         RecyclerView.Adapter<HeaderSortNoteListAdapter.ViewHolder>() {
+
+    interface OnClickListener{
+        fun onClick(sortNoteName:String)
+    }
 
 
     private lateinit var  binding : HeaserLayoutSortNoteListItemBinding
 
     private val labelDao = DataBase.dataBase.labelDao()
+
+    private val mClickListener = onClickListener
 
     inner class ViewHolder(binding: HeaserLayoutSortNoteListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val sortNoteText : TextView = binding.sortTx
@@ -39,9 +45,11 @@ class HeaderSortNoteListAdapter(val context: Context, var sortNoteList:List<Sort
 
         val holder = ViewHolder(binding)
         holder.itemView.setOnClickListener {
-            // TODO: 2021/5/21 侧拉栏点击 
+
             val position = holder.adapterPosition
             val sortNote = sortNoteList[position]
+
+            mClickListener.onClick(sortNote.name)
             
         }
 
