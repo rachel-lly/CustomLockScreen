@@ -181,7 +181,7 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         super.onOptionsItemSelected(item)
-        // TODO: 2021/5/10 详细事件页面 分享功能
+
         when(item.itemId){
             R.id.edit -> {
                 val intent = Intent(this, EditNoteAttributeActivity::class.java)

@@ -11,8 +11,6 @@ import com.example.customlockscreen.adapter.IconListAdapter
 import com.example.customlockscreen.databinding.ActivityAddSortNoteBinding
 import com.example.customlockscreen.model.bean.SortNote
 import com.example.customlockscreen.model.db.DataBase
-import com.example.customlockscreen.model.db.SortNoteDao
-
 
 class AddSortNoteActivity : AppCompatActivity() {
 

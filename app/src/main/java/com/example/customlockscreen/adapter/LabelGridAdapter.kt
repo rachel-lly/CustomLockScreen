@@ -16,7 +16,7 @@ import com.example.customlockscreen.model.bean.Label
 import java.text.SimpleDateFormat
 
 
-class LabelGridAdapter(val context: Context, val labelList:List<Label>) :
+class LabelGridAdapter(val context: Context, var labelList:List<Label>) :
         RecyclerView.Adapter<LabelGridAdapter.ViewHolder>() {
 
     private lateinit var  binding : CardItemGridBinding

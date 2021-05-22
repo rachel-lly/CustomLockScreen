@@ -13,8 +13,6 @@ import com.example.customlockscreen.model.bean.SortNote
 import com.example.customlockscreen.model.db.DataBase
 
 
-
-
 class NoteSortFragment : Fragment() {
 
 

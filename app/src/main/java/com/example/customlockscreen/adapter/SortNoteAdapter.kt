@@ -30,9 +30,6 @@ class SortNoteAdapter (val context: Context, val sortNoteList:List<SortNote>, cl
         binding =  SortNoteCardItemBinding.inflate(LayoutInflater.from(context))
 
 
-
-
-
         val holder = ViewHolder(binding)
         holder.itemView.setOnClickListener {
             val position = holder.adapterPosition

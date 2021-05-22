@@ -7,7 +7,6 @@ import android.text.SpannableStringBuilder
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-
 import com.example.customlockscreen.R
 import com.example.customlockscreen.databinding.ActivityEditNoteAttributeBinding
 import com.example.customlockscreen.model.bean.Label

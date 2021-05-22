@@ -28,7 +28,9 @@ class NoteListFragment : Fragment() {
 
     private lateinit var binding: FragmentNoteListBinding
 
-    private lateinit var adapter:LabelLinearAdapter
+    private lateinit var labelLinearAdapter:LabelLinearAdapter
+
+    private lateinit var labelGridAdapter:LabelGridAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,15 +40,24 @@ class NoteListFragment : Fragment() {
         setHasOptionsMenu(true)
 
         labelList = labelDao.getAllLabels()
-        adapter = this.context?.let { LabelLinearAdapter(it, labelList) }!!
+        labelLinearAdapter = this.context?.let { LabelLinearAdapter(it, labelList) }!!
+        labelGridAdapter = this.context?.let { LabelGridAdapter(it, labelList) }!!
 
-        binding.homeRecyclerview.adapter = adapter
+        binding.homeRecyclerview.adapter = labelLinearAdapter
         binding.homeRecyclerview.layoutManager = GridLayoutManager(this.context, 1)
 
         binding.homeSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark)
         binding.homeSwipeRefreshLayout.setOnRefreshListener {
-            adapter!!.labelList = labelDao.getAllLabels()
-            adapter!!.notifyDataSetChanged()
+
+            labelList =  labelDao.getAllLabels()
+
+            labelLinearAdapter.labelList = labelList
+            labelLinearAdapter.notifyDataSetChanged()
+
+
+            labelGridAdapter.labelList = labelList
+            labelGridAdapter.notifyDataSetChanged()
+
             binding.homeSwipeRefreshLayout.isRefreshing = false
         }
 
@@ -70,7 +81,10 @@ class NoteListFragment : Fragment() {
 
 
                     binding.homeRecyclerview.layoutManager = GridLayoutManager(this.context, 2)
-                    binding.homeRecyclerview.adapter = this.context?.let { LabelGridAdapter(it,labelList) }
+
+                    labelGridAdapter.labelList = labelList
+
+                    binding.homeRecyclerview.adapter = labelGridAdapter
 
                     binding.headerLayout.visibility = View.GONE
                     isFirst = false
@@ -78,7 +92,10 @@ class NoteListFragment : Fragment() {
                 }else{
 
                     binding.homeRecyclerview.layoutManager = GridLayoutManager(this.context, 1)
-                    binding.homeRecyclerview.adapter = this.context?.let { LabelLinearAdapter(it,labelList) }
+
+                    labelLinearAdapter.labelList = labelList
+
+                    binding.homeRecyclerview.adapter = labelLinearAdapter
                     binding.headerLayout.visibility = View.VISIBLE
 
                     isFirst = true
@@ -123,8 +140,11 @@ class NoteListFragment : Fragment() {
             labelList = labelDao.getSameSortNoteLabelList(sortName)
         }
 
-        adapter.labelList = labelList
-        adapter!!.notifyDataSetChanged()
+        labelLinearAdapter.labelList = labelList
+        labelLinearAdapter.notifyDataSetChanged()
+
+        labelGridAdapter.labelList = labelList
+        labelGridAdapter.notifyDataSetChanged()
     }
 }
 

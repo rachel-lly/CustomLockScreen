@@ -11,7 +11,6 @@ import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
 
-
 class ShotShareUtil(context: Context){
 
     companion object{

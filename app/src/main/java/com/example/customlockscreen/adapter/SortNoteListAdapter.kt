@@ -38,9 +38,6 @@ class SortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>)
         binding =  SortNoteListItemBinding.inflate(LayoutInflater.from(context))
 
 
-
-
-
         val holder = ViewHolder(binding)
         holder.itemView.setOnClickListener {
             val position = holder.adapterPosition
@@ -63,7 +60,7 @@ class SortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>)
         val sameSortNoteLabelList = labelDao.getSameSortNoteLabelList(sortNote.name)
 
         holder.sortNoteCount.text = sameSortNoteLabelList.size.toString()
-        // TODO: 2021/5/18 添加完label再弄
+
         if(sameSortNoteLabelList.size!=0){
             val minLabel:Label = Collections.min(sameSortNoteLabelList)
             holder.latestNoteName.text = minLabel.text

@@ -1,21 +1,14 @@
 package com.example.customlockscreen.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.customlockscreen.activity.EditSortNoteActivity
-import com.example.customlockscreen.activity.SORT_NOTE
 import com.example.customlockscreen.databinding.HeaserLayoutSortNoteListItemBinding
-import com.example.customlockscreen.databinding.SortNoteListItemBinding
-import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.bean.SortNote
 import com.example.customlockscreen.model.db.DataBase
-import java.util.*
 
 class HeaderSortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>,onClickListener: OnClickListener) :
         RecyclerView.Adapter<HeaderSortNoteListAdapter.ViewHolder>() {
