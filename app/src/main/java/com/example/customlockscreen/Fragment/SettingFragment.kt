@@ -10,6 +10,7 @@ import androidx.annotation.MenuRes
 import androidx.annotation.RequiresApi
 import com.example.customlockscreen.R
 import com.example.customlockscreen.activity.BackupDataActivity
+import com.example.customlockscreen.activity.LockScreenSettingActivity
 import com.example.customlockscreen.activity.TimeRemindActivity
 import com.example.customlockscreen.databinding.FragmentSettingBinding
 
@@ -39,7 +40,12 @@ class SettingFragment : Fragment() {
             val intent = Intent(context,BackupDataActivity::class.java)
             startActivity(intent)
         }
-        
+
+        binding.setLockScreenLayout.setOnClickListener {
+            val intent = Intent(context,LockScreenSettingActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
 

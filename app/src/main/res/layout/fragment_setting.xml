@@ -113,4 +113,33 @@
     </RelativeLayout>
 
 
+    <RelativeLayout
+        android:id="@+id/set_lock_screen_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_pressed_state"
+        android:paddingStart="30dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:layout_marginTop="20dp"
+        >
+
+        <ImageView
+            android:id="@+id/set_lock_screen_icon"
+            android:src="@mipmap/lock_screen"
+            style="@style/linear_item_icon"
+            />
+
+        <TextView
+            android:id="@+id/set_lock_screen_tx"
+            android:text="设置锁屏"
+            android:layout_toEndOf="@+id/set_lock_screen_icon"
+            style="@style/linear_item_text_behind_icon_10"
+            />
+
+    </RelativeLayout>
+
+
+
 </LinearLayout>

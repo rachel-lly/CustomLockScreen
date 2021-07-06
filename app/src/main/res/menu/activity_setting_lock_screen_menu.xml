@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <item
+        android:id="@+id/lock_screen"
+        android:title="lock_screen"
+        android:icon="@mipmap/cut_picture_lock_screen"
+        app:showAsAction="ifRoom"
+        />
+
+</menu>

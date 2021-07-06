@@ -35,12 +35,13 @@ class NoteListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        
         binding = FragmentNoteListBinding.inflate(LayoutInflater.from(this.context))
 
         setHasOptionsMenu(true)
 
         labelList = labelDao.getAllLabels()
-        labelLinearAdapter = this.context?.let { LabelLinearAdapter(it, labelList) }!!
+        labelLinearAdapter = this.context?.let { LabelLinearAdapter(it, labelList,false) }!!
         labelGridAdapter = this.context?.let { LabelGridAdapter(it, labelList) }!!
 
         binding.homeRecyclerview.adapter = labelLinearAdapter

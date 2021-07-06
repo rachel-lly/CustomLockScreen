@@ -58,7 +58,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
         binding.noteAttributeLayout.toTopSwitch.isChecked = label.isTop
 
-        binding.noteAttributeLayout.lockScreenSwitch.isChecked = label.isLockScreen
+//        binding.noteAttributeLayout.lockScreenSwitch.isChecked = label.isLockScreen
 
         binding.noteAttributeLayout.endTimeSwitch.isChecked = label.isEnd
 

@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 const val LABEL_TEXT = "LABEL_TEXT"
+const val LABEL_IS_LOCK = "LABEL_IS_LOCK"
 
 class DetailActivity : AppCompatActivity() {
 
@@ -35,6 +36,8 @@ class DetailActivity : AppCompatActivity() {
     private var image: Image? = null
 
     private lateinit var binding : ActivityDetailBinding
+
+    private var labelIsLock = false
 
 
     private val format = SimpleDateFormat("yyyy-MM-dd-EE", Locale.CHINESE)
@@ -60,6 +63,8 @@ class DetailActivity : AppCompatActivity() {
             }
 
             val labelText = intent!!.getStringExtra(LABEL_TEXT)
+            labelIsLock = intent!!.getBooleanExtra(LABEL_IS_LOCK,false)
+
 
 
             label = labelText!!.let { labelDao.getLabelByName(it) }
@@ -175,7 +180,11 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
-        menuInflater.inflate(R.menu.activity_detail_menu, menu)
+        if(!labelIsLock){
+            menuInflater.inflate(R.menu.activity_detail_menu, menu)
+        }else{
+            menuInflater.inflate(R.menu.activity_setting_lock_screen_menu, menu)
+        }
         return true
     }
 
@@ -192,6 +201,11 @@ class DetailActivity : AppCompatActivity() {
             R.id.share -> {
 
                 takeScreenShot()
+
+            }
+
+            R.id.lock_screen -> {
+                // TODO: 2021/7/6 截取图片设置为锁屏
 
             }
         }
@@ -234,3 +248,5 @@ class DetailActivity : AppCompatActivity() {
 
 
 }
+
+
