@@ -21,7 +21,7 @@ abstract class DataBase : RoomDatabase(){
         val dataBase :DataBase = Room.databaseBuilder(
                 MyApplication.getContext(),
                 DataBase::class.java,
-                "label.db"
+                "LabelEvent.db"
         )
                 .allowMainThreadQueries()
                 .build()

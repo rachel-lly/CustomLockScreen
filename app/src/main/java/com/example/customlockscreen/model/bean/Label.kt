@@ -19,8 +19,6 @@ data class Label(
 
         @ColumnInfo var isTop :Boolean = false
 
-        @ColumnInfo var isLockScreen = false
-
         @ColumnInfo var isEnd = false
 
         @ColumnInfo var endDate:Long = 1000000L
@@ -32,7 +30,6 @@ data class Label(
         day = parcel.readLong()
         sortNote = parcel.readString()!!
         isTop = parcel.readByte() != 0.toByte()
-        isLockScreen = parcel.readByte() != 0.toByte()
         isEnd = parcel.readByte() != 0.toByte()
         endDate = parcel.readLong()
     }
@@ -58,9 +55,6 @@ data class Label(
         parcel.writeString(sortNote)
 
         var b :Byte = if(isTop) 1 else 0
-        parcel.writeByte(b)
-
-        b = if(isLockScreen) 1 else 0
         parcel.writeByte(b)
 
         b = if(isEnd) 1 else 0
