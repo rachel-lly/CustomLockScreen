@@ -16,10 +16,11 @@ import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.customlockscreen.R
-import com.example.customlockscreen.Util.ShotShareUtil
+import com.example.customlockscreen.Util.PictureUtil
 import com.example.customlockscreen.databinding.ActivityDetailBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.db.DataBase
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.*
@@ -114,6 +115,9 @@ class DetailActivity : AppCompatActivity() {
         mediaProjection = mediaProjectionManager!!.getMediaProjection(resultCode, data!!)
         val virtualDisplay = mediaProjection!!.createVirtualDisplay("screen-mirror", width, height,
                 displayMetrics.densityDpi, DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, mImageReader.getSurface(), null, null)
+
+
+
         Handler(Looper.myLooper()!!).postDelayed({
             try {
                 image = mImageReader.acquireLatestImage()
@@ -133,7 +137,7 @@ class DetailActivity : AppCompatActivity() {
 
                         if (requestCode == EVENT_SCREENSHOT_SHARE) {
                             cutScreenShotToShare(bitmap)
-                        }else if(resultCode == EVENT_SCREENSHOT_LOCK){
+                        }else if(requestCode == EVENT_SCREENSHOT_LOCK){
                             cutScreenShotToLock(bitmap)
                         }
 
@@ -217,6 +221,7 @@ class DetailActivity : AppCompatActivity() {
             R.id.lock_screen -> {
           
                 takeScreenShotToLock()
+
             }
         }
 
@@ -229,15 +234,24 @@ class DetailActivity : AppCompatActivity() {
 
         val screenShot = getScreenShot(bitmap)
 
-        if (screenShot != null) {
-            ShotShareUtil(this).shotShare(this, screenShot)
-        }
+
+        PictureUtil().shotShare(this, screenShot)
+
     }
 
     private fun cutScreenShotToLock(bitmap: Bitmap) {
 
         val screenShot = getScreenShot(bitmap)
-        // TODO: 2021/7/7 设为锁屏事件 
+        PictureUtil().savePictureToPhotoAlbum(this,screenShot)
+
+
+        MaterialAlertDialogBuilder(this)
+                .setTitle("锁屏设置")
+                .setMessage("已保存图片至相册，可在相册中自行设置为锁屏")
+                .setPositiveButton(resources.getString(R.string.accept)) { dialog, which ->
+
+                }
+                .show()
 
     }
 

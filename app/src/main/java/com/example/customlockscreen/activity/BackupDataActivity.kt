@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.customlockscreen.R
-import com.example.customlockscreen.Util.ShotShareUtil
+import com.example.customlockscreen.Util.PictureUtil
 import com.example.customlockscreen.databinding.ActivityBackupDataBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
@@ -35,7 +35,7 @@ class BackupDataActivity : AppCompatActivity() {
 
     private fun showDeleteDialog() {
 
-            val bitmapDir = ShotShareUtil.getBitmapCacheDir(this)
+            val bitmapDir = PictureUtil.getBitmapCacheDir(this)
 
             MaterialAlertDialogBuilder(this)
                     .setTitle("确定清空缓存文件吗？")
