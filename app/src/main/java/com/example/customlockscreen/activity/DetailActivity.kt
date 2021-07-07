@@ -29,7 +29,8 @@ const val LABEL_IS_LOCK = "LABEL_IS_LOCK"
 
 class DetailActivity : AppCompatActivity() {
 
-    val EVENT_SCREENSHOT = 22 //截图事件
+    val EVENT_SCREENSHOT_SHARE = 22 //截图分享
+    val EVENT_SCREENSHOT_LOCK = 23 //截图设为锁屏
 
     private var mediaProjectionManager: MediaProjectionManager? = null
     private var mediaProjection: MediaProjection? = null
@@ -87,63 +88,72 @@ class DetailActivity : AppCompatActivity() {
             setContentView(binding.root)
     }
 
-    private fun takeScreenShot() {
+    private fun takeScreenShotToShare() {
         mediaProjectionManager = application.getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
-        startActivityForResult(mediaProjectionManager!!.createScreenCaptureIntent(), EVENT_SCREENSHOT)
+        startActivityForResult(mediaProjectionManager!!.createScreenCaptureIntent(), EVENT_SCREENSHOT_SHARE)
+    }
+
+    private fun takeScreenShotToLock() {
+        mediaProjectionManager = application.getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
+        startActivityForResult(mediaProjectionManager!!.createScreenCaptureIntent(), EVENT_SCREENSHOT_LOCK)
     }
 
     @SuppressLint("WrongConstant")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-        if (requestCode == EVENT_SCREENSHOT) {
-            super.onActivityResult(requestCode, resultCode, data)
 
-            val displayMetrics = DisplayMetrics()
-            val windowManager = this.getSystemService(WINDOW_SERVICE) as WindowManager
-            windowManager.defaultDisplay.getMetrics(displayMetrics)
-            val width = displayMetrics.widthPixels
-            val height = displayMetrics.heightPixels
+        super.onActivityResult(requestCode, resultCode, data)
 
-            val mImageReader: ImageReader = ImageReader.newInstance(width, height, PixelFormat.RGBA_8888, 2)
-            mediaProjection = mediaProjectionManager!!.getMediaProjection(resultCode, data!!)
-            val virtualDisplay = mediaProjection!!.createVirtualDisplay("screen-mirror", width, height,
-                    displayMetrics.densityDpi, DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, mImageReader.getSurface(), null, null)
-            Handler(Looper.myLooper()!!).postDelayed({
-                try {
-                    image = mImageReader.acquireLatestImage()
-                    if (image != null) {
-                        val planes: Array<Image.Plane> = image!!.getPlanes()
-                        val buffer: ByteBuffer = planes[0].getBuffer()
-                        val width: Int = image!!.getWidth()
-                        val height: Int = image!!.getHeight()
+        val displayMetrics = DisplayMetrics()
+        val windowManager = this.getSystemService(WINDOW_SERVICE) as WindowManager
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
+        val width = displayMetrics.widthPixels
+        val height = displayMetrics.heightPixels
 
-                        val pixelStride: Int = planes[0].getPixelStride()
-                        val rowStride: Int = planes[0].getRowStride()
-                        val rowPadding = rowStride - pixelStride * width
-                        var bitmap = Bitmap.createBitmap(width + rowPadding / pixelStride, height, Bitmap.Config.ARGB_8888)
-                        bitmap!!.copyPixelsFromBuffer(buffer)
-                        bitmap = Bitmap.createScaledBitmap(bitmap, bitmap.width, bitmap.height, false)
-                        if (bitmap != null) {
+        val mImageReader: ImageReader = ImageReader.newInstance(width, height, PixelFormat.RGBA_8888, 2)
+        mediaProjection = mediaProjectionManager!!.getMediaProjection(resultCode, data!!)
+        val virtualDisplay = mediaProjection!!.createVirtualDisplay("screen-mirror", width, height,
+                displayMetrics.densityDpi, DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, mImageReader.getSurface(), null, null)
+        Handler(Looper.myLooper()!!).postDelayed({
+            try {
+                image = mImageReader.acquireLatestImage()
+                if (image != null) {
+                    val planes: Array<Image.Plane> = image!!.getPlanes()
+                    val buffer: ByteBuffer = planes[0].getBuffer()
+                    val width: Int = image!!.getWidth()
+                    val height: Int = image!!.getHeight()
 
+                    val pixelStride: Int = planes[0].getPixelStride()
+                    val rowStride: Int = planes[0].getRowStride()
+                    val rowPadding = rowStride - pixelStride * width
+                    var bitmap = Bitmap.createBitmap(width + rowPadding / pixelStride, height, Bitmap.Config.ARGB_8888)
+                    bitmap!!.copyPixelsFromBuffer(buffer)
+                    bitmap = Bitmap.createScaledBitmap(bitmap, bitmap.width, bitmap.height, false)
+                    if (bitmap != null) {
 
-                            cutScreenShot(bitmap)
-
-
+                        if (requestCode == EVENT_SCREENSHOT_SHARE) {
+                            cutScreenShotToShare(bitmap)
+                        }else if(resultCode == EVENT_SCREENSHOT_LOCK){
+                            cutScreenShotToLock(bitmap)
                         }
-                        bitmap.recycle()
+
+
+
                     }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                } finally {
-                    image?.close()
-                    mImageReader.close()
-                    virtualDisplay?.release()
-                    //必须代码，否则出现BufferQueueProducer: [ImageReader] dequeueBuffer: BufferQueue has been abandoned
-                    mImageReader.setOnImageAvailableListener(null, null)
-                    mediaProjection!!.stop()
+                    bitmap.recycle()
                 }
-            }, 100)
-        }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            } finally {
+                image?.close()
+                mImageReader.close()
+                virtualDisplay?.release()
+                //必须代码，否则出现BufferQueueProducer: [ImageReader] dequeueBuffer: BufferQueue has been abandoned
+                mImageReader.setOnImageAvailableListener(null, null)
+                mediaProjection!!.stop()
+            }
+        }, 100)
+
     }
 
     private fun steepStatusBar() {
@@ -200,13 +210,13 @@ class DetailActivity : AppCompatActivity() {
 
             R.id.share -> {
 
-                takeScreenShot()
+                takeScreenShotToShare()
 
             }
 
             R.id.lock_screen -> {
-                // TODO: 2021/7/6 截取图片设置为锁屏
-
+          
+                takeScreenShotToLock()
             }
         }
 
@@ -215,8 +225,24 @@ class DetailActivity : AppCompatActivity() {
 
 
 
-    private fun cutScreenShot(bitmap: Bitmap) {
+    private fun cutScreenShotToShare(bitmap: Bitmap) {
 
+        val screenShot = getScreenShot(bitmap)
+
+        if (screenShot != null) {
+            ShotShareUtil(this).shotShare(this, screenShot)
+        }
+    }
+
+    private fun cutScreenShotToLock(bitmap: Bitmap) {
+
+        val screenShot = getScreenShot(bitmap)
+        // TODO: 2021/7/7 设为锁屏事件 
+
+    }
+
+
+    private fun getScreenShot(bitmap: Bitmap):Bitmap{
         val screenView = window.decorView
 
 
@@ -238,12 +264,8 @@ class DetailActivity : AppCompatActivity() {
         //去掉状态栏和标题栏
         val screenShot = bitmap.let { Bitmap.createBitmap(it, 0, toolbarHeight + statusbarHeight, width, height - toolbarHeight - statusbarHeight) }
 
-
-        if (screenShot != null) {
-            ShotShareUtil(this).shotShare(this, screenShot)
-        }
+        return screenShot;
     }
-
 
 
 
