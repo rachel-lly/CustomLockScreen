@@ -2,8 +2,11 @@ package com.example.customlockscreen.Fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.switchMap
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.*
 import com.example.customlockscreen.activity.AddNoteActivity
@@ -13,6 +16,7 @@ import com.example.customlockscreen.databinding.FragmentNoteListBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.bean.MessageEvent
 import com.example.customlockscreen.model.db.DataBase
+import com.example.customlockscreen.model.db.DataViewModel
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -20,7 +24,9 @@ import org.greenrobot.eventbus.ThreadMode
 
 class NoteListFragment : Fragment() {
 
-    private lateinit var labelList :List<Label>
+    private lateinit var labelList : List<Label>
+
+    private lateinit var dataViewModel: DataViewModel
 
     private val labelDao = DataBase.dataBase.labelDao()
 
@@ -40,17 +46,33 @@ class NoteListFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
-        labelList = labelDao.getAllLabels()
+
+        dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
+
+
+
+        dataViewModel.getAllLabelsByObserve().observe(this,{
+            labelList = it
+            labelLinearAdapter.labelList = labelList
+            labelGridAdapter.labelList = labelList
+            labelLinearAdapter.notifyDataSetChanged()
+            labelGridAdapter.notifyDataSetChanged()
+        })
+
+
+        labelList = ArrayList<Label>()
+
         labelLinearAdapter = this.context?.let { LabelLinearAdapter(it, labelList,false) }!!
         labelGridAdapter = this.context?.let { LabelGridAdapter(it, labelList) }!!
 
         binding.homeRecyclerview.adapter = labelLinearAdapter
         binding.homeRecyclerview.layoutManager = GridLayoutManager(this.context, 1)
 
+        labelLinearAdapter.notifyDataSetChanged()
+        labelGridAdapter.notifyDataSetChanged()
+
         binding.homeSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark)
         binding.homeSwipeRefreshLayout.setOnRefreshListener {
-
-            labelList =  labelDao.getAllLabels()
 
             labelLinearAdapter.labelList = labelList
             labelLinearAdapter.notifyDataSetChanged()
@@ -118,7 +140,7 @@ class NoteListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         EventBus.getDefault().register(this)
 
@@ -136,7 +158,9 @@ class NoteListFragment : Fragment() {
         val sortName = messageEvent.msg
 
         if(messageEvent.msg.equals("全部")){
+
             labelList = labelDao.getAllLabels()
+
         }else{
             labelList = labelDao.getSameSortNoteLabelList(sortName)
         }

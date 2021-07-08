@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.example.customlockscreen.application.MyApplication
 import com.example.customlockscreen.databinding.FragmentMineBinding
 import com.example.customlockscreen.model.db.DataBase
@@ -37,13 +38,13 @@ class MineFragment : Fragment() {
 
         binding.mineTime.text = today
 
-        binding.eventNum.text = labelDao.getAllLabels().size.toString()
 
+        binding.eventNum.text = "0"
         binding.sortNoteNum.text = sortNoteDao.getAllSortNotesName().size.toString()
 
-        var firstInstallTime = context?.let { MyApplication._context!!.packageManager.getPackageInfo(it.packageName,0).firstInstallTime }
+        val firstInstallTime = context?.let { MyApplication._context!!.packageManager.getPackageInfo(it.packageName,0).firstInstallTime }
 
-        var day = (todayTime- firstInstallTime!!)/(1000*3600*24)
+        val day = (todayTime- firstInstallTime!!)/(1000*3600*24)
 
 
         binding.useDayNum.text = day.toString()
@@ -51,7 +52,7 @@ class MineFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         return binding.root
     }
 

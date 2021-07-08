@@ -41,8 +41,8 @@ class NoteSortFragment : Fragment() {
 
         binding.sortNoteListSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark)
         binding.sortNoteListSwipeRefreshLayout.setOnRefreshListener {
-            adapter!!.sortNoteList = sortNoteDao.getAllSortNotes()
-            adapter!!.notifyDataSetChanged()
+            adapter.sortNoteList = sortNoteDao.getAllSortNotes()
+            adapter.notifyDataSetChanged()
             binding.sortNoteListSwipeRefreshLayout.isRefreshing = false
         }
 
@@ -71,7 +71,7 @@ class NoteSortFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return binding.root
     }
 

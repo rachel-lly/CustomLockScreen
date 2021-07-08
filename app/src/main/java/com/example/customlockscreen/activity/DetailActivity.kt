@@ -11,6 +11,7 @@ import android.media.projection.MediaProjection
 import android.media.projection.MediaProjectionManager
 import android.os.*
 import android.util.DisplayMetrics
+import android.util.Log
 import android.util.TypedValue
 import android.view.*
 import androidx.annotation.RequiresApi
@@ -47,6 +48,8 @@ class DetailActivity : AppCompatActivity() {
     private val labelDao = DataBase.dataBase.labelDao()
 
     private lateinit var label: Label
+
+
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,68 +105,73 @@ class DetailActivity : AppCompatActivity() {
     @SuppressLint("WrongConstant")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-
         super.onActivityResult(requestCode, resultCode, data)
 
-        val displayMetrics = DisplayMetrics()
-        val windowManager = this.getSystemService(WINDOW_SERVICE) as WindowManager
-        windowManager.defaultDisplay.getMetrics(displayMetrics)
-        val width = displayMetrics.widthPixels
-        val height = displayMetrics.heightPixels
 
-        val mImageReader: ImageReader = ImageReader.newInstance(width, height, PixelFormat.RGBA_8888, 2)
-        mediaProjection = mediaProjectionManager!!.getMediaProjection(resultCode, data!!)
-        val virtualDisplay = mediaProjection!!.createVirtualDisplay("screen-mirror", width, height,
-                displayMetrics.densityDpi, DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, mImageReader.getSurface(), null, null)
+        if(requestCode == EVENT_SCREENSHOT_LOCK or EVENT_SCREENSHOT_SHARE){
+            val displayMetrics = DisplayMetrics()
+            val windowManager = this.getSystemService(WINDOW_SERVICE) as WindowManager
+            windowManager.defaultDisplay.getMetrics(displayMetrics)
+            val width = displayMetrics.widthPixels
+            val height = displayMetrics.heightPixels
+
+            val mImageReader: ImageReader = ImageReader.newInstance(width, height, PixelFormat.RGBA_8888, 2)
+            mediaProjection = mediaProjectionManager!!.getMediaProjection(resultCode, data!!)
+            val virtualDisplay = mediaProjection!!.createVirtualDisplay("screen-mirror", width, height,
+                    displayMetrics.densityDpi, DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, mImageReader.getSurface(), null, null)
 
 
 
-        Handler(Looper.myLooper()!!).postDelayed({
-            try {
-                image = mImageReader.acquireLatestImage()
-                if (image != null) {
-                    val planes: Array<Image.Plane> = image!!.getPlanes()
-                    val buffer: ByteBuffer = planes[0].getBuffer()
-                    val width: Int = image!!.getWidth()
-                    val height: Int = image!!.getHeight()
+            Handler(Looper.myLooper()!!).postDelayed({
+                try {
+                    image = mImageReader.acquireLatestImage()
+                    if (image != null) {
+                        val planes: Array<Image.Plane> = image!!.getPlanes()
+                        val buffer: ByteBuffer = planes[0].getBuffer()
+                        val width: Int = image!!.getWidth()
+                        val height: Int = image!!.getHeight()
 
-                    val pixelStride: Int = planes[0].getPixelStride()
-                    val rowStride: Int = planes[0].getRowStride()
-                    val rowPadding = rowStride - pixelStride * width
-                    var bitmap = Bitmap.createBitmap(width + rowPadding / pixelStride, height, Bitmap.Config.ARGB_8888)
-                    bitmap!!.copyPixelsFromBuffer(buffer)
-                    bitmap = Bitmap.createScaledBitmap(bitmap, bitmap.width, bitmap.height, false)
-                    if (bitmap != null) {
+                        val pixelStride: Int = planes[0].getPixelStride()
+                        val rowStride: Int = planes[0].getRowStride()
+                        val rowPadding = rowStride - pixelStride * width
+                        var bitmap = Bitmap.createBitmap(width + rowPadding / pixelStride, height, Bitmap.Config.ARGB_8888)
+                        bitmap!!.copyPixelsFromBuffer(buffer)
+                        bitmap = Bitmap.createScaledBitmap(bitmap, bitmap.width, bitmap.height, false)
+                        if (bitmap != null) {
 
-                        if (requestCode == EVENT_SCREENSHOT_SHARE) {
-                            cutScreenShotToShare(bitmap)
-                        }else if(requestCode == EVENT_SCREENSHOT_LOCK){
-                            cutScreenShotToLock(bitmap)
+                            if (requestCode == EVENT_SCREENSHOT_SHARE) {
+                                cutScreenShotToShare(bitmap)
+                            }else if(requestCode == EVENT_SCREENSHOT_LOCK){
+                                cutScreenShotToLock(bitmap)
+                            }
+
+
+
                         }
-
-
-
+                        bitmap.recycle()
                     }
-                    bitmap.recycle()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                } finally {
+                    image?.close()
+                    mImageReader.close()
+                    virtualDisplay?.release()
+                    //必须代码，否则出现BufferQueueProducer: [ImageReader] dequeueBuffer: BufferQueue has been abandoned
+                    mImageReader.setOnImageAvailableListener(null, null)
+                    mediaProjection!!.stop()
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            } finally {
-                image?.close()
-                mImageReader.close()
-                virtualDisplay?.release()
-                //必须代码，否则出现BufferQueueProducer: [ImageReader] dequeueBuffer: BufferQueue has been abandoned
-                mImageReader.setOnImageAvailableListener(null, null)
-                mediaProjection!!.stop()
-            }
-        }, 100)
+            }, 100)
+        }
+
+
+
 
     }
 
     private fun steepStatusBar() {
 
 
-        var release= Build.MODEL
+        val release= Build.MODEL
         if (release!=null){
             if (release.contains("HUAWEI")){
 

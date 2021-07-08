@@ -7,6 +7,7 @@ import android.text.SpannableStringBuilder
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.example.customlockscreen.Fragment.NoteListFragment
 import com.example.customlockscreen.R
 import com.example.customlockscreen.databinding.ActivityEditNoteAttributeBinding
 import com.example.customlockscreen.model.bean.Label
@@ -16,6 +17,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 const val LABEL = "LABEL"
+
 
 class EditNoteAttributeActivity : AppCompatActivity() {
 
@@ -58,7 +60,6 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
         binding.noteAttributeLayout.toTopSwitch.isChecked = label.isTop
 
-//        binding.noteAttributeLayout.lockScreenSwitch.isChecked = label.isLockScreen
 
         binding.noteAttributeLayout.endTimeSwitch.isChecked = label.isEnd
 
@@ -164,7 +165,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
                 if(label.text.equals(addLabel.text)){
                     labelDao.updateLabel(addLabel)
-                    Toast.makeText(this,"修改数据成功--$addLabel", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,"修改数据成功", Toast.LENGTH_SHORT).show()
                 }else{
                     var nameList = labelDao.getAllLabelsName()
 
@@ -182,7 +183,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
                     }else{
                         labelDao.deleteLabel(label)
                         labelDao.insertLabel(addLabel)
-                        Toast.makeText(this,"修改数据成功--$addLabel", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this,"修改数据成功", Toast.LENGTH_SHORT).show()
                         finish()
                     }
 
@@ -194,7 +195,9 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
         binding.deleteNoteSure.setOnClickListener {
             labelDao.deleteLabel(label)
-            Toast.makeText(this,"删除数据成功--$label", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"删除数据成功", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,HomeActivity::class.java)
+            startActivity(intent)
         }
 
         setContentView(binding.root)
