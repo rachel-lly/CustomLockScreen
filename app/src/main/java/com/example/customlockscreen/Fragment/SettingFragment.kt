@@ -11,11 +11,11 @@ import android.widget.PopupMenu
 import androidx.annotation.MenuRes
 import androidx.annotation.RequiresApi
 import com.example.customlockscreen.R
-import com.example.customlockscreen.Util.SharePref
 import com.example.customlockscreen.activity.BackupDataActivity
 import com.example.customlockscreen.activity.LockScreenSettingActivity
 import com.example.customlockscreen.activity.TimeRemindActivity
 import com.example.customlockscreen.databinding.FragmentSettingBinding
+import com.example.customlockscreen.model.bean.MessageEvent
 import org.greenrobot.eventbus.EventBus
 
 
@@ -42,7 +42,7 @@ class SettingFragment : Fragment() {
 
         sortStyle = sharedPreferences.getString("sortStyle","按事件时间")
 
-        EventBus.getDefault().post(sortStyle)
+        EventBus.getDefault().post(sortStyle?.let { MessageEvent(it) })
 
         binding.sortStyle.text = sortStyle
 
@@ -101,7 +101,7 @@ class SettingFragment : Fragment() {
 
                 binding.sortStyle.text = sortStyle
 
-                EventBus.getDefault().post(sortStyle)
+                EventBus.getDefault().post(sortStyle?.let { MessageEvent(it) })
 
                 edit = sharedPreferences.edit()
                 edit.putString("sortStyle",sortStyle).apply()

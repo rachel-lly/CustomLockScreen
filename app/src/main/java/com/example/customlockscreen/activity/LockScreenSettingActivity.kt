@@ -33,8 +33,7 @@ class LockScreenSettingActivity : AppCompatActivity() {
         }
 
 
-
-        labelList = ArrayList<Label>()
+        labelList = labelDao.getAllLabels()
         labelLinearAdapter = this.let { LabelLinearAdapter(it, labelList,true) }
 
         binding.lockScreenSettingRecyclerview.adapter = labelLinearAdapter

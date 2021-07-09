@@ -4,11 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.switchMap
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.*
 import com.example.customlockscreen.activity.AddNoteActivity
@@ -22,6 +20,8 @@ import com.example.customlockscreen.model.db.DataViewModel
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class NoteListFragment : Fragment() {
@@ -40,9 +40,8 @@ class NoteListFragment : Fragment() {
 
     private lateinit var labelGridAdapter:LabelGridAdapter
 
-
     private lateinit var sharedPreferences : SharedPreferences
-    private lateinit var edit : SharedPreferences.Editor
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +51,9 @@ class NoteListFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
+        sharedPreferences = this.context!!.getSharedPreferences("LABEL_EVENT", Context.MODE_PRIVATE)
+
+        val style = sharedPreferences.getString("sortStyle","按事件时间")
 
         dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
 
@@ -59,25 +61,42 @@ class NoteListFragment : Fragment() {
 
         dataViewModel.getAllLabelsByObserve().observe(this,{
             labelList = it
+
+            if(style.equals("按事件时间")){
+
+                Collections.sort(labelList, kotlin.Comparator { o1, o2 ->
+                    return@Comparator o1.targetDate.compareTo(o2.targetDate)
+                })
+
+            }else{
+
+                Collections.sort(labelList, kotlin.Comparator { o1, o2 ->
+                    return@Comparator o1.addNoteTime.compareTo(o2.addNoteTime)
+                })
+
+            }
+
             labelLinearAdapter.labelList = labelList
             labelGridAdapter.labelList = labelList
             labelLinearAdapter.notifyDataSetChanged()
             labelGridAdapter.notifyDataSetChanged()
         })
 
-
-        sharedPreferences = this.context!!.getSharedPreferences("LABEL_EVENT", Context.MODE_PRIVATE)
-
-        val style = sharedPreferences.getString("sortStyle","按事件时间")
+        labelList = ArrayList<Label>()
 
         if(style.equals("按事件时间")){
-            labelList = labelDao.getAllLabels()
+            Collections.sort(labelList, kotlin.Comparator { o1, o2 ->
+                return@Comparator o1.targetDate.compareTo(o2.targetDate)
+            })
         }else{
-            labelList = labelDao.getAllLabelsByAddTime()
+            Collections.sort(labelList, kotlin.Comparator { o1, o2 ->
+                return@Comparator o1.addNoteTime.compareTo(o2.addNoteTime)
+            })
         }
 
         labelLinearAdapter = this.context?.let { LabelLinearAdapter(it, labelList,false) }!!
         labelGridAdapter = this.context?.let { LabelGridAdapter(it, labelList) }!!
+
 
         binding.homeRecyclerview.adapter = labelLinearAdapter
         binding.homeRecyclerview.layoutManager = GridLayoutManager(this.context, 1)
@@ -171,20 +190,53 @@ class NoteListFragment : Fragment() {
 
         val msg = messageEvent.msg
 
+        var isChange = false
+
         when(msg){
 
             "按添加时间" ->{
-                labelList = labelDao.getAllLabelsByAddTime()
+                isChange = true
+                labelList = labelDao.getAllLabels()
+                Collections.sort(labelList, kotlin.Comparator { o1, o2 ->
+                    return@Comparator o1.addNoteTime.compareTo(o2.addNoteTime)
+                })
             }
 
-            "全部","按事件时间" ->{
+            "按事件时间" ->{
+                isChange = true
+                labelList = labelDao.getAllLabels()
+
+                Collections.sort(labelList, kotlin.Comparator { o1, o2 ->
+                    return@Comparator o1.targetDate.compareTo(o2.targetDate)
+                })
+
+            }
+            "全部" ->{
                 labelList = labelDao.getAllLabels()
             }
+
 
             else ->{
                 labelList = labelDao.getSameSortNoteLabelList(msg)
             }
         }
+
+        if(!isChange){
+            val sortStyle = sharedPreferences.getString("sortStyle","按添加时间")
+
+            if(sortStyle.equals("按添加时间")){
+                Collections.sort(labelList, kotlin.Comparator { o1, o2 ->
+                    return@Comparator o1.addNoteTime.compareTo(o2.addNoteTime)
+                })
+            }else{
+                Collections.sort(labelList, kotlin.Comparator { o1, o2 ->
+                    return@Comparator o1.targetDate.compareTo(o2.targetDate)
+                })
+            }
+
+        }
+
+
 
         labelLinearAdapter.labelList = labelList
         labelLinearAdapter.notifyDataSetChanged()

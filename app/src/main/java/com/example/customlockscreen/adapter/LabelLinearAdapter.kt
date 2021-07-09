@@ -3,18 +3,15 @@ package com.example.customlockscreen.adapter
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.example.customlockscreen.Fragment.NoteListFragment
 import com.example.customlockscreen.R
 import com.example.customlockscreen.activity.DetailActivity
 import com.example.customlockscreen.activity.LABEL_IS_LOCK
 import com.example.customlockscreen.activity.LABEL_TEXT
-import com.example.customlockscreen.activity.LockScreenSettingActivity
 import com.example.customlockscreen.databinding.CardItemLinearBinding
 import com.example.customlockscreen.model.bean.Label
 

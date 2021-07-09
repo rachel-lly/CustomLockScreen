@@ -3,7 +3,6 @@ package com.example.customlockscreen.model.db
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.customlockscreen.model.bean.Label
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface LabelDao {
@@ -17,14 +16,11 @@ interface LabelDao {
     @Update
     fun updateLabel(label: Label)
 
-    @Query("SELECT * FROM label_table ORDER BY targetDate ASC")
+    @Query("SELECT * FROM label_table")
     fun getAllLabelsByObserve(): LiveData<List<Label>>
 
-    @Query("SELECT * FROM label_table ORDER BY targetDate ASC")
+    @Query("SELECT * FROM label_table")
     fun getAllLabels(): List<Label>
-
-    @Query("SELECT * FROM label_table ORDER BY addNoteTime ASC")
-    fun getAllLabelsByAddTime():List<Label>
 
     @Query("SELECT text FROM label_table")
     fun getAllLabelsName():List<String>
