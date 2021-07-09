@@ -16,6 +16,7 @@ import com.example.customlockscreen.activity.BackupDataActivity
 import com.example.customlockscreen.activity.LockScreenSettingActivity
 import com.example.customlockscreen.activity.TimeRemindActivity
 import com.example.customlockscreen.databinding.FragmentSettingBinding
+import org.greenrobot.eventbus.EventBus
 
 
 class SettingFragment : Fragment() {
@@ -40,6 +41,8 @@ class SettingFragment : Fragment() {
 
 
         sortStyle = sharedPreferences.getString("sortStyle","按事件时间")
+
+        EventBus.getDefault().post(sortStyle)
 
         binding.sortStyle.text = sortStyle
 
@@ -97,6 +100,8 @@ class SettingFragment : Fragment() {
                 }
 
                 binding.sortStyle.text = sortStyle
+
+                EventBus.getDefault().post(sortStyle)
 
                 edit = sharedPreferences.edit()
                 edit.putString("sortStyle",sortStyle).apply()

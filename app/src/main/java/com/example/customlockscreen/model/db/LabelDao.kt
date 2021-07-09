@@ -17,17 +17,14 @@ interface LabelDao {
     @Update
     fun updateLabel(label: Label)
 
-    @Query("SELECT * FROM label_table")
+    @Query("SELECT * FROM label_table ORDER BY targetDate ASC")
     fun getAllLabelsByObserve(): LiveData<List<Label>>
 
-    @Query("SELECT * FROM label_table")
+    @Query("SELECT * FROM label_table ORDER BY targetDate ASC")
     fun getAllLabels(): List<Label>
 
-    @Query("SELECT * FROM label_table ORDER BY targetDate ASC")
-    fun getAllLabelsByEventTime():LiveData<List<Label>>
-
     @Query("SELECT * FROM label_table ORDER BY addNoteTime ASC")
-    fun getAllLabelsByAddTime():LiveData<List<Label>>
+    fun getAllLabelsByAddTime():List<Label>
 
     @Query("SELECT text FROM label_table")
     fun getAllLabelsName():List<String>

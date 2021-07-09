@@ -1,6 +1,8 @@
 package com.example.customlockscreen.Fragment
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -38,6 +40,10 @@ class NoteListFragment : Fragment() {
 
     private lateinit var labelGridAdapter:LabelGridAdapter
 
+
+    private lateinit var sharedPreferences : SharedPreferences
+    private lateinit var edit : SharedPreferences.Editor
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -60,7 +66,15 @@ class NoteListFragment : Fragment() {
         })
 
 
-        labelList = ArrayList<Label>()
+        sharedPreferences = this.context!!.getSharedPreferences("LABEL_EVENT", Context.MODE_PRIVATE)
+
+        val style = sharedPreferences.getString("sortStyle","按事件时间")
+
+        if(style.equals("按事件时间")){
+            labelList = labelDao.getAllLabels()
+        }else{
+            labelList = labelDao.getAllLabelsByAddTime()
+        }
 
         labelLinearAdapter = this.context?.let { LabelLinearAdapter(it, labelList,false) }!!
         labelGridAdapter = this.context?.let { LabelGridAdapter(it, labelList) }!!
@@ -155,14 +169,21 @@ class NoteListFragment : Fragment() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(messageEvent:MessageEvent){
 
-        val sortName = messageEvent.msg
+        val msg = messageEvent.msg
 
-        if(messageEvent.msg.equals("全部")){
+        when(msg){
 
-            labelList = labelDao.getAllLabels()
+            "按添加时间" ->{
+                labelList = labelDao.getAllLabelsByAddTime()
+            }
 
-        }else{
-            labelList = labelDao.getSameSortNoteLabelList(sortName)
+            "全部","按事件时间" ->{
+                labelList = labelDao.getAllLabels()
+            }
+
+            else ->{
+                labelList = labelDao.getSameSortNoteLabelList(msg)
+            }
         }
 
         labelLinearAdapter.labelList = labelList

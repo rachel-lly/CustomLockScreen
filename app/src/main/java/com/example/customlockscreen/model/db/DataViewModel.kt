@@ -13,4 +13,5 @@ class DataViewModel : ViewModel() {
     fun getAllLabelsByObserve() = labelDao.getAllLabelsByObserve()
 
     fun getAllSortNotesByObserve() = sortNoteDao.getAllSortNotesByObserve()
+
 }
