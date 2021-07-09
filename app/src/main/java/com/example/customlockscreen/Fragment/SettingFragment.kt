@@ -1,6 +1,8 @@
 package com.example.customlockscreen.Fragment
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.view.*
@@ -9,6 +11,7 @@ import android.widget.PopupMenu
 import androidx.annotation.MenuRes
 import androidx.annotation.RequiresApi
 import com.example.customlockscreen.R
+import com.example.customlockscreen.Util.SharePref
 import com.example.customlockscreen.activity.BackupDataActivity
 import com.example.customlockscreen.activity.LockScreenSettingActivity
 import com.example.customlockscreen.activity.TimeRemindActivity
@@ -19,6 +22,11 @@ class SettingFragment : Fragment() {
 
     private lateinit var binding:FragmentSettingBinding
 
+    private var sortStyle :String ?= null
+
+    private lateinit var sharedPreferences : SharedPreferences
+
+    private lateinit var edit : SharedPreferences.Editor
 
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -26,7 +34,18 @@ class SettingFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         binding = FragmentSettingBinding.inflate(layoutInflater)
-        
+
+
+        sharedPreferences = context!!.getSharedPreferences("LABEL_EVENT",Context.MODE_PRIVATE)
+
+
+        sortStyle = sharedPreferences.getString("sortStyle","按事件时间")
+
+        binding.sortStyle.text = sortStyle
+
+
+
+
         binding.settingSortLayout.setOnClickListener {
             showMenu(it,R.menu.fragment_setting_sort_style_menu)
         }
@@ -46,6 +65,8 @@ class SettingFragment : Fragment() {
             startActivity(intent)
         }
 
+
+
     }
 
 
@@ -60,7 +81,7 @@ class SettingFragment : Fragment() {
 
         popup.setOnMenuItemClickListener (object :PopupMenu.OnMenuItemClickListener{
             override fun onMenuItemClick(menuItem: MenuItem?): Boolean {
-                var sortStyle = "按事件时间"
+
                 when(menuItem?.itemId){
                     R.id.sort_by_add_time->{
                         sortStyle = "按添加时间"
@@ -76,6 +97,10 @@ class SettingFragment : Fragment() {
                 }
 
                 binding.sortStyle.text = sortStyle
+
+                edit = sharedPreferences.edit()
+                edit.putString("sortStyle",sortStyle).apply()
+
                 popup.dismiss()
 
                 return true
@@ -95,5 +120,8 @@ class SettingFragment : Fragment() {
 
 
 }
+
+
+
 
 
