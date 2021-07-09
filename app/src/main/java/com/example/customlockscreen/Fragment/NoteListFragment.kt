@@ -82,7 +82,7 @@ class NoteListFragment : Fragment() {
             labelGridAdapter.notifyDataSetChanged()
         })
 
-        labelList = ArrayList<Label>()
+        labelList = ArrayList()
 
         if(style.equals("按事件时间")){
             Collections.sort(labelList, kotlin.Comparator { o1, o2 ->
