@@ -54,7 +54,7 @@ class SortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val sortNote = sortNoteList[position]
         holder.sortNoteText.text = sortNote.name
-        var iconId:Int = context.resources.getIdentifier(sortNote.iconName,"mipmap",context.packageName)
+        val iconId:Int = context.resources.getIdentifier(sortNote.iconName,"mipmap",context.packageName)
         holder.sortNoteIcon.setImageResource(iconId)
 
         val sameSortNoteLabelList = labelDao.getSameSortNoteLabelList(sortNote.name)

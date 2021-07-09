@@ -165,7 +165,7 @@ class AddNoteActivity : AppCompatActivity() {
                     Toast.makeText(this,"该事件已存在",Toast.LENGTH_SHORT).show()
                 }else{
                     labelDao.insertLabel(addLabel)
-                    Toast.makeText(this,"保存数据成功--$addLabel",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,"保存数据成功",Toast.LENGTH_SHORT).show()
                     finish()
                 }
 

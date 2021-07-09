@@ -52,7 +52,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
         label = intent!!.getParcelableExtra(LABEL)!!
 
-        binding.noteAttributeLayout.addNoteEt.text = SpannableStringBuilder(label!!.text)
+        binding.noteAttributeLayout.addNoteEt.text = SpannableStringBuilder(label.text)
 
         binding.noteAttributeLayout.addNoteDate.text = format.format(label.targetDate)
 

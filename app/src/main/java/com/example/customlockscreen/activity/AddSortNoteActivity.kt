@@ -112,7 +112,7 @@ class AddSortNoteActivity : AppCompatActivity() {
                     Toast.makeText(this,"该分类本已存在",Toast.LENGTH_SHORT).show()
                 }else{
                     sortNoteDao.insertSortNote(SortNote(sortNoteName,iconName))
-                    Toast.makeText(this,"保存数据成功--$sortNoteName:$iconName",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,"保存数据成功",Toast.LENGTH_SHORT).show()
                     finish()
                 }
             }

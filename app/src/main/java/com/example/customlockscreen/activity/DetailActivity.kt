@@ -75,9 +75,9 @@ class DetailActivity : AppCompatActivity() {
             label = labelText!!.let { labelDao.getLabelByName(it) }
 
             binding.detailCard.labelText.text = labelText
-            binding.detailCard.labelDate.text = format.format(label!!.targetDate)
+            binding.detailCard.labelDate.text = format.format(label.targetDate)
 
-            val day = label!!.day
+            val day = label.day
 
 
             binding.detailCard.labelDay.text = Math.abs(day).toString()

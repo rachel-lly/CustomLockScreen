@@ -46,7 +46,7 @@ class EditSortNoteActivity : AppCompatActivity() {
 
 
 
-        sortNote = intent?.getParcelableExtra<SortNote>(SORT_NOTE)
+        sortNote = intent?.getParcelableExtra(SORT_NOTE)
 
 
         if (sortNote != null) {
@@ -130,7 +130,7 @@ class EditSortNoteActivity : AppCompatActivity() {
 
                     if(sortNote!!.name.equals(sortNoteName)){
                         sortNoteDao.updateSortNote(addSortNote)
-                        Toast.makeText(this,"修改数据成功--$sortNoteName:$iconName",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this,"修改数据成功",Toast.LENGTH_SHORT).show()
                         finish()
                     }else{
                         val nameList = sortNoteDao.getAllSortNotesName()
@@ -149,7 +149,7 @@ class EditSortNoteActivity : AppCompatActivity() {
                         }else{
                             sortNoteDao.deleteSortNote(sortNote!!)
                             sortNoteDao.insertSortNote(addSortNote)
-                            Toast.makeText(this,"修改数据成功--$sortNoteName:$iconName",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this,"修改数据成功",Toast.LENGTH_SHORT).show()
                             finish()
                         }
                     }

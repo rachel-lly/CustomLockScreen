@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.customlockscreen.application.MyApplication
 import com.example.customlockscreen.databinding.FragmentMineBinding
 import com.example.customlockscreen.model.db.DataBase
+import com.example.customlockscreen.model.db.DataViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,6 +23,8 @@ class MineFragment : Fragment() {
     private val labelDao = DataBase.dataBase.labelDao()
 
     private val sortNoteDao = DataBase.dataBase.sortNoteDao()
+
+    private lateinit var dataViewModel: DataViewModel
 
     private val format = SimpleDateFormat("MMM  dd,yyyy", Locale.ENGLISH)
 
@@ -39,8 +42,19 @@ class MineFragment : Fragment() {
         binding.mineTime.text = today
 
 
-        binding.eventNum.text = "0"
+        binding.eventNum.text = labelDao.getAllLabelsName().size.toString()
         binding.sortNoteNum.text = sortNoteDao.getAllSortNotesName().size.toString()
+
+        dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
+
+        dataViewModel.getAllSortNotesByObserve().observe(this,{
+            binding.sortNoteNum.text = it.size.toString()
+        })
+
+        dataViewModel.getAllLabelsByObserve().observe(this,{
+            binding.eventNum.text = it.size.toString()
+        })
+
 
         val firstInstallTime = context?.let { MyApplication._context!!.packageManager.getPackageInfo(it.packageName,0).firstInstallTime }
 

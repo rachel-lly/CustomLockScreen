@@ -1,5 +1,6 @@
 package com.example.customlockscreen.model.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.customlockscreen.model.bean.SortNote
 
@@ -17,6 +18,10 @@ interface SortNoteDao {
 
     @Query("SELECT * FROM sort_note_table")
     fun getAllSortNotes():List<SortNote>
+
+    @Query("SELECT * FROM sort_note_table")
+    fun getAllSortNotesByObserve():LiveData<List<SortNote>>
+
 
     @Query("SELECT name FROM sort_note_table")
     fun getAllSortNotesName():List<String>

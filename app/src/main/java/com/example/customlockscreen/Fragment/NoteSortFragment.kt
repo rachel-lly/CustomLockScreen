@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.R
 import com.example.customlockscreen.activity.AddSortNoteActivity
@@ -11,6 +12,7 @@ import com.example.customlockscreen.adapter.SortNoteListAdapter
 import com.example.customlockscreen.databinding.FragmentNoteSortBinding
 import com.example.customlockscreen.model.bean.SortNote
 import com.example.customlockscreen.model.db.DataBase
+import com.example.customlockscreen.model.db.DataViewModel
 
 
 class NoteSortFragment : Fragment() {
@@ -23,6 +25,8 @@ class NoteSortFragment : Fragment() {
 
 
     private val sortNoteDao = DataBase.dataBase.sortNoteDao()
+
+    private lateinit var dataViewModel: DataViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +42,16 @@ class NoteSortFragment : Fragment() {
         adapter = context?.let { SortNoteListAdapter(it,list) }!!
         binding.fragmentSortNoteRecycleview.adapter = adapter
         binding.fragmentSortNoteRecycleview.layoutManager = GridLayoutManager(context,1)
+
+
+        dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
+
+        dataViewModel.getAllSortNotesByObserve().observe(this,{
+            adapter.sortNoteList = it
+            adapter.notifyDataSetChanged()
+        })
+
+
 
         binding.sortNoteListSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark)
         binding.sortNoteListSwipeRefreshLayout.setOnRefreshListener {
