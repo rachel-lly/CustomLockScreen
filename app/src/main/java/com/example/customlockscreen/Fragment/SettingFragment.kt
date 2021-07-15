@@ -17,6 +17,9 @@ import com.example.customlockscreen.activity.TimeRemindActivity
 import com.example.customlockscreen.databinding.FragmentSettingBinding
 import com.example.customlockscreen.model.bean.MessageEvent
 import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+import java.util.*
 
 
 class SettingFragment : Fragment() {
@@ -45,8 +48,6 @@ class SettingFragment : Fragment() {
         EventBus.getDefault().post(sortStyle?.let { MessageEvent(it) })
 
         binding.sortStyle.text = sortStyle
-
-
 
 
         binding.settingSortLayout.setOnClickListener {
@@ -90,22 +91,14 @@ class SettingFragment : Fragment() {
                         sortStyle = "按添加时间"
                     }
 
-
                     R.id.sort_by_event_time->{
                         sortStyle =  "按事件时间"
-
                     }
-
 
                 }
 
                 binding.sortStyle.text = sortStyle
-
                 EventBus.getDefault().post(sortStyle?.let { MessageEvent(it) })
-
-                edit = sharedPreferences.edit()
-                edit.putString("sortStyle",sortStyle).apply()
-
                 popup.dismiss()
 
                 return true
@@ -120,10 +113,30 @@ class SettingFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
+        EventBus.getDefault().register(this)
         return binding.root
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(messageEvent:MessageEvent){
+
+        val msg = messageEvent.msg
+
+        when(msg){
+
+            "按添加时间", "按事件时间" ->{
+                binding.sortStyle.text = msg
+            }
+        }
+
+        edit = sharedPreferences.edit()
+        edit.putString("sortStyle",msg).apply()
+    }
 }
 
 

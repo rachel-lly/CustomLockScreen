@@ -3,8 +3,12 @@ package com.example.customlockscreen.Fragment
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.widget.PopupMenu
+import androidx.annotation.MenuRes
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -127,6 +131,7 @@ class NoteListFragment : Fragment() {
 
 
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         super.onOptionsItemSelected(item)
@@ -163,10 +168,21 @@ class NoteListFragment : Fragment() {
                 val intent = Intent(context, AddNoteActivity::class.java)
                 context?.startActivity(intent)
             }
+
+            R.id.sort_by_event_time_home , R.id.sort_by_add_time_home->{
+
+                val sortStyle :String = item.title.toString()
+
+                EventBus.getDefault().post(sortStyle.let { MessageEvent(it) })
+
+            }
+
+
         }
 
         return true
     }
+
 
 
 
@@ -235,8 +251,6 @@ class NoteListFragment : Fragment() {
             }
 
         }
-
-
 
         labelLinearAdapter.labelList = labelList
         labelLinearAdapter.notifyDataSetChanged()
