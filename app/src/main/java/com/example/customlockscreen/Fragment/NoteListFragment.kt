@@ -22,6 +22,7 @@ import com.example.customlockscreen.model.db.DataViewModel
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -44,7 +45,10 @@ class NoteListFragment : Fragment() {
 
     private lateinit var sharedPreferences : SharedPreferences
 
+    private val format = SimpleDateFormat("yyyy-MM-dd-EE", Locale.CHINESE)
 
+
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -54,6 +58,10 @@ class NoteListFragment : Fragment() {
         setHasOptionsMenu(true)
 
         sharedPreferences = this.context!!.getSharedPreferences("LABEL_EVENT", Context.MODE_PRIVATE)
+
+
+
+
 
         val style = sharedPreferences.getString("sortStyle","按事件时间")
 
@@ -78,11 +86,14 @@ class NoteListFragment : Fragment() {
 
             }
 
+            refreshTopLabel()
             refreshList()
 
         })
 
         labelList = ArrayList()
+
+
 
         if(style.equals("按事件时间")){
             Collections.sort(labelList, kotlin.Comparator { o1, o2 ->
@@ -109,6 +120,8 @@ class NoteListFragment : Fragment() {
             refreshList()
             binding.homeSwipeRefreshLayout.isRefreshing = false
         }
+
+        refreshTopLabel()
 
 
     }
@@ -190,6 +203,7 @@ class NoteListFragment : Fragment() {
         EventBus.getDefault().unregister(this)
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(messageEvent:MessageEvent){
 
@@ -240,6 +254,7 @@ class NoteListFragment : Fragment() {
             }
 
         }
+        refreshTopLabel()
         refreshList()
     }
 
@@ -249,6 +264,54 @@ class NoteListFragment : Fragment() {
 
         labelGridAdapter.labelList = labelList
         labelGridAdapter.notifyDataSetChanged()
+    }
+
+
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun refreshTopLabel(){
+        val topEventName = sharedPreferences.getString("topLabelName",null)
+
+        if(topEventName == null){
+            defaultTopLabel()
+        }else{
+            val label: Label? = labelDao.getLabelByName(topEventName)
+            if(label!=null){
+                setTopLabel(label)
+            }else{
+                defaultTopLabel()
+            }
+
+        }
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun defaultTopLabel(){
+
+        if(!labelList.isEmpty()){
+
+            val label = labelList.get(0)
+            setTopLabel(label)
+        }else{
+            binding.homeHeaderTopText.text = "新年"
+            binding.homeHeaderTopDate.text = "2022-1-1 星期六"
+            binding.homeHeaderTopDay.text = "134"
+        }
+    }
+
+    fun setTopLabel(label: Label){
+        binding.homeHeaderTopText.text = label.text
+        binding.homeHeaderTopDate.text = format.format(label.targetDate)
+
+        val day = label.day
+
+        binding.homeHeaderTopDay.text = Math.abs(day).toString()
+        if(day>=0){
+            binding.homeHeaderTopDateJustText.text = "目标："
+        }else{
+            binding.homeHeaderTopDateJustText.text = "开始："
+        }
     }
 }
 

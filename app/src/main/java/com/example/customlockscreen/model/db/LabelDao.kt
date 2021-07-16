@@ -29,6 +29,6 @@ interface LabelDao {
     fun getSameSortNoteLabelList(sortNoteName:String):List<Label>
 
     @Query("SELECT * FROM label_table WHERE text =:text")
-    fun getLabelByName(text:String):Label
+    fun getLabelByName(text:String):Label?
 
 }

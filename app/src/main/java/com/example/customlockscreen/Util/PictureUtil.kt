@@ -12,7 +12,7 @@ import androidx.core.content.FileProvider
 import java.io.*
 
 
-class PictureUtil(){
+class PictureUtil{
 
     companion object{
         fun getBitmapCacheDir(context: Context): String{

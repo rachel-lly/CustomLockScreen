@@ -30,7 +30,7 @@
             >
 
             <TextView
-                android:id="@+id/home_header_label_chosen_text"
+                android:id="@+id/home_header_top_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New Year"
@@ -39,11 +39,21 @@
                 />
 
             <TextView
-                android:id="@+id/home_header_label_chosen_date"
+                android:id="@+id/home_header_top_date_just_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/home_header_label_chosen_text"
-                android:text="目标：2022-1-1 星期六"
+                android:layout_below="@+id/home_header_top_text"
+                android:text="目标："
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:id="@+id/home_header_top_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/home_header_top_text"
+                android:layout_toEndOf="@+id/home_header_top_date_just_text"
+                android:text="2022-1-1 星期六"
                 android:textSize="15sp"
                 />
 
@@ -51,7 +61,7 @@
 
 
         <TextView
-            android:id="@+id/home_header_label_chosen_day"
+            android:id="@+id/home_header_top_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="246"
