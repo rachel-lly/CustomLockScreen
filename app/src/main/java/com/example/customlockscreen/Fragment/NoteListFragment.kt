@@ -6,8 +6,6 @@ import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.view.*
-import android.widget.PopupMenu
-import androidx.annotation.MenuRes
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -80,10 +78,8 @@ class NoteListFragment : Fragment() {
 
             }
 
-            labelLinearAdapter.labelList = labelList
-            labelGridAdapter.labelList = labelList
-            labelLinearAdapter.notifyDataSetChanged()
-            labelGridAdapter.notifyDataSetChanged()
+            refreshList()
+
         })
 
         labelList = ArrayList()
@@ -110,14 +106,7 @@ class NoteListFragment : Fragment() {
 
         binding.homeSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark)
         binding.homeSwipeRefreshLayout.setOnRefreshListener {
-
-            labelLinearAdapter.labelList = labelList
-            labelLinearAdapter.notifyDataSetChanged()
-
-
-            labelGridAdapter.labelList = labelList
-            labelGridAdapter.notifyDataSetChanged()
-
+            refreshList()
             binding.homeSwipeRefreshLayout.isRefreshing = false
         }
 
@@ -251,7 +240,10 @@ class NoteListFragment : Fragment() {
             }
 
         }
+        refreshList()
+    }
 
+    fun refreshList(){
         labelLinearAdapter.labelList = labelList
         labelLinearAdapter.notifyDataSetChanged()
 
