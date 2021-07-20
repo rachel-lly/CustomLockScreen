@@ -1,6 +1,8 @@
 package com.example.customlockscreen.activity
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -39,10 +41,16 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
     private lateinit var label:Label
 
+    private lateinit var sharedPreferences : SharedPreferences
+    private lateinit var editor : SharedPreferences.Editor
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityEditNoteAttributeBinding.inflate(layoutInflater)
+
+        sharedPreferences = this.getSharedPreferences("LABEL_EVENT", Context.MODE_PRIVATE)
+        editor = sharedPreferences.edit()
 
         binding.editNoteAttributeToolbar.setNavigationIcon(R.mipmap.back)
         binding.editNoteAttributeToolbar.setNavigationOnClickListener {
@@ -50,6 +58,8 @@ class EditNoteAttributeActivity : AppCompatActivity() {
         }
 
         label = intent!!.getParcelableExtra(LABEL)!!
+
+        targetDayTime = label.targetDate
 
         binding.noteAttributeLayout.addNoteEt.text = SpannableStringBuilder(label.text)
 
@@ -63,6 +73,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
         binding.noteAttributeLayout.endTimeSwitch.isChecked = label.isEnd
 
         if(label.isEnd){
+            endTime = label.endDate
             binding.noteAttributeLayout.endTimeDate.text = format.format(label.endDate)
             binding.noteAttributeLayout.endTimeDateLayout.visibility = View.VISIBLE
             isFirst = false
@@ -142,12 +153,12 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
         binding.editNoteSure.setOnClickListener {
 
-            var noteText = binding.noteAttributeLayout.addNoteEt.text.toString()
+            val noteText = binding.noteAttributeLayout.addNoteEt.text.toString()
             if(noteText.isEmpty()){
                 Toast.makeText(this,"事件不能为空", Toast.LENGTH_SHORT).show()
             }else{
 
-                var todayTime = MaterialDatePicker.todayInUtcMilliseconds()
+                val todayTime = MaterialDatePicker.todayInUtcMilliseconds()
                 val addLabel = Label(noteText,targetDayTime,todayTime)
 
                 if(endTime!=null){
@@ -157,16 +168,24 @@ class EditNoteAttributeActivity : AppCompatActivity() {
                     }
                 }
 
-                var sortNoteName = binding.noteAttributeLayout.chooseSortTv.text.toString()
+                addLabel.isTop = binding.noteAttributeLayout.toTopSwitch.isChecked
+
+
+
+                val sortNoteName = binding.noteAttributeLayout.chooseSortTv.text.toString()
                 if(!sortNoteName.isEmpty()){
                     addLabel.sortNote = sortNoteName
                 }
 
                 if(label.text.equals(addLabel.text)){
+                    if(addLabel.isTop){
+                        changeOnTopLabel(addLabel.text)
+                    }
                     labelDao.updateLabel(addLabel)
                     Toast.makeText(this,"修改数据成功", Toast.LENGTH_SHORT).show()
+                    finish()
                 }else{
-                    var nameList = labelDao.getAllLabelsName()
+                    val nameList = labelDao.getAllLabelsName()
 
                     var flag = false
 
@@ -180,6 +199,9 @@ class EditNoteAttributeActivity : AppCompatActivity() {
                     if(flag){
                         Toast.makeText(this,"该事件已存在", Toast.LENGTH_SHORT).show()
                     }else{
+                        if(addLabel.isTop){
+                            changeOnTopLabel(addLabel.text)
+                        }
                         labelDao.deleteLabel(label)
                         labelDao.insertLabel(addLabel)
                         Toast.makeText(this,"修改数据成功", Toast.LENGTH_SHORT).show()
@@ -200,5 +222,20 @@ class EditNoteAttributeActivity : AppCompatActivity() {
         }
 
         setContentView(binding.root)
+    }
+
+    fun changeOnTopLabel(labelName : String){
+
+        val onTopLabel = sharedPreferences.getString("topLabelName",null)
+        if(onTopLabel!=null){
+            val deleteOnTopLabel = labelDao.getLabelByName(onTopLabel)
+            if(deleteOnTopLabel!=null){
+                deleteOnTopLabel.isTop = false
+                labelDao.updateLabel(deleteOnTopLabel)
+            }
+        }
+
+
+        editor.putString("topLabelName",labelName).apply()
     }
 }

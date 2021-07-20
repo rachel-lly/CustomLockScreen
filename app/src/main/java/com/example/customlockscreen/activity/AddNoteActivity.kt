@@ -1,6 +1,8 @@
 package com.example.customlockscreen.activity
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -26,7 +28,8 @@ class AddNoteActivity : AppCompatActivity() {
     private val END_TIME_TAG = "END_TIME_TAG"
     private val ADD_NOTE_TIME_TAG = "ADD_NOTE_TIME_TAG"
 
-    private var isFirst = true
+    private var isFirstEndTime = true
+
 
 
     private val format = SimpleDateFormat("yyyy-MM-dd-EE", Locale.CHINESE)
@@ -39,6 +42,9 @@ class AddNoteActivity : AppCompatActivity() {
 
     private val labelDao = DataBase.dataBase.labelDao()
 
+    private lateinit var sharedPreferences : SharedPreferences
+    private lateinit var editor : SharedPreferences.Editor
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         binding.noteAttributeLayout.chooseSortTv.text =data?.getStringExtra(SORT_NOTE_TEXT)
@@ -50,6 +56,10 @@ class AddNoteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityAddNoteBinding.inflate(layoutInflater)
+
+        sharedPreferences = this.getSharedPreferences("LABEL_EVENT", Context.MODE_PRIVATE)
+        editor = sharedPreferences.edit()
+
 
         binding.noteAttributeLayout.addNoteDate.text = today
 
@@ -102,12 +112,12 @@ class AddNoteActivity : AppCompatActivity() {
 
         binding.noteAttributeLayout.endTimeSwitch.setOnClickListener {
 
-            if(isFirst){
+            if(isFirstEndTime){
                 binding.noteAttributeLayout.endTimeDate.visibility = View.VISIBLE
-                isFirst = false
+                isFirstEndTime = false
             }else{
                 binding.noteAttributeLayout.endTimeDate.visibility = View.GONE
-                isFirst = true
+                isFirstEndTime = true
             }
 
         }
@@ -130,12 +140,12 @@ class AddNoteActivity : AppCompatActivity() {
 
         binding.addNoteSure.setOnClickListener {
 
-            var noteText = binding.noteAttributeLayout.addNoteEt.text.toString()
+            val noteText = binding.noteAttributeLayout.addNoteEt.text.toString()
             if(noteText.isEmpty()){
                 Toast.makeText(this,"事件不能为空",Toast.LENGTH_SHORT).show()
             }else{
 
-                var todayTime = MaterialDatePicker.todayInUtcMilliseconds()
+                val todayTime = MaterialDatePicker.todayInUtcMilliseconds()
                 val addLabel = Label(noteText,targetDayTime,todayTime)
 
                 if(endTime!=null){
@@ -145,12 +155,30 @@ class AddNoteActivity : AppCompatActivity() {
                     }
                 }
 
-                var sortNoteName = binding.noteAttributeLayout.chooseSortTv.text.toString()
+                addLabel.isTop = binding.noteAttributeLayout.toTopSwitch.isChecked
+
+                if(addLabel.isTop){
+
+
+                    val onTopLabel = sharedPreferences.getString("topLabelName",null)
+                    if(onTopLabel!=null){
+                        val deleteOnTopLabel = labelDao.getLabelByName(onTopLabel)
+                        if(deleteOnTopLabel!=null){
+                            deleteOnTopLabel.isTop = false
+                            labelDao.updateLabel(deleteOnTopLabel)
+                        }
+                    }
+
+
+                    editor.putString("topLabelName",addLabel.text).apply()
+                }
+
+                val sortNoteName = binding.noteAttributeLayout.chooseSortTv.text.toString()
                 if(!sortNoteName.isEmpty()){
                     addLabel.sortNote = sortNoteName
                 }
 
-                var nameList = labelDao.getAllLabelsName()
+                val nameList = labelDao.getAllLabelsName()
 
                 var flag = false
 
@@ -175,6 +203,8 @@ class AddNoteActivity : AppCompatActivity() {
 
 
         }
+
+
 
 
 

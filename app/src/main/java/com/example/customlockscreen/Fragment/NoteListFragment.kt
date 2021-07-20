@@ -60,9 +60,6 @@ class NoteListFragment : Fragment() {
         sharedPreferences = this.context!!.getSharedPreferences("LABEL_EVENT", Context.MODE_PRIVATE)
 
 
-
-
-
         val style = sharedPreferences.getString("sortStyle","按事件时间")
 
         dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
