@@ -55,6 +55,8 @@ class NoteListFragment : Fragment() {
         
         binding = FragmentNoteListBinding.inflate(LayoutInflater.from(this.context))
 
+        refreshRoomLabelListDay()
+
         setHasOptionsMenu(true)
 
         sharedPreferences = this.context!!.getSharedPreferences("LABEL_EVENT", Context.MODE_PRIVATE)
@@ -308,6 +310,15 @@ class NoteListFragment : Fragment() {
             binding.homeHeaderTopDateJustText.text = "目标："
         }else{
             binding.homeHeaderTopDateJustText.text = "开始："
+        }
+    }
+
+    fun refreshRoomLabelListDay(){
+        val allLabel : List<Label> = labelDao.getAllLabels()
+        for(i in 0..allLabel.size - 1 ){
+            val refreshLabel = allLabel.get(i)
+            refreshLabel.day =  (refreshLabel.targetDate-System.currentTimeMillis())/(1000*3600*24)
+            labelDao.updateLabel(refreshLabel)
         }
     }
 }
