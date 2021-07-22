@@ -25,17 +25,15 @@
             >
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
                 android:src="@mipmap/sort_note_icon"
-                android:layout_gravity="center"
+                style="@style/icon_in_LinearLayout"
                 />
 
             <EditText
                 android:id="@+id/add_sort_note_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginEnd="20dp"
                 />
         </LinearLayout>
@@ -58,7 +56,7 @@
 
             <ImageView
                 android:id="@+id/choose_icon_iv"
-                android:src="@mipmap/empty_heart"
+                android:src="@mipmap/sort_note_choose_icon"
                 style="@style/linear_item_icon"
                 />
 

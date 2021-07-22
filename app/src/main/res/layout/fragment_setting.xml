@@ -99,7 +99,7 @@
 
         <ImageView
             android:id="@+id/backup_data_icon"
-            android:src="@mipmap/backup_data"
+            android:src="@mipmap/dataup"
             style="@style/linear_item_icon"
             />
 

@@ -36,9 +36,15 @@
     </style>
 
     <style name="linear_item_icon">
-        <item name="android:layout_width">25dp</item>
-        <item name="android:layout_height">25dp</item>
+        <item name="android:layout_width">26dp</item>
+        <item name="android:layout_height">26dp</item>
         <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="icon_in_LinearLayout">
+        <item name="android:layout_width">26dp</item>
+        <item name="android:layout_height">26dp</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 
     <style name="header_layout_horizon_line">
