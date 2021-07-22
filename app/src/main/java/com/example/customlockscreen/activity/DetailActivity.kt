@@ -1,5 +1,6 @@
 package com.example.customlockscreen.activity
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -13,6 +14,7 @@ import android.os.*
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.*
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.customlockscreen.R
@@ -20,6 +22,7 @@ import com.example.customlockscreen.Util.PictureUtil
 import com.example.customlockscreen.databinding.ActivityDetailBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.db.DataBase
+import com.example.library.PermissionX
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
@@ -221,13 +224,39 @@ class DetailActivity : AppCompatActivity() {
 
             R.id.share -> {
 
-                takeScreenShotToShare()
+                PermissionX.request(this,
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE){
+                    allGranted,deniedList ->
+                    run {
+                        if (allGranted) {
+                            takeScreenShotToShare()
+                        } else {
+                            Toast.makeText(this,"你拒绝了 $deniedList",Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
 
             }
 
             R.id.lock_screen -> {
-          
-                takeScreenShotToLock()
+
+
+                PermissionX.request(this,
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE){
+                    allGranted,deniedList ->
+                    run {
+                        if (allGranted) {
+                            takeScreenShotToLock()
+                        } else {
+                            Toast.makeText(this,"你拒绝了 $deniedList",Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
 
             }
         }
