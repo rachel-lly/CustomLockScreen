@@ -293,9 +293,9 @@ class NoteListFragment : Fragment() {
             val label = labelList.get(0)
             setTopLabel(label)
         }else{
-            binding.homeHeaderTopText.text = "新年"
-            binding.homeHeaderTopDate.text = "2022-1-1 星期六"
-            binding.homeHeaderTopDay.text = "134"
+            binding.homeHeaderTopText.text = "--"
+            binding.homeHeaderTopDate.text = "----- --"
+            binding.homeHeaderTopDay.text = "--"
         }
     }
 
