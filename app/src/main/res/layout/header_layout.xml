@@ -26,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/drawer_top_text"
+            android:fontFamily="@font/montserrat_medium"
             android:textSize="20sp"
             android:textColor="#fff"
             android:layout_toEndOf="@+id/top_icon"
@@ -39,6 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="首页事件分类"
+        android:fontFamily="@font/montserrat_medium"
         android:textColor="#000"
         android:textSize="14sp"
         android:layout_marginStart="15dp"
@@ -83,6 +85,7 @@
                 android:layout_marginStart="20dp"
                 android:textSize="12sp"
                 android:text="全部事件"
+                android:fontFamily="@font/montserrat_medium"
                 android:textColor="#000"
                 android:layout_toEndOf="@id/all_labels_icon"
                 />
@@ -152,6 +155,7 @@
                 android:layout_marginStart="15dp"
                 android:textSize="14sp"
                 android:text="管理分类本"
+                android:fontFamily="@font/montserrat_medium"
                 android:textColor="#000"
                 android:layout_gravity="center_vertical"
                 />
@@ -187,6 +191,7 @@
                 android:layout_marginStart="15dp"
                 android:textSize="14sp"
                 android:text="我的"
+                android:fontFamily="@font/montserrat_medium"
                 android:textColor="#000"
                 android:layout_gravity="center_vertical"
                 />
@@ -222,6 +227,7 @@
                 android:layout_marginStart="15dp"
                 android:textSize="14sp"
                 android:text="设置"
+                android:fontFamily="@font/montserrat_medium"
                 android:textColor="#000"
                 android:layout_gravity="center_vertical"
                 />

@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:text="按事件时间"
             android:textColor="@color/colorPrimaryDark"
-            android:textStyle="italic"
+            android:fontFamily="@font/montserrat_medium_italic"
             android:textSize="18sp"
             android:layout_marginStart="20dp"
             android:layout_alignParentEnd="true"

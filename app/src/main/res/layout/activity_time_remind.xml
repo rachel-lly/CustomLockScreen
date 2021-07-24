@@ -84,7 +84,7 @@
                 android:text="9：00"
                 android:textSize="18sp"
                 android:textColor="@color/colorPrimaryDark"
-                android:textStyle="italic"
+                android:fontFamily="@font/montserrat_medium"
                 android:layout_marginStart="20dp"
                 />
 
@@ -160,7 +160,7 @@
                 android:text="9：00"
                 android:textSize="18sp"
                 android:textColor="@color/colorPrimaryDark"
-                android:textStyle="italic"
+                android:fontFamily="@font/montserrat_medium"
                 android:layout_marginStart="20dp"
                 />
 

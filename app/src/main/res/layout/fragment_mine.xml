@@ -23,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="May 9,2020"
+            android:fontFamily="@font/montserrat_medium"
             android:layout_marginTop="5dp"
             />
 
@@ -31,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ME"
-            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_bold"
             android:textSize="30sp"
             android:layout_below="@id/mine_time"
             android:layout_marginTop="10dp"
@@ -72,6 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="事件记录"
+                    android:fontFamily="@font/montserrat_medium"
                     android:layout_gravity="center"
                     />
 
@@ -80,9 +82,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_medium"
                     android:textSize="30sp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
                     />
                 <TextView
                     android:layout_width="wrap_content"
@@ -90,6 +94,7 @@
                     android:text="EVENTS"
                     android:textSize="8sp"
                     android:textColor="#fff"
+                    android:fontFamily="@font/montserrat_medium"
                     android:background="@drawable/rectangle_tv_bg"
                     android:layout_gravity="center"
                     />
@@ -114,6 +119,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="分类本"
+                    android:fontFamily="@font/montserrat_medium"
                     android:layout_gravity="center"
                     />
 
@@ -122,9 +128,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="3"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_medium"
                     android:textSize="30sp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
                     />
 
                 <TextView
@@ -133,6 +141,7 @@
                     android:text="NOTES"
                     android:textSize="8sp"
                     android:textColor="#fff"
+                    android:fontFamily="@font/montserrat_medium"
                     android:background="@drawable/rectangle_tv_bg"
                     android:layout_gravity="center"
                     />
@@ -157,6 +166,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="使用天数"
+                    android:fontFamily="@font/montserrat_medium"
                     android:layout_gravity="center"
                     />
 
@@ -165,9 +175,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="103"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_medium"
                     android:textSize="30sp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp"
                     />
 
                 <TextView
@@ -176,6 +188,7 @@
                     android:text="DAYS"
                     android:textSize="8sp"
                     android:textColor="#fff"
+                    android:fontFamily="@font/montserrat_medium"
                     android:background="@drawable/rectangle_tv_bg"
                     android:layout_gravity="center"
                     />

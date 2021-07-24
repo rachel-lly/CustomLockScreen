@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:text="(未来日期为倒数，过去日期为正数)"
                     android:layout_gravity="bottom"
-                    android:textStyle="italic"
+                    android:fontFamily="@font/montserrat_medium_italic"
                     />
 
             </LinearLayout>
@@ -91,7 +91,7 @@
                 android:text="2021-04-15 星期五"
                 android:textSize="16sp"
                 android:textColor="@color/colorPrimaryDark"
-                android:textStyle="italic"
+                android:fontFamily="@font/montserrat_medium"
                 android:layout_marginStart="50dp"
                 android:layout_marginTop="10dp"
                 />
@@ -142,8 +142,8 @@
                         android:text="生活"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="18sp"
+                        android:fontFamily="@font/montserrat_medium"
                         android:layout_marginStart="10dp"
-
                         android:layout_gravity="bottom" />
 
                     <ImageView
@@ -294,7 +294,7 @@
                 android:text="2021-04-15 星期五"
                 android:textSize="16sp"
                 android:textColor="@color/colorPrimaryDark"
-                android:textStyle="italic"
+                android:fontFamily="@font/montserrat_medium"
                 android:layout_marginStart="50dp"
                 android:layout_marginTop="10dp"
                 />
