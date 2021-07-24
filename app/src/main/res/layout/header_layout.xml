@@ -16,9 +16,9 @@
         >
         <ImageView
             android:id="@+id/top_icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
             android:src="@mipmap/top_icon"
+            android:layout_height="28dp"
+            android:layout_width="28dp"
             />
 
         <TextView
@@ -140,9 +140,9 @@
             <ImageView
                 android:id="@+id/sort_note_icon"
                 android:layout_width="20dp"
-                android:layout_height="23dp"
-                android:src="@mipmap/sort_note_black"
-                android:layout_gravity="center_vertical"
+                android:layout_height="20dp"
+                android:src="@mipmap/sort_note_gray"
+                android:layout_gravity="center"
                 />
 
             <TextView
@@ -174,17 +174,17 @@
 
             <ImageView
                 android:id="@+id/mine_icon"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@mipmap/mine_black"
-                android:layout_gravity="center_vertical"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/mine_gray"
+                android:layout_gravity="center"
                 />
 
             <TextView
                 android:id="@+id/mine_tx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="15dp"
                 android:textSize="14sp"
                 android:text="我的"
                 android:textColor="#000"
@@ -209,17 +209,17 @@
 
             <ImageView
                 android:id="@+id/setting_icon"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@mipmap/setting"
-                android:layout_gravity="center_vertical"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/setting_gray"
+                android:layout_gravity="center"
                 />
 
             <TextView
                 android:id="@+id/setting_tx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="15dp"
                 android:textSize="14sp"
                 android:text="设置"
                 android:textColor="#000"
