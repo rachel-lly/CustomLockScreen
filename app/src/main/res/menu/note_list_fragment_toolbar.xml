@@ -29,7 +29,7 @@
 
     <item
         android:id="@+id/grid_note"
-        android:icon="@mipmap/grid"
+        android:icon="@mipmap/grid_white"
         android:title="grid_note"
         app:showAsAction="ifRoom"
         />
@@ -37,7 +37,7 @@
 
     <item
         android:id="@+id/add_note"
-        android:icon="@mipmap/add"
+        android:icon="@mipmap/add_white"
         android:title="add_note"
         app:showAsAction="ifRoom"
         />
