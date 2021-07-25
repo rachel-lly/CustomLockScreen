@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.*
+import com.example.customlockscreen.Util.SharedPreferenceCommission
 import com.example.customlockscreen.activity.AddNoteActivity
 import com.example.customlockscreen.adapter.LabelGridAdapter
 import com.example.customlockscreen.adapter.LabelLinearAdapter
@@ -43,10 +44,7 @@ class NoteListFragment : Fragment() {
 
     private lateinit var labelGridAdapter:LabelGridAdapter
 
-    private lateinit var sharedPreferences : SharedPreferences
-
     private val format = SimpleDateFormat("yyyy-MM-dd-EE", Locale.CHINESE)
-
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,10 +57,8 @@ class NoteListFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
-        sharedPreferences = this.context!!.getSharedPreferences("LABEL_EVENT", Context.MODE_PRIVATE)
 
-
-        val style = sharedPreferences.getString("sortStyle","按事件时间")
+        val style by SharedPreferenceCommission(context!!,"sortStyle","按事件时间")
 
         dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
 
@@ -240,7 +236,7 @@ class NoteListFragment : Fragment() {
         }
 
         if(!isChange){
-            val sortStyle = sharedPreferences.getString("sortStyle","按添加时间")
+            val sortStyle by SharedPreferenceCommission(context!!,"sortStyle","按事件时间")
 
             if(sortStyle.equals("按添加时间")){
                 Collections.sort(labelList, kotlin.Comparator { o1, o2 ->
@@ -269,12 +265,13 @@ class NoteListFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.M)
     fun refreshTopLabel(){
-        val topEventName = sharedPreferences.getString("topLabelName",null)
 
-        if(topEventName == null){
+        val topEventName by SharedPreferenceCommission(context!!,"topLabelName","-1")
+
+        if(topEventName.equals("-1")){
             defaultTopLabel()
         }else{
-            val label: Label? = labelDao.getLabelByName(topEventName)
+            val label: Label? = topEventName!!.let { labelDao.getLabelByName(it) }
             if(label!=null){
                 setTopLabel(label)
             }else{

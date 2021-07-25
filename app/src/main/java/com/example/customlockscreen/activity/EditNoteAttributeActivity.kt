@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.customlockscreen.R
+import com.example.customlockscreen.Util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityEditNoteAttributeBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.db.DataBase
@@ -41,16 +42,11 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
     private lateinit var label:Label
 
-    private lateinit var sharedPreferences : SharedPreferences
-    private lateinit var editor : SharedPreferences.Editor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityEditNoteAttributeBinding.inflate(layoutInflater)
-
-        sharedPreferences = this.getSharedPreferences("LABEL_EVENT", Context.MODE_PRIVATE)
-        editor = sharedPreferences.edit()
 
         binding.editNoteAttributeToolbar.setNavigationIcon(R.mipmap.back)
         binding.editNoteAttributeToolbar.setNavigationOnClickListener {
@@ -180,6 +176,8 @@ class EditNoteAttributeActivity : AppCompatActivity() {
                 if(label.text.equals(addLabel.text)){
                     if(addLabel.isTop){
                         changeOnTopLabel(addLabel.text)
+                    }else{
+                        changeOnTopLabel("-1")
                     }
                     labelDao.updateLabel(addLabel)
                     Toast.makeText(this,"修改数据成功", Toast.LENGTH_SHORT).show()
@@ -226,16 +224,16 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
     fun changeOnTopLabel(labelName : String){
 
-        val onTopLabel = sharedPreferences.getString("topLabelName",null)
-        if(onTopLabel!=null){
-            val deleteOnTopLabel = labelDao.getLabelByName(onTopLabel)
-            if(deleteOnTopLabel!=null){
-                deleteOnTopLabel.isTop = false
-                labelDao.updateLabel(deleteOnTopLabel)
-            }
+
+        var topLabelName by SharedPreferenceCommission(this,"topLabelName","-1")
+
+        val deleteOnTopLabel = labelDao.getLabelByName(topLabelName)
+        if(deleteOnTopLabel!=null){
+            deleteOnTopLabel.isTop = false
+            labelDao.updateLabel(deleteOnTopLabel)
         }
 
+        topLabelName = labelName
 
-        editor.putString("topLabelName",labelName).apply()
     }
 }

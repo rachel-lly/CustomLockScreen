@@ -79,7 +79,8 @@
                     android:layout_height="wrap_content"
                     android:text="(未来日期为倒数，过去日期为正数)"
                     android:layout_gravity="bottom"
-                    android:fontFamily="@font/montserrat_medium_italic"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:layout_marginStart="3dp"
                     />
 
             </LinearLayout>

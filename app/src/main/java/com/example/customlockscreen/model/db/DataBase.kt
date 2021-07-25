@@ -14,8 +14,6 @@ abstract class DataBase : RoomDatabase(){
 
     abstract fun sortNoteDao():SortNoteDao
 
-
-
     private object Single{
 
         val dataBase :DataBase = Room.databaseBuilder(

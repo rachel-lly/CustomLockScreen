@@ -11,6 +11,7 @@ import android.widget.PopupMenu
 import androidx.annotation.MenuRes
 import androidx.annotation.RequiresApi
 import com.example.customlockscreen.R
+import com.example.customlockscreen.Util.SharedPreferenceCommission
 import com.example.customlockscreen.activity.BackupDataActivity
 import com.example.customlockscreen.activity.LockScreenSettingActivity
 import com.example.customlockscreen.activity.TimeRemindActivity
@@ -41,10 +42,9 @@ class SettingFragment : Fragment() {
 
         sharedPreferences = context!!.getSharedPreferences("LABEL_EVENT",Context.MODE_PRIVATE)
 
+        val sortStyle by SharedPreferenceCommission(context!!,"sortStyle","按事件时间")
 
-        sortStyle = sharedPreferences.getString("sortStyle","按事件时间")
-
-        EventBus.getDefault().post(sortStyle?.let { MessageEvent(it) })
+        EventBus.getDefault().post(sortStyle.let { MessageEvent(it) })
 
         binding.sortStyle.text = sortStyle
 
@@ -133,8 +133,9 @@ class SettingFragment : Fragment() {
             }
         }
 
-        edit = sharedPreferences.edit()
-        edit.putString("sortStyle",msg).apply()
+        var style by SharedPreferenceCommission(context!!,"sortStyle","按事件时间")
+        style = msg
+
     }
 }
 

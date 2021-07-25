@@ -44,13 +44,11 @@ class DetailActivity : AppCompatActivity() {
 
     private var labelIsLock = false
 
-
     private val format = SimpleDateFormat("yyyy-MM-dd-EE", Locale.CHINESE)
 
     private val labelDao = DataBase.dataBase.labelDao()
 
     private lateinit var label: Label
-
 
 
     @RequiresApi(Build.VERSION_CODES.M)
