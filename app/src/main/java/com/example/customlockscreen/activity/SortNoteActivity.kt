@@ -39,9 +39,6 @@ class SortNoteActivity : AppCompatActivity() {
 
         list = sortNoteDao.getAllSortNotes()
 
-
-
-
         onClickListener =object: SortNoteAdapter.ClickListener{
             override fun onClick(sortNoteName: String) {
                 val intent = Intent()

@@ -43,6 +43,12 @@ class EditNoteAttributeActivity : AppCompatActivity() {
     private lateinit var label:Label
 
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        binding.noteAttributeLayout.chooseSortTv.text = data?.getStringExtra(SORT_NOTE_TEXT)
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -222,8 +228,8 @@ class EditNoteAttributeActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    fun changeOnTopLabel(labelName : String){
 
+    fun changeOnTopLabel(labelName : String){
 
         var topLabelName by SharedPreferenceCommission(this,"topLabelName","-1")
 
@@ -232,8 +238,6 @@ class EditNoteAttributeActivity : AppCompatActivity() {
             deleteOnTopLabel.isTop = false
             labelDao.updateLabel(deleteOnTopLabel)
         }
-
         topLabelName = labelName
-
     }
 }

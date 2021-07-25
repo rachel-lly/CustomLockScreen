@@ -271,7 +271,7 @@ class NoteListFragment : Fragment() {
         if(topEventName.equals("-1")){
             defaultTopLabel()
         }else{
-            val label: Label? = topEventName!!.let { labelDao.getLabelByName(it) }
+            val label: Label? = topEventName.let { labelDao.getLabelByName(it) }
             if(label!=null){
                 setTopLabel(label)
             }else{

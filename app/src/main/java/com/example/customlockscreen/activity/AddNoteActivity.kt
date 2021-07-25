@@ -42,7 +42,7 @@ class AddNoteActivity : AppCompatActivity() {
     private val labelDao = DataBase.dataBase.labelDao()
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        binding.noteAttributeLayout.chooseSortTv.text =data?.getStringExtra(SORT_NOTE_TEXT)
+        binding.noteAttributeLayout.chooseSortTv.text = data?.getStringExtra(SORT_NOTE_TEXT)
         super.onActivityResult(requestCode, resultCode, data)
     }
 
