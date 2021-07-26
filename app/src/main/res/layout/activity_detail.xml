@@ -17,17 +17,72 @@
         android:layout_height="?android:attr/actionBarSize"
         />
 
-    <include
+
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/detail_card"
-        layout="@layout/card_item_grid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:cardCornerRadius="15dp"
         android:layout_centerVertical="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:id="@+id/label_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:textSize="20sp"
+                android:text="星期六还有"
+                android:textColor="#fff"
+                android:fontFamily="@font/montserrat_medium"
+                android:background="@color/note_list_future_dark"
+                android:maxLines="1"
+                android:layout_alignParentTop="true"
+                />
+
+            <TextView
+                android:id="@+id/label_day"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/label_text"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="55sp"
+                android:text="7"
+                android:fontFamily="@font/montserrat_medium"
+                android:background="#fcfcfc"
+                android:maxLines="1"
+                />
+
+            <TextView
+                android:id="@+id/label_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/label_day"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:gravity="center"
+                android:text="2020-04-23 星期五"
+                android:fontFamily="@font/montserrat_medium"
+                android:background="#f6f5f3"
+                android:maxLines="1"
+                />
 
 
-        />
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 
 

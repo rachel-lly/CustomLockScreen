@@ -27,7 +27,7 @@
 
     <style name="horizon_line">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_height">1dp</item>
         <item name="android:background">@color/line_color_gray</item>
     </style>
 
@@ -51,8 +51,10 @@
 
     <style name="header_layout_horizon_line">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1dp</item>
-        <item name="android:background">#dddddd</item>
+        <item name="android:layout_height">0.8dp</item>
+        <item name="android:background">@color/line_color_gray</item>
     </style>
+
+
 
 </resources>

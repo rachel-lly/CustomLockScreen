@@ -74,17 +74,17 @@ class DetailActivity : AppCompatActivity() {
 
             label = labelText!!.let { labelDao.getLabelByName(it)!! }
 
-            binding.detailCard.labelText.text = labelText
-            binding.detailCard.labelDate.text = format.format(label.targetDate)
+            binding.labelText.text = labelText
+            binding.labelDate.text = format.format(label.targetDate)
 
             val day = label.day
 
 
-            binding.detailCard.labelDay.text = Math.abs(day).toString()
+            binding.labelDay.text = Math.abs(day).toString()
             if(day>=0){
-                binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_future_dark, theme))
+                binding.labelText.setBackgroundColor(resources.getColor(R.color.note_list_future_dark, theme))
             }else{
-                binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_history_dark, theme))
+                binding.labelText.setBackgroundColor(resources.getColor(R.color.note_list_history_dark, theme))
             }
 
 

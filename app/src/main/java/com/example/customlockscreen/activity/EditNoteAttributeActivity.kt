@@ -65,6 +65,14 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
         binding.noteAttributeLayout.addNoteDate.text = format.format(label.targetDate)
 
+        val todayTime = MaterialDatePicker.todayInUtcMilliseconds()
+
+        if(label.targetDate<todayTime){
+            binding.noteAttributeLayout.addNoteDate.setTextColor(ContextCompat.getColor(this,R.color.color_passed))
+        }else{
+            binding.noteAttributeLayout.addNoteDate.setTextColor(ContextCompat.getColor(this,R.color.colorPrimaryDark))
+        }
+
         binding.noteAttributeLayout.chooseSortTv.text = label.sortNote
 
         binding.noteAttributeLayout.toTopSwitch.isChecked = label.isTop
@@ -76,7 +84,15 @@ class EditNoteAttributeActivity : AppCompatActivity() {
             endTime = label.endDate
             binding.noteAttributeLayout.endTimeDate.text = format.format(label.endDate)
             binding.noteAttributeLayout.endTimeDateLayout.visibility = View.VISIBLE
+
+            if(label.endDate<todayTime){
+                binding.noteAttributeLayout.endTimeDate.setTextColor(ContextCompat.getColor(this,R.color.color_passed))
+            }else{
+                binding.noteAttributeLayout.endTimeDate.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
+            }
+
             isFirst = false
+
         }else{
             binding.noteAttributeLayout.endTimeDate.visibility = View.GONE
         }

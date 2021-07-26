@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="246"
-            android:textSize="50sp"
+            android:textSize="55sp"
             android:fontFamily="@font/montserrat_medium"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="50dp"

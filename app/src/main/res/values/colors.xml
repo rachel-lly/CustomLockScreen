@@ -12,20 +12,18 @@
     <color name="colorPrimaryDark">#29bb89</color>
     <color name="colorAccent">#29bb89</color>
 
-    <color name="color_passed">#dfb09f</color>
+    <color name="color_passed">#fb8621</color>
 
-    <color name="color_unpressed">#78c931</color>
-    <color name="color_pressed">#7AAB4F</color>
 
     <color name="color_background_gray">#f3f3f1</color>
     
-    <color name="note_list_future_light">#b2e486</color>
-    <color name="note_list_future_dark">#7AAB4F</color>
+    <color name="note_list_future_light">#5ddcb0</color>
+    <color name="note_list_future_dark">#29bb89</color>
 
     <color name="note_list_history_light">#fdb45e</color>
-    <color name="note_list_history_dark">#f67404</color>
+    <color name="note_list_history_dark">#fb8621</color>
 
     <color name="text_bg_gray">#b0b1b6</color>
-    <color name="line_color_gray">#33b4bcc0</color>
+    <color name="line_color_gray">#d9dddf</color>
     
 </resources>

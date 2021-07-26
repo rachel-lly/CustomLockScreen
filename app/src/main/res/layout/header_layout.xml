@@ -96,6 +96,7 @@
                 android:layout_height="15dp"
                 android:text="11"
                 android:textSize="10sp"
+                android:fontFamily="@font/montserrat_medium"
                 android:textColor="#000"
                 android:gravity="center"
                 android:layout_gravity="center_vertical"
