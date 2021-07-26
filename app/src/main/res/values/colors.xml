@@ -25,5 +25,7 @@
 
     <color name="text_bg_gray">#b0b1b6</color>
     <color name="line_color_gray">#d9dddf</color>
+
+    <color name="text_more_gray">#4a4b50</color>
     
 </resources>

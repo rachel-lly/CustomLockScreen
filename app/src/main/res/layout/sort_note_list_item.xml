@@ -67,6 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="新年"
+            android:textColor="@color/text_more_gray"
             android:fontFamily="@font/montserrat_medium"
             android:textSize="15sp"
             android:layout_marginEnd="8dp"

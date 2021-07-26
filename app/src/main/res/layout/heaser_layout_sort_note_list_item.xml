@@ -38,7 +38,7 @@
             android:textSize="12sp"
             android:text="纪念日"
             android:fontFamily="@font/montserrat_medium"
-            android:textColor="#000"
+            android:textColor="@color/text_more_gray"
             android:layout_toEndOf="@id/sort_icon"
             />
 
