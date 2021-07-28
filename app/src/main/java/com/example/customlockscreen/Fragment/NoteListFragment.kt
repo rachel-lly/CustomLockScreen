@@ -44,6 +44,14 @@ class NoteListFragment : Fragment() {
 
     private val format = SimpleDateFormat("yyyy-MM-dd-EE", Locale.CHINESE)
 
+    val targetTimeComparator = kotlin.Comparator { o1:Label, o2:Label ->
+        return@Comparator o1.targetDate.compareTo(o2.targetDate)
+    }
+
+    val addTimeComparator = kotlin.Comparator { o1:Label, o2:Label ->
+        return@Comparator o1.addNoteTime.compareTo(o2.addNoteTime)
+    }
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,27 +63,25 @@ class NoteListFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
+        labelList = ArrayList()
+
 
         val style by SharedPreferenceCommission(context!!,"sortStyle","按事件时间")
 
         dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
 
-        labelList = ArrayList()
+
 
         dataViewModel.getAllLabelsByObserve().observe(this,{
             labelList = it
 
             if(style.equals("按事件时间")){
 
-                Collections.sort(labelList, kotlin.Comparator { o1, o2 ->
-                    return@Comparator o1.targetDate.compareTo(o2.targetDate)
-                })
+                Collections.sort(labelList,targetTimeComparator)
 
             }else{
 
-                Collections.sort(labelList, kotlin.Comparator { o1, o2 ->
-                    return@Comparator o1.addNoteTime.compareTo(o2.addNoteTime)
-                })
+                Collections.sort(labelList, addTimeComparator)
 
             }
 
@@ -85,13 +91,9 @@ class NoteListFragment : Fragment() {
         })
 
         if(style.equals("按事件时间")){
-            Collections.sort(labelList, kotlin.Comparator { o1, o2 ->
-                return@Comparator o1.targetDate.compareTo(o2.targetDate)
-            })
+            Collections.sort(labelList,targetTimeComparator)
         }else{
-            Collections.sort(labelList, kotlin.Comparator { o1, o2 ->
-                return@Comparator o1.addNoteTime.compareTo(o2.addNoteTime)
-            })
+            Collections.sort(labelList, addTimeComparator)
         }
 
         labelLinearAdapter = this.context?.let { LabelLinearAdapter(it, labelList,false) }!!
@@ -205,18 +207,14 @@ class NoteListFragment : Fragment() {
             "按添加时间" ->{
                 isChange = true
                 labelList = labelDao.getAllLabels()
-                Collections.sort(labelList, kotlin.Comparator { o1, o2 ->
-                    return@Comparator o1.addNoteTime.compareTo(o2.addNoteTime)
-                })
+                Collections.sort(labelList, addTimeComparator)
             }
 
             "按事件时间" ->{
                 isChange = true
                 labelList = labelDao.getAllLabels()
 
-                Collections.sort(labelList, kotlin.Comparator { o1, o2 ->
-                    return@Comparator o1.targetDate.compareTo(o2.targetDate)
-                })
+                Collections.sort(labelList,targetTimeComparator)
 
             }
             "全部" ->{
@@ -233,13 +231,9 @@ class NoteListFragment : Fragment() {
             val sortStyle by SharedPreferenceCommission(context!!,"sortStyle","按事件时间")
 
             if(sortStyle.equals("按添加时间")){
-                Collections.sort(labelList, kotlin.Comparator { o1, o2 ->
-                    return@Comparator o1.addNoteTime.compareTo(o2.addNoteTime)
-                })
+                Collections.sort(labelList, addTimeComparator)
             }else{
-                Collections.sort(labelList, kotlin.Comparator { o1, o2 ->
-                    return@Comparator o1.targetDate.compareTo(o2.targetDate)
-                })
+                Collections.sort(labelList,targetTimeComparator)
             }
 
         }
