@@ -40,9 +40,19 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
     private lateinit var label:Label
 
+    private var lastChoose: String? = null
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        binding.noteAttributeLayout.chooseSortTv.text = data?.getStringExtra(SORT_NOTE_TEXT)
+        var sortNote = data?.getStringExtra(SORT_NOTE_TEXT);
+        if(sortNote == null) {
+
+            sortNote = if (lastChoose != null)  lastChoose  else  "生活"
+
+        }else{
+            lastChoose = sortNote
+        }
+        binding.noteAttributeLayout.chooseSortTv.text = sortNote
         super.onActivityResult(requestCode, resultCode, data)
     }
 
