@@ -16,7 +16,7 @@ import com.example.customlockscreen.model.bean.SortNote
 import com.example.customlockscreen.model.db.DataBase
 import java.util.*
 
-class SortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>) :
+class SortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>,var labelList: List<Label>) :
         RecyclerView.Adapter<SortNoteListAdapter.ViewHolder>() {
 
 
@@ -53,15 +53,26 @@ class SortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val sortNote = sortNoteList[position]
-        holder.sortNoteText.text = sortNote.name
+        val sortNoteName = sortNote.name
+        holder.sortNoteText.text = sortNoteName
         val iconId:Int = context.resources.getIdentifier(sortNote.iconName,"mipmap",context.packageName)
         holder.sortNoteIcon.setImageResource(iconId)
 
-        val sameSortNoteLabelList = labelDao.getSameSortNoteLabelList(sortNote.name)
+        val sameSortNoteLabelList = ArrayList<Label>()
+
+        for(label in labelList){
+            if(label.sortNote.equals(sortNoteName)){
+                sameSortNoteLabelList.add(label)
+            }
+        }
 
         holder.sortNoteCount.text = sameSortNoteLabelList.size.toString()
 
         if(sameSortNoteLabelList.size!=0){
+
+            holder.latestNoteName.visibility = View.VISIBLE
+            holder.latestNoteDay.visibility = View.VISIBLE
+
             val minLabel:Label = Collections.min(sameSortNoteLabelList)
             holder.latestNoteName.text = minLabel.text
 
@@ -73,14 +84,16 @@ class SortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>)
 
 
         }else{
-            holder.latestNoteName.visibility = View.GONE
-            holder.latestNoteDay.visibility = View.GONE
+            holder.latestNoteName.visibility = View.INVISIBLE
+            holder.latestNoteDay.visibility = View.INVISIBLE
         }
 
 
     }
 
     override fun getItemCount() = sortNoteList.size
+
+
 
 
 }

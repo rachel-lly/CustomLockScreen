@@ -60,7 +60,7 @@ class NoteListFragment : Fragment() {
 
         dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
 
-
+        labelList = ArrayList()
 
         dataViewModel.getAllLabelsByObserve().observe(this,{
             labelList = it
@@ -83,10 +83,6 @@ class NoteListFragment : Fragment() {
             refreshList()
 
         })
-
-        labelList = ArrayList()
-
-
 
         if(style.equals("按事件时间")){
             Collections.sort(labelList, kotlin.Comparator { o1, o2 ->
