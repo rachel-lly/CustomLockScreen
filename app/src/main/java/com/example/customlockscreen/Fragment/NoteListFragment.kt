@@ -75,14 +75,16 @@ class NoteListFragment : Fragment() {
         dataViewModel.getAllLabelsByObserve().observe(this,{
             labelList = it
 
-            if(style.equals("按事件时间")){
-
-                Collections.sort(labelList,targetTimeComparator)
-
+            if(labelList.size == 0){
+                binding.listNullLogo.visibility = View.VISIBLE
             }else{
+                binding.listNullLogo.visibility = View.GONE
+            }
 
+            if(style.equals("按事件时间")){
+                Collections.sort(labelList,targetTimeComparator)
+            }else{
                 Collections.sort(labelList, addTimeComparator)
-
             }
 
             refreshTopLabel()
@@ -300,10 +302,21 @@ class NoteListFragment : Fragment() {
 
     fun refreshRoomLabelListDay(){
         val allLabel : List<Label> = labelDao.getAllLabels()
+        val nowTime: Long = System.currentTimeMillis()
         for(i in 0..allLabel.size - 1 ){
             val refreshLabel = allLabel.get(i)
-            refreshLabel.day =  (refreshLabel.targetDate-System.currentTimeMillis())/(1000*3600*24)
-            labelDao.updateLabel(refreshLabel)
+
+            if(refreshLabel.endDate<=nowTime){
+
+                labelDao.deleteLabel(refreshLabel)
+
+            }else{
+
+                refreshLabel.day =  (refreshLabel.targetDate-nowTime)/(1000*3600*24)
+                labelDao.updateLabel(refreshLabel)
+
+            }
+
         }
     }
 }

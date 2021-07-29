@@ -21,7 +21,7 @@ data class Label(
 
         @ColumnInfo var isEnd = false
 
-        @ColumnInfo var endDate:Long = 1000000L
+        @ColumnInfo var endDate:Long = Long.MAX_VALUE
 
     constructor(parcel: Parcel) : this(
             parcel.readString()!!,

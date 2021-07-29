@@ -28,10 +28,6 @@ class SettingFragment : Fragment() {
 
     private var sortStyle :String ?= null
 
-    private lateinit var sharedPreferences : SharedPreferences
-
-    private lateinit var edit : SharedPreferences.Editor
-
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,8 +35,6 @@ class SettingFragment : Fragment() {
 
         binding = FragmentSettingBinding.inflate(layoutInflater)
 
-
-        sharedPreferences = context!!.getSharedPreferences("LABEL_EVENT",Context.MODE_PRIVATE)
 
         val sortStyle by SharedPreferenceCommission(context!!,"sortStyle","按事件时间")
 
@@ -68,12 +62,7 @@ class SettingFragment : Fragment() {
             startActivity(intent)
         }
 
-
-
     }
-
-
-
 
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -103,9 +92,7 @@ class SettingFragment : Fragment() {
                 return true
             }
 
-
         })
-
 
         popup.show()
     }
@@ -130,11 +117,10 @@ class SettingFragment : Fragment() {
 
             "按添加时间", "按事件时间" ->{
                 binding.sortStyle.text = msg
+                var style by SharedPreferenceCommission(context!!,"sortStyle","按事件时间")
+                style = msg
             }
         }
-
-        var style by SharedPreferenceCommission(context!!,"sortStyle","按事件时间")
-        style = msg
 
     }
 }
