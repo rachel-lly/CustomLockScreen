@@ -1,13 +1,9 @@
 package com.example.customlockscreen.activity
 
-import android.graphics.Color
-import android.icu.number.IntegerWidth
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import com.example.customlockscreen.R
 import com.example.customlockscreen.Util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityTimeRemindBinding
@@ -34,19 +30,17 @@ class TimeRemindActivity : AppCompatActivity() {
 
         binding = ActivityTimeRemindBinding.inflate(layoutInflater)
 
-        setSupportActionBar(binding.detailToolbar)
-
         binding.detailToolbar.setNavigationIcon(R.mipmap.back)
         binding.detailToolbar.setNavigationOnClickListener {
             finish()
         }
 
-        val isNowTimeRemind by SharedPreferenceCommission(this,"isNowTimeRemind",false)
+        var isNowTimeRemind by SharedPreferenceCommission(this,"isNowTimeRemind",false)
 
-        val isFutureTimeRemind by SharedPreferenceCommission(this,"isFutureTimeRemind",false)
+        var isFutureTimeRemind by SharedPreferenceCommission(this,"isFutureTimeRemind",false)
 
-        val nowRemind by SharedPreferenceCommission(this,"nowRemindTime",540)
-        val futureRemind by SharedPreferenceCommission(this,"futureRemindTime",540)
+        var nowRemind by SharedPreferenceCommission(this,"nowRemindTime",540)
+        var futureRemind by SharedPreferenceCommission(this,"futureRemindTime",540)
 
         binding.todayEventTimeSwitch.isChecked = isNowTimeRemind
         binding.futureEventTimeSwitch.isChecked = isFutureTimeRemind
@@ -102,41 +96,24 @@ class TimeRemindActivity : AppCompatActivity() {
             picker.show(this.supportFragmentManager,FUTURE_EVENT_TIME_TAG)
         }
 
+        binding.timeRemindSure.setOnClickListener {
+
+            isNowTimeRemind = binding.todayEventTimeSwitch.isChecked
+            isFutureTimeRemind = binding.futureEventTimeSwitch.isChecked
+
+
+            if(isNowTimeRemind){
+                nowRemind = nowRemindTime
+            }
+
+            if (isFutureTimeRemind){
+                futureRemind = futureRemindTime
+            }
+
+            finish()
+        }
+
         setContentView(binding.root)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        super.onCreateOptionsMenu(menu)
-        menuInflater.inflate(R.menu.activity_time_remind_menu,menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        super.onOptionsItemSelected(item)
-        when(item.itemId){
-            R.id.sure ->{
-
-                var isNowTimeRemind by SharedPreferenceCommission(this,"isNowTimeRemind",false)
-
-                var isFutureTimeRemind by SharedPreferenceCommission(this,"isFutureTimeRemind",false)
-
-                isNowTimeRemind = binding.todayEventTimeSwitch.isChecked
-                isFutureTimeRemind = binding.futureEventTimeSwitch.isChecked
-
-
-                if(isNowTimeRemind){
-                    var nowRemind by SharedPreferenceCommission(this,"nowRemindTime",540)
-                    nowRemind = nowRemindTime
-                }
-
-                if (isFutureTimeRemind){
-                    var futureRemind by SharedPreferenceCommission(this,"futureRemindTime",540)
-                    futureRemind = futureRemindTime
-                }
-
-                finish()
-            }
-        }
-        return true
-    }
 }
