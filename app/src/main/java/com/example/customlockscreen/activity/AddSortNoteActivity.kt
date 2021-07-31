@@ -2,8 +2,6 @@ package com.example.customlockscreen.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.R
@@ -31,8 +29,6 @@ class AddSortNoteActivity : AppCompatActivity() {
 
 
         binding = ActivityAddSortNoteBinding.inflate(layoutInflater)
-
-        setSupportActionBar(binding.addSortNoteToolbar)
 
         binding.addSortNoteToolbar.setNavigationIcon(R.mipmap.back)
         binding.addSortNoteToolbar.setNavigationOnClickListener {
@@ -63,26 +59,6 @@ class AddSortNoteActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        super.onCreateOptionsMenu(menu)
-        menuInflater.inflate(R.menu.activity_save_data_menu,menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        super.onOptionsItemSelected(item)
-
-        when(item.itemId){
-
-            R.id.save_data ->{
-                saveSortNote()
-            }
-
-        }
-
-        return true
-
-    }
 
     private fun saveSortNote() {
 

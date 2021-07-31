@@ -37,8 +37,6 @@ class EditSortNoteActivity : AppCompatActivity() {
 
         binding = ActivityEditSortNoteBinding.inflate(layoutInflater)
 
-        setSupportActionBar(binding.editSortNoteToolbar)
-
         binding.editSortNoteToolbar.setNavigationIcon(R.mipmap.back)
         binding.editSortNoteToolbar.setNavigationOnClickListener {
             finish()
@@ -95,24 +93,6 @@ class EditSortNoteActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        super.onCreateOptionsMenu(menu)
-        menuInflater.inflate(R.menu.activity_save_data_menu,menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        super.onOptionsItemSelected(item)
-
-        when(item.itemId){
-            R.id.save_data ->{
-                updateSortNote()
-            }
-        }
-
-        return true
-    }
-
     private fun updateSortNote() {
         val iconList = adapter.iconList
 
@@ -154,11 +134,9 @@ class EditSortNoteActivity : AppCompatActivity() {
                         }
                     }
 
-
                 }
 
             }
-
 
         }else{
             Toast.makeText(this,"请选择一个图标",Toast.LENGTH_SHORT).show()
