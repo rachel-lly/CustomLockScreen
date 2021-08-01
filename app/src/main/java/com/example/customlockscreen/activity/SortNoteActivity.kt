@@ -62,8 +62,6 @@ class SortNoteActivity : AppCompatActivity() {
         })
 
 
-
-
         binding.addNoteSure.setOnClickListener {
             val intent = Intent(this,AddSortNoteActivity::class.java)
             startActivity(intent)

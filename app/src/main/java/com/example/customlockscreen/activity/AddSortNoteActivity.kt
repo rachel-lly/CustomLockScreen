@@ -12,7 +12,6 @@ import com.example.customlockscreen.model.db.DataBase
 
 class AddSortNoteActivity : AppCompatActivity() {
 
-
     private lateinit var binding:ActivityAddSortNoteBinding
 
     private lateinit var clickListener: IconListAdapter.ClickListener
@@ -75,16 +74,7 @@ class AddSortNoteActivity : AppCompatActivity() {
 
                 val nameList = sortNoteDao.getAllSortNotesName()
 
-                var flag = false
-
-                for(name in nameList){
-                    if(name.equals(sortNoteName)){
-                        flag = true
-                        break
-                    }
-                }
-
-                if(flag){
+                if(nameList.contains(sortNoteName)){
                     Toast.makeText(this,"该分类本已存在",Toast.LENGTH_SHORT).show()
                 }else{
                     sortNoteDao.insertSortNote(SortNote(sortNoteName,iconName))

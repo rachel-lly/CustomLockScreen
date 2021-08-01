@@ -30,7 +30,6 @@ class NoteSortFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         setHasOptionsMenu(true)
 
         binding = FragmentNoteSortBinding.inflate(LayoutInflater.from(this.context))
@@ -60,7 +59,6 @@ class NoteSortFragment : Fragment() {
             adapter.notifyDataSetChanged()
             binding.sortNoteListSwipeRefreshLayout.isRefreshing = false
         }
-
 
     }
 

@@ -208,14 +208,11 @@ class NoteListFragment : Fragment() {
 
             "按添加时间" ->{
                 isChange = true
-                labelList = labelDao.getAllLabels()
                 Collections.sort(labelList, addTimeComparator)
             }
 
             "按事件时间" ->{
                 isChange = true
-                labelList = labelDao.getAllLabels()
-
                 Collections.sort(labelList,targetTimeComparator)
 
             }

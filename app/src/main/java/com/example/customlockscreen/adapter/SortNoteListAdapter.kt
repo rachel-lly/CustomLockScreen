@@ -90,7 +90,4 @@ class SortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>,
 
     override fun getItemCount() = sortNoteList.size
 
-
-
-
 }

@@ -177,16 +177,7 @@ class AddNoteActivity : AppCompatActivity() {
 
                 val nameList = labelDao.getAllLabelsName()
 
-                var flag = false
-
-                for(name in nameList){
-                    if(name.equals(noteText)){
-                        flag = true
-                        break
-                    }
-                }
-
-                if(flag){
+                if(nameList.contains(noteText)){
                     Toast.makeText(this,"该事件已存在",Toast.LENGTH_SHORT).show()
                 }else{
                     labelDao.insertLabel(addLabel)
@@ -194,16 +185,9 @@ class AddNoteActivity : AppCompatActivity() {
                     finish()
                 }
 
-
             }
 
-
-
         }
-
-
-
-
 
         setContentView(binding.root)
     }

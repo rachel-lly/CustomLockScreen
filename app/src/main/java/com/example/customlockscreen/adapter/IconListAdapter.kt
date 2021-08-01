@@ -52,19 +52,15 @@ class IconListAdapter(val context: Context,clickListener: ClickListener) :
                 holderList.get(lastposition)?.checkbox?.visibility = View.GONE
             }
 
-
             mClickListener.onClick(position)
 
             holder.checkbox.isChecked = true
             holder.checkbox.visibility = View.VISIBLE
             lastposition = position
 
-
             notifyDataSetChanged()
 
         }
-
-
 
         return holder
     }

@@ -13,8 +13,7 @@ class TimeRemindActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityTimeRemindBinding
 
-    private var hour = "09"
-    private var minute = "00"
+    private lateinit var minute: String
 
     private var nowRemindTime = 0
     private var futureRemindTime = 0
@@ -62,22 +61,16 @@ class TimeRemindActivity : AppCompatActivity() {
 
         picker.addOnPositiveButtonClickListener {
 
-            hour = picker.hour.toString()
-
-            if(picker.minute<10){
-                minute = "0${picker.minute}"
-            }else{
-                minute = picker.minute.toString()
-            }
+            minute = if(picker.minute<10) "0${picker.minute}" else picker.minute.toString()
 
             when(picker.tag){
                 TODAY_EVENT_TIME_TAG ->{
-                    binding.todayEventTimeDate.text = "$hour:$minute"
+                    binding.todayEventTimeDate.text = "${picker.hour}:$minute"
                     nowRemindTime = picker.hour*60 + picker.minute
                 }
 
                 FUTURE_EVENT_TIME_TAG ->{
-                    binding.futureEventTimeDate.text = "$hour:$minute"
+                    binding.futureEventTimeDate.text = "${picker.hour}:$minute"
                     futureRemindTime = picker.hour*60 + picker.minute
                 }
             }

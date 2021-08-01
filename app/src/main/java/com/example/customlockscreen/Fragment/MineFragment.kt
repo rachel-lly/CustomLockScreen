@@ -33,14 +33,12 @@ class MineFragment : Fragment() {
     private val today = format.format(todayTime)
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = FragmentMineBinding.inflate(layoutInflater)
 
         binding.mineTime.text = today
-
 
         binding.eventNum.text = labelDao.getAllLabelsName().size.toString()
         binding.sortNoteNum.text = sortNoteDao.getAllSortNotesName().size.toString()
@@ -55,11 +53,9 @@ class MineFragment : Fragment() {
             binding.eventNum.text = it.size.toString()
         })
 
-
         val firstInstallTime = context?.let { MyApplication._context!!.packageManager.getPackageInfo(it.packageName,0).firstInstallTime }
 
         val day = (todayTime- firstInstallTime!!)/(1000*3600*24)
-
 
         binding.useDayNum.text = day.toString()
 
@@ -69,7 +65,5 @@ class MineFragment : Fragment() {
                               savedInstanceState: Bundle?): View {
         return binding.root
     }
-
-
 
 }

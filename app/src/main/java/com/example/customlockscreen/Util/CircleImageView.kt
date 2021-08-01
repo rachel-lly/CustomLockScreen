@@ -19,7 +19,6 @@ class CircleImageView(context: Context, attributeSet: AttributeSet):androidx.app
     private var mMatrix:Matrix = Matrix()
 
 
-
     @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas?) {
         val rawBitmap:Bitmap? = getBitmap(drawable)

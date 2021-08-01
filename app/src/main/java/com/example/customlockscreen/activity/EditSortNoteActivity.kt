@@ -3,8 +3,6 @@ package com.example.customlockscreen.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.SpannableStringBuilder
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.R
@@ -115,16 +113,7 @@ class EditSortNoteActivity : AppCompatActivity() {
                     }else{
                         val nameList = sortNoteDao.getAllSortNotesName()
 
-                        var flag = false
-
-                        for(name in nameList){
-                            if(name.equals(sortNoteName)){
-                                flag = true
-                                break
-                            }
-                        }
-
-                        if(flag){
+                        if(nameList.contains(sortNoteName)){
                             Toast.makeText(this,"该分类本已存在",Toast.LENGTH_SHORT).show()
                         }else{
                             sortNoteDao.deleteSortNote(sortNote!!)

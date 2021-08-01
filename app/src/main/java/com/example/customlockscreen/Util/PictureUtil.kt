@@ -18,23 +18,18 @@ class PictureUtil{
         fun getBitmapCacheDir(context: Context): String{
             return "${context.getExternalFilesDir(null)?.absolutePath}/BitmapCache"
         }
-
-
     }
 
     private lateinit var bitmapName:String
-
     private lateinit var bitmapPath:String
 
 
     fun shotShare(context: Context, bitmap: Bitmap){
 
         bitmapName = "${System.currentTimeMillis()}"
-
         bitmapPath = "${getBitmapCacheDir(context)}/$bitmapName.png"
 
         SaveBitmap(context, bitmap)
-
         ShareImage(context, bitmapPath)
 
     }
@@ -47,8 +42,6 @@ class PictureUtil{
     }
 
 
-
-
     private fun ShareImage(context: Context, imagePath: String) {
 
         val file = File(imagePath)
@@ -59,7 +52,6 @@ class PictureUtil{
             Uri.fromFile(file)
         }
 
-
         var intent = Intent(Intent.ACTION_SEND)
         intent.type = "image/*"
         intent.putExtra(Intent.EXTRA_STREAM, uri) // 分享的内容
@@ -67,7 +59,6 @@ class PictureUtil{
         intent = Intent.createChooser(intent, "分享到：")
 
         context.startActivity(intent)
-
 
     }
 
