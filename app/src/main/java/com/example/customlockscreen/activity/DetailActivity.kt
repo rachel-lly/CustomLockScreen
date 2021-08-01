@@ -17,6 +17,8 @@ import android.view.*
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginTop
+import androidx.core.view.updatePadding
 import com.example.customlockscreen.R
 import com.example.customlockscreen.Util.PictureUtil
 import com.example.customlockscreen.databinding.ActivityDetailBinding
@@ -70,24 +72,21 @@ class DetailActivity : AppCompatActivity() {
             val labelText = intent!!.getStringExtra(LABEL_TEXT)
             labelIsLock = intent!!.getBooleanExtra(LABEL_IS_LOCK,false)
 
-
+            binding.detailCard.labelDay.updatePadding(0,30,0,30)
 
             label = labelText!!.let { labelDao.getLabelByName(it)!! }
 
-            binding.labelText.text = labelText
-            binding.labelDate.text = format.format(label.targetDate)
+            binding.detailCard.labelText.text = labelText
+            binding.detailCard.labelDate.text = format.format(label.targetDate)
 
             val day = label.day
 
-
-            binding.labelDay.text = Math.abs(day).toString()
+            binding.detailCard.labelDay.text = Math.abs(day).toString()
             if(day>=0){
-                binding.labelText.setBackgroundColor(resources.getColor(R.color.note_list_future_dark, theme))
+                binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_future_dark, theme))
             }else{
-                binding.labelText.setBackgroundColor(resources.getColor(R.color.note_list_history_dark, theme))
+                binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_history_dark, theme))
             }
-
-
 
             setContentView(binding.root)
     }
@@ -145,8 +144,6 @@ class DetailActivity : AppCompatActivity() {
                                 cutScreenShotToLock(bitmap)
                             }
 
-
-
                         }
                         bitmap.recycle()
                     }
@@ -162,9 +159,6 @@ class DetailActivity : AppCompatActivity() {
                 }
             }, 100)
         }
-
-
-
 
     }
 
@@ -236,11 +230,9 @@ class DetailActivity : AppCompatActivity() {
                     }
                 }
 
-
             }
 
             R.id.lock_screen -> {
-
 
                 PermissionX.request(this,
                         Manifest.permission.CAMERA,
@@ -268,7 +260,6 @@ class DetailActivity : AppCompatActivity() {
 
         val screenShot = getScreenShot(bitmap)
 
-
         PictureUtil().shotShare(this, screenShot)
 
     }
@@ -277,7 +268,6 @@ class DetailActivity : AppCompatActivity() {
 
         val screenShot = getScreenShot(bitmap)
         PictureUtil().savePictureToPhotoAlbum(this,screenShot)
-
 
         MaterialAlertDialogBuilder(this)
                 .setTitle("锁屏设置")
@@ -292,7 +282,6 @@ class DetailActivity : AppCompatActivity() {
 
     private fun getScreenShot(bitmap: Bitmap):Bitmap{
         val screenView = window.decorView
-
 
         //获取状态栏高度
         val frame = Rect()
@@ -314,8 +303,6 @@ class DetailActivity : AppCompatActivity() {
 
         return screenShot;
     }
-
-
 
 }
 
