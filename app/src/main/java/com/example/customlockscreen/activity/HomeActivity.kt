@@ -97,8 +97,6 @@ class HomeActivity : AppCompatActivity() {
         }
 
 
-
-
         binding.homeToolbar.setNavigationOnClickListener {
 
             val list = sortNoteDao.getAllSortNotes()
