@@ -40,8 +40,6 @@ class EditSortNoteActivity : AppCompatActivity() {
             finish()
         }
 
-
-
         sortNote = intent?.getParcelableExtra(SORT_NOTE)
 
 
@@ -63,7 +61,6 @@ class EditSortNoteActivity : AppCompatActivity() {
         val layoutManager = GridLayoutManager(this,6)
 
 
-
         binding.editSortNoteCard.recycleView.adapter = adapter
         binding.editSortNoteCard.recycleView.layoutManager = layoutManager
 
@@ -83,7 +80,6 @@ class EditSortNoteActivity : AppCompatActivity() {
                     Toast.makeText(this,"删除分类本成功",Toast.LENGTH_SHORT).show()
                     finish()
                 }
-
 
             }
         }

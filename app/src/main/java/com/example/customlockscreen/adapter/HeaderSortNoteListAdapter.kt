@@ -27,8 +27,6 @@ class HeaderSortNoteListAdapter(val context: Context, var sortNoteList:List<Sort
     inner class ViewHolder(binding: HeaserLayoutSortNoteListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val sortNoteText : TextView = binding.sortTx
         val sortNoteIcon : ImageView = binding.sortIcon
-
-
         val sortNoteCount : TextView = binding.sortCount
     }
 

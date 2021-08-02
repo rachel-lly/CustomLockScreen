@@ -39,7 +39,6 @@ class AddSortNoteActivity : AppCompatActivity() {
             override fun onClick(position: Int) {
                 mPosition = position
             }
-
         }
 
 

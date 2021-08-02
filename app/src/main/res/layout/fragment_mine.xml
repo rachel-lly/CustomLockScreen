@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragment.MineFragment"
+    tools:context=".fragment.MineFragment"
     android:background="#fefefe"
     android:paddingStart="30dp"
     android:paddingEnd="30dp"

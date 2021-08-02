@@ -107,8 +107,6 @@ class EditNoteAttributeActivity : AppCompatActivity() {
             binding.noteAttributeLayout.endTimeDate.visibility = View.GONE
         }
 
-
-
         val datePicker = MaterialDatePicker.Builder.datePicker()
                 .setTitleText("Select date")
                 .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
@@ -196,8 +194,6 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
                 addLabel.isTop = binding.noteAttributeLayout.toTopSwitch.isChecked
 
-
-
                 val sortNoteName = binding.noteAttributeLayout.chooseSortTv.text.toString()
                 if(!sortNoteName.isEmpty()){
                     addLabel.sortNote = sortNoteName
@@ -226,11 +222,8 @@ class EditNoteAttributeActivity : AppCompatActivity() {
                         Toast.makeText(this,"修改数据成功", Toast.LENGTH_SHORT).show()
                         finish()
                     }
-
                 }
-
             }
-
         }
 
         binding.deleteNoteSure.setOnClickListener {

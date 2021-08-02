@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:padding="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragment.NoteListFragment">
+    tools:context=".fragment.NoteListFragment">
 
 
     <RelativeLayout

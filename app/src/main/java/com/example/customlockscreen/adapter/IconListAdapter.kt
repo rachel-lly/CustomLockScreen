@@ -30,8 +30,6 @@ class IconListAdapter(val context: Context,clickListener: ClickListener) :
             R.mipmap.computer, R.mipmap.cake, R.mipmap.diamond, R.mipmap.work_color, R.mipmap.life_color, R.mipmap.anniverity_color )
 
 
-
-
     inner class ViewHolder(binding: IconListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val icon = binding.icon
         val checkbox = binding.checkbox
@@ -64,8 +62,6 @@ class IconListAdapter(val context: Context,clickListener: ClickListener) :
 
         return holder
     }
-
-
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

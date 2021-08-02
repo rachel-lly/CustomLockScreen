@@ -1,4 +1,4 @@
-package com.example.customlockscreen.Fragment
+package com.example.customlockscreen.fragment
 
 import android.content.Intent
 import android.os.Build
@@ -70,8 +70,6 @@ class NoteListFragment : Fragment() {
 
         dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
 
-
-
         dataViewModel.getAllLabelsByObserve().observe(this,{
             labelList = it
 
@@ -116,14 +114,12 @@ class NoteListFragment : Fragment() {
 
         refreshTopLabel()
 
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.note_list_fragment_toolbar,menu)
     }
-
 
 
     @RequiresApi(Build.VERSION_CODES.M)

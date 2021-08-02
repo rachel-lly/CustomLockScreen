@@ -10,10 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.example.customlockscreen.Fragment.MineFragment
-import com.example.customlockscreen.Fragment.NoteListFragment
-import com.example.customlockscreen.Fragment.NoteSortFragment
-import com.example.customlockscreen.Fragment.SettingFragment
+import com.example.customlockscreen.fragment.MineFragment
+import com.example.customlockscreen.fragment.NoteListFragment
+import com.example.customlockscreen.fragment.NoteSortFragment
+import com.example.customlockscreen.fragment.SettingFragment
 import com.example.customlockscreen.R
 import com.example.customlockscreen.adapter.HeaderSortNoteListAdapter
 import com.example.customlockscreen.adapter.PagerAdapter
@@ -153,7 +153,7 @@ class HomeActivity : AppCompatActivity() {
         binding.homeNavigationView.inflateMenu(R.menu.home_navigation_view)
         binding.homeNavigationView.setOnNavigationItemSelectedListener {
 
-            for(i in 0..fragmentList.size-1){
+            for(i in 0 until fragmentList.size){
                 if(it.itemId == itemIdArray[i]){
                     binding.homeViewPager.currentItem = i
                 }

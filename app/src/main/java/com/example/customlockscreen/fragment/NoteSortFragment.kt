@@ -1,4 +1,4 @@
-package com.example.customlockscreen.Fragment
+package com.example.customlockscreen.fragment
 
 import android.content.Intent
 import android.os.Bundle

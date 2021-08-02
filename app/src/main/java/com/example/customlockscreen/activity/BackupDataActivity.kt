@@ -35,19 +35,18 @@ class BackupDataActivity : AppCompatActivity() {
 
     private fun showDeleteDialog() {
 
-            val bitmapDir = PictureUtil.getBitmapCacheDir(this)
+        val bitmapDir = PictureUtil.getBitmapCacheDir(this)
 
-            MaterialAlertDialogBuilder(this)
-                    .setTitle("确定清空缓存文件吗？")
-                    .setMessage("缓存图片储存文件路径为:$bitmapDir")
-                    .setPositiveButton(resources.getString(R.string.accept)){ dialog,which ->
+        MaterialAlertDialogBuilder(this)
+                .setTitle("确定清空缓存文件吗？")
+                .setMessage("缓存图片储存文件路径为:$bitmapDir")
+                .setPositiveButton(resources.getString(R.string.accept)){ dialog,which ->
                     deleteAllFile(bitmapDir)
-                    }
-                    .setNegativeButton(resources.getString(R.string.decline)){dialog,which ->
+                }
+                .setNegativeButton(resources.getString(R.string.decline)){dialog,which ->
 
-                    }
-                    .show()
-
+                }
+                .show()
 
     }
 
@@ -83,8 +82,6 @@ class BackupDataActivity : AppCompatActivity() {
             }
         }
 
-
     }
-
 
 }
