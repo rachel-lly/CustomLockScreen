@@ -1,5 +1,8 @@
 package com.example.customlockscreen.fragment
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -18,6 +21,7 @@ import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.bean.MessageEvent
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.model.db.DataViewModel
+import com.example.customlockscreen.receiver.AlertReceiver
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -44,11 +48,11 @@ class NoteListFragment : Fragment() {
 
     private val format = SimpleDateFormat("yyyy-MM-dd-EE", Locale.CHINESE)
 
-    val targetTimeComparator = kotlin.Comparator { o1:Label, o2:Label ->
+    val targetTimeComparator = kotlin.Comparator { o1: Label, o2: Label ->
         return@Comparator o1.targetDate.compareTo(o2.targetDate)
     }
 
-    val addTimeComparator = kotlin.Comparator { o1:Label, o2:Label ->
+    val addTimeComparator = kotlin.Comparator { o1: Label, o2: Label ->
         return@Comparator o1.addNoteTime.compareTo(o2.addNoteTime)
     }
 
@@ -59,6 +63,7 @@ class NoteListFragment : Fragment() {
         
         binding = FragmentNoteListBinding.inflate(LayoutInflater.from(this.context))
 
+
         refreshRoomLabelListDay()
 
         setHasOptionsMenu(true)
@@ -66,22 +71,22 @@ class NoteListFragment : Fragment() {
         labelList = ArrayList()
 
 
-        val style by SharedPreferenceCommission(context!!,"sortStyle","按事件时间")
+        val style by SharedPreferenceCommission(context!!, "sortStyle", "按事件时间")
 
         dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
 
-        dataViewModel.getAllLabelsByObserve().observe(this,{
+        dataViewModel.getAllLabelsByObserve().observe(this, {
             labelList = it
 
-            if(labelList.size == 0){
+            if (labelList.size == 0) {
                 binding.listNullLogo.visibility = View.VISIBLE
-            }else{
+            } else {
                 binding.listNullLogo.visibility = View.GONE
             }
 
-            if(style.equals("按事件时间")){
-                Collections.sort(labelList,targetTimeComparator)
-            }else{
+            if (style.equals("按事件时间")) {
+                Collections.sort(labelList, targetTimeComparator)
+            } else {
                 Collections.sort(labelList, addTimeComparator)
             }
 
@@ -91,12 +96,12 @@ class NoteListFragment : Fragment() {
         })
 
         if(style.equals("按事件时间")){
-            Collections.sort(labelList,targetTimeComparator)
+            Collections.sort(labelList, targetTimeComparator)
         }else{
             Collections.sort(labelList, addTimeComparator)
         }
 
-        labelLinearAdapter = this.context?.let { LabelLinearAdapter(it, labelList,false) }!!
+        labelLinearAdapter = this.context?.let { LabelLinearAdapter(it, labelList, false) }!!
         labelGridAdapter = this.context?.let { LabelGridAdapter(it, labelList) }!!
 
 
@@ -118,7 +123,7 @@ class NoteListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.note_list_fragment_toolbar,menu)
+        inflater.inflate(R.menu.note_list_fragment_toolbar, menu)
     }
 
 
@@ -129,8 +134,9 @@ class NoteListFragment : Fragment() {
         when(item.itemId){
             R.id.grid_note -> {
 
-                if(isFirst){
-
+                if (isFirst) {
+                    // TODO: 2021/8/4 点击 grid 发送通知 
+                    setRemind(true)
 
                     binding.homeRecyclerview.layoutManager = GridLayoutManager(this.context, 2)
 
@@ -141,7 +147,7 @@ class NoteListFragment : Fragment() {
                     binding.headerLayout.visibility = View.GONE
                     isFirst = false
 
-                }else{
+                } else {
 
                     binding.homeRecyclerview.layoutManager = GridLayoutManager(this.context, 1)
 
@@ -155,14 +161,14 @@ class NoteListFragment : Fragment() {
 
             }
 
-            R.id.add_note ->{
+            R.id.add_note -> {
                 val intent = Intent(context, AddNoteActivity::class.java)
                 context?.startActivity(intent)
             }
 
-            R.id.sort_by_event_time_home , R.id.sort_by_add_time_home->{
+            R.id.sort_by_event_time_home, R.id.sort_by_add_time_home -> {
 
-                val sortStyle :String = item.title.toString()
+                val sortStyle: String = item.title.toString()
 
                 EventBus.getDefault().post(sortStyle.let { MessageEvent(it) })
 
@@ -178,8 +184,8 @@ class NoteListFragment : Fragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
 
         EventBus.getDefault().register(this)
@@ -194,7 +200,7 @@ class NoteListFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.M)
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onMessageEvent(messageEvent:MessageEvent){
+    fun onMessageEvent(messageEvent: MessageEvent){
 
         val msg = messageEvent.msg
 
@@ -202,17 +208,17 @@ class NoteListFragment : Fragment() {
 
         when(msg){
 
-            "按添加时间" ->{
+            "按添加时间" -> {
                 isChange = true
                 Collections.sort(labelList, addTimeComparator)
             }
 
-            "按事件时间" ->{
+            "按事件时间" -> {
                 isChange = true
-                Collections.sort(labelList,targetTimeComparator)
+                Collections.sort(labelList, targetTimeComparator)
 
             }
-            "全部" ->{
+            "全部" -> {
                 labelList = labelDao.getAllLabels()
             }
 
@@ -223,12 +229,12 @@ class NoteListFragment : Fragment() {
         }
 
         if(!isChange){
-            val sortStyle by SharedPreferenceCommission(context!!,"sortStyle","按事件时间")
+            val sortStyle by SharedPreferenceCommission(context!!, "sortStyle", "按事件时间")
 
             if(sortStyle.equals("按添加时间")){
                 Collections.sort(labelList, addTimeComparator)
             }else{
-                Collections.sort(labelList,targetTimeComparator)
+                Collections.sort(labelList, targetTimeComparator)
             }
 
         }
@@ -249,7 +255,7 @@ class NoteListFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     fun refreshTopLabel(){
 
-        val topEventName by SharedPreferenceCommission(context!!,"topLabelName","-1")
+        val topEventName by SharedPreferenceCommission(context!!, "topLabelName", "-1")
 
         if(topEventName.equals("-1")){
             defaultTopLabel()
@@ -312,6 +318,37 @@ class NoteListFragment : Fragment() {
 
         }
     }
+
+    fun setRemind(b: Boolean){
+
+//        val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"))
+//        calendar.set(year, month, day, hour, minute)
+
+        val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"))
+        calendar.timeInMillis = System.currentTimeMillis()
+        calendar.add(Calendar.SECOND, 5) //5s后
+
+        val intent = Intent(context, AlertReceiver::class.java)
+        intent.setAction("NOTIFICATION")
+
+        val pi : PendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+        val manager : AlarmManager = context!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        manager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), pi)
+
+//        Intent intent = new Intent(this, AlarmReceiver.class);
+//        intent.setAction("NOTIFICATION");
+//        PendingIntent pi = PendingIntent.getBroadcast(this, 0, intent, 0);
+//        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//        int type = AlarmManager.RTC_WAKEUP;
+//        //new Date()：表示当前日期，可以根据项目需求替换成所求日期
+//        //getTime()：日期的该方法同样可以表示从1970年1月1日0点至今所经历的毫秒数
+//        long triggerAtMillis = new Date().getTime();
+//        long intervalMillis = 1000 * 60;
+//        manager.setInexactRepeating(type, triggerAtMillis, intervalMillis, pi);
+
+    }
+
 }
 
 
