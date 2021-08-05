@@ -33,9 +33,9 @@
             android:layout_height="wrap_content"
             android:text="ME"
             android:fontFamily="@font/montserrat_bold"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:layout_below="@id/mine_time"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             />
 
         <com.example.customlockscreen.Util.CircleImageView
@@ -73,6 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="事件记录"
+                    android:textSize="13sp"
                     android:fontFamily="@font/montserrat_medium"
                     android:layout_gravity="center"
                     />
@@ -83,10 +84,10 @@
                     android:layout_height="wrap_content"
                     android:text="10"
                     android:fontFamily="@font/montserrat_medium"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     android:layout_gravity="center"
                     android:layout_marginTop="3dp"
-                    android:layout_marginBottom="3dp"
+                    android:layout_marginBottom="5dp"
                     />
                 <TextView
                     android:layout_width="wrap_content"
@@ -119,6 +120,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="分类本"
+                    android:textSize="13sp"
                     android:fontFamily="@font/montserrat_medium"
                     android:layout_gravity="center"
                     />
@@ -129,10 +131,10 @@
                     android:layout_height="wrap_content"
                     android:text="3"
                     android:fontFamily="@font/montserrat_medium"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     android:layout_gravity="center"
                     android:layout_marginTop="3dp"
-                    android:layout_marginBottom="3dp"
+                    android:layout_marginBottom="5dp"
                     />
 
                 <TextView
@@ -166,6 +168,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="使用天数"
+                    android:textSize="13sp"
                     android:fontFamily="@font/montserrat_medium"
                     android:layout_gravity="center"
                     />
@@ -176,10 +179,10 @@
                     android:layout_height="wrap_content"
                     android:text="103"
                     android:fontFamily="@font/montserrat_medium"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     android:layout_gravity="center"
                     android:layout_marginTop="3dp"
-                    android:layout_marginBottom="3dp"
+                    android:layout_marginBottom="5dp"
                     />
 
                 <TextView

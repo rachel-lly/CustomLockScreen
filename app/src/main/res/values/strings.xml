@@ -10,7 +10,7 @@
     <style name="linear_item_text_behind_icon">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:layout_marginStart">20dp</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:fontFamily">@font/montserrat_medium</item>
@@ -19,7 +19,7 @@
     <style name="linear_item_text_behind_icon_10">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:layout_marginStart">10dp</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:fontFamily">@font/montserrat_medium</item>
@@ -38,14 +38,14 @@
     </style>
 
     <style name="linear_item_icon">
-        <item name="android:layout_width">25dp</item>
-        <item name="android:layout_height">25dp</item>
+        <item name="android:layout_width">22dp</item>
+        <item name="android:layout_height">22dp</item>
         <item name="android:layout_centerVertical">true</item>
     </style>
 
     <style name="icon_in_LinearLayout">
-        <item name="android:layout_width">25dp</item>
-        <item name="android:layout_height">25dp</item>
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
         <item name="android:layout_gravity">center</item>
     </style>
 

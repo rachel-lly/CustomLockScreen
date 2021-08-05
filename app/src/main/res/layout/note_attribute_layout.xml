@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="20dp"
+            android:paddingBottom="15dp"
             >
 
             <LinearLayout
@@ -32,7 +32,7 @@
                 android:orientation="horizontal"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 >
 
                 <ImageView
@@ -51,7 +51,7 @@
 
             <View
                 style="@style/horizon_line"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 />
 
             <LinearLayout
@@ -60,7 +60,7 @@
                 android:orientation="horizontal"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 >
 
                 <ImageView
@@ -78,19 +78,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="(未来日期为倒数，过去日期为正数)"
+                    android:textSize="10sp"
                     android:layout_gravity="bottom"
                     android:fontFamily="@font/montserrat_medium"
                     android:layout_marginStart="3dp"
                     />
 
+
             </LinearLayout>
+
+
 
             <TextView
                 android:id="@+id/add_note_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2021-04-15 星期五"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textColor="@color/colorPrimaryDark"
                 android:fontFamily="@font/montserrat_medium"
                 android:layout_marginStart="50dp"
@@ -99,7 +103,7 @@
 
             <View
                 style="@style/horizon_line"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="8dp"
                 />
 
             <RelativeLayout
@@ -108,8 +112,8 @@
                 android:orientation="horizontal"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="8dp"
                 >
 
                 <ImageView
@@ -142,7 +146,7 @@
                         android:layout_height="wrap_content"
                         android:text="生活"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:fontFamily="@font/montserrat_medium"
                         android:layout_marginStart="10dp"
                         android:layout_gravity="bottom" />
@@ -164,7 +168,7 @@
 
             <View
                 style="@style/horizon_line"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 />
 
             <RelativeLayout
@@ -173,7 +177,7 @@
                 android:orientation="horizontal"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="5dp"
                 >
 
@@ -253,7 +257,7 @@
             android:orientation="horizontal"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:layout_marginBottom="20dp"
             >
 
@@ -283,9 +287,8 @@
             android:id="@+id/end_time_date_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="20dp"
-
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="15dp"
             >
 
             <TextView
@@ -293,7 +296,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2021-04-15 星期五"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textColor="@color/colorPrimaryDark"
                 android:fontFamily="@font/montserrat_medium"
                 android:layout_marginStart="50dp"

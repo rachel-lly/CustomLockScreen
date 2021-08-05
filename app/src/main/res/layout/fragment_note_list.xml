@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="蛤蛤"
-                android:textSize="26sp"
+                android:textSize="18sp"
                 android:fontFamily="@font/montserrat_bold"
                  />
 
@@ -44,8 +44,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/home_header_top_text"
-                android:text="目标："
-                android:textSize="15sp"
+                android:text="目标: "
+                android:textSize="12sp"
                 />
 
             <TextView
@@ -55,7 +55,7 @@
                 android:layout_below="@+id/home_header_top_text"
                 android:layout_toEndOf="@+id/home_header_top_date_just_text"
                 android:text="2022-1-1 星期六"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:fontFamily="@font/montserrat_medium"
                 />
 
@@ -67,16 +67,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="246"
-            android:textSize="55sp"
+            android:textSize="40sp"
             android:fontFamily="@font/montserrat_medium"
+            android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="50dp"
             />
 
         <ImageView
             android:id="@+id/icon_day"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="25dp"
             android:src="@mipmap/day"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"

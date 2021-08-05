@@ -17,8 +17,8 @@
         android:background="@drawable/item_pressed_state"
         android:paddingStart="30dp"
         android:paddingEnd="20dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         >
 
         <ImageView
@@ -41,7 +41,7 @@
             android:text="按事件时间"
             android:textColor="@color/colorPrimaryDark"
             android:fontFamily="@font/montserrat_medium"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:layout_marginStart="20dp"
             android:layout_alignParentEnd="true"
             />
@@ -61,8 +61,8 @@
         android:background="@drawable/item_pressed_state"
         android:paddingStart="30dp"
         android:paddingEnd="20dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         >
 
         <ImageView
@@ -92,9 +92,9 @@
         android:background="@drawable/item_pressed_state"
         android:paddingStart="30dp"
         android:paddingEnd="20dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:layout_marginTop="20dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:layout_marginTop="15dp"
         >
 
         <ImageView
@@ -120,9 +120,9 @@
         android:background="@drawable/item_pressed_state"
         android:paddingStart="30dp"
         android:paddingEnd="20dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:layout_marginTop="20dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:layout_marginTop="15dp"
         >
 
         <ImageView

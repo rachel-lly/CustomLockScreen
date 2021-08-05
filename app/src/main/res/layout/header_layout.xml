@@ -11,7 +11,7 @@
         android:layout_height="80dp"
         android:background="@color/colorPrimaryDark"
         >
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/top_text_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,8 +22,9 @@
             <ImageView
                 android:id="@+id/top_icon"
                 android:src="@mipmap/top_icon"
-                android:layout_height="28dp"
-                android:layout_width="28dp"
+                android:layout_height="20dp"
+                android:layout_width="20dp"
+                android:layout_gravity="bottom"
                 />
 
             <TextView
@@ -32,12 +33,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/drawer_top_text"
                 android:fontFamily="@font/montserrat_medium"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:textColor="#fff"
-                android:layout_toEndOf="@+id/top_icon"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="5dp"
                 />
-        </RelativeLayout>
+        </LinearLayout>
 
     </RelativeLayout>
 
@@ -49,7 +49,7 @@
         android:text="首页事件分类"
         android:fontFamily="@font/montserrat_medium"
         android:textColor="@color/text_more_gray"
-        android:textSize="14sp"
+        android:textSize="13sp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp"
@@ -89,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="10dp"
                 android:textSize="12sp"
                 android:text="全部事件"
                 android:fontFamily="@font/montserrat_medium"
@@ -160,8 +160,8 @@
                 android:id="@+id/sort_tx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:textSize="14sp"
+                android:layout_marginStart="10dp"
+                android:textSize="13sp"
                 android:text="管理分类本"
                 android:fontFamily="@font/montserrat_medium"
                 android:textColor="@color/text_more_gray"
@@ -196,8 +196,8 @@
                 android:id="@+id/mine_tx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:textSize="14sp"
+                android:layout_marginStart="10dp"
+                android:textSize="13sp"
                 android:text="我的"
                 android:fontFamily="@font/montserrat_medium"
                 android:textColor="@color/text_more_gray"
@@ -232,8 +232,8 @@
                 android:id="@+id/setting_tx"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:textSize="14sp"
+                android:layout_marginStart="10dp"
+                android:textSize="13sp"
                 android:text="设置"
                 android:fontFamily="@font/montserrat_medium"
                 android:textColor="@color/text_more_gray"
