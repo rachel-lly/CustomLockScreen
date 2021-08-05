@@ -1,10 +1,6 @@
 package com.example.customlockscreen.activity
 
 import android.Manifest
-import android.content.ClipDescription
-import android.content.DialogInterface
-import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
@@ -15,7 +11,6 @@ import com.example.customlockscreen.Util.CalendarReminderUtils
 import com.example.customlockscreen.Util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityTimeRemindBinding
 import com.example.library.PermissionX
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 
@@ -115,9 +110,6 @@ class TimeRemindActivity : AppCompatActivity() {
             isNowTimeRemind = binding.todayEventTimeSwitch.isChecked
             isFutureTimeRemind = binding.futureEventTimeSwitch.isChecked
 
-//            if(isFutureTimeRemind || isNowTimeRemind){
-//                val notificationManager: NotificationManagerCompat = NotificationManagerCompat.from(this);
-//                val isEnabled = notificationManager.areNotificationsEnabled()
 
             if(isNowTimeRemind){
                 nowRemind = nowRemindTime
@@ -128,38 +120,6 @@ class TimeRemindActivity : AppCompatActivity() {
                 futureRemind = futureRemindTime
 
             }
-
-
-//                    //未打开通知
-//                    MaterialAlertDialogBuilder(this)
-//                            .setTitle("提示")
-//                            .setMessage("是否允许应用打开通知权限？")
-//                            .setNegativeButton(resources.getString(R.string.decline)){dialog,which ->
-//                                Toast.makeText(this,"拒绝接收通知",Toast.LENGTH_SHORT).show()
-//                                dialog.cancel()
-//                            }
-//                            .setPositiveButton(resources.getString(R.string.accept)){ dialog,which ->
-//                                dialog.cancel()
-//                                val intent = Intent()
-//                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                                    intent.action = "android.settings.APP_NOTIFICATION_SETTINGS"
-//                                    intent.putExtra("android.provider.extra.APP_PACKAGE", this.getPackageName())
-//                                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {  //5.0
-//                                    intent.action = "android.settings.APP_NOTIFICATION_SETTINGS"
-//                                    intent.putExtra("app_package", this.getPackageName())
-//                                    intent.putExtra("app_uid", this.getApplicationInfo().uid)
-//                                    startActivity(intent)
-//                                } else {
-//                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//                                    intent.action = "android.settings.APPLICATION_DETAILS_SETTINGS"
-//                                    intent.data = Uri.fromParts("package", this.getPackageName(), null)
-//                                }
-//                                startActivity(intent)
-//                            }
-//                            .show()
-
-
-
         }
 
         setContentView(binding.root)

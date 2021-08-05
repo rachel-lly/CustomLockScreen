@@ -1,33 +1,23 @@
 package com.example.customlockscreen.fragment
 
-import android.Manifest
-import android.app.AlarmManager
-import android.app.NotificationChannel
-import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.*
-import com.example.customlockscreen.Util.CalendarReminderUtils
 import com.example.customlockscreen.Util.SharedPreferenceCommission
 import com.example.customlockscreen.activity.AddNoteActivity
 import com.example.customlockscreen.adapter.LabelGridAdapter
 import com.example.customlockscreen.adapter.LabelLinearAdapter
-import com.example.customlockscreen.application.MyApplication
 import com.example.customlockscreen.databinding.FragmentNoteListBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.bean.MessageEvent
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.model.db.DataViewModel
-import com.example.customlockscreen.receiver.AlertReceiver
-import com.example.library.PermissionX
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -322,40 +312,6 @@ class NoteListFragment : Fragment() {
 
         }
     }
-
-//    fun setRemind(){
-//
-////        val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"))
-////        calendar.set(year, month, day, hour, minute)
-//
-//        val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"))
-//
-//        calendar.timeInMillis = System.currentTimeMillis()
-//        calendar.add(Calendar.SECOND, 3) //5s后
-//
-//        val intent = Intent(context, AlertReceiver::class.java)
-//        intent.setAction("NOTIFICATION")
-//
-//        val pi : PendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
-//        val manager : AlarmManager = context!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-//
-//
-//        manager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), pi)
-//
-//
-//
-////        Intent intent = new Intent(this, AlarmReceiver.class);
-////        intent.setAction("NOTIFICATION");
-////        PendingIntent pi = PendingIntent.getBroadcast(this, 0, intent, 0);
-////        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-////        int type = AlarmManager.RTC_WAKEUP;
-////        //new Date()：表示当前日期，可以根据项目需求替换成所求日期
-////        //getTime()：日期的该方法同样可以表示从1970年1月1日0点至今所经历的毫秒数
-////        long triggerAtMillis = new Date().getTime();
-////        long intervalMillis = 1000 * 60;
-////        manager.setInexactRepeating(type, triggerAtMillis, intervalMillis, pi);
-//
-//    }
 
 }
 

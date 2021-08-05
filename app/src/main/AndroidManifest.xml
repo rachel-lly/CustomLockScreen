@@ -51,16 +51,6 @@
             android:resource="@array/preloaded_fonts" />
 
 
-        <receiver android:name=".receiver.AlertReceiver"
-            android:exported="false"
-            />
-
-        <service android:name=".receiver.AlertService"
-            android:exported="false"
-            android:process="system"
-            android:enabled="true"
-            />
-
 
     </application>
 

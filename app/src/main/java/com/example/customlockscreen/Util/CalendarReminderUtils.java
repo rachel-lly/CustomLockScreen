@@ -48,8 +48,7 @@ public class CalendarReminderUtils {
      * 检查是否存在现有账户，存在则返回账户id，否则返回-1
      */
     private static int checkCalendarAccount(Context context) {
-        Cursor userCursor = context.getContentResolver().query(Uri.parse(CALENDER_URL), null, null, null, null);
-        try {
+        try (Cursor userCursor = context.getContentResolver().query(Uri.parse(CALENDER_URL), null, null, null, null)) {
             if (userCursor == null) { //查询返回空值
                 return -1;
             }
@@ -59,10 +58,6 @@ public class CalendarReminderUtils {
                 return userCursor.getInt(userCursor.getColumnIndex(CalendarContract.Calendars._ID));
             } else {
                 return -1;
-            }
-        } finally {
-            if (userCursor != null) {
-                userCursor.close();
             }
         }
     }
@@ -148,8 +143,7 @@ public class CalendarReminderUtils {
         if (context == null) {
             return;
         }
-        Cursor eventCursor = context.getContentResolver().query(Uri.parse(CALENDER_EVENT_URL), null, null, null, null);
-        try {
+        try (Cursor eventCursor = context.getContentResolver().query(Uri.parse(CALENDER_EVENT_URL), null, null, null, null)) {
             if (eventCursor == null) { //查询返回空值
                 return;
             }
@@ -166,10 +160,6 @@ public class CalendarReminderUtils {
                         }
                     }
                 }
-            }
-        } finally {
-            if (eventCursor != null) {
-                eventCursor.close();
             }
         }
     }
