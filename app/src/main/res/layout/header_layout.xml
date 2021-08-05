@@ -9,29 +9,36 @@
         android:id="@+id/drawlayout_header"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:paddingTop="40dp"
-        android:paddingBottom="10dp"
-        android:paddingStart="20dp"
         android:background="@color/colorPrimaryDark"
         >
-        <ImageView
-            android:id="@+id/top_icon"
-            android:src="@mipmap/top_icon"
-            android:layout_height="28dp"
-            android:layout_width="28dp"
-            />
-
-        <TextView
-            android:id="@+id/top_text"
+        <RelativeLayout
+            android:id="@+id/top_text_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/drawer_top_text"
-            android:fontFamily="@font/montserrat_medium"
-            android:textSize="20sp"
-            android:textColor="#fff"
-            android:layout_toEndOf="@+id/top_icon"
-            android:layout_marginStart="20dp"
-            />
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="8dp"
+            >
+            <ImageView
+                android:id="@+id/top_icon"
+                android:src="@mipmap/top_icon"
+                android:layout_height="28dp"
+                android:layout_width="28dp"
+                />
+
+            <TextView
+                android:id="@+id/top_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/drawer_top_text"
+                android:fontFamily="@font/montserrat_medium"
+                android:textSize="20sp"
+                android:textColor="#fff"
+                android:layout_toEndOf="@+id/top_icon"
+                android:layout_marginStart="10dp"
+                />
+        </RelativeLayout>
+
     </RelativeLayout>
 
     <TextView

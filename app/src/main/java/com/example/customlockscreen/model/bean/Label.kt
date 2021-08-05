@@ -13,7 +13,8 @@ data class Label(
         @ColumnInfo var addNoteTime:Long
         ) : Comparable<Any>,Parcelable {
 
-        @ColumnInfo var day = (targetDate-System.currentTimeMillis())/(1000*3600*24)
+        @ColumnInfo var day = targetDate/(1000*3600*24)-System.currentTimeMillis()/(1000*3600*24)
+
 
         @ColumnInfo var sortNote :String = "生活"
 

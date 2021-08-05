@@ -8,6 +8,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+
 
     <application
         android:name=".application.MyApplication"
@@ -50,6 +53,12 @@
 
         <receiver android:name=".receiver.AlertReceiver"
             android:exported="false"
+            />
+
+        <service android:name=".receiver.AlertService"
+            android:exported="false"
+            android:process="system"
+            android:enabled="true"
             />
 
 
