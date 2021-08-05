@@ -1,16 +1,11 @@
 package com.example.customlockscreen.activity
 
-import android.Manifest
-import android.os.Build
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
 import com.example.customlockscreen.R
-import com.example.customlockscreen.Util.CalendarReminderUtils
 import com.example.customlockscreen.Util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityTimeRemindBinding
-import com.example.library.PermissionX
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 
@@ -123,26 +118,6 @@ class TimeRemindActivity : AppCompatActivity() {
         }
 
         setContentView(binding.root)
-    }
-
-    fun setRemind(title:String,description: String,startTime: Long,endTime: Long,previousDayRemind: Int){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-
-
-            PermissionX.request(this,
-                    Manifest.permission.WRITE_CALENDAR,
-                    Manifest.permission.READ_CALENDAR){
-                allGranted,deniedList ->
-                run {
-                    if (allGranted) {
-                        CalendarReminderUtils.addCalendarEvent(this,title,description,startTime,endTime,previousDayRemind)
-                    } else {
-                        Toast.makeText(this,"你拒绝了 $deniedList", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-
-        }
     }
 
 }
