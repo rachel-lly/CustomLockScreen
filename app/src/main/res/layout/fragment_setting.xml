@@ -31,7 +31,7 @@
             android:id="@+id/sort_tx"
             android:text="排序方式"
             android:layout_toEndOf="@+id/sort_icon"
-            style="@style/linear_item_text_behind_icon_10"
+            style="@style/linear_item_text_behind_icon"
             />
 
         <TextView
@@ -75,7 +75,7 @@
             android:id="@+id/clock_tx"
             android:text="提醒时间设置"
             android:layout_toEndOf="@+id/clock_icon"
-            style="@style/linear_item_text_behind_icon_10"
+            style="@style/linear_item_text_behind_icon"
             />
 
     </RelativeLayout>
@@ -107,7 +107,7 @@
             android:id="@+id/backup_data_tx"
             android:text="备份数据管理"
             android:layout_toEndOf="@+id/backup_data_icon"
-            style="@style/linear_item_text_behind_icon_10"
+            style="@style/linear_item_text_behind_icon"
             />
 
     </RelativeLayout>
@@ -135,7 +135,7 @@
             android:id="@+id/set_lock_screen_tx"
             android:text="设置锁屏"
             android:layout_toEndOf="@+id/set_lock_screen_icon"
-            style="@style/linear_item_text_behind_icon_10"
+            style="@style/linear_item_text_behind_icon"
             />
 
     </RelativeLayout>

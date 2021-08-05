@@ -63,7 +63,7 @@
             <TextView
                 android:layout_toEndOf="@id/choose_icon_iv"
                 android:text="选择分类本的图标"
-                style="@style/linear_item_text_behind_icon_10"
+                style="@style/linear_item_text_behind_icon"
                 android:layout_gravity="bottom"
                 />
 

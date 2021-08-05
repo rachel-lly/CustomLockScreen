@@ -41,19 +41,19 @@
                 android:orientation="horizontal"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 >
 
                 <ImageView
                     android:id="@+id/today_event_time_iv"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@mipmap/remind"
                     android:layout_centerVertical="true"
                     />
 
                 <TextView
-                    style="@style/linear_item_text_behind_icon_10"
+                    style="@style/linear_item_text_behind_icon"
                     android:layout_toEndOf="@id/today_event_time_iv"
                     android:text="当日事件提醒时间"
                     />
@@ -73,13 +73,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
                 >
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@mipmap/time"
                     android:layout_gravity="center_vertical"
                     />
@@ -89,10 +89,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="9：00"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:textColor="@color/colorPrimaryDark"
                     android:fontFamily="@font/montserrat_medium"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="12dp"
                     />
 
             </LinearLayout>
@@ -126,19 +126,19 @@
                 android:orientation="horizontal"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 >
 
                 <ImageView
                     android:id="@+id/future_today_event_time_iv"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@mipmap/remind"
                     android:layout_centerVertical="true"
                     />
 
                 <TextView
-                    style="@style/linear_item_text_behind_icon_10"
+                    style="@style/linear_item_text_behind_icon"
                     android:layout_toEndOf="@id/future_today_event_time_iv"
                     android:text="未来事件提醒时间"
                     />
@@ -158,13 +158,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
                 >
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@mipmap/time"
                     android:layout_gravity="center_vertical"
                     />
@@ -174,10 +174,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="9：00"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:textColor="@color/colorPrimaryDark"
                     android:fontFamily="@font/montserrat_medium"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="12dp"
                     />
 
             </LinearLayout>

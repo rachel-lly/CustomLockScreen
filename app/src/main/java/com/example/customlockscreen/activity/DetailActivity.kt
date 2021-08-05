@@ -72,7 +72,7 @@ class DetailActivity : AppCompatActivity() {
             val labelText = intent!!.getStringExtra(LABEL_TEXT)
             labelIsLock = intent!!.getBooleanExtra(LABEL_IS_LOCK,false)
 
-            binding.detailCard.labelDay.updatePadding(0,30,0,30)
+            binding.detailCard.labelDay.updatePadding(0,25,0,25)
 
             label = labelText!!.let { labelDao.getLabelByName(it)!! }
 

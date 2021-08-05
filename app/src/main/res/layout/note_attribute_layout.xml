@@ -69,7 +69,7 @@
                     />
 
                 <TextView
-                    style="@style/linear_item_text_behind_icon_10"
+                    style="@style/linear_item_text_behind_icon"
                     android:text="目标日"
                     android:layout_gravity="bottom"
                     />
@@ -126,7 +126,7 @@
                     android:id="@+id/sort_text"
                     android:layout_toEndOf="@id/sort_iv"
                     android:text="分类"
-                    style="@style/linear_item_text_behind_icon_10"
+                    style="@style/linear_item_text_behind_icon"
                     android:layout_gravity="bottom"
                     />
 
@@ -188,7 +188,7 @@
                     />
 
                 <TextView
-                    style="@style/linear_item_text_behind_icon_10"
+                    style="@style/linear_item_text_behind_icon"
                     android:layout_toEndOf="@id/to_top_iv"
                     android:text="置顶"
                     />
@@ -200,41 +200,6 @@
                     android:layout_alignParentEnd="true"
                     />
             </RelativeLayout>
-
-<!--            <View-->
-<!--                style="@style/horizon_line"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                />-->
-
-<!--            <RelativeLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:layout_marginStart="15dp"-->
-<!--                android:layout_marginEnd="10dp"-->
-<!--                android:layout_marginTop="20dp"-->
-<!--                android:layout_marginBottom="5dp"-->
-<!--                >-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/lock_screen_iv"-->
-<!--                    android:src="@mipmap/lock_screen"-->
-<!--                    style="@style/linear_item_icon"-->
-<!--                    />-->
-
-<!--                <TextView-->
-<!--                    style="@style/linear_item_text_behind_icon_10"-->
-<!--                    android:layout_toEndOf="@id/lock_screen_iv"-->
-<!--                    android:text="设为锁屏"-->
-<!--                    />-->
-
-<!--                <androidx.appcompat.widget.SwitchCompat-->
-<!--                    android:id="@+id/lock_screen_switch"-->
-<!--                    android:layout_width="55dp"-->
-<!--                    android:layout_height="20dp"-->
-<!--                    android:layout_alignParentEnd="true"-->
-<!--                    />-->
-<!--            </RelativeLayout>-->
 
         </LinearLayout>
 
@@ -269,7 +234,7 @@
 
             <TextView
                 android:id="@+id/end_time_text"
-                style="@style/linear_item_text_behind_icon_10"
+                style="@style/linear_item_text_behind_icon"
                 android:layout_toEndOf="@id/end_time_iv"
                 android:text="结束时间"
                 />
