@@ -171,7 +171,7 @@ class AddNoteActivity : AppCompatActivity() {
                 }
 
                 val sortNoteName = binding.noteAttributeLayout.chooseSortTv.text.toString()
-                if(!sortNoteName.isEmpty()){
+                if(sortNoteName.isNotEmpty()){
                     addLabel.sortNote = sortNoteName
                 }
 

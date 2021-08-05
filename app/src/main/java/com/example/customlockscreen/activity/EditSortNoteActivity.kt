@@ -73,7 +73,7 @@ class EditSortNoteActivity : AppCompatActivity() {
 
             if(sortNote!=null){
 
-                if(labelDao.getSameSortNoteLabelList(sortNote!!.name).size!=0){
+                if(labelDao.getSameSortNoteLabelList(sortNote!!.name).isNotEmpty()){
                     Toast.makeText(this,"该分类本下有事件，删除失败",Toast.LENGTH_SHORT).show()
                 }else{
                     sortNoteDao.deleteSortNote(sortNote!!)

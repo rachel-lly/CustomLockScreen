@@ -74,7 +74,7 @@ class NoteListFragment : Fragment() {
         dataViewModel.getAllLabelsByObserve().observe(this, {
             labelList = it
 
-            if (labelList.size == 0) {
+            if (labelList.isEmpty()) {
                 binding.listNullLogo.visibility = View.VISIBLE
             } else {
                 binding.listNullLogo.visibility = View.GONE
@@ -164,7 +164,7 @@ class NoteListFragment : Fragment() {
 
                 val sortStyle: String = item.title.toString()
 
-                EventBus.getDefault().post(sortStyle.let { MessageEvent(it) })
+                EventBus.getDefault().post(MessageEvent(sortStyle))
 
             }
 
@@ -268,7 +268,7 @@ class NoteListFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     fun defaultTopLabel(){
 
-        if(!labelList.isEmpty()){
+        if(labelList.isNotEmpty()){
 
             val label = labelList.get(0)
             setTopLabel(label)

@@ -10,6 +10,6 @@ class PagerAdapter(activity: FragmentActivity,fragments: List<Fragment>) : Fragm
 
     override fun getItemCount(): Int = this.fragmentList.size
 
-    override fun createFragment(position: Int): Fragment = fragmentList.get(position)
+    override fun createFragment(position: Int): Fragment = fragmentList[position]
 
 }

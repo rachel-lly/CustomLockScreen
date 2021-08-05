@@ -44,7 +44,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        var sortNote = data?.getStringExtra(SORT_NOTE_TEXT);
+        var sortNote = data?.getStringExtra(SORT_NOTE_TEXT)
         if(sortNote == null) {
 
             sortNote = if (lastChoose != null)  lastChoose  else  "生活"
@@ -195,7 +195,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
                 addLabel.isTop = binding.noteAttributeLayout.toTopSwitch.isChecked
 
                 val sortNoteName = binding.noteAttributeLayout.chooseSortTv.text.toString()
-                if(!sortNoteName.isEmpty()){
+                if(sortNoteName.isNotEmpty()){
                     addLabel.sortNote = sortNoteName
                 }
 
@@ -237,7 +237,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
     }
 
 
-    fun changeOnTopLabel(labelName : String){
+    private fun changeOnTopLabel(labelName : String){
 
         var topLabelName by SharedPreferenceCommission(this,"topLabelName","-1")
 

@@ -47,7 +47,7 @@ class IconListAdapter(val context: Context,clickListener: ClickListener) :
             val position = holder.adapterPosition
 
             if(lastposition!=-1){
-                holderList.get(lastposition)?.checkbox?.visibility = View.GONE
+                holderList[lastposition]?.checkbox?.visibility = View.GONE
             }
 
             mClickListener.onClick(position)
@@ -66,7 +66,7 @@ class IconListAdapter(val context: Context,clickListener: ClickListener) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.icon.setImageResource(iconList[position])
-        holderList.put(position,holder)
+        holderList[position] = holder
     }
 
 

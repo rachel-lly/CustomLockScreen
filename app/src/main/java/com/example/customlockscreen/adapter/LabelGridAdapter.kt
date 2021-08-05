@@ -14,6 +14,7 @@ import com.example.customlockscreen.activity.LABEL_TEXT
 import com.example.customlockscreen.databinding.CardItemGridBinding
 import com.example.customlockscreen.model.bean.Label
 import java.text.SimpleDateFormat
+import kotlin.math.abs
 
 
 class LabelGridAdapter(val context: Context, var labelList:List<Label>) :
@@ -51,7 +52,7 @@ class LabelGridAdapter(val context: Context, var labelList:List<Label>) :
         val label = labelList[position]
         holder.LabelText.text = label.text
         holder.LabelDate.text = format.format(label.targetDate)
-        holder.LabelDay.text = Math.abs(label.day).toString()
+        holder.LabelDay.text = abs(label.day).toString()
         if(label.day>=0){
             holder.LabelText.setBackgroundColor(context.resources.getColor(R.color.note_list_future_dark,context.theme))
         }else{

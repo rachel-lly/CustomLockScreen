@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.LockScreenSettingActivity"></activity>
+        <activity android:name=".activity.LockScreenSettingActivity" />
         <activity android:name=".activity.EditSortNoteActivity" />
         <activity android:name=".activity.BackupDataActivity" />
         <activity android:name=".activity.EditNoteAttributeActivity" />

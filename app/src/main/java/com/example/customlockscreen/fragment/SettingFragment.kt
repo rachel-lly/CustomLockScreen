@@ -69,28 +69,24 @@ class SettingFragment : Fragment() {
         popup.menuInflater.inflate(menuRes,popup.menu)
         popup.gravity = Gravity.RIGHT
 
-        popup.setOnMenuItemClickListener (object :PopupMenu.OnMenuItemClickListener{
-            override fun onMenuItemClick(menuItem: MenuItem?): Boolean {
-
-                when(menuItem?.itemId){
-                    R.id.sort_by_add_time->{
-                        sortStyle = "按添加时间"
-                    }
-
-                    R.id.sort_by_event_time->{
-                        sortStyle =  "按事件时间"
-                    }
-
+        popup.setOnMenuItemClickListener { menuItem ->
+            when (menuItem?.itemId) {
+                R.id.sort_by_add_time -> {
+                    sortStyle = "按添加时间"
                 }
 
-                binding.sortStyle.text = sortStyle
-                EventBus.getDefault().post(sortStyle?.let { MessageEvent(it) })
-                popup.dismiss()
+                R.id.sort_by_event_time -> {
+                    sortStyle = "按事件时间"
+                }
 
-                return true
             }
 
-        })
+            binding.sortStyle.text = sortStyle
+            EventBus.getDefault().post(sortStyle?.let { MessageEvent(it) })
+            popup.dismiss()
+
+            true
+        }
 
         popup.show()
     }

@@ -71,14 +71,13 @@ class BackupDataActivity : AppCompatActivity() {
         val files = fileDir.listFiles()
 
         if(files!=null){
-            for(index in 0..files.size-1){
-                val deleteFile = files[index]
-                if(deleteFile.isFile){
-                    deleteFile.delete()
-                }else if(deleteFile.isDirectory){
-                    delete(deleteFile)
+            for(file in files){
+                if(file.isFile){
+                    file.delete()
+                }else if(file.isDirectory){
+                    delete(file)
                 }
-                deleteFile.delete()
+                file.delete()
             }
         }
 

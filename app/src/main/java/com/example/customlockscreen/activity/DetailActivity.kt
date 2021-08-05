@@ -17,7 +17,6 @@ import android.view.*
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.marginTop
 import androidx.core.view.updatePadding
 import com.example.customlockscreen.R
 import com.example.customlockscreen.Util.PictureUtil
@@ -29,14 +28,15 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.abs
 
 const val LABEL_TEXT = "LABEL_TEXT"
 const val LABEL_IS_LOCK = "LABEL_IS_LOCK"
 
 class DetailActivity : AppCompatActivity() {
 
-    val EVENT_SCREENSHOT_SHARE = 22 //截图分享
-    val EVENT_SCREENSHOT_LOCK = 23 //截图设为锁屏
+    private val EVENT_SCREENSHOT_SHARE = 22 //截图分享
+    private val EVENT_SCREENSHOT_LOCK = 23 //截图设为锁屏
 
     private var mediaProjectionManager: MediaProjectionManager? = null
     private var mediaProjection: MediaProjection? = null
@@ -81,7 +81,7 @@ class DetailActivity : AppCompatActivity() {
 
             val day = label.day
 
-            binding.detailCard.labelDay.text = Math.abs(day).toString()
+            binding.detailCard.labelDay.text = abs(day).toString()
             if(day>=0){
                 binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_future_dark, theme))
             }else{
@@ -117,7 +117,7 @@ class DetailActivity : AppCompatActivity() {
             val mImageReader: ImageReader = ImageReader.newInstance(width, height, PixelFormat.RGBA_8888, 2)
             mediaProjection = mediaProjectionManager!!.getMediaProjection(resultCode, data!!)
             val virtualDisplay = mediaProjection!!.createVirtualDisplay("screen-mirror", width, height,
-                    displayMetrics.densityDpi, DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, mImageReader.getSurface(), null, null)
+                    displayMetrics.densityDpi, DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, mImageReader.surface, null, null)
 
 
 
@@ -125,13 +125,13 @@ class DetailActivity : AppCompatActivity() {
                 try {
                     image = mImageReader.acquireLatestImage()
                     if (image != null) {
-                        val planes: Array<Image.Plane> = image!!.getPlanes()
-                        val buffer: ByteBuffer = planes[0].getBuffer()
-                        val width: Int = image!!.getWidth()
-                        val height: Int = image!!.getHeight()
+                        val planes: Array<Image.Plane> = image!!.planes
+                        val buffer: ByteBuffer = planes[0].buffer
+                        val width: Int = image!!.width
+                        val height: Int = image!!.height
 
-                        val pixelStride: Int = planes[0].getPixelStride()
-                        val rowStride: Int = planes[0].getRowStride()
+                        val pixelStride: Int = planes[0].pixelStride
+                        val rowStride: Int = planes[0].rowStride
                         val rowPadding = rowStride - pixelStride * width
                         var bitmap = Bitmap.createBitmap(width + rowPadding / pixelStride, height, Bitmap.Config.ARGB_8888)
                         bitmap!!.copyPixelsFromBuffer(buffer)
@@ -299,9 +299,8 @@ class DetailActivity : AppCompatActivity() {
         val height = screenView.height
 
         //去掉状态栏和标题栏
-        val screenShot = bitmap.let { Bitmap.createBitmap(it, 0, toolbarHeight + statusbarHeight, width, height - toolbarHeight - statusbarHeight) }
 
-        return screenShot;
+        return bitmap.let { Bitmap.createBitmap(it, 0, toolbarHeight + statusbarHeight, width, height - toolbarHeight - statusbarHeight) };
     }
 
 }

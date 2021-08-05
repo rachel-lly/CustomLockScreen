@@ -14,6 +14,7 @@ import com.example.customlockscreen.activity.LABEL_IS_LOCK
 import com.example.customlockscreen.activity.LABEL_TEXT
 import com.example.customlockscreen.databinding.CardItemLinearBinding
 import com.example.customlockscreen.model.bean.Label
+import kotlin.math.abs
 
 class LabelLinearAdapter(val context: Context, var labelList:List<Label>,val isLock:Boolean) :
     RecyclerView.Adapter<LabelLinearAdapter.ViewHolder>() {
@@ -51,7 +52,7 @@ class LabelLinearAdapter(val context: Context, var labelList:List<Label>,val isL
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val label = labelList[position]
         holder.LabelText.text = label.text
-        holder.LabelDay.text = Math.abs(label.day).toString()
+        holder.LabelDay.text = abs(label.day).toString()
         if(label.day>=0){
             holder.LabelDay.setBackgroundColor(context.resources.getColor(R.color.note_list_future_light,context.theme))
             holder.labelJustText.setBackgroundColor(context.resources.getColor(R.color.note_list_future_dark,context.theme))
