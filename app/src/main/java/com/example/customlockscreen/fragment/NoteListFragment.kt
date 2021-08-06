@@ -1,10 +1,13 @@
 package com.example.customlockscreen.fragment
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,6 +21,8 @@ import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.bean.MessageEvent
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.model.db.DataViewModel
+import com.example.customlockscreen.service.AlertService
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -131,6 +136,41 @@ class NoteListFragment : Fragment() {
             R.id.grid_note -> {
 
                 if (isFirst) {
+
+                    // TODO: 2021/8/6 服务发送通知
+                    val notificationManager: NotificationManagerCompat = NotificationManagerCompat.from(context!!)
+                    val isEnabled = notificationManager.areNotificationsEnabled()
+                    if(!isEnabled){
+                        MaterialAlertDialogBuilder(context!!)
+                                .setTitle("提示")
+                                .setMessage("是否允许应用打开通知权限？")
+                                .setNegativeButton(resources.getString(R.string.decline)){dialog,which ->
+                                    Toast.makeText(context,"拒绝接收通知",Toast.LENGTH_SHORT).show()
+                                    dialog.cancel()
+                                }
+                                .setPositiveButton(resources.getString(R.string.accept)){ dialog,which ->
+                                    dialog.cancel()
+                                    val intent = Intent()
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                        intent.action = "android.settings.APP_NOTIFICATION_SETTINGS"
+                                        intent.putExtra("android.provider.extra.APP_PACKAGE", context!!.packageName)
+                                    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {  //5.0
+                                        intent.action = "android.settings.APP_NOTIFICATION_SETTINGS"
+                                        intent.putExtra("app_package", context!!.packageName)
+                                        intent.putExtra("app_uid", context!!.applicationInfo.uid)
+                                        startActivity(intent)
+                                    } else {
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                        intent.action = "android.settings.APPLICATION_DETAILS_SETTINGS"
+                                        intent.data = Uri.fromParts("package", context!!.packageName, null)
+                                    }
+                                    startActivity(intent)
+                                }
+                                .show()
+                    }
+
+                    val intent = Intent(context,AlertService::class.java)
+                    context!!.startService(intent)
 
                     binding.homeRecyclerview.layoutManager = GridLayoutManager(this.context, 2)
 

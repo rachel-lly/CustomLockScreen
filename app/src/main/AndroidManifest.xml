@@ -48,7 +48,11 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-
+        <service
+            android:name=".service.AlertService"
+            android:exported="false"
+            android:process="system"
+            />
 
     </application>
 
