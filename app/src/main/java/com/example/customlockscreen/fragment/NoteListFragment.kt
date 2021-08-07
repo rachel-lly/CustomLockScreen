@@ -1,9 +1,11 @@
 package com.example.customlockscreen.fragment
 
+import android.Manifest
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.*
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -22,6 +24,7 @@ import com.example.customlockscreen.model.bean.MessageEvent
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.model.db.DataViewModel
 import com.example.customlockscreen.service.AlertService
+import com.example.library.PermissionX
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -136,6 +139,8 @@ class NoteListFragment : Fragment() {
             R.id.grid_note -> {
 
                 if (isFirst) {
+
+
 
                     // TODO: 2021/8/6 服务发送通知
                     val notificationManager: NotificationManagerCompat = NotificationManagerCompat.from(context!!)
