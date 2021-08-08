@@ -343,11 +343,12 @@ class DetailActivity : AppCompatActivity() {
         val width = screenView.width
         val height = screenView.height
 
-        //去掉状态栏和标题栏
+        //去掉状态栏和标题栏和虚拟导航栏
 
         return bitmap.let { Bitmap.createBitmap(it, 0, toolbarHeight + statusbarHeight, width, height - toolbarHeight - statusbarHeight - getVirtualBarHeight()) }
     }
 
+    //获取虚拟导航栏的高度
     private fun getVirtualBarHeight():Int{
         var height = 0
         val display = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
