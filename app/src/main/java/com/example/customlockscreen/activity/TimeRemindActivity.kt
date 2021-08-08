@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
 import com.example.customlockscreen.R
-import com.example.customlockscreen.Util.SharedPreferenceCommission
+import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityTimeRemindBinding
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat

@@ -1,4 +1,4 @@
-package com.example.customlockscreen.Util
+package com.example.customlockscreen.util
 
 import android.annotation.SuppressLint
 import android.content.Context

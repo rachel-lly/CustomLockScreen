@@ -1,12 +1,10 @@
-package com.example.customlockscreen.Util
+package com.example.customlockscreen.util
 
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.media.audiofx.BassBoost
 import android.net.Uri
 import android.os.Build
-import android.provider.Settings
 import android.provider.Settings.ACTION_SETTINGS
 import android.util.Log
 

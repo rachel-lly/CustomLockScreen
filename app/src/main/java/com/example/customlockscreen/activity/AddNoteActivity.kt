@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.customlockscreen.R
-import com.example.customlockscreen.Util.SharedPreferenceCommission
+import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityAddNoteBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.db.DataBase

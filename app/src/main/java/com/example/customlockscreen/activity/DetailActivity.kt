@@ -19,7 +19,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.updatePadding
 import com.example.customlockscreen.R
-import com.example.customlockscreen.Util.PictureUtil
+import com.example.customlockscreen.util.PictureUtil
 import com.example.customlockscreen.databinding.ActivityDetailBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.db.DataBase
@@ -220,13 +220,13 @@ class DetailActivity : AppCompatActivity() {
                         if (allGranted) {
 
                             val view = window.decorView
-                            var bitmap :Bitmap
+
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                 //获取layout的位置
                                 val location = IntArray(2)
                                 view.getLocationInWindow(location)
                                 //准备一个bitmap对象，用来将copy出来的区域绘制到此对象中
-                                bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888, true)
+                                val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888, true)
                                 PixelCopy.request(this.window,
                                         Rect(location[0], location[1], location[0] + view.width, location[1] + view.height),
                                         bitmap, { copyResult ->
@@ -262,13 +262,13 @@ class DetailActivity : AppCompatActivity() {
                         if (allGranted) {
 
                             val view = window.decorView
-                            var bitmap :Bitmap
+
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                 //获取layout的位置
                                 val location = IntArray(2)
                                 view.getLocationInWindow(location)
                                 //准备一个bitmap对象，用来将copy出来的区域绘制到此对象中
-                                bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888, true)
+                                val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888, true)
                                 PixelCopy.request(this.window,
                                         Rect(location[0], location[1], location[0] + view.width, location[1] + view.height),
                                         bitmap, { copyResult ->
