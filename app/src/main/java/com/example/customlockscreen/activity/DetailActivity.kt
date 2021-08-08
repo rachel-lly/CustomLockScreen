@@ -25,10 +25,12 @@ import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.db.DataBase
 import com.example.library.PermissionX
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import java.lang.Exception
 import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.abs
+
 
 const val LABEL_TEXT = "LABEL_TEXT"
 const val LABEL_IS_LOCK = "LABEL_IS_LOCK"
@@ -37,6 +39,8 @@ class DetailActivity : AppCompatActivity() {
 
     private val EVENT_SCREENSHOT_SHARE = 22 //截图分享
     private val EVENT_SCREENSHOT_LOCK = 23 //截图设为锁屏
+
+    private val TAG = "DetailActivity"
 
     private var mediaProjectionManager: MediaProjectionManager? = null
     private var mediaProjection: MediaProjection? = null
@@ -70,9 +74,9 @@ class DetailActivity : AppCompatActivity() {
             }
 
             val labelText = intent!!.getStringExtra(LABEL_TEXT)
-            labelIsLock = intent!!.getBooleanExtra(LABEL_IS_LOCK,false)
+            labelIsLock = intent!!.getBooleanExtra(LABEL_IS_LOCK, false)
 
-            binding.detailCard.labelDay.updatePadding(0,25,0,25)
+            binding.detailCard.labelDay.updatePadding(0, 25, 0, 25)
 
             label = labelText!!.let { labelDao.getLabelByName(it)!! }
 
@@ -106,11 +110,9 @@ class DetailActivity : AppCompatActivity() {
 
         super.onActivityResult(requestCode, resultCode, data)
 
+        if(requestCode == EVENT_SCREENSHOT_LOCK ||requestCode == EVENT_SCREENSHOT_SHARE){
 
-        if(requestCode == EVENT_SCREENSHOT_LOCK or EVENT_SCREENSHOT_SHARE){
-            val displayMetrics = DisplayMetrics()
-            val windowManager = this.getSystemService(WINDOW_SERVICE) as WindowManager
-            windowManager.defaultDisplay.getMetrics(displayMetrics)
+            val displayMetrics = resources.displayMetrics
             val width = displayMetrics.widthPixels
             val height = displayMetrics.heightPixels
 
@@ -118,8 +120,6 @@ class DetailActivity : AppCompatActivity() {
             mediaProjection = mediaProjectionManager!!.getMediaProjection(resultCode, data!!)
             val virtualDisplay = mediaProjection!!.createVirtualDisplay("screen-mirror", width, height,
                     displayMetrics.densityDpi, DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, mImageReader.surface, null, null)
-
-
 
             Handler(Looper.myLooper()!!).postDelayed({
                 try {
@@ -129,7 +129,6 @@ class DetailActivity : AppCompatActivity() {
                         val buffer: ByteBuffer = planes[0].buffer
                         val width: Int = image!!.width
                         val height: Int = image!!.height
-
                         val pixelStride: Int = planes[0].pixelStride
                         val rowStride: Int = planes[0].rowStride
                         val rowPadding = rowStride - pixelStride * width
@@ -168,15 +167,12 @@ class DetailActivity : AppCompatActivity() {
         val release= Build.MODEL
         if (release!=null){
             if (release.contains("HUAWEI")){
-
                 window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
             }
-
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             //5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色
-
             val decorView = window.decorView
             //两个 flag 要结合使用，表示让应用的主体内容占用系统状态栏的空间
             decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -210,7 +206,7 @@ class DetailActivity : AppCompatActivity() {
         when(item.itemId){
             R.id.edit -> {
                 val intent = Intent(this, EditNoteAttributeActivity::class.java)
-                intent.putExtra(LABEL,label)
+                intent.putExtra(LABEL, label)
                 startActivity(intent)
             }
 
@@ -219,13 +215,37 @@ class DetailActivity : AppCompatActivity() {
                 PermissionX.request(this,
                         Manifest.permission.CAMERA,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_EXTERNAL_STORAGE){
-                    allGranted,deniedList ->
+                        Manifest.permission.READ_EXTERNAL_STORAGE) { allGranted, deniedList ->
                     run {
                         if (allGranted) {
-                            takeScreenShotToShare()
+
+                            val view = window.decorView
+                            var bitmap :Bitmap
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                //获取layout的位置
+                                val location = IntArray(2)
+                                view.getLocationInWindow(location)
+                                //准备一个bitmap对象，用来将copy出来的区域绘制到此对象中
+                                bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888, true)
+                                PixelCopy.request(this.window,
+                                        Rect(location[0], location[1], location[0] + view.width, location[1] + view.height),
+                                        bitmap, { copyResult ->
+                                    //如果成功
+                                    if (copyResult == PixelCopy.SUCCESS) {
+                                        cutScreenShotToShare(bitmap)
+                                    }else{
+                                        Toast.makeText(this, "截图出现错误", Toast.LENGTH_SHORT).show()
+                                    }
+                                }, Handler(Looper.getMainLooper()))
+
+                            }else{
+                                takeScreenShotToShare()
+                            }
+
+
+
                         } else {
-                            Toast.makeText(this,"你拒绝了 $deniedList",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "你拒绝了 $deniedList", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -237,13 +257,38 @@ class DetailActivity : AppCompatActivity() {
                 PermissionX.request(this,
                         Manifest.permission.CAMERA,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_EXTERNAL_STORAGE){
-                    allGranted,deniedList ->
+                        Manifest.permission.READ_EXTERNAL_STORAGE) { allGranted, deniedList ->
                     run {
                         if (allGranted) {
-                            takeScreenShotToLock()
+
+                            val view = window.decorView
+                            var bitmap :Bitmap
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                //获取layout的位置
+                                val location = IntArray(2)
+                                view.getLocationInWindow(location)
+                                //准备一个bitmap对象，用来将copy出来的区域绘制到此对象中
+                                bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888, true)
+                                PixelCopy.request(this.window,
+                                        Rect(location[0], location[1], location[0] + view.width, location[1] + view.height),
+                                        bitmap, { copyResult ->
+                                    //如果成功
+                                    if (copyResult == PixelCopy.SUCCESS) {
+                                        cutScreenShotToLock(bitmap)
+                                    }else{
+                                        Toast.makeText(this, "截图出现错误", Toast.LENGTH_SHORT).show()
+                                    }
+                                }, Handler(Looper.getMainLooper()))
+
+
+                            }else{
+                                takeScreenShotToLock()
+                            }
+
+
+
                         } else {
-                            Toast.makeText(this,"你拒绝了 $deniedList",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "你拒绝了 $deniedList", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -267,7 +312,7 @@ class DetailActivity : AppCompatActivity() {
     private fun cutScreenShotToLock(bitmap: Bitmap) {
 
         val screenShot = getScreenShot(bitmap)
-        PictureUtil().savePictureToPhotoAlbum(this,screenShot)
+        PictureUtil().savePictureToPhotoAlbum(this, screenShot)
 
         MaterialAlertDialogBuilder(this)
                 .setTitle("锁屏设置")
@@ -300,7 +345,28 @@ class DetailActivity : AppCompatActivity() {
 
         //去掉状态栏和标题栏
 
-        return bitmap.let { Bitmap.createBitmap(it, 0, toolbarHeight + statusbarHeight, width, height - toolbarHeight - statusbarHeight) };
+        return bitmap.let { Bitmap.createBitmap(it, 0, toolbarHeight + statusbarHeight, width, height - toolbarHeight - statusbarHeight - getVirtualBarHeight()) }
+    }
+
+    private fun getVirtualBarHeight():Int{
+        var height = 0
+        val display = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            display
+        } else {
+            val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+            windowManager.defaultDisplay
+        }
+        val dm = DisplayMetrics()
+        try {
+            val c = Class.forName("android.view.Display")
+            val method = c.getMethod("getRealMetrics", DisplayMetrics::class.java)
+            method.invoke(display, dm)
+            val displayMetrics = resources.displayMetrics
+            height = dm.heightPixels - displayMetrics.heightPixels
+        } catch (e:Exception) {
+            e.printStackTrace()
+        }
+        return height
     }
 
 }

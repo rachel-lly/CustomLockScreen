@@ -26,7 +26,7 @@ class PictureUtil{
 
     fun shotShare(context: Context, bitmap: Bitmap){
 
-        bitmapName = "${System.currentTimeMillis()}"
+        bitmapName = "share"
         bitmapPath = "${getBitmapCacheDir(context)}/$bitmapName.png"
 
         SaveBitmap(context, bitmap)
@@ -38,7 +38,7 @@ class PictureUtil{
         bitmapName = "lock"
         bitmapPath = "${getBitmapCacheDir(context)}/$bitmapName.png"
         SaveBitmap(context, bitmap)
-        putBitmapToMedia(context,bitmapName,bitmap)
+        putBitmapToMedia(context, bitmapName, bitmap)
     }
 
 
@@ -99,9 +99,9 @@ class PictureUtil{
             bm.compress(Bitmap.CompressFormat.JPEG, 100, out)
             out?.flush()
             out?.close()
-            Toast.makeText(context,"图片保存成功",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "图片保存成功", Toast.LENGTH_SHORT).show()
         } catch (e: IOException) {
-            Toast.makeText(context,"图片保存失败",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "图片保存失败", Toast.LENGTH_SHORT).show()
             e.printStackTrace()
         }
     }
