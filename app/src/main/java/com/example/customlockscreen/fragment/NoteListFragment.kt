@@ -1,13 +1,18 @@
 package com.example.customlockscreen.fragment
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.app.Service
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -171,8 +176,20 @@ class NoteListFragment : Fragment() {
                                 .show()
                     }
 
-                    val intent = Intent(context,AlertService::class.java)
-                    context!!.startService(intent)
+//        val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"))
+//        calendar.set(year, month, day, hour, minute)
+
+//        manager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), pi)
+
+                    val alarmManager = context!!.getSystemService(Service.ALARM_SERVICE) as AlarmManager
+                    val anhour = 3 * 1000
+                    val triggerAtMillis = System.currentTimeMillis() + anhour
+                    val alarmIntent = Intent(context, AlertService::class.java)
+                    val pendingIntent = PendingIntent.getService(context, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+                    alarmManager.cancel(pendingIntent)
+
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent)
+
 
                     binding.homeRecyclerview.layoutManager = GridLayoutManager(this.context, 2)
 

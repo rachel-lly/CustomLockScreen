@@ -53,18 +53,6 @@ class AlertService : Service(){
 
         }.start()
 
-
-        val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
-        val anhour = 10 * 1000
-        val triggerAtMillis = SystemClock.elapsedRealtime() + anhour
-        val alarmIntent = Intent(this, AlertService::class.java)
-        val pendingIntent = PendingIntent.getService(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-        alarmManager.cancel(pendingIntent)
-
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtMillis, pendingIntent)
-
-        Log.e("hhhhhh","2")
-
         return super.onStartCommand(intent, flags, startId)
 
     }
