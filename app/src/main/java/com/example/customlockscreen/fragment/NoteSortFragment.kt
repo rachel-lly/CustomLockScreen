@@ -13,6 +13,7 @@ import com.example.customlockscreen.databinding.FragmentNoteSortBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.bean.SortNote
 import com.example.customlockscreen.model.db.DataViewModel
+import com.example.customlockscreen.util.SharedPreferenceCommission
 
 
 class NoteSortFragment : Fragment() {
@@ -37,7 +38,9 @@ class NoteSortFragment : Fragment() {
         list = ArrayList()
         labelList = ArrayList()
 
-        if(list.isEmpty()){
+        var isFirst by SharedPreferenceCommission(context!!, "isFirst", true)
+
+        if(isFirst&&list.isEmpty()){
             (list as ArrayList<SortNote>).add(SortNote("生活",resources.getResourceEntryName(R.mipmap.cat)))
             (list as ArrayList<SortNote>).add(SortNote("纪念日",resources.getResourceEntryName(R.mipmap.anniverity_color)))
             (list as ArrayList<SortNote>).add(SortNote("学习",resources.getResourceEntryName(R.mipmap.cactus)))
@@ -53,6 +56,7 @@ class NoteSortFragment : Fragment() {
         dataViewModel.getAllSortNotesByObserve().observe(this,{
             adapter.sortNoteList = it
             adapter.notifyDataSetChanged()
+            isFirst = false
         })
 
         dataViewModel.getAllLabelsByObserve().observe(this,{
