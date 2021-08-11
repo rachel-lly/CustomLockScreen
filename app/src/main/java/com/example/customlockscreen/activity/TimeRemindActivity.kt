@@ -1,11 +1,20 @@
 package com.example.customlockscreen.activity
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.app.Service
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
 import com.example.customlockscreen.R
 import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityTimeRemindBinding
+import com.example.customlockscreen.service.AlertService
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 
@@ -105,16 +114,65 @@ class TimeRemindActivity : AppCompatActivity() {
             isNowTimeRemind = binding.todayEventTimeSwitch.isChecked
             isFutureTimeRemind = binding.futureEventTimeSwitch.isChecked
 
+            if(isNowTimeRemind || isFutureTimeRemind){
+                // TODO: 2021/8/6 服务发送通知
+                val notificationManager: NotificationManagerCompat = NotificationManagerCompat.from(this)
+                val isEnabled = notificationManager.areNotificationsEnabled()
+                if(!isEnabled){
+                    MaterialAlertDialogBuilder(this)
+                            .setTitle("提示")
+                            .setMessage("是否允许应用打开通知权限？")
+                            .setNegativeButton(resources.getString(R.string.decline)){dialog,which ->
+                                Toast.makeText(this,"拒绝接收通知", Toast.LENGTH_SHORT).show()
+                                dialog.cancel()
+                            }
+                            .setPositiveButton(resources.getString(R.string.accept)){ dialog,which ->
+                                dialog.cancel()
+                                val intent = Intent()
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                    intent.action = "android.settings.APP_NOTIFICATION_SETTINGS"
+                                    intent.putExtra("android.provider.extra.APP_PACKAGE", packageName)
+                                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {  //5.0
+                                    intent.action = "android.settings.APP_NOTIFICATION_SETTINGS"
+                                    intent.putExtra("app_package", packageName)
+                                    intent.putExtra("app_uid", applicationInfo.uid)
+                                    startActivity(intent)
+                                } else {
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                    intent.action = "android.settings.APPLICATION_DETAILS_SETTINGS"
+                                    intent.data = Uri.fromParts("package", packageName, null)
+                                }
+                                startActivity(intent)
+                            }
+                            .show()
+                }
 
-            if(isNowTimeRemind){
-                nowRemind = nowRemindTime
+//        val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"))
+//        calendar.set(year, month, day, hour, minute)
 
+//        manager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), pi)
+
+                val alarmManager = getSystemService(Service.ALARM_SERVICE) as AlarmManager
+                val anhour = 3 * 1000
+                val triggerAtMillis = System.currentTimeMillis() + anhour
+                val alarmIntent = Intent(this, AlertService::class.java)
+                val pendingIntent = PendingIntent.getService(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+                alarmManager.cancel(pendingIntent)
+
+                alarmManager.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent)
+
+                if(isNowTimeRemind){
+                    nowRemind = nowRemindTime
+
+                }
+
+                if (isFutureTimeRemind){
+                    futureRemind = futureRemindTime
+
+                }
             }
 
-            if (isFutureTimeRemind){
-                futureRemind = futureRemindTime
 
-            }
         }
 
         setContentView(binding.root)
