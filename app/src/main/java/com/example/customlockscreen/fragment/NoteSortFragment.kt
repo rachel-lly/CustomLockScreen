@@ -12,7 +12,9 @@ import com.example.customlockscreen.adapter.SortNoteListAdapter
 import com.example.customlockscreen.databinding.FragmentNoteSortBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.bean.SortNote
+import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.model.db.DataViewModel
+import com.example.customlockscreen.model.db.SortNoteDao
 import com.example.customlockscreen.util.SharedPreferenceCommission
 
 
@@ -27,6 +29,7 @@ class NoteSortFragment : Fragment() {
 
     private lateinit var dataViewModel: DataViewModel
 
+    private lateinit var sortNoteDao: SortNoteDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +38,14 @@ class NoteSortFragment : Fragment() {
 
         binding = FragmentNoteSortBinding.inflate(LayoutInflater.from(this.context))
 
+        sortNoteDao = DataBase.dataBase.sortNoteDao()
+
         list = ArrayList()
         labelList = ArrayList()
+
+        adapter = context?.let { SortNoteListAdapter(it,list,labelList) }!!
+        binding.fragmentSortNoteRecycleview.adapter = adapter
+        binding.fragmentSortNoteRecycleview.layoutManager = GridLayoutManager(context,1)
 
         var isFirst by SharedPreferenceCommission(context!!, "isFirst", true)
 
@@ -44,19 +53,20 @@ class NoteSortFragment : Fragment() {
             (list as ArrayList<SortNote>).add(SortNote("生活",resources.getResourceEntryName(R.mipmap.cat)))
             (list as ArrayList<SortNote>).add(SortNote("纪念日",resources.getResourceEntryName(R.mipmap.anniverity_color)))
             (list as ArrayList<SortNote>).add(SortNote("学习",resources.getResourceEntryName(R.mipmap.cactus)))
+            for(sortNote in list){
+                sortNoteDao.insertSortNote(sortNote)
+            }
+
         }
-
-        adapter = context?.let { SortNoteListAdapter(it,list,labelList) }!!
-        binding.fragmentSortNoteRecycleview.adapter = adapter
-        binding.fragmentSortNoteRecycleview.layoutManager = GridLayoutManager(context,1)
-
 
         dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
 
         dataViewModel.getAllSortNotesByObserve().observe(this,{
             adapter.sortNoteList = it
             adapter.notifyDataSetChanged()
-            isFirst = false
+            if(isFirst){
+                isFirst = false
+            }
         })
 
         dataViewModel.getAllLabelsByObserve().observe(this,{
