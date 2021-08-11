@@ -8,26 +8,34 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "LABEL_TABLE")
 data class Label(
-        @PrimaryKey var text: String,
+        @ColumnInfo var text: String,
         @ColumnInfo var targetDate: Long,
         @ColumnInfo var addNoteTime:Long
         ) : Comparable<Any>,Parcelable {
 
-        @ColumnInfo var day = targetDate/(1000*3600*24)-System.currentTimeMillis()/(1000*3600*24)
+        @PrimaryKey(autoGenerate = true)
+        var id:Int = 0
 
+        @ColumnInfo
+        var day = targetDate/(1000*3600*24)-System.currentTimeMillis()/(1000*3600*24)
 
-        @ColumnInfo var sortNote :String = "生活"
+        @ColumnInfo
+        var sortNote :String = "生活"
 
-        @ColumnInfo var isTop :Boolean = false
+        @ColumnInfo
+        var isTop :Boolean = false
 
-        @ColumnInfo var isEnd = false
+        @ColumnInfo
+        var isEnd = false
 
-        @ColumnInfo var endDate:Long = Long.MAX_VALUE
+        @ColumnInfo
+        var endDate:Long = Long.MAX_VALUE
 
     constructor(parcel: Parcel) : this(
             parcel.readString()!!,
             parcel.readLong(),
             parcel.readLong()) {
+        id = parcel.readInt()
         day = parcel.readLong()
         sortNote = parcel.readString()!!
         isTop = parcel.readByte() != 0.toByte()
@@ -52,6 +60,7 @@ data class Label(
         parcel.writeString(text)
         parcel.writeLong(targetDate)
         parcel.writeLong(addNoteTime)
+        parcel.writeInt(id)
         parcel.writeLong(day)
         parcel.writeString(sortNote)
 

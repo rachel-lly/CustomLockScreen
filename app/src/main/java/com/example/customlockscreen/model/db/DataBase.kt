@@ -7,7 +7,7 @@ import com.example.customlockscreen.application.MyApplication
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.bean.SortNote
 
-@Database(entities = arrayOf(Label::class, SortNote::class),version = 1)
+@Database(entities = [Label::class, SortNote::class],version = 1)
 abstract class DataBase : RoomDatabase(){
 
     abstract fun labelDao():LabelDao
@@ -19,7 +19,7 @@ abstract class DataBase : RoomDatabase(){
         val dataBase :DataBase = Room.databaseBuilder(
                 MyApplication.getContext(),
                 DataBase::class.java,
-                "LabelEvent.db"
+                "LabelDB.db"
         )
                 .allowMainThreadQueries()
                 .build()
