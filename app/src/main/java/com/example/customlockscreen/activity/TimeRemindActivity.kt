@@ -17,6 +17,7 @@ import com.example.customlockscreen.service.AlertService
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import java.util.*
 
 
 class TimeRemindActivity : AppCompatActivity() {
@@ -147,19 +148,21 @@ class TimeRemindActivity : AppCompatActivity() {
                             .show()
                 }
 
-//        val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"))
-//        calendar.set(year, month, day, hour, minute)
 
-//        manager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), pi)
 
                 val alarmManager = getSystemService(Service.ALARM_SERVICE) as AlarmManager
-                val anhour = 3 * 1000
-                val triggerAtMillis = System.currentTimeMillis() + anhour
                 val alarmIntent = Intent(this, AlertService::class.java)
+                val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"))
+
+
+                //若设置多个定时任务 requestCode要设置多个 唯一性
                 val pendingIntent = PendingIntent.getService(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
                 alarmManager.cancel(pendingIntent)
 
-                alarmManager.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent)
+
+//                calendar.set(year, month, day, hour, minute)
+
+                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
 
                 if(isNowTimeRemind){
                     nowRemind = nowRemindTime

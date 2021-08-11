@@ -37,6 +37,12 @@ class NoteSortFragment : Fragment() {
         list = ArrayList()
         labelList = ArrayList()
 
+        if(list.isEmpty()){
+            (list as ArrayList<SortNote>).add(SortNote("生活",resources.getResourceEntryName(R.mipmap.cat)))
+            (list as ArrayList<SortNote>).add(SortNote("纪念日",resources.getResourceEntryName(R.mipmap.anniverity_color)))
+            (list as ArrayList<SortNote>).add(SortNote("学习",resources.getResourceEntryName(R.mipmap.cactus)))
+        }
+
         adapter = context?.let { SortNoteListAdapter(it,list,labelList) }!!
         binding.fragmentSortNoteRecycleview.adapter = adapter
         binding.fragmentSortNoteRecycleview.layoutManager = GridLayoutManager(context,1)

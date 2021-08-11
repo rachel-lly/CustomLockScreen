@@ -36,7 +36,7 @@ class SettingFragment : Fragment() {
 
         val sortStyle by SharedPreferenceCommission(context!!,"sortStyle","按事件时间")
 
-        EventBus.getDefault().post(sortStyle.let { MessageEvent(it) })
+        EventBus.getDefault().post(MessageEvent(sortStyle))
 
         binding.sortStyle.text = sortStyle
 
