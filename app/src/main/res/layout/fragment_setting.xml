@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/item_pressed_state"
         android:paddingStart="30dp"
-        android:paddingEnd="20dp"
+        android:paddingEnd="10dp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         >
@@ -78,6 +78,11 @@
             style="@style/linear_item_text_behind_icon"
             />
 
+        <ImageView
+            android:src="@mipmap/right"
+            style="@style/item_end_icon"
+            />
+
     </RelativeLayout>
 
     <View
@@ -91,7 +96,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/item_pressed_state"
         android:paddingStart="30dp"
-        android:paddingEnd="20dp"
+        android:paddingEnd="10dp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:layout_marginTop="15dp"
@@ -110,6 +115,11 @@
             style="@style/linear_item_text_behind_icon"
             />
 
+        <ImageView
+            android:src="@mipmap/right"
+            style="@style/item_end_icon"
+            />
+
     </RelativeLayout>
 
 
@@ -119,7 +129,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/item_pressed_state"
         android:paddingStart="30dp"
-        android:paddingEnd="20dp"
+        android:paddingEnd="10dp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:layout_marginTop="15dp"
@@ -136,6 +146,11 @@
             android:text="设置锁屏"
             android:layout_toEndOf="@+id/set_lock_screen_icon"
             style="@style/linear_item_text_behind_icon"
+            />
+
+        <ImageView
+            android:src="@mipmap/right"
+            style="@style/item_end_icon"
             />
 
     </RelativeLayout>
