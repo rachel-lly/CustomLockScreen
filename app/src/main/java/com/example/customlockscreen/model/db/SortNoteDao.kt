@@ -13,6 +13,9 @@ interface SortNoteDao {
     @Delete
     fun deleteSortNote(sortNote: SortNote)
 
+    @Query("DELETE FROM sort_note_table")
+    fun deleteAllSortNote()
+
     @Update
     fun updateSortNote(sortNote: SortNote)
 
@@ -25,4 +28,7 @@ interface SortNoteDao {
 
     @Query("SELECT name FROM sort_note_table")
     fun getAllSortNotesName():List<String>
+
+    @Query("SELECT COUNT(*) FROM sort_note_table")
+    fun getSortNoteCount():Int
 }

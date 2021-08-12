@@ -13,6 +13,9 @@ interface LabelDao {
     @Delete
     fun deleteLabel(label: Label)
 
+    @Query("DELETE FROM label_table")
+    fun deleteAllLabel()
+
     @Update
     fun updateLabel(label: Label)
 
@@ -31,4 +34,6 @@ interface LabelDao {
     @Query("SELECT * FROM label_table WHERE text =:text")
     fun getLabelByName(text:String):Label?
 
+    @Query("SELECT COUNT(*) FROM label_table")
+    fun getLabelCount():Int
 }

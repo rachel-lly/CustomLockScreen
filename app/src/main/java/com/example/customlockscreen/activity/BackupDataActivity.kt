@@ -55,7 +55,6 @@ class BackupDataActivity : AppCompatActivity() {
                 .setTitle("确定清空所有分类本吗？")
                 .setMessage("删除分类本之前会删除所有分类本下的事件记录")
                 .setPositiveButton(resources.getString(R.string.accept)){ dialog,which ->
-                    deleteAllLabel()
                     deleteAllSortNote()
                 }
                 .setNegativeButton(resources.getString(R.string.decline)){dialog,which ->
@@ -65,13 +64,12 @@ class BackupDataActivity : AppCompatActivity() {
     }
 
     private fun deleteAllSortNote() {
-        val sortNoteList = sortNoteDao.getAllSortNotes()
-        if (sortNoteList.isEmpty()){
+
+        if (sortNoteDao.getSortNoteCount() == 0){
             this.toast("当前无分类本")
         }else{
-            for(sortNote in sortNoteList){
-                sortNoteDao.deleteSortNote(sortNote)
-            }
+            labelDao.deleteAllLabel()
+            sortNoteDao.deleteAllSortNote()
             this.toast("已清空所有分类本及分类本下的事件")
         }
 
@@ -91,13 +89,11 @@ class BackupDataActivity : AppCompatActivity() {
     }
 
     private fun deleteAllLabel() {
-        val labelList = labelDao.getAllLabels()
-        if (labelList.isEmpty()){
+
+        if (labelDao.getLabelCount() == 0){
             this.toast("当前无事件记录")
         }else{
-            for(label in labelDao.getAllLabels()) {
-                labelDao.deleteLabel(label)
-            }
+            labelDao.deleteAllLabel()
             this.toast("已清空所有事件")
         }
     }
