@@ -3,13 +3,13 @@ package com.example.customlockscreen.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.SpannableStringBuilder
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.R
 import com.example.customlockscreen.adapter.IconListAdapter
 import com.example.customlockscreen.databinding.ActivityEditSortNoteBinding
 import com.example.customlockscreen.model.bean.SortNote
 import com.example.customlockscreen.model.db.DataBase
+import com.example.customlockscreen.util.ToastUtil.Companion.toast
 
 const val SORT_NOTE = "SORT_NOTE"
 
@@ -74,10 +74,10 @@ class EditSortNoteActivity : AppCompatActivity() {
             if(sortNote!=null){
 
                 if(labelDao.getSameSortNoteLabelList(sortNote!!.name).isNotEmpty()){
-                    Toast.makeText(this,"该分类本下有事件，删除失败",Toast.LENGTH_SHORT).show()
+                    this.toast("该分类本下有事件，删除失败")
                 }else{
                     sortNoteDao.deleteSortNote(sortNote!!)
-                    Toast.makeText(this,"删除分类本成功",Toast.LENGTH_SHORT).show()
+                    this.toast("删除分类本成功")
                     finish()
                 }
 
@@ -94,7 +94,7 @@ class EditSortNoteActivity : AppCompatActivity() {
 
             val iconName = resources.getResourceEntryName(iconList[mPosition])
             if(binding.editSortNoteCard.addSortNoteEt.text.isEmpty()){
-                Toast.makeText(this,"分类本文字不能为空",Toast.LENGTH_SHORT).show()
+                this.toast("分类本文字不能为空")
             }else{
                 val sortNoteName = binding.editSortNoteCard.addSortNoteEt.text.toString()
 
@@ -104,17 +104,17 @@ class EditSortNoteActivity : AppCompatActivity() {
 
                     if(sortNote!!.name.equals(sortNoteName)){
                         sortNoteDao.updateSortNote(addSortNote)
-                        Toast.makeText(this,"修改数据成功",Toast.LENGTH_SHORT).show()
+                        this.toast("修改数据成功")
                         finish()
                     }else{
                         val nameList = sortNoteDao.getAllSortNotesName()
 
                         if(nameList.contains(sortNoteName)){
-                            Toast.makeText(this,"该分类本已存在",Toast.LENGTH_SHORT).show()
+                            this.toast("该分类本已存在")
                         }else{
                             sortNoteDao.deleteSortNote(sortNote!!)
                             sortNoteDao.insertSortNote(addSortNote)
-                            Toast.makeText(this,"修改数据成功",Toast.LENGTH_SHORT).show()
+                            this.toast("修改数据成功")
                             finish()
                         }
                     }
@@ -124,7 +124,7 @@ class EditSortNoteActivity : AppCompatActivity() {
             }
 
         }else{
-            Toast.makeText(this,"请选择一个图标",Toast.LENGTH_SHORT).show()
+            this.toast("请选择一个图标")
         }
     }
 }

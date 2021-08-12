@@ -2,13 +2,13 @@ package com.example.customlockscreen.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.R
 import com.example.customlockscreen.adapter.IconListAdapter
 import com.example.customlockscreen.databinding.ActivityAddSortNoteBinding
 import com.example.customlockscreen.model.bean.SortNote
 import com.example.customlockscreen.model.db.DataBase
+import com.example.customlockscreen.util.ToastUtil.Companion.toast
 
 class AddSortNoteActivity : AppCompatActivity() {
 
@@ -66,7 +66,7 @@ class AddSortNoteActivity : AppCompatActivity() {
 
             val iconName = resources.getResourceEntryName(iconList[mPosition])
             if(binding.addSortNoteCard.addSortNoteEt.text.isEmpty()){
-                Toast.makeText(this,"分类本文字不能为空",Toast.LENGTH_SHORT).show()
+                this.toast("分类本文字不能为空")
             }else{
 
                 val sortNoteName = binding.addSortNoteCard.addSortNoteEt.text.toString()
@@ -74,16 +74,16 @@ class AddSortNoteActivity : AppCompatActivity() {
                 val nameList = sortNoteDao.getAllSortNotesName()
 
                 if(nameList.contains(sortNoteName)){
-                    Toast.makeText(this,"该分类本已存在",Toast.LENGTH_SHORT).show()
+                    this.toast("该分类本已存在")
                 }else{
                     sortNoteDao.insertSortNote(SortNote(sortNoteName,iconName))
-                    Toast.makeText(this,"保存数据成功",Toast.LENGTH_SHORT).show()
+                    this.toast("保存数据成功")
                     finish()
                 }
             }
 
         }else{
-            Toast.makeText(this,"请选择一个图标",Toast.LENGTH_SHORT).show()
+            this.toast("请选择一个图标")
         }
     }
 }

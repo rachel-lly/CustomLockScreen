@@ -2,13 +2,13 @@ package com.example.customlockscreen.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import com.example.customlockscreen.R
 import com.example.customlockscreen.util.PictureUtil
 import com.example.customlockscreen.databinding.ActivityBackupDataBinding
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.model.db.LabelDao
 import com.example.customlockscreen.model.db.SortNoteDao
+import com.example.customlockscreen.util.ToastUtil.Companion.toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File
 
@@ -67,12 +67,12 @@ class BackupDataActivity : AppCompatActivity() {
     private fun deleteAllSortNote() {
         val sortNoteList = sortNoteDao.getAllSortNotes()
         if (sortNoteList.isEmpty()){
-            Toast.makeText(this,"当前无分类本",Toast.LENGTH_SHORT).show()
+            this.toast("当前无分类本")
         }else{
             for(sortNote in sortNoteList){
                 sortNoteDao.deleteSortNote(sortNote)
             }
-            Toast.makeText(this,"已清空所有分类本及分类本下的事件",Toast.LENGTH_SHORT).show()
+            this.toast("已清空所有分类本及分类本下的事件")
         }
 
     }
@@ -93,12 +93,12 @@ class BackupDataActivity : AppCompatActivity() {
     private fun deleteAllLabel() {
         val labelList = labelDao.getAllLabels()
         if (labelList.isEmpty()){
-            Toast.makeText(this,"当前无事件记录",Toast.LENGTH_SHORT).show()
+            this.toast("当前无事件记录")
         }else{
             for(label in labelDao.getAllLabels()) {
                 labelDao.deleteLabel(label)
             }
-            Toast.makeText(this,"已清空所有事件",Toast.LENGTH_SHORT).show()
+            this.toast("已清空所有事件")
         }
     }
 
@@ -123,15 +123,14 @@ class BackupDataActivity : AppCompatActivity() {
 
         val fileDir = File(bitmapDir)
         if(!fileDir.exists()){
-            Toast.makeText(this,"暂无缓存图片",Toast.LENGTH_SHORT).show()
+            this.toast("暂无缓存图片")
         }else{
             delete(fileDir)
             fileDir.delete()
             if(!fileDir.exists()){
-                Toast.makeText(this,"清除缓存图片成功",Toast.LENGTH_SHORT).show()
+                this.toast("清除缓存图片成功")
             }
         }
-
 
     }
 

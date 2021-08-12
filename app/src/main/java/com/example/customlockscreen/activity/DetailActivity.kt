@@ -14,7 +14,6 @@ import android.os.*
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.*
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.updatePadding
@@ -23,6 +22,7 @@ import com.example.customlockscreen.util.PictureUtil
 import com.example.customlockscreen.databinding.ActivityDetailBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.db.DataBase
+import com.example.customlockscreen.util.ToastUtil.Companion.toast
 import com.example.library.PermissionX
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.lang.Exception
@@ -30,7 +30,6 @@ import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.abs
-
 
 const val LABEL_TEXT = "LABEL_TEXT"
 const val LABEL_IS_LOCK = "LABEL_IS_LOCK"
@@ -234,7 +233,7 @@ class DetailActivity : AppCompatActivity() {
                                     if (copyResult == PixelCopy.SUCCESS) {
                                         cutScreenShotToShare(bitmap)
                                     }else{
-                                        Toast.makeText(this, "截图出现错误", Toast.LENGTH_SHORT).show()
+                                        this.toast("截图出现错误")
                                     }
                                 }, Handler(Looper.getMainLooper()))
 
@@ -245,7 +244,7 @@ class DetailActivity : AppCompatActivity() {
 
 
                         } else {
-                            Toast.makeText(this, "你拒绝了 $deniedList", Toast.LENGTH_SHORT).show()
+                            this.toast("你拒绝了 $deniedList")
                         }
                     }
                 }
@@ -276,7 +275,7 @@ class DetailActivity : AppCompatActivity() {
                                     if (copyResult == PixelCopy.SUCCESS) {
                                         cutScreenShotToLock(bitmap)
                                     }else{
-                                        Toast.makeText(this, "截图出现错误", Toast.LENGTH_SHORT).show()
+                                        this.toast("截图出现错误")
                                     }
                                 }, Handler(Looper.getMainLooper()))
 
@@ -288,7 +287,7 @@ class DetailActivity : AppCompatActivity() {
 
 
                         } else {
-                            Toast.makeText(this, "你拒绝了 $deniedList", Toast.LENGTH_SHORT).show()
+                            this.toast("你拒绝了 $deniedList")
                         }
                     }
                 }

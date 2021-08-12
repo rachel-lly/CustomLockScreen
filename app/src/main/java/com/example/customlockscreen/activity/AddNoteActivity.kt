@@ -4,13 +4,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.customlockscreen.R
 import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityAddNoteBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.db.DataBase
+import com.example.customlockscreen.util.ToastUtil.Companion.toast
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
 import java.util.*
@@ -142,7 +142,7 @@ class AddNoteActivity : AppCompatActivity() {
 
             val noteText = binding.noteAttributeLayout.addNoteEt.text.toString()
             if(noteText.isEmpty()){
-                Toast.makeText(this,"事件不能为空",Toast.LENGTH_SHORT).show()
+                this.toast("事件不能为空")
             }else{
 
                 val todayTime = MaterialDatePicker.todayInUtcMilliseconds()
@@ -178,10 +178,10 @@ class AddNoteActivity : AppCompatActivity() {
                 val nameList = labelDao.getAllLabelsName()
 
                 if(nameList.contains(noteText)){
-                    Toast.makeText(this,"该事件已存在",Toast.LENGTH_SHORT).show()
+                    this.toast("该事件已存在")
                 }else{
                     labelDao.insertLabel(addLabel)
-                    Toast.makeText(this,"保存数据成功",Toast.LENGTH_SHORT).show()
+                    this.toast("保存数据成功")
                     finish()
                 }
 

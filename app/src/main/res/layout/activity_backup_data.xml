@@ -101,7 +101,7 @@
 
         <ImageView
             android:id="@+id/backup_sortnote_icon"
-            android:src="@mipmap/delete_label"
+            android:src="@mipmap/delete_waring"
             style="@style/linear_item_icon"
             />
 
