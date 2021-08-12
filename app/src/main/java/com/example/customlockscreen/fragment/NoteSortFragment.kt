@@ -49,14 +49,10 @@ class NoteSortFragment : Fragment() {
 
         var isFirst by SharedPreferenceCommission(context!!, "isFirst", true)
 
-        if(isFirst&&list.isEmpty()){
-            (list as ArrayList<SortNote>).add(SortNote("生活",resources.getResourceEntryName(R.mipmap.cat)))
-            (list as ArrayList<SortNote>).add(SortNote("纪念日",resources.getResourceEntryName(R.mipmap.anniverity_color)))
-            (list as ArrayList<SortNote>).add(SortNote("学习",resources.getResourceEntryName(R.mipmap.cactus)))
-            for(sortNote in list){
-                sortNoteDao.insertSortNote(sortNote)
-            }
-
+        if(isFirst){
+            sortNoteDao.insertSortNote(SortNote("生活",resources.getResourceEntryName(R.mipmap.cat)))
+            sortNoteDao.insertSortNote(SortNote("纪念日",resources.getResourceEntryName(R.mipmap.anniverity_color)))
+            sortNoteDao.insertSortNote(SortNote("学习",resources.getResourceEntryName(R.mipmap.cactus)))
         }
 
         dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)

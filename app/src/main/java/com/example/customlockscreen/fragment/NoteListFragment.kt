@@ -66,6 +66,14 @@ class NoteListFragment : Fragment() {
 
         labelList = ArrayList()
 
+        val isFirst by SharedPreferenceCommission(context!!, "isFirst", true)
+
+        if(isFirst){
+            val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"))
+            val year = calendar.get(Calendar.YEAR) + 1
+            calendar.set(year,0,1)
+            labelDao.insertLabel(Label("新年",calendar.timeInMillis,System.currentTimeMillis()))
+        }
 
         val style by SharedPreferenceCommission(context!!, "sortStyle", "按事件时间")
 
