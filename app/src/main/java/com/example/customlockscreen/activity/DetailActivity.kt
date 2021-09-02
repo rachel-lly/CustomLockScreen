@@ -22,13 +22,12 @@ import com.example.customlockscreen.util.PictureUtil
 import com.example.customlockscreen.databinding.ActivityDetailBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.db.DataBase
+import com.example.customlockscreen.util.TimeManager.Companion.format
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
 import com.example.library.PermissionX
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.lang.Exception
 import java.nio.ByteBuffer
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.math.abs
 
 const val LABEL_TEXT = "LABEL_TEXT"
@@ -48,8 +47,6 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var binding : ActivityDetailBinding
 
     private var labelIsLock = false
-
-    private val format = SimpleDateFormat("yyyy-MM-dd-EE", Locale.CHINESE)
 
     private val labelDao = DataBase.dataBase.labelDao()
 

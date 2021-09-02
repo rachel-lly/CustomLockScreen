@@ -10,10 +10,9 @@ import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityAddNoteBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.db.DataBase
+import com.example.customlockscreen.util.TimeManager.Companion.format
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
 import com.google.android.material.datepicker.MaterialDatePicker
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.time.ExperimentalTime
 
 const val SORT_NOTE_TEXT = "SORT_NOTE_TEXT"
@@ -28,8 +27,6 @@ class AddNoteActivity : AppCompatActivity() {
     private val ADD_NOTE_TIME_TAG = "ADD_NOTE_TIME_TAG"
 
     private var isFirstEndTime = true
-
-    private val format = SimpleDateFormat("yyyy-MM-dd-EE", Locale.CHINESE)
 
     private var targetDayTime:Long = MaterialDatePicker.todayInUtcMilliseconds()
 

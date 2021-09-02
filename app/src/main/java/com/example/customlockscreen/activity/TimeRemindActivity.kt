@@ -160,9 +160,6 @@ class TimeRemindActivity : AppCompatActivity() {
                         PackageManager.DONT_KILL_APP
                 )
 
-
-
-
                 val alarmManager = getSystemService(Service.ALARM_SERVICE) as AlarmManager
                 val alarmIntent = Intent(this, AlertService::class.java)
                 val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"))

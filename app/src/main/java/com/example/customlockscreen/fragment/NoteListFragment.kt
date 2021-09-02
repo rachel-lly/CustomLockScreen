@@ -18,10 +18,11 @@ import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.bean.MessageEvent
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.model.db.DataViewModel
+import com.example.customlockscreen.util.TimeManager.Companion.format
+import com.example.customlockscreen.util.TimeManager.Companion.refreshRoomLabelListDay
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -41,8 +42,6 @@ class NoteListFragment : Fragment() {
     private lateinit var labelLinearAdapter:LabelLinearAdapter
 
     private lateinit var labelGridAdapter:LabelGridAdapter
-
-    private val format = SimpleDateFormat("yyyy-MM-dd-EE", Locale.CHINESE)
 
     val targetTimeComparator = kotlin.Comparator { o1: Label, o2: Label ->
         return@Comparator o1.targetDate.compareTo(o2.targetDate)
@@ -301,25 +300,7 @@ class NoteListFragment : Fragment() {
         }
     }
 
-    fun refreshRoomLabelListDay(){
-        val allLabel : List<Label> = labelDao.getAllLabels()
-        val nowTime: Long = System.currentTimeMillis()
-        for(i in 0 until allLabel.size){
-            val refreshLabel = allLabel.get(i)
 
-            if(refreshLabel.endDate<=nowTime){
-
-                labelDao.deleteLabel(refreshLabel)
-
-            }else{
-
-                refreshLabel.day =  refreshLabel.targetDate/(1000*3600*24)-nowTime/(1000*3600*24)
-                labelDao.updateLabel(refreshLabel)
-
-            }
-
-        }
-    }
 
 }
 
