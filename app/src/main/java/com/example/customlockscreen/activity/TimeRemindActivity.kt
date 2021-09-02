@@ -3,7 +3,9 @@ package com.example.customlockscreen.activity
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.app.Service
+import android.content.ComponentName
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -14,6 +16,7 @@ import com.example.customlockscreen.R
 import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityTimeRemindBinding
 import com.example.customlockscreen.service.AlertService
+import com.example.customlockscreen.service.AlertBootReceiver
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -148,6 +151,16 @@ class TimeRemindActivity : AppCompatActivity() {
                             .show()
                 }
 
+                //开启通知后，启动开机自启
+                val receiver = ComponentName(this, AlertBootReceiver::class.java)
+
+                packageManager.setComponentEnabledSetting(
+                        receiver,
+                        PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                        PackageManager.DONT_KILL_APP
+                )
+
+
 
 
                 val alarmManager = getSystemService(Service.ALARM_SERVICE) as AlarmManager
@@ -156,13 +169,19 @@ class TimeRemindActivity : AppCompatActivity() {
 
 
                 //若设置多个定时任务 requestCode要设置多个 唯一性
+
                 val pendingIntent = PendingIntent.getService(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
                 alarmManager.cancel(pendingIntent)
 
+//                calendar.set(year, month, day, hour, 0)
 
-//                calendar.set(year, month, day, hour, minute)
 
-                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+                if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+                    //版本大于Android 6.0
+                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+                }else{
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+                }
 
                 if(isNowTimeRemind){
                     nowRemind = nowRemindTime
@@ -173,9 +192,15 @@ class TimeRemindActivity : AppCompatActivity() {
                     futureRemind = futureRemindTime
 
                 }
+            }else{
+                //取消开机自启
+                val receiver = ComponentName(this, AlertBootReceiver::class.java)
+                packageManager.setComponentEnabledSetting(
+                        receiver,
+                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                        PackageManager.DONT_KILL_APP
+                )
             }
-
-
         }
 
         setContentView(binding.root)

@@ -55,7 +55,7 @@
                 <TextView
                     style="@style/linear_item_text_behind_icon"
                     android:layout_toEndOf="@id/today_event_time_iv"
-                    android:text="当日事件提醒时间"
+                    android:text="当日事件提醒"
                     />
 
                 <androidx.appcompat.widget.SwitchCompat
@@ -140,7 +140,7 @@
                 <TextView
                     style="@style/linear_item_text_behind_icon"
                     android:layout_toEndOf="@id/future_today_event_time_iv"
-                    android:text="未来事件提醒时间"
+                    android:text="未来事件提醒"
                     />
 
                 <androidx.appcompat.widget.SwitchCompat
