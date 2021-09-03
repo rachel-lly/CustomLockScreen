@@ -17,6 +17,7 @@ import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityTimeRemindBinding
 import com.example.customlockscreen.service.AlertService
 import com.example.customlockscreen.service.AlertBootReceiver
+import com.example.customlockscreen.util.TimeManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -162,27 +163,14 @@ class TimeRemindActivity : AppCompatActivity() {
 
                 val alarmManager = getSystemService(Service.ALARM_SERVICE) as AlarmManager
                 val alarmIntent = Intent(this, AlertService::class.java)
-                val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"))
 
 
-                //若设置多个定时任务 requestCode要设置多个 唯一性
+                val isAPIM = Build.VERSION.SDK_INT>=Build.VERSION_CODES.M
 
-                val pendingIntent = PendingIntent.getService(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-                alarmManager.cancel(pendingIntent)
-
-//                calendar.set(year, month, day, hour, 0)
-
-
-                if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-                    //版本大于Android 6.0
-                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
-                }else{
-                    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
-                }
 
                 if(isNowTimeRemind){
                     nowRemind = nowRemindTime
-
+                    TimeManager().setTodayRemind(nowRemindTime,alarmManager,isAPIM,this,alarmIntent)
                 }
 
                 if (isFutureTimeRemind){
