@@ -1,5 +1,6 @@
 package com.example.customlockscreen.activity
 
+import android.Manifest
 import android.app.AlarmManager
 import android.app.Service
 import android.content.ComponentName
@@ -15,8 +16,10 @@ import com.example.customlockscreen.R
 import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityTimeRemindBinding
 import com.example.customlockscreen.service.AlertBootReceiver
+import com.example.customlockscreen.util.JumpToStartUpUtil
 import com.example.customlockscreen.util.TimeManager
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
+import com.example.library.PermissionX
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -159,6 +162,24 @@ class TimeRemindActivity : AppCompatActivity() {
                         PackageManager.DONT_KILL_APP
                 )
 
+
+                PermissionX.request(this,Manifest.permission.RECEIVE_BOOT_COMPLETED){ allGranted, deniedList ->
+                    if(!allGranted){
+                        MaterialAlertDialogBuilder(this)
+                                .setTitle("提示")
+                                .setMessage("是否允许应用开机自启动？")
+                                .setNegativeButton(resources.getString(R.string.decline)){dialog,which ->
+                                    Toast.makeText(this,"拒绝开机自启动", Toast.LENGTH_SHORT).show()
+                                    dialog.cancel()
+                                }
+                                .setPositiveButton(resources.getString(R.string.accept)){ dialog,which ->
+                                    dialog.cancel()
+                                    JumpToStartUpUtil.startToAutoStartSetting(this)
+                                }
+                                .show()
+                    }
+                }
+
                 val alarmManager = getSystemService(Service.ALARM_SERVICE) as AlarmManager
 
                 val isAPIM = Build.VERSION.SDK_INT>=Build.VERSION_CODES.M
@@ -185,7 +206,6 @@ class TimeRemindActivity : AppCompatActivity() {
                 )
             }
 
-            finish()
         }
 
         setContentView(binding.root)
