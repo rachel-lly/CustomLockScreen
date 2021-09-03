@@ -1,7 +1,6 @@
 package com.example.customlockscreen.activity
 
 import android.app.AlarmManager
-import android.app.PendingIntent
 import android.app.Service
 import android.content.ComponentName
 import android.content.Intent
@@ -15,13 +14,12 @@ import androidx.core.app.NotificationManagerCompat
 import com.example.customlockscreen.R
 import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityTimeRemindBinding
-import com.example.customlockscreen.service.AlertService
 import com.example.customlockscreen.service.AlertBootReceiver
 import com.example.customlockscreen.util.TimeManager
+import com.example.customlockscreen.util.ToastUtil.Companion.toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
-import java.util.*
 
 
 class TimeRemindActivity : AppCompatActivity() {
@@ -162,21 +160,21 @@ class TimeRemindActivity : AppCompatActivity() {
                 )
 
                 val alarmManager = getSystemService(Service.ALARM_SERVICE) as AlarmManager
-                val alarmIntent = Intent(this, AlertService::class.java)
-
 
                 val isAPIM = Build.VERSION.SDK_INT>=Build.VERSION_CODES.M
 
-
                 if(isNowTimeRemind){
                     nowRemind = nowRemindTime
-                    TimeManager().setTodayRemind(nowRemindTime,alarmManager,isAPIM,this,alarmIntent)
+                    TimeManager().setTodayRemind(nowRemindTime,alarmManager,isAPIM,this)
                 }
 
                 if (isFutureTimeRemind){
                     futureRemind = futureRemindTime
-
+                    TimeManager().setFutureRemind(futureRemindTime,alarmManager,isAPIM,this)
                 }
+
+                this.toast("已设置通知时间")
+
             }else{
                 //取消开机自启
                 val receiver = ComponentName(this, AlertBootReceiver::class.java)
@@ -186,6 +184,8 @@ class TimeRemindActivity : AppCompatActivity() {
                         PackageManager.DONT_KILL_APP
                 )
             }
+
+            finish()
         }
 
         setContentView(binding.root)

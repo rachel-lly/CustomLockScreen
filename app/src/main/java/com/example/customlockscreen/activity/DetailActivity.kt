@@ -30,7 +30,7 @@ import java.lang.Exception
 import java.nio.ByteBuffer
 import kotlin.math.abs
 
-const val LABEL_TEXT = "LABEL_TEXT"
+const val LABEL = "LABEL"
 const val LABEL_IS_LOCK = "LABEL_IS_LOCK"
 
 class DetailActivity : AppCompatActivity() {
@@ -47,8 +47,6 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var binding : ActivityDetailBinding
 
     private var labelIsLock = false
-
-    private val labelDao = DataBase.dataBase.labelDao()
 
     private lateinit var label: Label
 
@@ -69,14 +67,14 @@ class DetailActivity : AppCompatActivity() {
                 finish()
             }
 
-            val labelText = intent!!.getStringExtra(LABEL_TEXT)
+            label= intent.getParcelableExtra(LABEL)!!
             labelIsLock = intent!!.getBooleanExtra(LABEL_IS_LOCK, false)
 
             binding.detailCard.labelDay.updatePadding(0, 25, 0, 25)
 
-            label = labelText!!.let { labelDao.getLabelByName(it)!! }
 
-            binding.detailCard.labelText.text = labelText
+
+            binding.detailCard.labelText.text = label.text
             binding.detailCard.labelDate.text = format.format(label.targetDate)
 
             val day = label.day

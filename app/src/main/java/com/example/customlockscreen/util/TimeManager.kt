@@ -5,13 +5,16 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.os.Build
-import android.util.Log
+import com.example.customlockscreen.activity.LABEL
+import com.example.customlockscreen.application.MyApplication
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.db.DataBase
+import com.example.customlockscreen.service.AlertService
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+
+const val LABEL_TEXT = "LABEL_TEXT"
 
 class TimeManager {
 
@@ -24,8 +27,8 @@ class TimeManager {
         fun refreshRoomLabelListDay(){
             val allLabel : List<Label> = labelDao.getAllLabels()
             val nowTime: Long = System.currentTimeMillis()
-            for(i in 0 until allLabel.size){
-                val refreshLabel = allLabel.get(i)
+            for(i in allLabel.indices){
+                val refreshLabel = allLabel[i]
 
                 if(refreshLabel.endDate<=nowTime){
 
@@ -49,7 +52,7 @@ class TimeManager {
         val res = ArrayList<Label>()
 
         for(label in list){
-            if(label.day in 0..3){//5天之内加入提醒
+            if(label.day in 0..3){//3天之内加入提醒
                 res.add(label)
             }
         }
@@ -63,7 +66,7 @@ class TimeManager {
         val res = ArrayList<Label>()
 
         for(label in list){
-            if(label.day in 1..6){//5天之内加入提醒
+            if(label.day in 3..6){//提前3天加入提醒
                 res.add(label)
             }
         }
@@ -71,47 +74,60 @@ class TimeManager {
     }
 
 
-    fun setTodayRemind(remindTime:Int, alarmManager: AlarmManager, isLargerM: Boolean,context: Context,alarmIntent: Intent){
-        setRemind(remindTime,alarmManager,isLargerM,context,alarmIntent,getTodayRemindList())
+    fun setTodayRemind(remindTime:Int, alarmManager: AlarmManager, isLargerM: Boolean,context: Context){
+        setRemind(remindTime,alarmManager,isLargerM,context,getTodayRemindList(),false)
     }
 
-    fun setFutureRemind(remindTime:Int, alarmManager: AlarmManager, isLargerM: Boolean,context: Context,alarmIntent: Intent){
-        setRemind(remindTime,alarmManager,isLargerM,context,alarmIntent,getFutureRemindList())
+    fun setFutureRemind(remindTime:Int, alarmManager: AlarmManager, isLargerM: Boolean,context: Context){
+        setRemind(remindTime,alarmManager,isLargerM,context,getFutureRemindList(),true)
     }
 
     @SuppressLint("NewApi")
-    fun setRemind(remindTime:Int, alarmManager: AlarmManager, isLargerM: Boolean,context: Context,alarmIntent: Intent,remindList: List<Label>){
+    fun setRemind(remindTime:Int, alarmManager: AlarmManager, isLargerM: Boolean,context: Context,remindList: List<Label>,isFuture: Boolean){
 
         val hour = remindTime/60
         val min = remindTime%60
 
+
+        val alarmIntent = Intent(MyApplication.getContext(), AlertService::class.java)
         val calendar:Calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"))
 
         if(isLargerM){
             for(label in remindList){
                 //若设置多个定时任务 requestCode要设置多个 唯一性
+               alarmIntent.putExtra(LABEL_TEXT,label.text)
+
                 val pendingIntent = PendingIntent.getService(context, label.id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+
                 alarmManager.cancel(pendingIntent)
 
                 calendar.time = Date(label.targetDate)
-                Log.e("(>=M)Time","${label.targetDate}----->day:${calendar.get(Calendar.DAY_OF_MONTH)}--hour:${calendar.get(Calendar.HOUR)}--min::${calendar.get(Calendar.MINUTE)}")
+
+               if(isFuture){
+                    calendar.add(Calendar.DAY_OF_MONTH,-3)
+                }
+
                 calendar.set(Calendar.HOUR,hour)
                 calendar.set(Calendar.MINUTE,min)
-                Log.e("(>=M)TimeChange","${label.targetDate}----->day:${calendar.get(Calendar.DAY_OF_MONTH)}--hour:${calendar.get(Calendar.HOUR)}--min::${calendar.get(Calendar.MINUTE)}")
                 alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
             }
         }else{
             for(label in remindList){
 
+                alarmIntent.putExtra(LABEL_TEXT,label.text)
+
                 val pendingIntent = PendingIntent.getService(context, label.id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
                 alarmManager.cancel(pendingIntent)
 
                 calendar.time = Date(label.targetDate)
-                Log.e("Time","${label.targetDate}----->day:${calendar.get(Calendar.DAY_OF_MONTH)}--hour:${calendar.get(Calendar.HOUR)}--min::${calendar.get(Calendar.MINUTE)}")
+
+                if(isFuture){
+                    calendar.add(Calendar.DAY_OF_MONTH,-3)
+                }
+
                 calendar.set(Calendar.HOUR,hour)
                 calendar.set(Calendar.MINUTE,min)
-                Log.e("Time","${label.targetDate}----->day:${calendar.get(Calendar.DAY_OF_MONTH)}--hour:${calendar.get(Calendar.HOUR)}--min::${calendar.get(Calendar.MINUTE)}")
-                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
+               alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
             }
         }
 

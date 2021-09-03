@@ -10,8 +10,8 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.customlockscreen.R
 import com.example.customlockscreen.activity.DetailActivity
+import com.example.customlockscreen.activity.LABEL
 import com.example.customlockscreen.activity.LABEL_IS_LOCK
-import com.example.customlockscreen.activity.LABEL_TEXT
 import com.example.customlockscreen.databinding.CardItemLinearBinding
 import com.example.customlockscreen.model.bean.Label
 import kotlin.math.abs
@@ -38,7 +38,7 @@ class LabelLinearAdapter(val context: Context, var labelList:List<Label>,val isL
             val label = labelList[position]
 
             val intent = Intent(context, DetailActivity::class.java).apply {
-                putExtra(LABEL_TEXT,label.text)
+                putExtra(LABEL,label)
                 putExtra(LABEL_IS_LOCK,isLock)
             }
             context.startActivity(intent)

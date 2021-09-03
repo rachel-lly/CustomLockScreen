@@ -15,8 +15,6 @@ import com.example.customlockscreen.util.TimeManager.Companion.format
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
 import com.google.android.material.datepicker.MaterialDatePicker
 
-const val LABEL = "LABEL"
-
 class EditNoteAttributeActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityEditNoteAttributeBinding
