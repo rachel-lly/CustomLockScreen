@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.MineFragment"
-    android:background="#fefefe"
+    android:background="#fcfcfc"
     android:paddingStart="30dp"
     android:paddingEnd="30dp"
     android:paddingTop="40dp">
@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:text="May 9,2020"
             android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/color_normal"
             android:layout_marginTop="5dp"
             />
 
@@ -33,6 +34,7 @@
             android:layout_height="wrap_content"
             android:text="ME"
             android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/color_bold"
             android:textSize="25sp"
             android:layout_below="@id/mine_time"
             android:layout_marginTop="5dp"
@@ -60,6 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="20dp"
+            android:background="#fff"
             >
 
             <LinearLayout
@@ -75,6 +78,7 @@
                     android:text="事件记录"
                     android:textSize="13sp"
                     android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/color_normal"
                     android:layout_gravity="center"
                     />
 
@@ -84,6 +88,7 @@
                     android:layout_height="wrap_content"
                     android:text="10"
                     android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/color_bold"
                     android:textSize="25sp"
                     android:layout_gravity="center"
                     android:layout_marginTop="3dp"
@@ -122,6 +127,7 @@
                     android:text="分类本"
                     android:textSize="13sp"
                     android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/color_normal"
                     android:layout_gravity="center"
                     />
 
@@ -131,6 +137,7 @@
                     android:layout_height="wrap_content"
                     android:text="3"
                     android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/color_bold"
                     android:textSize="25sp"
                     android:layout_gravity="center"
                     android:layout_marginTop="3dp"
@@ -170,6 +177,7 @@
                     android:text="使用天数"
                     android:textSize="13sp"
                     android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/color_normal"
                     android:layout_gravity="center"
                     />
 
@@ -179,6 +187,7 @@
                     android:layout_height="wrap_content"
                     android:text="103"
                     android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/color_bold"
                     android:textSize="25sp"
                     android:layout_gravity="center"
                     android:layout_marginTop="3dp"

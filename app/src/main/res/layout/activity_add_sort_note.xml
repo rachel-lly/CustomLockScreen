@@ -34,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="添加"
+        android:textColor="@color/white"
         android:layout_below="@id/add_sort_note_card"
         android:layout_marginTop="30dp"
         android:layout_marginStart="10dp"

@@ -49,6 +49,7 @@
                 android:textSize="40sp"
                 android:text="7"
                 android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/color_bold"
                 android:background="#fcfcfc"
                 android:maxLines="1"
                 />
@@ -64,6 +65,7 @@
                 android:text="2020-04-23 星期五"
                 android:textSize="12sp"
                 android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/color_normal"
                 android:background="#f6f5f3"
                 android:maxLines="1"
                 />

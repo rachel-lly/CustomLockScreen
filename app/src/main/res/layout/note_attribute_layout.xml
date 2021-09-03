@@ -14,7 +14,6 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"
-        android:background="#fff"
         >
 
         <LinearLayout
@@ -24,6 +23,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingBottom="15dp"
+            android:background="#fff"
             >
 
             <LinearLayout
@@ -81,6 +81,7 @@
                     android:textSize="10sp"
                     android:layout_gravity="bottom"
                     android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/color_normal"
                     android:layout_marginStart="3dp"
                     />
 
@@ -216,59 +217,67 @@
         android:layout_marginEnd="10dp"
         >
         <RelativeLayout
-            android:id="@+id/end_time_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="20dp"
+            android:layout_height="match_parent"
+            android:background="#fff"
             >
+            <RelativeLayout
+                android:id="@+id/end_time_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="20dp"
 
-            <ImageView
-                android:id="@+id/end_time_iv"
-                android:src="@mipmap/end_time"
-                style="@style/linear_item_icon"
-                />
+                >
 
-            <TextView
-                android:id="@+id/end_time_text"
-                style="@style/linear_item_text_behind_icon"
-                android:layout_toEndOf="@id/end_time_iv"
-                android:text="结束时间"
-                />
+                <ImageView
+                    android:id="@+id/end_time_iv"
+                    android:src="@mipmap/end_time"
+                    style="@style/linear_item_icon"
+                    />
 
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/end_time_switch"
-                android:layout_width="55dp"
-                android:layout_height="20dp"
-                android:layout_alignParentEnd="true"
-                />
+                <TextView
+                    android:id="@+id/end_time_text"
+                    style="@style/linear_item_text_behind_icon"
+                    android:layout_toEndOf="@id/end_time_iv"
+                    android:text="结束时间"
+                    />
 
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/end_time_switch"
+                    android:layout_width="55dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/end_time_date_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="15dp"
+                >
+
+                <TextView
+                    android:id="@+id/end_time_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2021-04-15 星期五"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="10dp"
+                    />
+
+            </LinearLayout>
         </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/end_time_date_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="15dp"
-            >
-
-            <TextView
-                android:id="@+id/end_time_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2021-04-15 星期五"
-                android:textSize="14sp"
-                android:textColor="@color/colorPrimaryDark"
-                android:fontFamily="@font/montserrat_medium"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="10dp"
-                />
-
-        </LinearLayout>
 
 
     </com.google.android.material.card.MaterialCardView>

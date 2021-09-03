@@ -27,5 +27,8 @@
     <color name="line_color_gray">#d9dddf</color>
 
     <color name="text_more_gray">#4a4b50</color>
+
+    <color name="color_bold">#747474</color>
+    <color name="color_normal">#757575</color>
     
 </resources>

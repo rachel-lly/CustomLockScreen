@@ -38,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="保存"
+            android:textColor="@color/white"
             android:layout_below="@id/note_attribute_layout"
             android:layout_marginTop="30dp"
             android:layout_marginStart="10dp"

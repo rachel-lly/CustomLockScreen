@@ -29,6 +29,7 @@
                 android:id="@+id/sort_tx"
                 style="@style/linear_item_text_behind_icon"
                 android:text="纪念日"
+
                 android:layout_toEndOf="@id/sort_icon"
                 android:layout_centerVertical="true"
                 />
@@ -58,6 +59,7 @@
             android:layout_height="wrap_content"
             android:text="还有 3 天"
             android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/color_normal"
             android:textSize="10sp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"

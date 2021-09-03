@@ -37,7 +37,7 @@
                 android:layout_weight="3"
                 android:gravity="center"
                 android:paddingStart="15dp"
-                android:background="#f3f5f6"
+                android:background="#fcfcfc"
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
                 />
