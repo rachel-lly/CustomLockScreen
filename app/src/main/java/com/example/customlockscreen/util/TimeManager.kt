@@ -5,8 +5,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import com.example.customlockscreen.activity.LABEL
-import com.example.customlockscreen.application.MyApplication
+import android.util.Log
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.service.AlertService
@@ -74,59 +73,57 @@ class TimeManager {
     }
 
 
-    fun setTodayRemind(remindTime:Int, alarmManager: AlarmManager, isLargerM: Boolean,context: Context){
-        setRemind(remindTime,alarmManager,isLargerM,context,getTodayRemindList(),false)
+    fun setTodayRemind(remindTime: Int, alarmManager: AlarmManager, isLargerM: Boolean, context: Context){
+        setRemind(remindTime, alarmManager, isLargerM, context, getTodayRemindList(), false)
     }
 
-    fun setFutureRemind(remindTime:Int, alarmManager: AlarmManager, isLargerM: Boolean,context: Context){
-        setRemind(remindTime,alarmManager,isLargerM,context,getFutureRemindList(),true)
+    fun setFutureRemind(remindTime: Int, alarmManager: AlarmManager, isLargerM: Boolean, context: Context){
+        setRemind(remindTime, alarmManager, isLargerM, context, getFutureRemindList(), true)
     }
 
     @SuppressLint("NewApi")
-    fun setRemind(remindTime:Int, alarmManager: AlarmManager, isLargerM: Boolean,context: Context,remindList: List<Label>,isFuture: Boolean){
+    fun setRemind(remindTime: Int, alarmManager: AlarmManager, isLargerM: Boolean, context: Context, remindList: List<Label>, isFuture: Boolean){
 
         val hour = remindTime/60
         val min = remindTime%60
 
 
-        val alarmIntent = Intent(MyApplication.getContext(), AlertService::class.java)
+        val alarmIntent = Intent(context, AlertService::class.java)
         val calendar:Calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"))
 
         if(isLargerM){
             for(label in remindList){
                 //若设置多个定时任务 requestCode要设置多个 唯一性
-               alarmIntent.putExtra(LABEL_TEXT,label.text)
-
+               alarmIntent.putExtra(LABEL_TEXT, label.text)
+                alarmIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                 val pendingIntent = PendingIntent.getService(context, label.id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-
-                alarmManager.cancel(pendingIntent)
+                Log.e("Time", "${label.text}--${label.id}")
 
                 calendar.time = Date(label.targetDate)
 
                if(isFuture){
-                    calendar.add(Calendar.DAY_OF_MONTH,-3)
+                    calendar.add(Calendar.DAY_OF_MONTH, -3)
                 }
 
-                calendar.set(Calendar.HOUR,hour)
-                calendar.set(Calendar.MINUTE,min)
+                calendar.set(Calendar.HOUR, hour)
+                calendar.set(Calendar.MINUTE, min)
                 alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
             }
         }else{
             for(label in remindList){
 
-                alarmIntent.putExtra(LABEL_TEXT,label.text)
-
+                alarmIntent.putExtra(LABEL_TEXT, label.text)
+                alarmIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                 val pendingIntent = PendingIntent.getService(context, label.id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-                alarmManager.cancel(pendingIntent)
 
                 calendar.time = Date(label.targetDate)
 
                 if(isFuture){
-                    calendar.add(Calendar.DAY_OF_MONTH,-3)
+                    calendar.add(Calendar.DAY_OF_MONTH, -3)
                 }
 
-                calendar.set(Calendar.HOUR,hour)
-                calendar.set(Calendar.MINUTE,min)
+                calendar.set(Calendar.HOUR, hour)
+                calendar.set(Calendar.MINUTE, min)
                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.timeInMillis, pendingIntent)
             }
         }
