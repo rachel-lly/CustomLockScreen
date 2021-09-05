@@ -43,7 +43,6 @@
                 android:fontFamily="@font/montserrat_medium"
                 android:textColor="#fff"
                 android:gravity="center"
-                android:layout_gravity="center_vertical"
                 android:background="@drawable/circle_tv_bg"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/sort_tx"

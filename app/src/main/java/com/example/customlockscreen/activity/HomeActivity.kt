@@ -148,7 +148,6 @@ class HomeActivity : AppCompatActivity() {
         })
 
 
-        binding.homeNavigationView.inflateMenu(R.menu.home_navigation_view)
         binding.homeNavigationView.setOnNavigationItemSelectedListener {
 
             for(i in 0 until fragmentList.size){
