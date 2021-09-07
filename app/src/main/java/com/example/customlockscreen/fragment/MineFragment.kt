@@ -4,7 +4,9 @@ import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.database.Cursor
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.ImageDecoder
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -55,8 +57,7 @@ class MineFragment : Fragment() {
 
         binding.mineAvater.setOnClickListener {
             PermissionX.request(activity!!,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.CAMERA){ allgranted, deniedList ->
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE){ allgranted, deniedList ->
 
                 if(allgranted){
                     //跳转系统相册
@@ -94,18 +95,26 @@ class MineFragment : Fragment() {
             IMAGE_REQUEST_CODE -> {
                 if (resultCode == RESULT_OK) {
                     val selectedImageUri = data!!.data
-                    val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-                    val cursor: Cursor = selectedImageUri?.let {
-                        context?.contentResolver?.query(it,
-                                filePathColumn, null, null, null)
-                    }!! //从系统表中查询指定Uri对应的照片
 
-                    cursor.moveToFirst()
-                    val columnIndex: Int = cursor.getColumnIndex(filePathColumn[0])
-                    val path = cursor.getString(columnIndex) //获取照片路径
+                    val bitmap: Bitmap
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                        val source = ImageDecoder.createSource(context!!.contentResolver,selectedImageUri!!)
+                        bitmap = ImageDecoder.decodeBitmap(source)
+                    }else{
+                        val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+                        val cursor: Cursor = selectedImageUri?.let {
+                            context?.contentResolver?.query(it,
+                                    filePathColumn, null, null, null)
+                        }!! //从系统表中查询指定Uri对应的照片
+                        cursor.moveToFirst()
+                        val columnIndex: Int = cursor.getColumnIndex(filePathColumn[0])
+                        val path = cursor.getString(columnIndex) //获取照片路径
 
-                    cursor.close()
-                    val bitmap = BitmapFactory.decodeFile(path)
+                        cursor.close()
+                        bitmap = BitmapFactory.decodeFile(path)
+                    }
+
+
                     binding.mineAvater.setImageBitmap(bitmap)
                 }
             }

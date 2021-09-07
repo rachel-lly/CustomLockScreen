@@ -36,8 +36,8 @@
 
             <TextView
                 android:id="@+id/sort_count"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:text="111"
                 android:textSize="10sp"
                 android:fontFamily="@font/montserrat_medium"
@@ -77,8 +77,6 @@
             android:layout_toStartOf="@+id/sort_note_day"
             android:layout_centerVertical="true"
             />
-
-
 
     </RelativeLayout>
 

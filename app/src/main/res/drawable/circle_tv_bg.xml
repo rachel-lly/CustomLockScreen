@@ -2,20 +2,14 @@
 <shape
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval"
+    android:useLevel="false"
     >
 
     <solid android:color="@color/text_bg_gray"/>
 
     <size
-        android:width="16dp"
-        android:height="16dp"
-        />
-
-    <padding
-        android:top="1dp"
-        android:bottom="1dp"
-        android:left="1dp"
-        android:right="1dp"
+        android:width="20dp"
+        android:height="20dp"
         />
 
 </shape>
