@@ -34,20 +34,26 @@
                 android:layout_centerVertical="true"
                 />
 
-            <TextView
-                android:id="@+id/sort_count"
+            <RelativeLayout
                 android:layout_width="18dp"
                 android:layout_height="18dp"
-                android:text="111"
-                android:textSize="10sp"
-                android:fontFamily="@font/montserrat_medium"
-                android:textColor="#fff"
-                android:gravity="center"
                 android:background="@drawable/circle_tv_bg"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/sort_tx"
                 android:layout_centerVertical="true"
-                />
+                >
+                <TextView
+                    android:id="@+id/sort_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="111"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="#fff"
+                    android:layout_centerInParent="true"
+                    />
+            </RelativeLayout>
+
 
 
 
