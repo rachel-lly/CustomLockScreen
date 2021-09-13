@@ -8,16 +8,15 @@
     android:layout_height="match_parent"
     tools:context=".fragment.MineFragment"
     android:background="#fcfcfc"
-    android:paddingStart="30dp"
-    android:paddingEnd="30dp"
-    android:paddingTop="40dp">
+    >
 
     <RelativeLayout
         android:id="@+id/mine_header_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="40dp"
         >
 
         <TextView
@@ -51,177 +50,172 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/expanded_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="120dp"
-        android:visibility="gone"
-        />
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/mine_header_layout"
-        android:layout_marginTop="30dp"
-        app:cardCornerRadius="10dp"
-        >
-
-        <LinearLayout
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/main_card"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="20dp"
-            android:background="#fff"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mine_header_layout"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            app:cardCornerRadius="10dp"
             >
 
             <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:background="#fff"
                 >
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="事件记录"
-                    android:textSize="13sp"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textColor="@color/color_normal"
-                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="事件记录"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/color_normal"
+                        android:layout_gravity="center"
+                        />
+
+                    <TextView
+                        android:id="@+id/event_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/color_bold"
+                        android:textSize="25sp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="5dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="EVENTS"
+                        android:textSize="8sp"
+                        android:textColor="#fff"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:background="@drawable/rectangle_tv_bg"
+                        android:layout_gravity="center"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    style="@style/vertical_line"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+
                     />
 
-                <TextView
-                    android:id="@+id/event_num"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="10"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textColor="@color/color_bold"
-                    android:textSize="25sp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginBottom="5dp"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="分类本"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/color_normal"
+                        android:layout_gravity="center"
+                        />
+
+                    <TextView
+                        android:id="@+id/sort_note_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/color_bold"
+                        android:textSize="25sp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="5dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NOTES"
+                        android:textSize="8sp"
+                        android:textColor="#fff"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:background="@drawable/rectangle_tv_bg"
+                        android:layout_gravity="center"
+                        />
+
+
+                </LinearLayout>
+
+                <View
+                    style="@style/vertical_line"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     />
-                <TextView
-                    android:layout_width="wrap_content"
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="EVENTS"
-                    android:textSize="8sp"
-                    android:textColor="#fff"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:background="@drawable/rectangle_tv_bg"
-                    android:layout_gravity="center"
-                    />
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="使用天数"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/color_normal"
+                        android:layout_gravity="center"
+                        />
+
+                    <TextView
+                        android:id="@+id/use_day_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="103"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/color_bold"
+                        android:textSize="25sp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="5dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="DAYS"
+                        android:textSize="8sp"
+                        android:textColor="#fff"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:background="@drawable/rectangle_tv_bg"
+                        android:layout_gravity="center"
+                        />
+
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
-            <View
-                style="@style/vertical_line"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-
-                />
-
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="分类本"
-                    android:textSize="13sp"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textColor="@color/color_normal"
-                    android:layout_gravity="center"
-                    />
-
-                <TextView
-                    android:id="@+id/sort_note_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textColor="@color/color_bold"
-                    android:textSize="25sp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginBottom="5dp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="NOTES"
-                    android:textSize="8sp"
-                    android:textColor="#fff"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:background="@drawable/rectangle_tv_bg"
-                    android:layout_gravity="center"
-                    />
-
-
-            </LinearLayout>
-
-            <View
-                style="@style/vertical_line"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                />
-
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="使用天数"
-                    android:textSize="13sp"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textColor="@color/color_normal"
-                    android:layout_gravity="center"
-                    />
-
-                <TextView
-                    android:id="@+id/use_day_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="103"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textColor="@color/color_bold"
-                    android:textSize="25sp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginBottom="5dp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="DAYS"
-                    android:textSize="8sp"
-                    android:textColor="#fff"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:background="@drawable/rectangle_tv_bg"
-                    android:layout_gravity="center"
-                    />
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
+        </com.google.android.material.card.MaterialCardView>
 
 
 
