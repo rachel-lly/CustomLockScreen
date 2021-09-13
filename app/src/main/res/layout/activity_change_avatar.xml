@@ -38,6 +38,7 @@
 
 
         <Button
+            android:id="@+id/change_avatar_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/header_avatar_Layout"
