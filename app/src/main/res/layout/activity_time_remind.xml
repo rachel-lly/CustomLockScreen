@@ -63,6 +63,7 @@
                     android:id="@+id/today_event_time_switch"
                     android:layout_width="55dp"
                     android:layout_height="20dp"
+                    android:theme="@style/switchStyle"
                     android:layout_alignParentEnd="true"
                     />
 
@@ -148,6 +149,7 @@
                     android:id="@+id/future_event_time_switch"
                     android:layout_width="55dp"
                     android:layout_height="20dp"
+                    android:theme="@style/switchStyle"
                     android:layout_alignParentEnd="true"
                     />
 

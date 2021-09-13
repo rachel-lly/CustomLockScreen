@@ -49,7 +49,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:menu="@menu/home_navigation_view"
-                android:backgroundTint="@color/white"
+                android:background="@color/white"
+                app:itemIconTint="@color/bottom_navigation_view_color"
+                app:itemTextColor="@color/bottom_navigation_view_color"
                 app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
                 />
 

@@ -9,6 +9,7 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.customlockscreen.R
@@ -55,7 +56,7 @@ class MineFragment : Fragment() {
         binding.mineAvater.setOnClickListener {
             val intent = Intent(activity,ChangeAvatarActivity::class.java)
             startActivity(intent)
-            activity?.overridePendingTransition(R.anim.activity_open_enter,R.anim.activity_open_exit)
+            activity!!.overridePendingTransition(R.anim.activity_open_enter,R.anim.activity_open_exit)
         }
 
         dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
