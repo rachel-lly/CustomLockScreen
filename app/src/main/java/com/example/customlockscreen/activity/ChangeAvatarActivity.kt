@@ -1,10 +1,13 @@
 package com.example.customlockscreen.activity
 
 import android.Manifest
+import android.app.ActivityOptions
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.transition.*
+import android.view.Window
 import com.example.customlockscreen.R
 import com.example.customlockscreen.databinding.ActivityChangeAvatarBinding
 import com.example.customlockscreen.fragment.IMAGE_REQUEST_CODE
@@ -20,13 +23,13 @@ class ChangeAvatarActivity : AppCompatActivity() {
 
         binding = ActivityChangeAvatarBinding.inflate(layoutInflater)
 
+
         setSupportActionBar(binding.changeAvatarToolbar)
 
         supportActionBar?.setDisplayShowTitleEnabled(false)
         binding.changeAvatarToolbar.setNavigationIcon(R.mipmap.back)
         binding.changeAvatarToolbar.setNavigationOnClickListener {
-            finish()
-            overridePendingTransition(R.anim.activity_close_enter,R.anim.activity_close_exit)
+            supportFinishAfterTransition()
         }
 
         binding.changeAvatarButton.setOnClickListener {

@@ -34,6 +34,11 @@
     </style>
 
 
+    <style name="MaterialAnimations" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowContentTransitions">true</item>
+    </style>
+
+
 
     <style name="switchStyle" parent="Theme.AppCompat.Light">
         <item name="colorControlActivated">@color/colorPrimary</item>

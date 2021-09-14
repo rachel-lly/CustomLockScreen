@@ -30,10 +30,13 @@
             android:background="@color/colorPrimary"
             >
             <com.example.customlockscreen.util.CircleImageView
+                android:id="@+id/main_avatar"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/avater"
+                style="@style/MaterialAnimations"
+                android:transitionName="avatar"
                 />
         </RelativeLayout>
 

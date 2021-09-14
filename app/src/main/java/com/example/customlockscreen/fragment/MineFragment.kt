@@ -1,6 +1,7 @@
 package com.example.customlockscreen.fragment
 
 import android.app.Activity.RESULT_OK
+import android.app.ActivityOptions
 import android.content.Intent
 import android.database.Cursor
 import android.graphics.*
@@ -55,8 +56,9 @@ class MineFragment : Fragment() {
 
         binding.mineAvater.setOnClickListener {
             val intent = Intent(activity,ChangeAvatarActivity::class.java)
-            startActivity(intent)
-            activity!!.overridePendingTransition(R.anim.activity_open_enter,R.anim.activity_open_exit)
+            val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(activity,binding.mineAvater,"avatar")
+            startActivity(intent,transitionActivityOptions.toBundle())
+
         }
 
         dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
