@@ -31,4 +31,5 @@ interface SortNoteDao {
 
     @Query("SELECT COUNT(*) FROM sort_note_table")
     fun getSortNoteCount():Int
+
 }

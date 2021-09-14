@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.R
 import com.example.customlockscreen.adapter.IconListAdapter
+import com.example.customlockscreen.adapter.iconList
 import com.example.customlockscreen.databinding.ActivityAddSortNoteBinding
 import com.example.customlockscreen.model.bean.SortNote
 import com.example.customlockscreen.model.db.DataBase
@@ -42,7 +43,8 @@ class AddSortNoteActivity : AppCompatActivity() {
         }
 
 
-        adapter = IconListAdapter(this,clickListener)
+
+        adapter = IconListAdapter(this,clickListener,0)
         val layoutManager = GridLayoutManager(this,6)
 
 
@@ -60,7 +62,6 @@ class AddSortNoteActivity : AppCompatActivity() {
 
     private fun saveSortNote() {
 
-        val iconList = adapter.iconList
 
         if(mPosition!=-1){
 

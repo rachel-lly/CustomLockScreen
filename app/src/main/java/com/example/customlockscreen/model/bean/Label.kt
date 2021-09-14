@@ -72,6 +72,10 @@ data class Label(
         parcel.writeLong(endDate)
     }
 
+    override fun toString(): String {
+        return "Label(text='$text', targetDate=$targetDate, addNoteTime=$addNoteTime, id=$id, day=$day, sortNote='$sortNote', isTop=$isTop, isEnd=$isEnd, endDate=$endDate)"
+    }
+
     companion object CREATOR : Parcelable.Creator<Label> {
         override fun createFromParcel(parcel: Parcel): Label {
             return Label(parcel)
@@ -81,6 +85,8 @@ data class Label(
             return arrayOfNulls(size)
         }
     }
+
+
 }
 
 

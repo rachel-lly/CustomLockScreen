@@ -9,8 +9,11 @@ import com.example.customlockscreen.R
 import com.example.customlockscreen.databinding.IconListItemBinding
 import java.util.HashMap
 
+val iconList = intArrayOf(R.mipmap.cat,R.mipmap.owl, R.mipmap.flamingo,R.mipmap.cactus, R.mipmap.marigold,R.mipmap.umbrella,
+        R.mipmap.happy, R.mipmap.rocket,R.mipmap.yellow_star, R.mipmap.love_heart, R.mipmap.earth,R.mipmap.music,
+        R.mipmap.computer, R.mipmap.cake, R.mipmap.diamond, R.mipmap.work_color, R.mipmap.life_color, R.mipmap.anniverity_color )
 
-class IconListAdapter(val context: Context,clickListener: ClickListener) :
+class IconListAdapter(val context: Context,clickListener: ClickListener,defaultPosition: Int) :
         RecyclerView.Adapter<IconListAdapter.ViewHolder>() {
 
     interface ClickListener{
@@ -23,11 +26,8 @@ class IconListAdapter(val context: Context,clickListener: ClickListener) :
 
     private var holderList = HashMap<Int,IconListAdapter.ViewHolder>()
 
-    private var lastposition = -1
+    private var lastposition = defaultPosition
 
-     val iconList = intArrayOf(R.mipmap.cat,R.mipmap.owl, R.mipmap.flamingo,R.mipmap.cactus, R.mipmap.marigold,R.mipmap.umbrella,
-            R.mipmap.happy, R.mipmap.rocket,R.mipmap.yellow_star, R.mipmap.love_heart, R.mipmap.earth,R.mipmap.music,
-            R.mipmap.computer, R.mipmap.cake, R.mipmap.diamond, R.mipmap.work_color, R.mipmap.life_color, R.mipmap.anniverity_color )
 
 
     inner class ViewHolder(binding: IconListItemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -46,9 +46,9 @@ class IconListAdapter(val context: Context,clickListener: ClickListener) :
 
             val position = holder.adapterPosition
 
-            if(lastposition!=-1){
-                holderList[lastposition]?.checkbox?.visibility = View.GONE
-            }
+
+            holderList[lastposition]?.checkbox?.visibility = View.GONE
+
 
             mClickListener.onClick(position)
 
@@ -65,6 +65,10 @@ class IconListAdapter(val context: Context,clickListener: ClickListener) :
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if(position==lastposition){
+            holder.checkbox.isChecked = true
+            holder.checkbox.visibility = View.VISIBLE
+        }
         holder.icon.setImageResource(iconList[position])
         holderList[position] = holder
     }

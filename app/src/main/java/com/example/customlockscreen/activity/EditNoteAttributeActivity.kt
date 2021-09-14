@@ -172,51 +172,46 @@ class EditNoteAttributeActivity : AppCompatActivity() {
         binding.editNoteSure.setOnClickListener {
 
             val noteText = binding.noteAttributeLayout.addNoteEt.text.toString()
+            val lastName = label.text
+
+
             if(noteText.isEmpty()){
                 this.toast("事件不能为空")
             }else{
 
-                val todayTime = MaterialDatePicker.todayInUtcMilliseconds()
-                val addLabel = Label(noteText,targetDayTime,todayTime)
+                label.text = noteText
 
                 if(endTime!=null){
-                    addLabel.isEnd = binding.noteAttributeLayout.endTimeSwitch.isChecked
-                    if(addLabel.isEnd){
-                        addLabel.endDate = endTime as Long
+                    label.isEnd = binding.noteAttributeLayout.endTimeSwitch.isChecked
+                    if(label.isEnd){
+                        label.endDate = endTime as Long
                     }
                 }
 
-                addLabel.isTop = binding.noteAttributeLayout.toTopSwitch.isChecked
+                label.isTop = binding.noteAttributeLayout.toTopSwitch.isChecked
 
                 val sortNoteName = binding.noteAttributeLayout.chooseSortTv.text.toString()
                 if(sortNoteName.isNotEmpty()){
-                    addLabel.sortNote = sortNoteName
+                    label.sortNote = sortNoteName
                 }
 
-                if(label.text.equals(addLabel.text)){
-                    if(addLabel.isTop){
-                        changeOnTopLabel(addLabel.text)
-                    }else{
+
+                val nameList = labelDao.getAllLabelsName()
+
+                if(!lastName.equals(noteText)&&nameList.contains(noteText)){
+                    this.toast("该事件已存在")
+                }else{
+                    if(label.isTop){
+                        changeOnTopLabel(label.text)
+                    }else if(lastName.equals(noteText)){
                         changeOnTopLabel("-1")
                     }
-                    labelDao.updateLabel(addLabel)
-                    this.toast("修改数据成功")
-                    finish()
-                }else{
-                    val nameList = labelDao.getAllLabelsName()
+                    labelDao.updateLabel(label)
+                    this.toast("修改数据成功,$label")
 
-                    if(nameList.contains(noteText)){
-                        this.toast("该事件已存在")
-                    }else{
-                        if(addLabel.isTop){
-                            changeOnTopLabel(addLabel.text)
-                        }
-                        labelDao.deleteLabel(label)
-                        labelDao.insertLabel(addLabel)
-                        this.toast("修改数据成功")
-                        finish()
-                    }
+                    finish()
                 }
+
             }
         }
 
