@@ -1,6 +1,7 @@
 package com.example.customlockscreen.activity
 
 import android.Manifest
+import android.app.Activity
 import android.app.AlarmManager
 import android.app.Service
 import android.content.ComponentName
@@ -9,8 +10,12 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.transition.Explode
+import android.transition.Slide
+import android.view.Gravity
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat.finishAfterTransition
 import androidx.core.app.NotificationManagerCompat
 import com.example.customlockscreen.R
 import com.example.customlockscreen.util.SharedPreferenceCommission
@@ -43,9 +48,21 @@ class TimeRemindActivity : AppCompatActivity() {
 
         binding = ActivityTimeRemindBinding.inflate(layoutInflater)
 
+        val slide = Slide()
+        slide.slideEdge = Gravity.LEFT
+        slide.excludeTarget(android.R.id.statusBarBackground, true)
+        window.exitTransition = slide
+
+
+        val slide2 = Slide()
+        slide2.slideEdge = Gravity.RIGHT
+        slide2.excludeTarget(android.R.id.statusBarBackground, true)
+        window.enterTransition = slide2
+
+
         binding.detailToolbar.setNavigationIcon(R.mipmap.back)
         binding.detailToolbar.setNavigationOnClickListener {
-            finish()
+            finishAfterTransition()
         }
 
         val notificationManager: NotificationManagerCompat = NotificationManagerCompat.from(this);

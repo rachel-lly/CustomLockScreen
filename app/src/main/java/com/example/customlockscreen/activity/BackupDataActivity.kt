@@ -2,6 +2,8 @@ package com.example.customlockscreen.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.transition.Slide
+import android.view.Gravity
 import com.example.customlockscreen.R
 import com.example.customlockscreen.util.PictureUtil
 import com.example.customlockscreen.databinding.ActivityBackupDataBinding
@@ -26,12 +28,23 @@ class BackupDataActivity : AppCompatActivity() {
 
         binding = ActivityBackupDataBinding.inflate(layoutInflater)
 
+        val slide = Slide()
+        slide.slideEdge = Gravity.LEFT
+        slide.excludeTarget(android.R.id.statusBarBackground, true)
+        window.exitTransition = slide
+
+
+        val slide2 = Slide()
+        slide2.slideEdge = Gravity.RIGHT
+        slide2.excludeTarget(android.R.id.statusBarBackground, true)
+        window.enterTransition = slide2
+
         labelDao  = DataBase.dataBase.labelDao()
         sortNoteDao = DataBase.dataBase.sortNoteDao()
 
         binding.backupDataToolbar.setNavigationIcon(R.mipmap.back)
         binding.backupDataToolbar.setNavigationOnClickListener {
-            finish()
+            finishAfterTransition()
         }
 
         binding.backupPictureLayout.setOnClickListener {

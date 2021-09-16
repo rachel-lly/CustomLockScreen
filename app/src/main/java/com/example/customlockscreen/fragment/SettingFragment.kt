@@ -1,20 +1,24 @@
 package com.example.customlockscreen.fragment
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.PopupMenu
 import androidx.annotation.MenuRes
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
+import androidx.fragment.app.Fragment
 import com.example.customlockscreen.R
-import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.activity.BackupDataActivity
 import com.example.customlockscreen.activity.LockScreenSettingActivity
 import com.example.customlockscreen.activity.TimeRemindActivity
 import com.example.customlockscreen.databinding.FragmentSettingBinding
 import com.example.customlockscreen.model.bean.MessageEvent
+import com.example.customlockscreen.util.SharedPreferenceCommission
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -34,7 +38,11 @@ class SettingFragment : Fragment() {
         binding = FragmentSettingBinding.inflate(layoutInflater)
 
 
-        val sortStyle by SharedPreferenceCommission(context!!,"sortStyle","按事件时间")
+        val statusBar: View = activity!!.findViewById(android.R.id.statusBarBackground)
+
+
+
+        val sortStyle by SharedPreferenceCommission(context!!, "sortStyle", "按事件时间")
 
         EventBus.getDefault().post(MessageEvent(sortStyle))
 
@@ -42,31 +50,31 @@ class SettingFragment : Fragment() {
 
 
         binding.settingSortLayout.setOnClickListener {
-            showMenu(it,R.menu.fragment_setting_sort_style_menu)
+            showMenu(it, R.menu.fragment_setting_sort_style_menu)
         }
         
         binding.settingClockLayout.setOnClickListener {
-            val intent = Intent(context,TimeRemindActivity::class.java)
-            startActivity(intent)
+            val intent = Intent(context, TimeRemindActivity::class.java)
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
         }
         
         binding.settingBackupDataLayout.setOnClickListener {
-            val intent = Intent(context,BackupDataActivity::class.java)
-            startActivity(intent)
+            val intent = Intent(context, BackupDataActivity::class.java)
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
         }
 
         binding.setLockScreenLayout.setOnClickListener {
-            val intent = Intent(context,LockScreenSettingActivity::class.java)
-            startActivity(intent)
+            val intent = Intent(context, LockScreenSettingActivity::class.java)
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
         }
 
     }
 
 
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun showMenu(v:View, @MenuRes menuRes: Int) {
-        val popup = PopupMenu(context!!,v)
-        popup.menuInflater.inflate(menuRes,popup.menu)
+    private fun showMenu(v: View, @MenuRes menuRes: Int) {
+        val popup = PopupMenu(context!!, v)
+        popup.menuInflater.inflate(menuRes, popup.menu)
         popup.gravity = Gravity.RIGHT
 
         popup.setOnMenuItemClickListener { menuItem ->
@@ -103,15 +111,15 @@ class SettingFragment : Fragment() {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onMessageEvent(messageEvent:MessageEvent){
+    fun onMessageEvent(messageEvent: MessageEvent){
 
         val msg = messageEvent.msg
 
         when(msg){
 
-            "按添加时间", "按事件时间" ->{
+            "按添加时间", "按事件时间" -> {
                 binding.sortStyle.text = msg
-                var style by SharedPreferenceCommission(context!!,"sortStyle","按事件时间")
+                var style by SharedPreferenceCommission(context!!, "sortStyle", "按事件时间")
                 style = msg
             }
         }
