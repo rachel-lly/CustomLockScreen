@@ -8,6 +8,43 @@
     android:background="@color/color_background_gray"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/setting_dark_theme_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_pressed_state"
+        android:paddingStart="30dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        >
+
+        <ImageView
+            android:id="@+id/dark_theme_icon"
+            android:src="@mipmap/moon"
+            style="@style/linear_item_icon"
+            />
+
+        <TextView
+            android:id="@+id/dark_theme_tx"
+            android:text="夜间模式"
+            android:layout_toEndOf="@+id/dark_theme_icon"
+            style="@style/linear_item_text_behind_icon"
+            />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/dark_theme_switch"
+            android:layout_width="55dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:theme="@style/switchStyle" />
+
+    </RelativeLayout>
+
+    <View
+        style="@style/horizon_line"
+        />
 
     <RelativeLayout
         android:layout_marginTop="10dp"

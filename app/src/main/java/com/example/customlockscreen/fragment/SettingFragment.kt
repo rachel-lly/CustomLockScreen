@@ -1,7 +1,6 @@
 package com.example.customlockscreen.fragment
 
 import android.app.ActivityOptions
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -9,6 +8,7 @@ import android.view.*
 import android.widget.PopupMenu
 import androidx.annotation.MenuRes
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.example.customlockscreen.R
 import com.example.customlockscreen.activity.BackupDataActivity
@@ -36,8 +36,14 @@ class SettingFragment : Fragment() {
         binding = FragmentSettingBinding.inflate(layoutInflater)
 
 
-
         val sortStyle by SharedPreferenceCommission(context!!, "sortStyle", "按事件时间")
+
+        var isDarkTheme by SharedPreferenceCommission(context!!,"isDarkTheme",false)
+
+        EventBus.getDefault().post(MessageEvent(if(isDarkTheme) "夜" else "日"))
+
+        binding.darkThemeSwitch.isChecked = isDarkTheme
+
 
         EventBus.getDefault().post(MessageEvent(sortStyle))
 
@@ -61,6 +67,11 @@ class SettingFragment : Fragment() {
         binding.setLockScreenLayout.setOnClickListener {
             val intent = Intent(context, LockScreenSettingActivity::class.java)
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
+        }
+
+        binding.darkThemeSwitch.setOnClickListener {
+            isDarkTheme = binding.darkThemeSwitch.isChecked
+            EventBus.getDefault().post(MessageEvent(if(isDarkTheme) "夜" else "日"))
         }
 
     }
@@ -117,8 +128,17 @@ class SettingFragment : Fragment() {
                 var style by SharedPreferenceCommission(context!!, "sortStyle", "按事件时间")
                 style = msg
             }
-        }
 
+            "夜","日"->{
+                var isDarkTheme by SharedPreferenceCommission(context!!,"isDarkTheme",false)
+                isDarkTheme = msg == "夜"
+                if(isDarkTheme){
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }else{
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+            }
+        }
     }
 }
 

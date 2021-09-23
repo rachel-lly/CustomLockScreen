@@ -7,6 +7,7 @@ import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +22,7 @@ import com.example.customlockscreen.adapter.PagerAdapter
 import com.example.customlockscreen.databinding.ActivityHomeBinding
 import com.example.customlockscreen.model.bean.MessageEvent
 import com.example.customlockscreen.model.db.DataBase
+import com.example.customlockscreen.util.SharedPreferenceCommission
 import org.greenrobot.eventbus.EventBus
 
 class HomeActivity : AppCompatActivity() {
@@ -43,6 +45,9 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
 
         setSupportActionBar(binding.homeToolbar)
+
+        val isDarkTheme by SharedPreferenceCommission(this,"isDarkTheme",false)
+        EventBus.getDefault().post(MessageEvent(if(isDarkTheme) "夜" else "日"))
 
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)
