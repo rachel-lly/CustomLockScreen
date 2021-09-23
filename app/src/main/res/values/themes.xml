@@ -40,7 +40,7 @@
     </style>
 
     <style name="switchStyle" parent="Theme.AppCompat.Light">
-        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorControlActivated">#29BB89</item>
         <item name="colorSwitchThumbNormal">#b2b2b2</item>
         <item name="android:colorForeground">#b2b2b2</item>
     </style>

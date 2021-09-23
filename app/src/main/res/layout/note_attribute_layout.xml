@@ -18,149 +18,133 @@
 
         <LinearLayout
             android:id="@+id/content_layout"
-            android:layout_below="@+id/add_note_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/add_note_toolbar"
+            android:background="@color/white_bg_gray"
             android:orientation="vertical"
-            android:paddingBottom="15dp"
-            android:background="#fff"
-            >
+            android:paddingBottom="15dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginStart="15dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginTop="8dp"
-                >
+                android:layout_marginEnd="20dp"
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:src="@mipmap/note_text"
                     style="@style/icon_in_LinearLayout"
-                    />
+                    android:src="@mipmap/note_text" />
 
                 <EditText
                     android:id="@+id/add_note_et"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:theme="@style/MyEditText"
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="20dp"
-                    />
+                    android:textColor="@color/black"
+                    android:theme="@style/MyEditText" />
             </LinearLayout>
 
             <View
                 style="@style/horizon_line"
-                android:layout_marginTop="8dp"
-                />
+                android:layout_marginTop="8dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginStart="15dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginTop="15dp"
-                >
+                android:layout_marginEnd="10dp"
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:src="@mipmap/note_date"
                     style="@style/icon_in_LinearLayout"
-                    />
+                    android:src="@mipmap/note_date" />
 
                 <TextView
                     style="@style/linear_item_text_behind_icon"
-                    android:text="目标日"
                     android:layout_gravity="bottom"
-                    />
+                    android:text="目标日" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="(未来日期为倒数，过去日期为正数)"
-                    android:textSize="10sp"
                     android:layout_gravity="bottom"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textColor="@color/color_normal"
                     android:layout_marginStart="3dp"
-                    />
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="(未来日期为倒数，过去日期为正数)"
+                    android:textColor="@color/color_normal"
+                    android:textSize="10sp" />
 
 
             </LinearLayout>
-
 
 
             <TextView
                 android:id="@+id/add_note_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2021-04-15 星期五"
-                android:textSize="14sp"
-                android:textColor="@color/colorPrimaryDark"
-                android:fontFamily="@font/montserrat_medium"
                 android:layout_marginStart="50dp"
                 android:layout_marginTop="10dp"
-                />
+                android:fontFamily="@font/montserrat_medium"
+                android:text="2021-04-15 星期五"
+                android:textColor="@color/text_colorPrimary"
+                android:textSize="14sp" />
 
             <View
                 style="@style/horizon_line"
-                android:layout_marginTop="8dp"
-                />
+                android:layout_marginTop="8dp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginStart="15dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="8dp"
-                >
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/sort_iv"
-                    android:src="@mipmap/sort_note"
                     style="@style/linear_item_icon"
-                    />
+                    android:src="@mipmap/sort_note" />
 
                 <TextView
                     android:id="@+id/sort_text"
-                    android:layout_toEndOf="@id/sort_iv"
-                    android:text="分类"
                     style="@style/linear_item_text_behind_icon"
                     android:layout_gravity="bottom"
-                    />
+                    android:layout_toEndOf="@id/sort_iv"
+                    android:text="分类" />
 
 
                 <LinearLayout
                     android:id="@+id/choose_sort_note_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="5dp"
-                    >
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/choose_sort_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="生活"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/montserrat_medium"
+                        android:layout_gravity="bottom"
                         android:layout_marginStart="10dp"
-                        android:layout_gravity="bottom" />
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="生活"
+                        android:textColor="@color/text_colorPrimary"
+                        android:textSize="14sp" />
 
                     <ImageView
 
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-                        android:src="@mipmap/choose_down"
                         android:layout_gravity="center"
                         android:layout_marginStart="5dp"
-                        />
+                        android:src="@mipmap/choose_down" />
 
 
                 </LinearLayout>
@@ -170,37 +154,33 @@
 
             <View
                 style="@style/horizon_line"
-                android:layout_marginTop="8dp"
-                />
+                android:layout_marginTop="8dp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginStart="15dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="5dp"
-                >
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/to_top_iv"
-                    android:src="@mipmap/to_top"
                     style="@style/linear_item_icon"
-                    />
+                    android:src="@mipmap/to_top" />
 
                 <TextView
                     style="@style/linear_item_text_behind_icon"
                     android:layout_toEndOf="@id/to_top_iv"
-                    android:text="置顶"
-                    />
+                    android:text="置顶" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/to_top_switch"
                     android:layout_width="55dp"
                     android:layout_height="20dp"
-                    android:theme="@style/switchStyle"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignParentEnd="true"
+                    android:theme="@style/switchStyle" />
             </RelativeLayout>
 
         </LinearLayout>
@@ -220,7 +200,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#fff"
+            android:background="@color/white_bg_gray"
             >
             <RelativeLayout
                 android:id="@+id/end_time_layout"
@@ -271,7 +251,7 @@
                     android:layout_height="wrap_content"
                     android:text="2021-04-15 星期五"
                     android:textSize="14sp"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/text_colorPrimary"
                     android:fontFamily="@font/montserrat_medium"
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="10dp"

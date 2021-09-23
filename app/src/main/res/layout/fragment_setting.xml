@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="按事件时间"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/text_colorPrimary"
             android:fontFamily="@font/montserrat_medium"
             android:textSize="14sp"
             android:layout_marginStart="20dp"

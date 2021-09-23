@@ -41,5 +41,9 @@
     <color name="linear_item_text_day_color">#fff</color>
 
     <color name="grid_item_day_color">#f6f5f3</color>
+    <color name="grid_item_color">#fcfcfc</color>
+    <color name="white_bg_gray">#fff</color>
+
+    <color name="text_colorPrimary">@color/colorPrimary</color>
     
 </resources>

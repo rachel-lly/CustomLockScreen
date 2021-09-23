@@ -17,11 +17,11 @@
 
     <color name="color_background_gray">#000000</color>
 
-    <color name="note_list_future_light">#22a074</color>
+    <color name="note_list_future_light">#1c8460</color>
     <color name="note_list_future_dark">#17674b</color>
 
-    <color name="note_list_history_light">#fdb374</color>
-    <color name="note_list_history_dark">#fb8621</color>
+    <color name="note_list_history_light">#d56403</color>
+    <color name="note_list_history_dark">#a34c02</color>
 
     <color name="text_bg_gray">#000</color>
     <color name="line_color_gray">#000</color>
@@ -36,9 +36,13 @@
     <color name="press_color">#4d4d4d</color>
     <color name="text_background_gray">#000</color>
 
-    <color name="linear_item_color">#525252</color>
+    <color name="linear_item_color">#282828</color>
     <color name="linear_item_text_color">#fff</color>
     <color name="linear_item_text_day_color">#fff</color>
 
-    <color name="grid_item_day_color">#414141</color>
+    <color name="grid_item_day_color">#282828</color>
+    <color name="grid_item_color">#414141</color>
+    <color name="white_bg_gray">#1f1f1f</color>
+
+    <color name="text_colorPrimary">#29bb89</color>
 </resources>

@@ -50,7 +50,7 @@
                 android:text="7"
                 android:fontFamily="@font/montserrat_medium"
                 android:textColor="@color/color_bold"
-                android:background="@color/linear_item_color"
+                android:background="@color/grid_item_color"
                 android:maxLines="1"
                 />
 
