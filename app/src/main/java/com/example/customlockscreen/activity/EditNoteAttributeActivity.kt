@@ -66,6 +66,8 @@ class EditNoteAttributeActivity : AppCompatActivity() {
         targetDayTime = label.targetDate
 
         binding.noteAttributeLayout.addNoteEt.text = SpannableStringBuilder(label.text)
+        binding.noteAttributeLayout.addNoteEt.setSelection(label.text.length)
+        binding.noteAttributeLayout.addNoteEt.requestFocus()
 
         binding.noteAttributeLayout.addNoteDate.text = format.format(label.targetDate)
 

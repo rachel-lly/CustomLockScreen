@@ -56,6 +56,8 @@ class EditSortNoteActivity : AppCompatActivity() {
 
         if (sortNote != null) {
             binding.editSortNoteCard.addSortNoteEt.text = SpannableStringBuilder(sortNote!!.name)
+            binding.editSortNoteCard.addSortNoteEt.setSelection(sortNote!!.name.length)
+            binding.editSortNoteCard.addSortNoteEt.requestFocus()
         }
 
 
