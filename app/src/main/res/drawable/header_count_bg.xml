@@ -4,7 +4,7 @@
     android:shape="rectangle">
 
     <solid
-        android:color="#ebebeb"
+        android:color="@color/text_background_gray"
         />
 
 

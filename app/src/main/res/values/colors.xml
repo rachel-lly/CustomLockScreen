@@ -30,5 +30,16 @@
 
     <color name="color_bold">#747474</color>
     <color name="color_normal">#757575</color>
+
+    <color name="mine_fragment_color">#fcfcfc</color>
+
+    <color name="press_color">#f1f0ee</color>
+    <color name="text_background_gray">#ebebeb</color>
+
+    <color name="linear_item_color">#fcfcfc</color>
+    <color name="linear_item_text_color">#424347</color>
+    <color name="linear_item_text_day_color">#fff</color>
+
+    <color name="grid_item_day_color">#f6f5f3</color>
     
 </resources>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FFffffff</color>
+    <color name="white">#FF000000</color>
+
+    <color name="colorPrimary">#17674b</color>
+    <color name="colorPrimaryDark">#17674b</color>
+    <color name="colorAccent">#17674b</color>
+
+    <color name="color_passed">#fb8621</color>
+
+
+    <color name="color_background_gray">#000000</color>
+
+    <color name="note_list_future_light">#22a074</color>
+    <color name="note_list_future_dark">#17674b</color>
+
+    <color name="note_list_history_light">#fdb374</color>
+    <color name="note_list_history_dark">#fb8621</color>
+
+    <color name="text_bg_gray">#000</color>
+    <color name="line_color_gray">#000</color>
+
+    <color name="text_more_gray">#fff</color>
+
+    <color name="color_bold">#f7f7f7</color>
+    <color name="color_normal">#eee</color>
+
+    <color name="mine_fragment_color">#000000</color>
+
+    <color name="press_color">#4d4d4d</color>
+    <color name="text_background_gray">#000</color>
+
+    <color name="linear_item_color">#525252</color>
+    <color name="linear_item_text_color">#fff</color>
+    <color name="linear_item_text_day_color">#fff</color>
+
+    <color name="grid_item_day_color">#414141</color>
+</resources>

@@ -30,16 +30,14 @@
         <item name="android:paddingEnd">5dp</item>
         <item name="android:dropDownVerticalOffset">5dp</item>
         <item name="android:dropDownHorizontalOffset">0dp</item>
-        <item name="android:popupBackground">#fff</item>
-        <item name="android:textColor">#000</item>
+        <item name="android:popupBackground">@color/white</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
 
     <style name="MaterialAnimations" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowContentTransitions">true</item>
     </style>
-
-
 
     <style name="switchStyle" parent="Theme.AppCompat.Light">
         <item name="colorControlActivated">@color/colorPrimary</item>
