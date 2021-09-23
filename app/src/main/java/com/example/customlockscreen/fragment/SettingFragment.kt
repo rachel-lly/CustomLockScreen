@@ -37,17 +37,12 @@ class SettingFragment : Fragment() {
 
 
         val sortStyle by SharedPreferenceCommission(context!!, "sortStyle", "按事件时间")
+        EventBus.getDefault().post(MessageEvent(sortStyle))
+        binding.sortStyle.text = sortStyle
 
         var isDarkTheme by SharedPreferenceCommission(context!!,"isDarkTheme",false)
-
         EventBus.getDefault().post(MessageEvent(if(isDarkTheme) "夜" else "日"))
-
         binding.darkThemeSwitch.isChecked = isDarkTheme
-
-
-        EventBus.getDefault().post(MessageEvent(sortStyle))
-
-        binding.sortStyle.text = sortStyle
 
 
         binding.settingSortLayout.setOnClickListener {
@@ -137,6 +132,7 @@ class SettingFragment : Fragment() {
                 }else{
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 }
+                binding.darkThemeSwitch.isChecked = isDarkTheme
             }
         }
     }
