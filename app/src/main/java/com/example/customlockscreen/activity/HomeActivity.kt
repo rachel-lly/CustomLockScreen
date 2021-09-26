@@ -1,25 +1,27 @@
 package com.example.customlockscreen.activity
 
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.example.customlockscreen.fragment.MineFragment
-import com.example.customlockscreen.fragment.NoteListFragment
-import com.example.customlockscreen.fragment.NoteSortFragment
-import com.example.customlockscreen.fragment.SettingFragment
 import com.example.customlockscreen.R
 import com.example.customlockscreen.adapter.HeaderSortNoteListAdapter
 import com.example.customlockscreen.adapter.PagerAdapter
 import com.example.customlockscreen.databinding.ActivityHomeBinding
+import com.example.customlockscreen.fragment.MineFragment
+import com.example.customlockscreen.fragment.NoteListFragment
+import com.example.customlockscreen.fragment.NoteSortFragment
+import com.example.customlockscreen.fragment.SettingFragment
 import com.example.customlockscreen.model.bean.MessageEvent
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.util.SharedPreferenceCommission
@@ -46,12 +48,17 @@ class HomeActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.homeToolbar)
 
-        val isDarkTheme by SharedPreferenceCommission(this,"isDarkTheme",false)
-        EventBus.getDefault().post(MessageEvent(if(isDarkTheme) "夜" else "日"))
-
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)
             it.setHomeAsUpIndicator(R.mipmap.menu)
+        }
+
+        var isFirst by SharedPreferenceCommission(this, "isFirst", true)
+        if(isFirst){
+            var isDarkTheme by SharedPreferenceCommission(this, "isDarkTheme", false)
+            isDarkTheme = getDarkModeStatus(this)
+            EventBus.getDefault().post(MessageEvent(if (isDarkTheme) "夜" else "日"))
+            isFirst = false
         }
 
 
@@ -72,7 +79,7 @@ class HomeActivity : AppCompatActivity() {
 
         }
 
-        adapter = HeaderSortNoteListAdapter(this,list,clickListener)
+        adapter = HeaderSortNoteListAdapter(this, list, clickListener)
 
         val headerLayout = binding.navigationView.inflateHeaderView(R.layout.header_layout)
         val recycleView = headerLayout.findViewById<RecyclerView>(R.id.drawlayout_headerlayout_recycleview)
@@ -128,25 +135,25 @@ class HomeActivity : AppCompatActivity() {
         fragmentList.add(MineFragment())
         fragmentList.add(SettingFragment())
 
-        binding.homeViewPager.adapter = PagerAdapter(this,fragmentList)
-        binding.homeViewPager.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
+        binding.homeViewPager.adapter = PagerAdapter(this, fragmentList)
+        binding.homeViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 binding.homeNavigationView.selectedItemId = itemIdArray[position]
-                when(position){
-                    0->{
+                when (position) {
+                    0 -> {
                         binding.homeToolbar.title = "主页"
                     }
 
-                    1->{
+                    1 -> {
                         binding.homeToolbar.title = "分类管理"
                     }
 
-                    2->{
+                    2 -> {
                         binding.homeToolbar.title = "我的"
                     }
 
-                    3->{
+                    3 -> {
                         binding.homeToolbar.title = "设置"
                     }
                 }
@@ -168,5 +175,10 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
+    //检查当前系统是否已开启暗黑模式
+    private fun getDarkModeStatus(context: Context): Boolean {
+        val mode: Int = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+        return mode == Configuration.UI_MODE_NIGHT_YES
+    }
 
 }

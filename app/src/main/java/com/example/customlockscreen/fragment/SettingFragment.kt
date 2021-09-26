@@ -41,7 +41,6 @@ class SettingFragment : Fragment() {
         binding.sortStyle.text = sortStyle
 
         var isDarkTheme by SharedPreferenceCommission(context!!,"isDarkTheme",false)
-        EventBus.getDefault().post(MessageEvent(if(isDarkTheme) "夜" else "日"))
         binding.darkThemeSwitch.isChecked = isDarkTheme
 
 
