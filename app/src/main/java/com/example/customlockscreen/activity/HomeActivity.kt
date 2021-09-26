@@ -9,7 +9,6 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +24,7 @@ import com.example.customlockscreen.fragment.SettingFragment
 import com.example.customlockscreen.model.bean.MessageEvent
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.util.SharedPreferenceCommission
+import com.example.customlockscreen.util.ThemeUtil.Companion.getDarkModeStatus
 import org.greenrobot.eventbus.EventBus
 
 class HomeActivity : AppCompatActivity() {
@@ -51,14 +51,6 @@ class HomeActivity : AppCompatActivity() {
         supportActionBar?.let {
             it.setDisplayHomeAsUpEnabled(true)
             it.setHomeAsUpIndicator(R.mipmap.menu)
-        }
-
-        var isFirst by SharedPreferenceCommission(this, "isFirst", true)
-        if(isFirst){
-            var isDarkTheme by SharedPreferenceCommission(this, "isDarkTheme", false)
-            isDarkTheme = getDarkModeStatus(this)
-            EventBus.getDefault().post(MessageEvent(if (isDarkTheme) "夜" else "日"))
-            isFirst = false
         }
 
 
@@ -175,10 +167,18 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-    //检查当前系统是否已开启暗黑模式
-    private fun getDarkModeStatus(context: Context): Boolean {
-        val mode: Int = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        return mode == Configuration.UI_MODE_NIGHT_YES
-    }
 
+
+    override fun onResume() {
+        super.onResume()
+        //用户是否改变了该应用的模式切换
+        //1. 没有改变过:按照系统设置的模式改变
+        //2. 改变：按照应用的设置
+        val isDarkThemeUserChange by SharedPreferenceCommission(this,"isDarkThemeUserChange",false)
+        if(isDarkThemeUserChange){
+            EventBus.getDefault().post(MessageEvent(if(getDarkModeStatus(this)) "夜" else "日"))
+        }else{
+            EventBus.getDefault().post(MessageEvent("系统"))
+        }
+    }
 }

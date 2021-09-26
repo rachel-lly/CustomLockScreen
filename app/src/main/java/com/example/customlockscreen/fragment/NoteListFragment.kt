@@ -209,6 +209,10 @@ class NoteListFragment : Fragment() {
 
         when(msg){
 
+            "夜","日","系统" ->{
+
+            }
+
             "按添加时间" -> {
                 isChange = true
                 Collections.sort(labelList, addTimeComparator)
@@ -299,9 +303,6 @@ class NoteListFragment : Fragment() {
             binding.homeHeaderTopDateJustText.text = "开始："
         }
     }
-
-
-
 }
 
 

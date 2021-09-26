@@ -17,6 +17,7 @@ import com.example.customlockscreen.activity.TimeRemindActivity
 import com.example.customlockscreen.databinding.FragmentSettingBinding
 import com.example.customlockscreen.model.bean.MessageEvent
 import com.example.customlockscreen.util.SharedPreferenceCommission
+import com.example.customlockscreen.util.ThemeUtil
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -35,13 +36,14 @@ class SettingFragment : Fragment() {
 
         binding = FragmentSettingBinding.inflate(layoutInflater)
 
+        var isDarkThemeUserChange by SharedPreferenceCommission(context!!,"isDarkThemeUserChange",false)
 
         val sortStyle by SharedPreferenceCommission(context!!, "sortStyle", "按事件时间")
         EventBus.getDefault().post(MessageEvent(sortStyle))
         binding.sortStyle.text = sortStyle
 
-        var isDarkTheme by SharedPreferenceCommission(context!!,"isDarkTheme",false)
-        binding.darkThemeSwitch.isChecked = isDarkTheme
+
+        binding.darkThemeSwitch.isChecked = ThemeUtil.getDarkModeStatus(context!!)
 
 
         binding.settingSortLayout.setOnClickListener {
@@ -64,7 +66,8 @@ class SettingFragment : Fragment() {
         }
 
         binding.darkThemeSwitch.setOnClickListener {
-            isDarkTheme = binding.darkThemeSwitch.isChecked
+            isDarkThemeUserChange = true
+            val isDarkTheme = binding.darkThemeSwitch.isChecked
             EventBus.getDefault().post(MessageEvent(if(isDarkTheme) "夜" else "日"))
         }
 
@@ -124,14 +127,19 @@ class SettingFragment : Fragment() {
             }
 
             "夜","日"->{
-                var isDarkTheme by SharedPreferenceCommission(context!!,"isDarkTheme",false)
-                isDarkTheme = msg == "夜"
+
+                val isDarkTheme = msg=="夜"
                 if(isDarkTheme){
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 }else{
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 }
+
                 binding.darkThemeSwitch.isChecked = isDarkTheme
+            }
+
+            "系统"->{
+                binding.darkThemeSwitch.isChecked = ThemeUtil.getDarkModeStatus(context!!)
             }
         }
     }
