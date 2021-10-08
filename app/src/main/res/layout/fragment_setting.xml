@@ -15,8 +15,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/item_pressed_state"
         android:paddingStart="30dp"
-        android:paddingEnd="20dp"
         android:paddingTop="15dp"
+        android:paddingEnd="10dp"
         android:paddingBottom="15dp"
         >
 
@@ -33,12 +33,34 @@
             style="@style/linear_item_text_behind_icon"
             />
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/dark_theme_switch"
-            android:layout_width="55dp"
-            android:layout_height="20dp"
+        <TextView
+            android:id="@+id/dark_theme_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="跟随系统"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/text_more_gray"
+            android:fontFamily="@font/montserrat_medium"
+            android:textSize="14sp"
+            android:layout_marginStart="20dp"
             android:layout_alignParentEnd="true"
-            android:theme="@style/switchStyle" />
+            />
+
+        <ImageView
+            android:src="@mipmap/right"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            />
+
+
+<!--        <androidx.appcompat.widget.SwitchCompat-->
+<!--            android:id="@+id/dark_theme_switch"-->
+<!--            android:layout_width="55dp"-->
+<!--            android:layout_height="20dp"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:theme="@style/switchStyle" />-->
 
     </RelativeLayout>
 
@@ -80,6 +102,7 @@
             android:fontFamily="@font/montserrat_medium"
             android:textSize="14sp"
             android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
             android:layout_alignParentEnd="true"
             />
 

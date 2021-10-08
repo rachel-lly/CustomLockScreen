@@ -37,6 +37,9 @@ interface LabelDao {
     @Query("SELECT COUNT(*) FROM label_table")
     fun getLabelCount():Int
 
+    @Query("SELECT COUNT(*) FROM label_table WHERE sortNote =:sortNoteName")
+    fun getLabelCountBySameSort(sortNoteName: String):Int
+
     @Query("UPDATE label_table SET text =:name WHERE id =:id")
     fun updateLabelByName(name: String,id: Int)
 

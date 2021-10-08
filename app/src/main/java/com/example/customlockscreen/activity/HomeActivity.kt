@@ -1,9 +1,6 @@
 package com.example.customlockscreen.activity
 
-import android.content.Context
-import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
@@ -30,7 +27,6 @@ import org.greenrobot.eventbus.EventBus
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var  binding : ActivityHomeBinding
-    private val itemIdArray :IntArray = intArrayOf(R.id.item_home, R.id.item_note, R.id.item_mine, R.id.item_setting)
 
     private var fragmentList = ArrayList<Fragment>()
 
@@ -104,11 +100,10 @@ class HomeActivity : AppCompatActivity() {
 
         binding.homeToolbar.setNavigationOnClickListener {
 
-            val list = sortNoteDao.getAllSortNotes()
-            adapter.sortNoteList = list
+            adapter.sortNoteList = sortNoteDao.getAllSortNotes()
             adapter.notifyDataSetChanged()
 
-            textView.text = labelDao.getAllLabelsName().size.toString()
+            textView.text = labelDao.getLabelCount().toString()
 
             binding.drawerLayout.openDrawer(Gravity.LEFT)
         }
@@ -131,7 +126,6 @@ class HomeActivity : AppCompatActivity() {
         binding.homeViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                binding.homeNavigationView.selectedItemId = itemIdArray[position]
                 when (position) {
                     0 -> {
                         binding.homeToolbar.title = "主页"
@@ -155,13 +149,24 @@ class HomeActivity : AppCompatActivity() {
 
         binding.homeNavigationView.setOnNavigationItemSelectedListener {
 
-            for(i in 0 until fragmentList.size){
-                if(it.itemId == itemIdArray[i]){
-                    binding.homeViewPager.currentItem = i
+            when(it.itemId){
+                R.id.item_home->{
+                    binding.homeViewPager.currentItem = 0
                 }
+
+                R.id.item_note->{
+                    binding.homeViewPager.currentItem = 1
+                }
+
+                R.id.item_mine,-> {
+                    binding.homeViewPager.currentItem = 2
+                }
+
+                R.id.item_setting->{
+                    binding.homeViewPager.currentItem = 3
+                }
+
             }
-
-
             return@setOnNavigationItemSelectedListener true
         }
 

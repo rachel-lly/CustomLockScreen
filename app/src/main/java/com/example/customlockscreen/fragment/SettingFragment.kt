@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.example.customlockscreen.R
 import com.example.customlockscreen.activity.BackupDataActivity
+import com.example.customlockscreen.activity.DarkThemeSettingActivity
 import com.example.customlockscreen.activity.LockScreenSettingActivity
 import com.example.customlockscreen.activity.TimeRemindActivity
 import com.example.customlockscreen.databinding.FragmentSettingBinding
@@ -36,14 +37,14 @@ class SettingFragment : Fragment() {
 
         binding = FragmentSettingBinding.inflate(layoutInflater)
 
-        var isDarkThemeUserChange by SharedPreferenceCommission(context!!,"isDarkThemeUserChange",false)
+//        var isDarkThemeUserChange by SharedPreferenceCommission(context!!,"isDarkThemeUserChange",false)
 
         val sortStyle by SharedPreferenceCommission(context!!, "sortStyle", "按事件时间")
         EventBus.getDefault().post(MessageEvent(sortStyle))
         binding.sortStyle.text = sortStyle
 
-
-        binding.darkThemeSwitch.isChecked = ThemeUtil.getDarkModeStatus(context!!)
+//
+//        binding.darkThemeSwitch.isChecked = ThemeUtil.getDarkModeStatus(context!!)
 
 
         binding.settingSortLayout.setOnClickListener {
@@ -65,11 +66,16 @@ class SettingFragment : Fragment() {
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
         }
 
-        binding.darkThemeSwitch.setOnClickListener {
-            isDarkThemeUserChange = true
-            val isDarkTheme = binding.darkThemeSwitch.isChecked
-            EventBus.getDefault().post(MessageEvent(if(isDarkTheme) "夜" else "日"))
+        binding.settingDarkThemeLayout.setOnClickListener {
+            val intent = Intent(context, DarkThemeSettingActivity::class.java)
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
         }
+
+//        binding.darkThemeSwitch.setOnClickListener {
+//            isDarkThemeUserChange = true
+//            val isDarkTheme = binding.darkThemeSwitch.isChecked
+//            EventBus.getDefault().post(MessageEvent(if(isDarkTheme) "夜" else "日"))
+//        }
 
     }
 
@@ -126,21 +132,21 @@ class SettingFragment : Fragment() {
                 style = msg
             }
 
-            "夜","日"->{
-
-                val isDarkTheme = msg=="夜"
-                if(isDarkTheme){
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                }else{
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                }
-
-                binding.darkThemeSwitch.isChecked = isDarkTheme
-            }
-
-            "系统"->{
-                binding.darkThemeSwitch.isChecked = ThemeUtil.getDarkModeStatus(context!!)
-            }
+//            "夜","日"->{
+//
+//                val isDarkTheme = msg=="夜"
+//                if(isDarkTheme){
+//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+//                }else{
+//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+//                }
+//
+//                binding.darkThemeSwitch.isChecked = isDarkTheme
+//            }
+//
+//            "系统"->{
+//                binding.darkThemeSwitch.isChecked = ThemeUtil.getDarkModeStatus(context!!)
+//            }
         }
     }
 }

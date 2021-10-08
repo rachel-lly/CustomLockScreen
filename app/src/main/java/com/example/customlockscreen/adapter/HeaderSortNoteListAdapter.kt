@@ -53,9 +53,7 @@ class HeaderSortNoteListAdapter(val context: Context, var sortNoteList:List<Sort
         val iconId:Int = context.resources.getIdentifier(sortNote.iconName,"mipmap",context.packageName)
         holder.sortNoteIcon.setImageResource(iconId)
 
-        val sameSortNoteLabelList = labelDao.getSameSortNoteLabelList(sortNote.name)
-
-        holder.sortNoteCount.text = sameSortNoteLabelList.size.toString()
+        holder.sortNoteCount.text = labelDao.getLabelCountBySameSort(sortNote.name).toString()
     }
 
     override fun getItemCount() = sortNoteList.size
