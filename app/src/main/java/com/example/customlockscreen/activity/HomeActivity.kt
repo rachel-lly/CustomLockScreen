@@ -1,11 +1,14 @@
 package com.example.customlockscreen.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +26,8 @@ import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.util.ThemeUtil.Companion.getDarkModeStatus
 import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class HomeActivity : AppCompatActivity() {
 
@@ -179,11 +184,16 @@ class HomeActivity : AppCompatActivity() {
         //用户是否改变了该应用的模式切换
         //1. 没有改变过:按照系统设置的模式改变
         //2. 改变：按照应用的设置
-        val isDarkThemeUserChange by SharedPreferenceCommission(this,"isDarkThemeUserChange",false)
-        if(isDarkThemeUserChange){
-            EventBus.getDefault().post(MessageEvent(if(getDarkModeStatus(this)) "夜" else "日"))
+        val isFollowSystem by SharedPreferenceCommission(this,"isFollowSystem",true)
+        if(isFollowSystem){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         }else{
-            EventBus.getDefault().post(MessageEvent("系统"))
+            val isDarkTheme by SharedPreferenceCommission(this,"isDarkTheme",false)
+            if(isDarkTheme){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }else{
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
         }
     }
 }

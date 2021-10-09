@@ -37,14 +37,21 @@ class SettingFragment : Fragment() {
 
         binding = FragmentSettingBinding.inflate(layoutInflater)
 
-//        var isDarkThemeUserChange by SharedPreferenceCommission(context!!,"isDarkThemeUserChange",false)
-
         val sortStyle by SharedPreferenceCommission(context!!, "sortStyle", "按事件时间")
         EventBus.getDefault().post(MessageEvent(sortStyle))
         binding.sortStyle.text = sortStyle
 
-//
-//        binding.darkThemeSwitch.isChecked = ThemeUtil.getDarkModeStatus(context!!)
+        val isFollowSystem by SharedPreferenceCommission(context!!,"isFollowSystem",true)
+        if(isFollowSystem){
+            binding.darkThemeStyle.text = "跟随系统"
+        }else{
+            val isDarkTheme by SharedPreferenceCommission(context!!,"isDarkTheme",false)
+            if(isDarkTheme){
+                binding.darkThemeStyle.text = "夜间模式"
+            }else{
+                binding.darkThemeStyle.text = "日间模式"
+            }
+        }
 
 
         binding.settingSortLayout.setOnClickListener {
@@ -70,13 +77,6 @@ class SettingFragment : Fragment() {
             val intent = Intent(context, DarkThemeSettingActivity::class.java)
             startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
         }
-
-//        binding.darkThemeSwitch.setOnClickListener {
-//            isDarkThemeUserChange = true
-//            val isDarkTheme = binding.darkThemeSwitch.isChecked
-//            EventBus.getDefault().post(MessageEvent(if(isDarkTheme) "夜" else "日"))
-//        }
-
     }
 
 
@@ -132,21 +132,17 @@ class SettingFragment : Fragment() {
                 style = msg
             }
 
-//            "夜","日"->{
-//
-//                val isDarkTheme = msg=="夜"
-//                if(isDarkTheme){
-//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-//                }else{
-//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//                }
-//
-//                binding.darkThemeSwitch.isChecked = isDarkTheme
-//            }
-//
-//            "系统"->{
-//                binding.darkThemeSwitch.isChecked = ThemeUtil.getDarkModeStatus(context!!)
-//            }
+            "夜" ->{
+                binding.darkThemeStyle.text = "夜间模式"
+            }
+
+            "日" ->{
+                binding.darkThemeStyle.text = "日间模式"
+            }
+
+            "系统" ->{
+                binding.darkThemeStyle.text = "跟随系统"
+            }
         }
     }
 }

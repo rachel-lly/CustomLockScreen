@@ -30,6 +30,7 @@
 
     <color name="color_bold">#f7f7f7</color>
     <color name="color_normal">#eee</color>
+    <color name="color_black">#fff</color>
 
     <color name="mine_fragment_color">#000000</color>
 
