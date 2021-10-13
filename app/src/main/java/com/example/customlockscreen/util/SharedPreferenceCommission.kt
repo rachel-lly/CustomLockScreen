@@ -8,10 +8,10 @@ import kotlin.reflect.KProperty
 class SharedPreferenceCommission<T>(
         val context: Context,
         val name:String,
-        val defaultValue: T
+        private val defaultValue: T
 ): ReadWriteProperty<Any?, T>{
 
-    val sharedPreference: SharedPreferences by lazy {
+    private val sharedPreference: SharedPreferences by lazy {
         context.getSharedPreferences("LABEL_EVENT",Context.MODE_PRIVATE)
     }
 

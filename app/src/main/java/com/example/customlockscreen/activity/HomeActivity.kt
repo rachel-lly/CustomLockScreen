@@ -1,9 +1,7 @@
 package com.example.customlockscreen.activity
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
-import android.view.View
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -24,10 +22,7 @@ import com.example.customlockscreen.fragment.SettingFragment
 import com.example.customlockscreen.model.bean.MessageEvent
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.util.SharedPreferenceCommission
-import com.example.customlockscreen.util.ThemeUtil.Companion.getDarkModeStatus
 import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
 
 class HomeActivity : AppCompatActivity() {
 

@@ -21,7 +21,6 @@ import com.example.customlockscreen.R
 import com.example.customlockscreen.util.PictureUtil
 import com.example.customlockscreen.databinding.ActivityDetailBinding
 import com.example.customlockscreen.model.bean.Label
-import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.util.TimeManager.Companion.format
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
 import com.example.library.PermissionX

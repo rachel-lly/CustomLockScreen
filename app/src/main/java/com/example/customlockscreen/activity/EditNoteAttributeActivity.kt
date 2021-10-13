@@ -31,7 +31,6 @@ class EditNoteAttributeActivity : AppCompatActivity() {
     private val today = format.format(targetDayTime)
 
     private val labelDao = DataBase.dataBase.labelDao()
-    private val sortNoteDao = DataBase.dataBase.sortNoteDao()
 
     private lateinit var label:Label
 
@@ -78,10 +77,10 @@ class EditNoteAttributeActivity : AppCompatActivity() {
             binding.noteAttributeLayout.addNoteDate.setTextColor(ContextCompat.getColor(this,R.color.colorPrimaryDark))
         }
 
-        binding.noteAttributeLayout.chooseSortTv.text = label.sortNote
-        lastChoose = label.sortNote
-
-
+        label.sortNote.also{
+            binding.noteAttributeLayout.chooseSortTv.text = it
+            lastChoose = it
+        }
 
         binding.noteAttributeLayout.toTopSwitch.isChecked = label.isTop
 

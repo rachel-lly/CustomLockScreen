@@ -8,7 +8,6 @@ import android.view.*
 import android.widget.PopupMenu
 import androidx.annotation.MenuRes
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.example.customlockscreen.R
 import com.example.customlockscreen.activity.BackupDataActivity
@@ -18,7 +17,6 @@ import com.example.customlockscreen.activity.TimeRemindActivity
 import com.example.customlockscreen.databinding.FragmentSettingBinding
 import com.example.customlockscreen.model.bean.MessageEvent
 import com.example.customlockscreen.util.SharedPreferenceCommission
-import com.example.customlockscreen.util.ThemeUtil
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode

@@ -10,12 +10,10 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.transition.Explode
 import android.transition.Slide
 import android.view.Gravity
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat.finishAfterTransition
 import androidx.core.app.NotificationManagerCompat
 import com.example.customlockscreen.R
 import com.example.customlockscreen.util.SharedPreferenceCommission

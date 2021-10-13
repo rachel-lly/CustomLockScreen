@@ -10,10 +10,8 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.customlockscreen.R
 import com.example.customlockscreen.activity.ChangeAvatarActivity
 import com.example.customlockscreen.application.MyApplication
 import com.example.customlockscreen.databinding.FragmentMineBinding
