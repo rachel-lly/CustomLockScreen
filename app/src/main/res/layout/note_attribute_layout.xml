@@ -134,7 +134,7 @@
                         android:layout_gravity="bottom"
                         android:layout_marginStart="10dp"
                         android:fontFamily="@font/montserrat_medium"
-                        android:text="生活"
+                        android:text=""
                         android:textColor="@color/text_colorPrimary"
                         android:textSize="14sp" />
 

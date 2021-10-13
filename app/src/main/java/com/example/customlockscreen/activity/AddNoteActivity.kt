@@ -35,21 +35,38 @@ class AddNoteActivity : AppCompatActivity() {
     private val today = format.format(targetDayTime)
 
     private val labelDao = DataBase.dataBase.labelDao()
+    private val sortNoteDao = DataBase.dataBase.sortNoteDao()
 
     private var lastChoose: String? = null
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        var sortNote = data?.getStringExtra(SORT_NOTE_TEXT);
+        val sortNote = data?.getStringExtra(SORT_NOTE_TEXT);
         if(sortNote == null){
 
-            sortNote = if (lastChoose != null)  lastChoose  else  "生活"
+            if(lastChoose!=null){
+                binding.noteAttributeLayout.chooseSortTv.text = lastChoose
+            }else{
+                initDefaultSortNoteName()
+            }
 
         }else{
             lastChoose = sortNote
+            binding.noteAttributeLayout.chooseSortTv.text = sortNote
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+
+    private fun initDefaultSortNoteName(){
+        val sortNote:String
+        val sortNoteCnt =  sortNoteDao.getSortNoteCount()
+        if(sortNoteCnt==0){
+            sortNote = "暂无分类本"
+        }else{
+            sortNote = sortNoteDao.getAllSortNotes()[0].name
         }
         binding.noteAttributeLayout.chooseSortTv.text = sortNote
-        super.onActivityResult(requestCode, resultCode, data)
     }
 
     @ExperimentalTime
@@ -59,6 +76,8 @@ class AddNoteActivity : AppCompatActivity() {
         binding = ActivityAddNoteBinding.inflate(layoutInflater)
 
         binding.noteAttributeLayout.addNoteDate.text = today
+
+        initDefaultSortNoteName()
 
         val datePicker = MaterialDatePicker.Builder.datePicker()
                 .setTitleText("Select date")
@@ -137,53 +156,56 @@ class AddNoteActivity : AppCompatActivity() {
 
         binding.addNoteSure.setOnClickListener {
 
-            val noteText = binding.noteAttributeLayout.addNoteEt.text.toString()
-            if(noteText.isEmpty()){
-                this.toast("事件不能为空")
+            if(binding.noteAttributeLayout.chooseSortTv.text.equals("暂无分类本")){
+                this.toast("请先建立事件的分类本")
             }else{
+                val noteText = binding.noteAttributeLayout.addNoteEt.text.toString()
+                if(noteText.isEmpty()){
+                    this.toast("事件不能为空")
+                }else{
 
-                val todayTime = MaterialDatePicker.todayInUtcMilliseconds()
-                val addLabel = Label(noteText,targetDayTime,todayTime)
+                    val todayTime = MaterialDatePicker.todayInUtcMilliseconds()
+                    val addLabel = Label(noteText,targetDayTime,todayTime)
 
-                if(endTime!=null){
-                    addLabel.isEnd = binding.noteAttributeLayout.endTimeSwitch.isChecked
-                    if(addLabel.isEnd){
-                        addLabel.endDate = endTime as Long
-                    }
-                }
-
-                addLabel.isTop = binding.noteAttributeLayout.toTopSwitch.isChecked
-
-                var topLabelName by SharedPreferenceCommission(this,"topLabelName","-1")
-                if(addLabel.isTop){
-
-                    if(!topLabelName.equals("-1")){
-                        val deleteOnTopLabel = labelDao.getLabelByName(topLabelName)
-                        if(deleteOnTopLabel!=null){
-                            deleteOnTopLabel.isTop = false
-                            labelDao.updateLabel(deleteOnTopLabel)
+                    if(endTime!=null){
+                        addLabel.isEnd = binding.noteAttributeLayout.endTimeSwitch.isChecked
+                        if(addLabel.isEnd){
+                            addLabel.endDate = endTime as Long
                         }
                     }
-                    topLabelName = addLabel.text
+
+                    addLabel.isTop = binding.noteAttributeLayout.toTopSwitch.isChecked
+
+                    var topLabelName by SharedPreferenceCommission(this,"topLabelName","-1")
+                    if(addLabel.isTop){
+
+                        if(!topLabelName.equals("-1")){
+                            val deleteOnTopLabel = labelDao.getLabelByName(topLabelName)
+                            if(deleteOnTopLabel!=null){
+                                deleteOnTopLabel.isTop = false
+                                labelDao.updateLabel(deleteOnTopLabel)
+                            }
+                        }
+                        topLabelName = addLabel.text
+                    }
+
+                    val sortNoteName = binding.noteAttributeLayout.chooseSortTv.text.toString()
+                    if(sortNoteName.isNotEmpty()){
+                        addLabel.sortNote = sortNoteName
+                    }
+
+                    val nameList = labelDao.getAllLabelsName()
+
+                    if(nameList.contains(noteText)){
+                        this.toast("该事件已存在")
+                    }else{
+                        labelDao.insertLabel(addLabel)
+                        this.toast("保存数据成功")
+                        finish()
+                    }
+
                 }
-
-                val sortNoteName = binding.noteAttributeLayout.chooseSortTv.text.toString()
-                if(sortNoteName.isNotEmpty()){
-                    addLabel.sortNote = sortNoteName
-                }
-
-                val nameList = labelDao.getAllLabelsName()
-
-                if(nameList.contains(noteText)){
-                    this.toast("该事件已存在")
-                }else{
-                    labelDao.insertLabel(addLabel)
-                    this.toast("保存数据成功")
-                    finish()
-                }
-
             }
-
         }
 
         setContentView(binding.root)

@@ -31,6 +31,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
     private val today = format.format(targetDayTime)
 
     private val labelDao = DataBase.dataBase.labelDao()
+    private val sortNoteDao = DataBase.dataBase.sortNoteDao()
 
     private lateinit var label:Label
 
@@ -38,11 +39,9 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        var sortNote = data?.getStringExtra(SORT_NOTE_TEXT)
-        if(sortNote == null) {
-
-            sortNote = if (lastChoose != null)  lastChoose  else  "生活"
-
+        var sortNote = data?.getStringExtra(SORT_NOTE_TEXT);
+        if(sortNote == null){
+            sortNote = lastChoose
         }else{
             lastChoose = sortNote
         }
@@ -80,6 +79,9 @@ class EditNoteAttributeActivity : AppCompatActivity() {
         }
 
         binding.noteAttributeLayout.chooseSortTv.text = label.sortNote
+        lastChoose = label.sortNote
+
+
 
         binding.noteAttributeLayout.toTopSwitch.isChecked = label.isTop
 
@@ -173,48 +175,54 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
         binding.editNoteSure.setOnClickListener {
 
-            val noteText = binding.noteAttributeLayout.addNoteEt.text.toString()
-            val lastName = label.text
-
-
-            if(noteText.isEmpty()){
-                this.toast("事件不能为空")
+            if(binding.noteAttributeLayout.chooseSortTv.text.equals("暂无分类本")){
+                this.toast("请先建立事件的分类本")
             }else{
-
-                label.text = noteText
-
-                if(endTime!=null){
-                    label.isEnd = binding.noteAttributeLayout.endTimeSwitch.isChecked
-                    if(label.isEnd){
-                        label.endDate = endTime as Long
-                    }
-                }
-
-                label.isTop = binding.noteAttributeLayout.toTopSwitch.isChecked
-
-                val sortNoteName = binding.noteAttributeLayout.chooseSortTv.text.toString()
-                if(sortNoteName.isNotEmpty()){
-                    label.sortNote = sortNoteName
-                }
+                val noteText = binding.noteAttributeLayout.addNoteEt.text.toString()
+                val lastName = label.text
 
 
-                val nameList = labelDao.getAllLabelsName()
-
-                if(!lastName.equals(noteText)&&nameList.contains(noteText)){
-                    this.toast("该事件已存在")
+                if(noteText.isEmpty()){
+                    this.toast("事件不能为空")
                 }else{
-                    if(label.isTop){
-                        changeOnTopLabel(label.text)
-                    }else if(lastName.equals(noteText)){
-                        changeOnTopLabel("-1")
+
+                    label.text = noteText
+
+                    if(endTime!=null){
+                        label.isEnd = binding.noteAttributeLayout.endTimeSwitch.isChecked
+                        if(label.isEnd){
+                            label.endDate = endTime as Long
+                        }
                     }
-                    labelDao.updateLabel(label)
-                    this.toast("修改数据成功,$label")
 
-                    finish()
+                    label.isTop = binding.noteAttributeLayout.toTopSwitch.isChecked
+
+                    val sortNoteName = binding.noteAttributeLayout.chooseSortTv.text.toString()
+                    if(sortNoteName.isNotEmpty()){
+                        label.sortNote = sortNoteName
+                    }
+
+
+                    val nameList = labelDao.getAllLabelsName()
+
+                    if(!lastName.equals(noteText)&&nameList.contains(noteText)){
+                        this.toast("该事件已存在")
+                    }else{
+                        if(label.isTop){
+                            changeOnTopLabel(label.text)
+                        }else if(lastName.equals(noteText)){
+                            changeOnTopLabel("-1")
+                        }
+                        labelDao.updateLabel(label)
+                        this.toast("修改数据成功,$label")
+
+                        finish()
+                    }
+
                 }
-
             }
+
+
         }
 
         binding.deleteNoteSure.setOnClickListener {
