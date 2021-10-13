@@ -21,7 +21,7 @@ class AddSortNoteActivity : AppCompatActivity() {
 
     private lateinit var adapter :IconListAdapter
 
-    private var mPosition:Int = -1
+    private var mPosition:Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,29 +62,23 @@ class AddSortNoteActivity : AppCompatActivity() {
 
     private fun saveSortNote() {
 
-
-        if(mPosition!=-1){
-
-            val iconName = resources.getResourceEntryName(iconList[mPosition])
-            if(binding.addSortNoteCard.addSortNoteEt.text.isEmpty()){
-                this.toast("分类本文字不能为空")
-            }else{
-
-                val sortNoteName = binding.addSortNoteCard.addSortNoteEt.text.toString()
-
-                val nameList = sortNoteDao.getAllSortNotesName()
-
-                if(nameList.contains(sortNoteName)){
-                    this.toast("该分类本已存在")
-                }else{
-                    sortNoteDao.insertSortNote(SortNote(sortNoteName,iconName))
-                    this.toast("保存数据成功")
-                    finish()
-                }
-            }
-
+        val iconName = resources.getResourceEntryName(iconList[mPosition])
+        if(binding.addSortNoteCard.addSortNoteEt.text.isEmpty()){
+            this.toast("分类本文字不能为空")
         }else{
-            this.toast("请选择一个图标")
+
+            val sortNoteName = binding.addSortNoteCard.addSortNoteEt.text.toString()
+
+            val nameList = sortNoteDao.getAllSortNotesName()
+
+            if(nameList.contains(sortNoteName)){
+                this.toast("该分类本已存在")
+            }else{
+                sortNoteDao.insertSortNote(SortNote(sortNoteName,iconName))
+                this.toast("保存数据成功")
+                finish()
+            }
         }
+
     }
 }

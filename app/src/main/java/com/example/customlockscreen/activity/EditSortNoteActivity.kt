@@ -16,7 +16,7 @@ const val SORT_NOTE = "SORT_NOTE"
 
 class EditSortNoteActivity : AppCompatActivity() {
 
-    private var mPosition:Int = -1
+    private var mPosition:Int = 0
 
     private lateinit var binding : ActivityEditSortNoteBinding
 
@@ -100,36 +100,32 @@ class EditSortNoteActivity : AppCompatActivity() {
 
     private fun updateSortNote() {
 
-        if(mPosition!=-1){
-
-            val iconName = resources.getResourceEntryName(iconList[mPosition])
-            if(binding.editSortNoteCard.addSortNoteEt.text.isEmpty()){
-                this.toast("分类本文字不能为空")
-            }else{
-                val sortNoteName = binding.editSortNoteCard.addSortNoteEt.text.toString()
-
-                val lastName = sortNote!!.name
-
-                sortNote!!.name = sortNoteName
-                sortNote!!.iconName = iconName
-                this.toast("${sortNote}")
-                val nameList = sortNoteDao.getAllSortNotesName()
-
-
-                if(!lastName.equals(sortNote!!.name)&&nameList.contains(sortNoteName)){
-                    this.toast("该分类本已存在")
-                }else{
-                    sortNoteDao.updateSortNote(sortNote!!)
-                    val list = labelDao.getSameSortNoteLabelList(lastName)
-                    for(label in list){
-                        labelDao.updateLabelBySortNote(sortNoteName,label.id)
-                    }
-                    this.toast("修改数据成功")
-                    finish()
-                }
-            }
+        val iconName = resources.getResourceEntryName(iconList[mPosition])
+        if(binding.editSortNoteCard.addSortNoteEt.text.isEmpty()){
+            this.toast("分类本文字不能为空")
         }else{
-            this.toast("请选择一个图标")
+            val sortNoteName = binding.editSortNoteCard.addSortNoteEt.text.toString()
+
+            val lastName = sortNote!!.name
+
+            sortNote!!.name = sortNoteName
+            sortNote!!.iconName = iconName
+            this.toast("${sortNote}")
+            val nameList = sortNoteDao.getAllSortNotesName()
+
+
+            if(!lastName.equals(sortNote!!.name)&&nameList.contains(sortNoteName)){
+                this.toast("该分类本已存在")
+            }else{
+                sortNoteDao.updateSortNote(sortNote!!)
+                val list = labelDao.getSameSortNoteLabelList(lastName)
+                for(label in list){
+                    labelDao.updateLabelBySortNote(sortNoteName,label.id)
+                }
+                this.toast("修改数据成功")
+                finish()
+            }
         }
+
     }
 }
