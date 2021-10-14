@@ -32,6 +32,7 @@ class LabelLinearAdapter(val context: Context, var labelList:List<Label>,val isL
         binding =  CardItemLinearBinding.inflate(LayoutInflater.from(context))
 
         val holder = ViewHolder(binding)
+
         holder.itemView.setOnClickListener {
 
             val position = holder.adapterPosition

@@ -29,7 +29,7 @@
             android:layout_height="200dp"
             android:background="@color/colorPrimary"
             >
-            <com.example.customlockscreen.util.CircleImageView
+            <com.example.customlockscreen.view.CircleImageView
                 android:id="@+id/main_avatar"
                 android:layout_width="150dp"
                 android:layout_height="150dp"

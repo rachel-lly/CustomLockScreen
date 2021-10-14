@@ -21,6 +21,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
         <item name="android:windowActivityTransitions">true</item>
+
     </style>
 
     <!--设置menu弹出位置在Toolbar下方-->

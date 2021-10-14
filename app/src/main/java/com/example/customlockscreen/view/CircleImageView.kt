@@ -1,4 +1,4 @@
-package com.example.customlockscreen.util
+package com.example.customlockscreen.view
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -25,10 +25,10 @@ class CircleImageView(context: Context, attributeSet: AttributeSet):androidx.app
 
         if(rawBitmap!=null){
 
-            val viewMinSize = Math.min(width, height)
+            val viewMinSize = width.coerceAtMost(height)
 
 
-            if(mShader==null||!rawBitmap.equals(mBitmap)){
+            if(mShader==null|| rawBitmap != mBitmap){
                 mBitmap = rawBitmap
                 mShader = BitmapShader(rawBitmap,Shader.TileMode.CLAMP,Shader.TileMode.CLAMP)
             }
@@ -38,7 +38,7 @@ class CircleImageView(context: Context, attributeSet: AttributeSet):androidx.app
                 mShader?.setLocalMatrix(mMatrix)
             }
 
-            mPaint.setShader(mShader)
+            mPaint.shader = mShader
             mPaint.isAntiAlias = true
             val radius = viewMinSize/2.0f
             canvas?.drawCircle(radius,radius,radius,mPaint)
@@ -49,32 +49,36 @@ class CircleImageView(context: Context, attributeSet: AttributeSet):androidx.app
 
     }
 
-    fun getBitmap(drawable: Drawable): Bitmap? {
-        if(drawable is BitmapDrawable){
+    private fun getBitmap(drawable: Drawable): Bitmap? {
+        when (drawable) {
+            is BitmapDrawable -> {
 
-            return drawable.bitmap
+                return drawable.bitmap
 
-        }else if(drawable is ColorDrawable){
+            }
+            is ColorDrawable -> {
 
-            val rect: Rect = drawable.bounds
-            val width = rect.right - rect.left
-            val height = rect.bottom - rect.top
+                val rect: Rect = drawable.bounds
+                val width = rect.right - rect.left
+                val height = rect.bottom - rect.top
 
-            val color = drawable.color
+                val color = drawable.color
 
-            val bitmap:Bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-            val canvas = Canvas(bitmap)
-            canvas.drawARGB(
-                Color.alpha(color),
-                Color.red(color),
-                Color.green(color),
-                Color.blue(color)
-            )
+                val bitmap:Bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+                val canvas = Canvas(bitmap)
+                canvas.drawARGB(
+                        Color.alpha(color),
+                        Color.red(color),
+                        Color.green(color),
+                        Color.blue(color)
+                )
 
-            return bitmap
+                return bitmap
 
-        }else{
-            return null
+            }
+            else -> {
+                return null
+            }
         }
     }
 

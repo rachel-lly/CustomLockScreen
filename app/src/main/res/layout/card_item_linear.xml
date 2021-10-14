@@ -1,86 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
-
     >
 
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
         app:cardCornerRadius="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         >
 
-        <LinearLayout
+        <com.example.customlockscreen.view.SwipeMenuLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            app:ios="false"
+            app:leftSwipe="true"
+            app:swipeEnable="true"
             >
 
-            <TextView
-                android:id="@+id/label_text"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="15sp"
-                android:text="星期六还有"
-                android:textColor="@color/linear_item_text_color"
-                android:fontFamily="@font/montserrat_medium"
-                android:maxLines="1"
-                android:layout_weight="3"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:paddingStart="15dp"
-                android:background="@color/linear_item_color"
-                android:paddingTop="3dp"
-                android:paddingBottom="3dp"
-                />
+                >
 
-            <TextView
-                android:id="@+id/label_day"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-                android:text="8"
-                android:textColor="@color/linear_item_text_day_color"
-                android:fontFamily="@font/montserrat_medium"
-                android:maxLines="1"
-                android:layout_weight="0.8"
+                <TextView
+                    android:id="@+id/label_text"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:textSize="15sp"
+                    android:text="星期六还有"
+                    android:textColor="@color/linear_item_text_color"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:maxLines="1"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:paddingStart="15dp"
+                    android:background="@color/linear_item_color"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    />
+
+                <TextView
+                    android:id="@+id/label_day"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:textSize="16sp"
+                    android:text="8"
+                    android:textColor="@color/linear_item_text_day_color"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:maxLines="1"
+                    android:layout_weight="0.8"
+                    android:gravity="center"
+                    android:background="@color/note_list_future_light"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    />
+
+
+                <TextView
+                    android:id="@+id/day_just_text"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:textSize="15sp"
+                    android:text="天"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/linear_item_text_day_color"
+                    android:maxLines="1"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:background="@color/note_list_future_dark"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:background="@color/note_list_future_light"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                />
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:textSize="15sp"
+                    android:text="删除"
+                    android:textColor="@color/linear_item_text_color"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:maxLines="1"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:background="#da0d23"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:textSize="16sp"
+                    android:text="置顶"
+                    android:textColor="@color/linear_item_text_day_color"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:maxLines="1"
+                    android:layout_weight="0.8"
+                    android:gravity="center"
+                    android:background="#ecd50a"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    />
 
 
-            <TextView
-                android:id="@+id/day_just_text"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="15sp"
-                android:text="天"
-                android:fontFamily="@font/montserrat_medium"
-                android:textColor="@color/linear_item_text_day_color"
-                android:maxLines="1"
-                android:layout_weight="0.5"
-                android:gravity="center"
-                android:background="@color/note_list_future_dark"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:textSize="15sp"
+                    android:text="标记未读"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/linear_item_text_day_color"
+                    android:maxLines="1"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:background="#d9dee4"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    />
 
 
-        </LinearLayout>
+            </LinearLayout>
+
+
+        </com.example.customlockscreen.view.SwipeMenuLayout>
+
 
 
 
     </com.google.android.material.card.MaterialCardView>
 
 
-</RelativeLayout>
+</LinearLayout>
