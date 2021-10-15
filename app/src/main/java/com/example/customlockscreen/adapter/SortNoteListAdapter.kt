@@ -15,11 +15,17 @@ import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.bean.SortNote
 import java.util.*
 
-class SortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>,var labelList: List<Label>) :
+class SortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>,var labelList: List<Label>,deleteOnClickListener: deleteOnClickListener) :
         RecyclerView.Adapter<SortNoteListAdapter.ViewHolder>() {
 
 
     private lateinit var  binding : SortNoteListItemBinding
+
+    private val listener = deleteOnClickListener
+
+    interface deleteOnClickListener{
+        fun delete(sortNote: SortNote)
+    }
 
     inner class ViewHolder(binding: SortNoteListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val sortNoteText : TextView = binding.sortTx
@@ -29,6 +35,10 @@ class SortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>,
         val sortNoteCount : TextView = binding.sortCount
         val latestNoteName :TextView = binding.sortNoteName
         val latestNoteDay :TextView = binding.sortNoteDay
+
+        val editSortNote: TextView = binding.editSortNoteItem
+        val deleteSortNote: TextView = binding.deleteSortNoteItem
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,16 +46,25 @@ class SortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>,
 
 
         val holder = ViewHolder(binding)
-        holder.itemView.setOnClickListener {
+        holder.editSortNote.setOnClickListener {
             val position = holder.adapterPosition
             val sortNote = sortNoteList[position]
+            jumpToEditActivity(sortNote)
+        }
 
-            val intent = Intent(context,EditSortNoteActivity::class.java)
-            intent.putExtra(SORT_NOTE,sortNote)
-            context.startActivity(intent)
+        holder.deleteSortNote.setOnClickListener {
+            val position = holder.adapterPosition
+            val sortNote = sortNoteList[position]
+            listener.delete(sortNote)
         }
 
         return holder
+    }
+
+    private fun jumpToEditActivity(sortNote: SortNote){
+        val intent = Intent(context,EditSortNoteActivity::class.java)
+        intent.putExtra(SORT_NOTE,sortNote)
+        context.startActivity(intent)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

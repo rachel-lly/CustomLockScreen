@@ -1,7 +1,6 @@
 package com.example.customlockscreen.activity
 
 import android.Manifest
-import android.app.Activity
 import android.app.AlarmManager
 import android.app.Service
 import android.content.ComponentName
@@ -178,7 +177,7 @@ class TimeRemindActivity : AppCompatActivity() {
                 )
 
 
-                PermissionX.request(this,Manifest.permission.RECEIVE_BOOT_COMPLETED){ allGranted, deniedList ->
+                PermissionX.request(this,Manifest.permission.RECEIVE_BOOT_COMPLETED){ allGranted, _ ->
                     if(!allGranted){
                         MaterialAlertDialogBuilder(this)
                                 .setTitle("提示")

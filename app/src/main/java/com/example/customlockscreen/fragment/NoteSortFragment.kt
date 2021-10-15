@@ -14,9 +14,11 @@ import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.bean.SortNote
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.model.db.DataViewModel
+import com.example.customlockscreen.model.db.LabelDao
 import com.example.customlockscreen.model.db.SortNoteDao
 import com.example.customlockscreen.util.SharedPreferenceCommission
-
+import com.example.customlockscreen.util.ToastUtil.Companion.toast
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class NoteSortFragment : Fragment() {
 
@@ -29,7 +31,10 @@ class NoteSortFragment : Fragment() {
 
     private lateinit var dataViewModel: DataViewModel
 
+    private lateinit var labelDao: LabelDao
     private lateinit var sortNoteDao: SortNoteDao
+
+    private lateinit var deleteListener:SortNoteListAdapter.deleteOnClickListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,11 +44,29 @@ class NoteSortFragment : Fragment() {
         binding = FragmentNoteSortBinding.inflate(LayoutInflater.from(this.context))
 
         sortNoteDao = DataBase.dataBase.sortNoteDao()
+        labelDao = DataBase.dataBase.labelDao()
 
         list = ArrayList()
         labelList = ArrayList()
 
-        adapter = context?.let { SortNoteListAdapter(it,list,labelList) }!!
+        deleteListener = object : SortNoteListAdapter.deleteOnClickListener {
+            override fun delete(sortNote: SortNote) {
+                MaterialAlertDialogBuilder(context!!)
+                    .setTitle("提醒")
+                    .setMessage("确定删除这个分类本?")
+                    .setPositiveButton(context!!.resources.getString(R.string.accept)) { _, _ ->
+                        if(labelDao.getSameSortNoteLabelList(sortNote.name).isNotEmpty()){
+                            context!!.toast("该分类本下有事件，删除失败")
+                        }else{
+                            sortNoteDao.deleteSortNote(sortNote)
+                            context!!.toast("删除分类本成功")
+                        }
+                    }
+                    .show()
+            }
+        }
+
+        adapter = context?.let { SortNoteListAdapter(it,list,labelList,deleteListener) }!!
         binding.fragmentSortNoteRecycleview.adapter = adapter
         binding.fragmentSortNoteRecycleview.layoutManager = GridLayoutManager(context,1)
 

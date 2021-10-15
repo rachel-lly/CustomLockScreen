@@ -8,14 +8,21 @@
     android:background="@drawable/item_pressed_state"
     >
 
-    <RelativeLayout
+
+    <com.example.customlockscreen.view.SwipeMenuLayout
         android:id="@+id/card_sort_note_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="20dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
         >
+
+        <RelativeLayout
+            android:id="@+id/sort_note_linear_item_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            >
 
 
             <ImageView
@@ -58,33 +65,78 @@
 
 
 
-        <TextView
-            android:id="@+id/sort_note_day"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="还有 3 天"
-            android:fontFamily="@font/montserrat_medium"
-            android:textColor="@color/color_normal"
-            android:textSize="10sp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="20dp"
-            />
+            <TextView
+                android:id="@+id/sort_note_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="还有 3 天"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/color_normal"
+                android:textSize="10sp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                />
 
-        <TextView
-            android:id="@+id/sort_note_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="新年"
-            android:textColor="@color/text_more_gray"
-            android:fontFamily="@font/montserrat_medium"
-            android:textSize="13sp"
-            android:layout_marginEnd="8dp"
-            android:layout_toStartOf="@+id/sort_note_day"
-            android:layout_centerVertical="true"
-            />
+            <TextView
+                android:id="@+id/sort_note_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="新年"
+                android:textColor="@color/text_more_gray"
+                android:fontFamily="@font/montserrat_medium"
+                android:textSize="13sp"
+                android:layout_marginEnd="8dp"
+                android:layout_toStartOf="@+id/sort_note_day"
+                android:layout_centerVertical="true"
+                />
 
-    </RelativeLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:id="@+id/edit_sort_note_item"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:textSize="16sp"
+                android:text="编辑"
+                android:textColor="#fff"
+                android:fontFamily="@font/montserrat_medium"
+                android:maxLines="1"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@color/orange_bg"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                />
+
+
+            <TextView
+                android:id="@+id/delete_sort_note_item"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:textSize="15sp"
+                android:text="删除"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="#fff"
+                android:maxLines="1"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@color/red_bg"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                />
+
+
+        </LinearLayout>
+
+    </com.example.customlockscreen.view.SwipeMenuLayout>
+
 
     <View
         style="@style/horizon_line"

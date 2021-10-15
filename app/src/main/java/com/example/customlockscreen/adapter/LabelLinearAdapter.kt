@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
@@ -27,7 +26,6 @@ class LabelLinearAdapter(val context: Context, var labelList:List<Label>,val isL
         val LabelText : TextView = binding.labelText
         val LabelDay : TextView = binding.labelDay
         val labelJustText:TextView = binding.dayJustText
-        val contentLayout:LinearLayout = binding.contentLayout
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,7 +33,7 @@ class LabelLinearAdapter(val context: Context, var labelList:List<Label>,val isL
 
         val holder = ViewHolder(binding)
 
-        holder.contentLayout.setOnClickListener {
+        holder.itemView.setOnClickListener {
 
             val position = holder.adapterPosition
             val label = labelList[position]

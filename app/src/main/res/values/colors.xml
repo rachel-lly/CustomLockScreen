@@ -46,5 +46,11 @@
     <color name="white_bg_gray">#fff</color>
 
     <color name="text_colorPrimary">@color/colorPrimary</color>
+
+
+    <color name="blue_bg">#3d83e6</color>
+    <color name="orange_bg">#eda150</color>
+    <color name="red_bg">#e75d58</color>
+
     
 </resources>

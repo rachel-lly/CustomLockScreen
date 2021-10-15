@@ -129,18 +129,22 @@ class HomeActivity : AppCompatActivity() {
                 when (position) {
                     0 -> {
                         binding.homeToolbar.title = "主页"
+                        binding.homeNavigationView.selectedItemId = R.id.item_home
                     }
 
                     1 -> {
                         binding.homeToolbar.title = "分类管理"
+                        binding.homeNavigationView.selectedItemId = R.id.item_note
                     }
 
                     2 -> {
                         binding.homeToolbar.title = "我的"
+                        binding.homeNavigationView.selectedItemId = R.id.item_mine
                     }
 
                     3 -> {
                         binding.homeToolbar.title = "设置"
+                        binding.homeNavigationView.selectedItemId = R.id.item_setting
                     }
                 }
             }

@@ -46,4 +46,9 @@
     <color name="white_bg_gray">#1f1f1f</color>
 
     <color name="text_colorPrimary">#29bb89</color>
+
+    <color name="blue_bg">#3576c6</color>
+    <color name="orange_bg">#eda150</color>
+    <color name="red_bg">#e75d58</color>
+
 </resources>
