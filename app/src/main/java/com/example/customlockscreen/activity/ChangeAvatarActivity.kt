@@ -1,13 +1,17 @@
 package com.example.customlockscreen.activity
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import com.bumptech.glide.Glide
 import com.example.customlockscreen.R
 import com.example.customlockscreen.databinding.ActivityChangeAvatarBinding
 import com.example.customlockscreen.fragment.IMAGE_REQUEST_CODE
+import com.example.customlockscreen.util.FileUtil.Companion.saveAvatar
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
 import com.example.library.PermissionX
 
@@ -44,5 +48,20 @@ class ChangeAvatarActivity : AppCompatActivity() {
 
 
         setContentView(binding.root)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(Activity.RESULT_OK == resultCode){
+            if(IMAGE_REQUEST_CODE == requestCode){
+                val uri = data!!.data
+
+                val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(uri!!))
+
+                saveAvatar(this,bitmap,"avatar")
+
+                Glide.with(this).load(bitmap).into(binding.mainAvatar)
+            }
+        }
     }
 }

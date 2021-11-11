@@ -14,6 +14,7 @@ import com.example.customlockscreen.databinding.SortNoteListItemBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.bean.SortNote
 import java.util.*
+import kotlin.math.abs
 
 class SortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>,var labelList: List<Label>,deleteOnClickListener: deleteOnClickListener) :
         RecyclerView.Adapter<SortNoteListAdapter.ViewHolder>() {
@@ -77,7 +78,7 @@ class SortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>,
         val sameSortNoteLabelList = ArrayList<Label>()
 
         for(label in labelList){
-            if(label.sortNote.equals(sortNoteName)){
+            if(label.sortNote == sortNoteName){
                 sameSortNoteLabelList.add(label)
             }
         }
@@ -95,7 +96,7 @@ class SortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>,
             if(minLabel.day>0){
                 holder.latestNoteDay.text = "还有 ${minLabel.day} 天"
             }else{
-                holder.latestNoteDay.text = "已经 ${Math.abs(minLabel.day)} 天"
+                holder.latestNoteDay.text = "已经 ${abs(minLabel.day)} 天"
             }
 
 

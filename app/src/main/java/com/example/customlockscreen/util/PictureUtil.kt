@@ -9,16 +9,12 @@ import android.os.Build
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.core.content.FileProvider
+import com.example.customlockscreen.util.FileUtil.Companion.getBitmapCacheDir
+import com.example.customlockscreen.util.FileUtil.Companion.saveBitmap
 import java.io.*
 
 
 class PictureUtil{
-
-    companion object{
-        fun getBitmapCacheDir(context: Context): String{
-            return "${context.getExternalFilesDir(null)?.absolutePath}/BitmapCache"
-        }
-    }
 
     private lateinit var bitmapName:String
     private lateinit var bitmapPath:String
@@ -29,20 +25,20 @@ class PictureUtil{
         bitmapName = "share"
         bitmapPath = "${getBitmapCacheDir(context)}/$bitmapName.png"
 
-        SaveBitmap(context, bitmap)
-        ShareImage(context, bitmapPath)
+        saveBitmap(context, bitmap,bitmapName)
+        shareImage(context, bitmapPath)
 
     }
 
     fun savePictureToPhotoAlbum(context: Context, bitmap: Bitmap){
         bitmapName = "lock"
         bitmapPath = "${getBitmapCacheDir(context)}/$bitmapName.png"
-        SaveBitmap(context, bitmap)
+        saveBitmap(context, bitmap,bitmapName)
         putBitmapToMedia(context, bitmapName, bitmap)
     }
 
 
-    private fun ShareImage(context: Context, imagePath: String) {
+    private fun shareImage(context: Context, imagePath: String) {
 
         val file = File(imagePath)
 
@@ -62,32 +58,7 @@ class PictureUtil{
 
     }
 
-    private fun SaveBitmap(context: Context, bitmap: Bitmap) {
 
-        try { // 获取SDCard指定目录下
-
-            val sdCardDir = getBitmapCacheDir(context)
-
-            val dirFile = File(sdCardDir) //目录转化成文件夹
-            if (!dirFile.exists()) {              //如果不存在，那就建立这个文件夹
-                dirFile.mkdirs()
-            }
-            val file = File(sdCardDir, "$bitmapName.png") // 在该目录下创建图片
-            if (file.exists()) {
-                file.delete()
-            }
-            file.createNewFile() //创建文件
-            val out = FileOutputStream(file)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
-            out.flush()
-            out.close()
-        } catch (e: FileNotFoundException) {
-            e.printStackTrace()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-
-    }
 
     fun putBitmapToMedia(context: Context, fileName: String, bm: Bitmap) {
         val values = ContentValues()

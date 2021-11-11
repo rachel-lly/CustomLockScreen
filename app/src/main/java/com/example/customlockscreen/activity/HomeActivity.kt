@@ -115,9 +115,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun fragmentControl() {
 
-        val noteListFragment = NoteListFragment()
-
-        fragmentList.add(noteListFragment)
+        fragmentList.add(NoteListFragment())
         fragmentList.add(NoteSortFragment())
         fragmentList.add(MineFragment())
         fragmentList.add(SettingFragment())

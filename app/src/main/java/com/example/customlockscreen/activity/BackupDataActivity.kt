@@ -5,14 +5,15 @@ import android.os.Bundle
 import android.transition.Slide
 import android.view.Gravity
 import com.example.customlockscreen.R
-import com.example.customlockscreen.util.PictureUtil
 import com.example.customlockscreen.databinding.ActivityBackupDataBinding
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.model.db.LabelDao
 import com.example.customlockscreen.model.db.SortNoteDao
+import com.example.customlockscreen.util.FileUtil.Companion.deleteDirectory
+import com.example.customlockscreen.util.FileUtil.Companion.getBitmapCacheDir
+import com.example.customlockscreen.util.FileUtil.Companion.isExistFile
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.io.File
 
 class BackupDataActivity : AppCompatActivity() {
 
@@ -113,7 +114,7 @@ class BackupDataActivity : AppCompatActivity() {
 
     private fun showDeletePictureDialog() {
 
-        val bitmapDir = PictureUtil.getBitmapCacheDir(this)
+        val bitmapDir = getBitmapCacheDir(this)
 
         MaterialAlertDialogBuilder(this)
                 .setTitle("确定清空缓存文件吗？")
@@ -130,34 +131,13 @@ class BackupDataActivity : AppCompatActivity() {
 
     private fun deleteAllFile(bitmapDir: String) {
 
-        val fileDir = File(bitmapDir)
-        if(!fileDir.exists()){
+        val isExist = isExistFile(bitmapDir)
+        if(!isExist){
             this.toast("暂无缓存图片")
         }else{
-            delete(fileDir)
-            fileDir.delete()
-            if(!fileDir.exists()){
-                this.toast("清除缓存图片成功")
-            }
+            deleteDirectory(bitmapDir)
+            this.toast("清除缓存图片成功")
         }
-
-    }
-
-    private fun delete(fileDir:File){
-
-        val files = fileDir.listFiles()
-
-        if(files!=null){
-            for(file in files){
-                if(file.isFile){
-                    file.delete()
-                }else if(file.isDirectory){
-                    delete(file)
-                }
-                file.delete()
-            }
-        }
-
     }
 
 }

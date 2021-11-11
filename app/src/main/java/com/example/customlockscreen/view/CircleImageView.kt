@@ -33,10 +33,10 @@ class CircleImageView(context: Context, attributeSet: AttributeSet):androidx.app
                 mShader = BitmapShader(rawBitmap,Shader.TileMode.CLAMP,Shader.TileMode.CLAMP)
             }
 
-            if(mShader!=null){
-                mMatrix.setScale(viewMinSize.toFloat()/rawBitmap.width, viewMinSize.toFloat()/rawBitmap.height)
-                mShader?.setLocalMatrix(mMatrix)
-            }
+
+            mMatrix.setScale(viewMinSize.toFloat()/rawBitmap.width, viewMinSize.toFloat()/rawBitmap.height)
+            mShader?.setLocalMatrix(mMatrix)
+
 
             mPaint.shader = mShader
             mPaint.isAntiAlias = true

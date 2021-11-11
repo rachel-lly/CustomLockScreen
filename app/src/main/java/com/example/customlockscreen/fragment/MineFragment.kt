@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.customlockscreen.activity.ChangeAvatarActivity
 import com.example.customlockscreen.application.MyApplication
 import com.example.customlockscreen.databinding.FragmentMineBinding
@@ -47,6 +48,7 @@ class MineFragment : Fragment() {
 
         binding = FragmentMineBinding.inflate(layoutInflater)
 
+
         binding.mineTime.text = today
 
         binding.eventNum.text = labelDao.getAllLabelsName().size.toString()
@@ -75,38 +77,6 @@ class MineFragment : Fragment() {
 
         binding.useDayNum.text = day.toString()
 
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when(requestCode){
-            IMAGE_REQUEST_CODE -> {
-                if (resultCode == RESULT_OK) {
-                    val selectedImageUri = data!!.data
-
-                    val bitmap: Bitmap
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
-                        val source = ImageDecoder.createSource(context!!.contentResolver,selectedImageUri!!)
-                        bitmap = ImageDecoder.decodeBitmap(source)
-                    }else{
-                        val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-                        val cursor: Cursor = selectedImageUri?.let {
-                            context?.contentResolver?.query(it,
-                                    filePathColumn, null, null, null)
-                        }!! //从系统表中查询指定Uri对应的照片
-                        cursor.moveToFirst()
-                        val columnIndex: Int = cursor.getColumnIndex(filePathColumn[0])
-                        val path = cursor.getString(columnIndex) //获取照片路径
-
-                        cursor.close()
-                        bitmap = BitmapFactory.decodeFile(path)
-                    }
-
-
-                    binding.mineAvater.setImageBitmap(bitmap)
-                }
-            }
-        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
