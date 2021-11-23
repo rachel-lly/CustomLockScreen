@@ -36,6 +36,17 @@ class NoteSortFragment : Fragment() {
 
     private lateinit var deleteListener:SortNoteListAdapter.deleteOnClickListener
 
+    companion object {
+
+        private val fragment = NoteSortFragment()
+
+        @JvmStatic
+        fun newInstance() = fragment
+
+    }
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

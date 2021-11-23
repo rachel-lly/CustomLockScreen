@@ -115,10 +115,10 @@ class HomeActivity : AppCompatActivity() {
 
     private fun fragmentControl() {
 
-        fragmentList.add(NoteListFragment())
-        fragmentList.add(NoteSortFragment())
-        fragmentList.add(MineFragment())
-        fragmentList.add(SettingFragment())
+        fragmentList.add(NoteListFragment.newInstance())
+        fragmentList.add(NoteSortFragment.newInstance())
+        fragmentList.add(MineFragment.newInstance())
+        fragmentList.add(SettingFragment.newInstance())
 
         binding.homeViewPager.adapter = PagerAdapter(this, fragmentList)
         binding.homeViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {

@@ -29,6 +29,17 @@ class SettingFragment : Fragment() {
     private var sortStyle :String ?= null
 
 
+
+    companion object {
+
+        private val fragment = SettingFragment()
+
+        @JvmStatic
+        fun newInstance() = fragment
+
+    }
+
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -51,6 +51,17 @@ class NoteListFragment : Fragment() {
         return@Comparator o1.addNoteTime.compareTo(o2.addNoteTime)
     }
 
+
+    companion object {
+
+        private val fragment = NoteListFragment()
+
+        @JvmStatic
+        fun newInstance() = fragment
+
+    }
+
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
