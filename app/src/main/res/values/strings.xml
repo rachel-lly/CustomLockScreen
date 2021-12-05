@@ -54,6 +54,8 @@
         <item name="android:layout_height">0.8dp</item>
         <item name="android:background">@color/line_color_gray</item>
     </style>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

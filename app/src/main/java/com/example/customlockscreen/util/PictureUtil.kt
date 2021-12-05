@@ -16,25 +16,18 @@ import java.io.*
 
 class PictureUtil{
 
-    private lateinit var bitmapName:String
-    private lateinit var bitmapPath:String
-
-
     fun shotShare(context: Context, bitmap: Bitmap){
+        val bitmapPath = "${getBitmapCacheDir(context)}/share.png"
 
-        bitmapName = "share"
-        bitmapPath = "${getBitmapCacheDir(context)}/$bitmapName.png"
-
-        saveBitmap(context, bitmap,bitmapName)
+        saveBitmap(context, bitmap,"share")
         shareImage(context, bitmapPath)
 
     }
 
     fun savePictureToPhotoAlbum(context: Context, bitmap: Bitmap){
-        bitmapName = "lock"
-        bitmapPath = "${getBitmapCacheDir(context)}/$bitmapName.png"
-        saveBitmap(context, bitmap,bitmapName)
-        putBitmapToMedia(context, bitmapName, bitmap)
+
+        saveBitmap(context, bitmap,"lock")
+        putBitmapToMedia(context, "lock", bitmap)
     }
 
 
@@ -60,7 +53,7 @@ class PictureUtil{
 
 
 
-    fun putBitmapToMedia(context: Context, fileName: String, bm: Bitmap) {
+    private fun putBitmapToMedia(context: Context, fileName: String, bm: Bitmap) {
         val values = ContentValues()
         values.put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")

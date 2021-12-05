@@ -1,7 +1,10 @@
 package com.example.customlockscreen.util
 
+import android.content.ContentResolver
 import android.content.Context
 import android.graphics.Bitmap
+import android.net.Uri
+import android.provider.MediaStore
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
@@ -12,7 +15,7 @@ class FileUtil {
     companion object{
 
         fun getBitmapCacheDir(context: Context) = "${context.getExternalFilesDir(null)?.absolutePath}/BitmapCache"
-        fun getBitmapAvatarDir(context: Context) = "${context.getExternalFilesDir(null)?.absolutePath}/AvatarCache"
+        fun getAvatarCacheDir(context: Context) = "${context.getExternalFilesDir(null)?.absolutePath}/AvatarCache"
 
 
         fun deleteDirectory(dir: String){
@@ -25,7 +28,7 @@ class FileUtil {
 
         }
 
-        fun delete(fileDir:File){
+        private fun delete(fileDir:File){
 
             val files = fileDir.listFiles()
 
@@ -49,7 +52,7 @@ class FileUtil {
         }
 
         fun saveAvatar(context: Context, bitmap: Bitmap,bitmapName: String){
-            saveBitmap(bitmap, getBitmapAvatarDir(context),bitmapName)
+            saveBitmap(bitmap, getAvatarCacheDir(context),bitmapName)
         }
 
         fun saveBitmap(bitmap: Bitmap,bitmapDir: String,bitmapName: String) {
@@ -77,8 +80,18 @@ class FileUtil {
 
         }
 
+        fun getCropFile(context: Context,uri: Uri): File? {
+            val proj = arrayOf(MediaStore.Images.Media._ID)
+            val cursor = context.contentResolver.query(uri,proj,null,null,null)
 
-
+            if(cursor!!.moveToFirst()){
+                val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID)
+                val path = cursor.getString(columnIndex)
+                cursor.close()
+                return File(path)
+            }
+            return null
+        }
 
     }
 

@@ -44,7 +44,7 @@ class TimeManager {
         }
     }
 
-    fun getTodayRemindList():List<Label>{
+    private fun getTodayRemindList():List<Label>{
         refreshRoomLabelListDay()
         val list = labelDao.getAllLabels()
 
