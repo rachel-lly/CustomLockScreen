@@ -21,9 +21,8 @@ class CircleImageView(context: Context, attributeSet: AttributeSet):androidx.app
 
     @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas?) {
-        val rawBitmap:Bitmap? = getBitmap(drawable)
-
-        if(rawBitmap!=null){
+        if(drawable!=null){
+            val rawBitmap:Bitmap = getBitmap(drawable)!!
 
             val viewMinSize = width.coerceAtMost(height)
 
@@ -43,9 +42,11 @@ class CircleImageView(context: Context, attributeSet: AttributeSet):androidx.app
             val radius = viewMinSize/2.0f
             canvas?.drawCircle(radius,radius,radius,mPaint)
 
+
         }else{
             super.onDraw(canvas)
         }
+
 
     }
 

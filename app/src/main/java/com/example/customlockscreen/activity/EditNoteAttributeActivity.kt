@@ -15,6 +15,8 @@ import com.example.customlockscreen.util.TimeManager.Companion.format
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
 import com.google.android.material.datepicker.MaterialDatePicker
 
+const val IS_DELETE = 233
+
 class EditNoteAttributeActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityEditNoteAttributeBinding
@@ -227,8 +229,10 @@ class EditNoteAttributeActivity : AppCompatActivity() {
         binding.deleteNoteSure.setOnClickListener {
             labelDao.deleteLabel(label)
             this.toast("删除数据成功")
-            val intent = Intent(this,HomeActivity::class.java)
-            startActivity(intent)
+
+            val intent = Intent()
+            setResult(IS_DELETE,intent)
+            finish()
         }
 
         setContentView(binding.root)

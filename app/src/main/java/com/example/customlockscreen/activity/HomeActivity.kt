@@ -108,7 +108,9 @@ class HomeActivity : AppCompatActivity() {
             binding.drawerLayout.openDrawer(Gravity.LEFT)
         }
 
+
         fragmentControl()
+
 
         setContentView(binding.root)
     }
@@ -119,6 +121,7 @@ class HomeActivity : AppCompatActivity() {
         fragmentList.add(NoteSortFragment.newInstance())
         fragmentList.add(MineFragment.newInstance())
         fragmentList.add(SettingFragment.newInstance())
+
 
         binding.homeViewPager.adapter = PagerAdapter(this, fragmentList)
         binding.homeViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {

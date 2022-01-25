@@ -80,8 +80,9 @@ class NoteListFragment : Fragment() {
 
         if(isFirst){
             val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"))
-            val year = calendar.get(Calendar.YEAR) + 1
-            calendar.set(year,0,1)
+            val nextYear = calendar.get(Calendar.YEAR) + 1
+            calendar.set(nextYear,0,1)
+
             labelDao.insertLabel(Label("新年",calendar.timeInMillis,System.currentTimeMillis()))
         }
 

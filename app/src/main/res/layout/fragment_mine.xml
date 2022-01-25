@@ -43,12 +43,12 @@
 
         <com.example.customlockscreen.view.CircleImageView
             android:id="@+id/mine_avater"
+            style="@style/MaterialAnimations"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_alignParentEnd="true"
             android:src="@drawable/avater"
-            style="@style/MaterialAnimations"
-            android:transitionName="avatar"/>
+            android:transitionName="avatar" />
 
     </RelativeLayout>
 

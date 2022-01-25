@@ -51,15 +51,16 @@ class ChangeAvatarActivity : AppCompatActivity() {
         }
 
 
-        val avatarPath = "${getAvatarCacheDir(this)}/avatar.png"
+//        val avatarPath = "${getAvatarCacheDir(this)}/avatar.png"
+//
+//        if(isExistFile(avatarPath)){
+//            val file = File(avatarPath)
+//            Glide.with(this).load(file).into(binding.mainAvatar)
+//        }else{
+//            Glide.with(this).load(R.drawable.avater).into(binding.mainAvatar)
+//        }
 
-        if(isExistFile(avatarPath)){
-            val file = File(avatarPath)
-            Glide.with(this).load(file).into(binding.mainAvatar)
-        }else{
-            Glide.with(this).load(R.drawable.avater).into(binding.mainAvatar)
-        }
-
+        Glide.with(this).load(R.drawable.avater).into(binding.mainAvatar)
 
         binding.changeAvatarButton.setOnClickListener {
             PermissionX.request(this,

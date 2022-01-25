@@ -102,55 +102,61 @@ class DetailActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         super.onActivityResult(requestCode, resultCode, data)
+        when(requestCode){
 
-        if(requestCode == EVENT_SCREENSHOT_LOCK ||requestCode == EVENT_SCREENSHOT_SHARE){
+            IS_DELETE ->{
+                finish()
+            }
 
-            val displayMetrics = resources.displayMetrics
-            val width = displayMetrics.widthPixels
-            val height = displayMetrics.heightPixels
+            EVENT_SCREENSHOT_LOCK,EVENT_SCREENSHOT_SHARE->{
+                val displayMetrics = resources.displayMetrics
+                val width = displayMetrics.widthPixels
+                val height = displayMetrics.heightPixels
 
-            val mImageReader: ImageReader = ImageReader.newInstance(width, height, PixelFormat.RGBA_8888, 2)
-            mediaProjection = mediaProjectionManager!!.getMediaProjection(resultCode, data!!)
-            val virtualDisplay = mediaProjection!!.createVirtualDisplay("screen-mirror", width, height,
+                val mImageReader: ImageReader = ImageReader.newInstance(width, height, PixelFormat.RGBA_8888, 2)
+                mediaProjection = mediaProjectionManager!!.getMediaProjection(resultCode, data!!)
+                val virtualDisplay = mediaProjection!!.createVirtualDisplay("screen-mirror", width, height,
                     displayMetrics.densityDpi, DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, mImageReader.surface, null, null)
 
-            Handler(Looper.myLooper()!!).postDelayed({
-                try {
-                    image = mImageReader.acquireLatestImage()
-                    if (image != null) {
-                        val planes: Array<Image.Plane> = image!!.planes
-                        val buffer: ByteBuffer = planes[0].buffer
-                        val width: Int = image!!.width
-                        val height: Int = image!!.height
-                        val pixelStride: Int = planes[0].pixelStride
-                        val rowStride: Int = planes[0].rowStride
-                        val rowPadding = rowStride - pixelStride * width
-                        var bitmap = Bitmap.createBitmap(width + rowPadding / pixelStride, height, Bitmap.Config.ARGB_8888)
-                        bitmap!!.copyPixelsFromBuffer(buffer)
-                        bitmap = Bitmap.createScaledBitmap(bitmap, bitmap.width, bitmap.height, false)
-                        if (bitmap != null) {
+                Handler(Looper.myLooper()!!).postDelayed({
+                    try {
+                        image = mImageReader.acquireLatestImage()
+                        if (image != null) {
+                            val planes: Array<Image.Plane> = image!!.planes
+                            val buffer: ByteBuffer = planes[0].buffer
+                            val width: Int = image!!.width
+                            val height: Int = image!!.height
+                            val pixelStride: Int = planes[0].pixelStride
+                            val rowStride: Int = planes[0].rowStride
+                            val rowPadding = rowStride - pixelStride * width
+                            var bitmap = Bitmap.createBitmap(width + rowPadding / pixelStride, height, Bitmap.Config.ARGB_8888)
+                            bitmap!!.copyPixelsFromBuffer(buffer)
+                            bitmap = Bitmap.createScaledBitmap(bitmap, bitmap.width, bitmap.height, false)
+                            if (bitmap != null) {
 
-                            if (requestCode == EVENT_SCREENSHOT_SHARE) {
-                                cutScreenShotToShare(bitmap)
-                            }else if(requestCode == EVENT_SCREENSHOT_LOCK){
-                                cutScreenShotToLock(bitmap)
+                                if (requestCode == EVENT_SCREENSHOT_SHARE) {
+                                    cutScreenShotToShare(bitmap)
+                                }else if(requestCode == EVENT_SCREENSHOT_LOCK){
+                                    cutScreenShotToLock(bitmap)
+                                }
+
                             }
-
+                            bitmap.recycle()
                         }
-                        bitmap.recycle()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    } finally {
+                        image?.close()
+                        mImageReader.close()
+                        virtualDisplay?.release()
+                        //必须代码，否则出现BufferQueueProducer: [ImageReader] dequeueBuffer: BufferQueue has been abandoned
+                        mImageReader.setOnImageAvailableListener(null, null)
+                        mediaProjection!!.stop()
                     }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                } finally {
-                    image?.close()
-                    mImageReader.close()
-                    virtualDisplay?.release()
-                    //必须代码，否则出现BufferQueueProducer: [ImageReader] dequeueBuffer: BufferQueue has been abandoned
-                    mImageReader.setOnImageAvailableListener(null, null)
-                    mediaProjection!!.stop()
-                }
-            }, 100)
+                }, 100)
+            }
         }
+
 
     }
 
@@ -200,7 +206,7 @@ class DetailActivity : AppCompatActivity() {
             R.id.edit -> {
                 val intent = Intent(this, EditNoteAttributeActivity::class.java)
                 intent.putExtra(LABEL, label)
-                startActivity(intent)
+                startActivityForResult(intent, IS_DELETE)
             }
 
             R.id.share -> {
