@@ -5,10 +5,10 @@ import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.R
 import com.example.customlockscreen.adapter.IconListAdapter
-import com.example.customlockscreen.adapter.iconList
 import com.example.customlockscreen.databinding.ActivityAddSortNoteBinding
 import com.example.customlockscreen.model.bean.SortNote
 import com.example.customlockscreen.model.db.DataBase
+import com.example.customlockscreen.util.Code
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
 
 class AddSortNoteActivity : AppCompatActivity() {
@@ -62,7 +62,7 @@ class AddSortNoteActivity : AppCompatActivity() {
 
     private fun saveSortNote() {
 
-        val iconName = resources.getResourceEntryName(iconList[mPosition])
+        val iconName = resources.getResourceEntryName(Code.iconList[mPosition])
         if(binding.addSortNoteCard.addSortNoteEt.text.isEmpty()){
             this.toast("分类本文字不能为空")
         }else{

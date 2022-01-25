@@ -6,13 +6,13 @@ import android.text.SpannableStringBuilder
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.R
 import com.example.customlockscreen.adapter.IconListAdapter
-import com.example.customlockscreen.adapter.iconList
 import com.example.customlockscreen.databinding.ActivityEditSortNoteBinding
 import com.example.customlockscreen.model.bean.SortNote
 import com.example.customlockscreen.model.db.DataBase
+import com.example.customlockscreen.util.Code
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
 
-const val SORT_NOTE = "SORT_NOTE"
+
 
 class EditSortNoteActivity : AppCompatActivity() {
 
@@ -41,10 +41,10 @@ class EditSortNoteActivity : AppCompatActivity() {
             finish()
         }
 
-        sortNote = intent?.getParcelableExtra(SORT_NOTE)
-        val size = iconList.size
+        sortNote = intent?.getParcelableExtra(Code.SORT_NOTE)
+        val size = Code.iconList.size
         for(i in 0 until size){
-            val s = resources.getResourceEntryName(iconList[i])
+            val s = resources.getResourceEntryName(Code.iconList[i])
             if(s.equals(sortNote!!.iconName)){
                 mPosition = i
                 break;
@@ -100,7 +100,7 @@ class EditSortNoteActivity : AppCompatActivity() {
 
     private fun updateSortNote() {
 
-        val iconName = resources.getResourceEntryName(iconList[mPosition])
+        val iconName = resources.getResourceEntryName(Code.iconList[mPosition])
         if(binding.editSortNoteCard.addSortNoteEt.text.isEmpty()){
             this.toast("分类本文字不能为空")
         }else{

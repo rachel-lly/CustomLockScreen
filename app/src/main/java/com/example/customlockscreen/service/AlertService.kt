@@ -9,9 +9,8 @@ import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.example.customlockscreen.R
 import com.example.customlockscreen.activity.DetailActivity
-import com.example.customlockscreen.activity.LABEL
 import com.example.customlockscreen.model.db.DataBase
-import com.example.customlockscreen.util.LABEL_TEXT
+import com.example.customlockscreen.util.Code
 
 class AlertService : Service(){
     override fun onBind(intent: Intent?): IBinder? {
@@ -21,7 +20,7 @@ class AlertService : Service(){
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
 
-        val labelText = intent!!.getStringExtra(LABEL_TEXT)
+        val labelText = intent!!.getStringExtra(Code.LABEL_TEXT)
         val label = DataBase.dataBase.labelDao().getLabelByName(labelText!!)
 
         if(label!=null){
@@ -34,7 +33,7 @@ class AlertService : Service(){
 
 
             val toIntent = Intent(this, DetailActivity::class.java)
-            toIntent.putExtra(LABEL,label)
+            toIntent.putExtra(Code.LABEL,label)
 
             val pendingIntent = PendingIntent.getActivity(this, label.id, toIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 

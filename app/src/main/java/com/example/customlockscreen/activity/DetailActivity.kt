@@ -21,6 +21,7 @@ import com.example.customlockscreen.R
 import com.example.customlockscreen.util.PictureUtil
 import com.example.customlockscreen.databinding.ActivityDetailBinding
 import com.example.customlockscreen.model.bean.Label
+import com.example.customlockscreen.util.Code
 import com.example.customlockscreen.util.TimeManager.Companion.format
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
 import com.example.library.PermissionX
@@ -29,13 +30,11 @@ import java.lang.Exception
 import java.nio.ByteBuffer
 import kotlin.math.abs
 
-const val LABEL = "LABEL"
-const val LABEL_IS_LOCK = "LABEL_IS_LOCK"
+
 
 class DetailActivity : AppCompatActivity() {
 
-    private val EVENT_SCREENSHOT_SHARE = 22 //截图分享
-    private val EVENT_SCREENSHOT_LOCK = 23 //截图设为锁屏
+
 
     private val TAG = "DetailActivity"
 
@@ -66,8 +65,8 @@ class DetailActivity : AppCompatActivity() {
                 finish()
             }
 
-            label= intent.getParcelableExtra(LABEL)!!
-            labelIsLock = intent!!.getBooleanExtra(LABEL_IS_LOCK, false)
+            label= intent.getParcelableExtra(Code.LABEL)!!
+            labelIsLock = intent!!.getBooleanExtra(Code.LABEL_IS_LOCK, false)
 
             binding.detailCard.labelDay.updatePadding(0, 25, 0, 25)
 
@@ -90,12 +89,12 @@ class DetailActivity : AppCompatActivity() {
 
     private fun takeScreenShotToShare() {
         mediaProjectionManager = application.getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
-        startActivityForResult(mediaProjectionManager!!.createScreenCaptureIntent(), EVENT_SCREENSHOT_SHARE)
+        startActivityForResult(mediaProjectionManager!!.createScreenCaptureIntent(), Code.EVENT_SCREENSHOT_SHARE)
     }
 
     private fun takeScreenShotToLock() {
         mediaProjectionManager = application.getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
-        startActivityForResult(mediaProjectionManager!!.createScreenCaptureIntent(), EVENT_SCREENSHOT_LOCK)
+        startActivityForResult(mediaProjectionManager!!.createScreenCaptureIntent(), Code.EVENT_SCREENSHOT_LOCK)
     }
 
     @SuppressLint("WrongConstant")
@@ -104,11 +103,11 @@ class DetailActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         when(requestCode){
 
-            IS_DELETE ->{
+            Code.IS_DELETE ->{
                 finish()
             }
 
-            EVENT_SCREENSHOT_LOCK,EVENT_SCREENSHOT_SHARE->{
+            Code.EVENT_SCREENSHOT_LOCK,Code.EVENT_SCREENSHOT_SHARE->{
                 val displayMetrics = resources.displayMetrics
                 val width = displayMetrics.widthPixels
                 val height = displayMetrics.heightPixels
@@ -134,9 +133,9 @@ class DetailActivity : AppCompatActivity() {
                             bitmap = Bitmap.createScaledBitmap(bitmap, bitmap.width, bitmap.height, false)
                             if (bitmap != null) {
 
-                                if (requestCode == EVENT_SCREENSHOT_SHARE) {
+                                if (requestCode == Code.EVENT_SCREENSHOT_SHARE) {
                                     cutScreenShotToShare(bitmap)
-                                }else if(requestCode == EVENT_SCREENSHOT_LOCK){
+                                }else if(requestCode == Code.EVENT_SCREENSHOT_LOCK){
                                     cutScreenShotToLock(bitmap)
                                 }
 
@@ -205,8 +204,8 @@ class DetailActivity : AppCompatActivity() {
         when(item.itemId){
             R.id.edit -> {
                 val intent = Intent(this, EditNoteAttributeActivity::class.java)
-                intent.putExtra(LABEL, label)
-                startActivityForResult(intent, IS_DELETE)
+                intent.putExtra(Code.LABEL, label)
+                startActivityForResult(intent, Code.IS_DELETE)
             }
 
             R.id.share -> {

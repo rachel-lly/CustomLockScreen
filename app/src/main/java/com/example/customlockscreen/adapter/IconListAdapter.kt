@@ -5,13 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.customlockscreen.R
 import com.example.customlockscreen.databinding.IconListItemBinding
+import com.example.customlockscreen.util.Code
 import java.util.HashMap
-
-val iconList = intArrayOf(R.mipmap.cat,R.mipmap.owl, R.mipmap.flamingo,R.mipmap.cactus, R.mipmap.marigold,R.mipmap.umbrella,
-        R.mipmap.happy, R.mipmap.rocket,R.mipmap.yellow_star, R.mipmap.love_heart, R.mipmap.earth,R.mipmap.music,
-        R.mipmap.computer, R.mipmap.cake, R.mipmap.diamond, R.mipmap.work_color, R.mipmap.life_color, R.mipmap.anniverity_color )
 
 class IconListAdapter(val context: Context,clickListener: ClickListener,defaultPosition: Int) :
         RecyclerView.Adapter<IconListAdapter.ViewHolder>() {
@@ -69,12 +65,12 @@ class IconListAdapter(val context: Context,clickListener: ClickListener,defaultP
             holder.checkbox.isChecked = true
             holder.checkbox.visibility = View.VISIBLE
         }
-        holder.icon.setImageResource(iconList[position])
+        holder.icon.setImageResource(Code.iconList[position])
         holderList[position] = holder
     }
 
 
-    override fun getItemCount() = iconList.size
+    override fun getItemCount() = Code.iconList.size
 
     override fun getItemId(position: Int) = position.toLong()
 

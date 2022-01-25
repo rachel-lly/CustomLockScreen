@@ -9,10 +9,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.customlockscreen.activity.EditSortNoteActivity
-import com.example.customlockscreen.activity.SORT_NOTE
 import com.example.customlockscreen.databinding.SortNoteListItemBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.bean.SortNote
+import com.example.customlockscreen.util.Code
 import java.util.*
 import kotlin.math.abs
 
@@ -64,7 +64,7 @@ class SortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>,
 
     private fun jumpToEditActivity(sortNote: SortNote){
         val intent = Intent(context,EditSortNoteActivity::class.java)
-        intent.putExtra(SORT_NOTE,sortNote)
+        intent.putExtra(Code.SORT_NOTE,sortNote)
         context.startActivity(intent)
     }
 

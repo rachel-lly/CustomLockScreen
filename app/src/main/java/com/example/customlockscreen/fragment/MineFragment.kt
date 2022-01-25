@@ -15,14 +15,9 @@ import com.example.customlockscreen.application.MyApplication
 import com.example.customlockscreen.databinding.FragmentMineBinding
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.model.db.DataViewModel
-import com.example.customlockscreen.util.FileUtil
 import com.google.android.material.datepicker.MaterialDatePicker
-import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-
-
-const val IMAGE_REQUEST_CODE = 12
 
 class MineFragment : Fragment() {
 

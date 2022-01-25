@@ -6,7 +6,6 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -15,15 +14,12 @@ import android.view.MenuItem
 import com.bumptech.glide.Glide
 import com.example.customlockscreen.R
 import com.example.customlockscreen.databinding.ActivityChangeAvatarBinding
-import com.example.customlockscreen.fragment.IMAGE_REQUEST_CODE
-import com.example.customlockscreen.util.FileUtil.Companion.getAvatarCacheDir
-import com.example.customlockscreen.util.FileUtil.Companion.isExistFile
+import com.example.customlockscreen.util.Code
 import com.example.customlockscreen.util.FileUtil.Companion.saveAvatar
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
 import com.example.library.PermissionX
-import java.io.File
 
-const val REQUEST_CODE_CAPTURE_CROP = 11111
+
 
 class ChangeAvatarActivity : AppCompatActivity() {
 
@@ -69,7 +65,7 @@ class ChangeAvatarActivity : AppCompatActivity() {
                 if(allgranted){
                     //跳转系统相册
                     val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-                    startActivityForResult(intent, IMAGE_REQUEST_CODE)
+                    startActivityForResult(intent, Code.IMAGE_REQUEST_CODE)
 
                 }else{
                     toast("你拒绝了 $deniedList")
@@ -90,7 +86,7 @@ class ChangeAvatarActivity : AppCompatActivity() {
         if(Activity.RESULT_OK == resultCode){
 
             when (requestCode){
-                IMAGE_REQUEST_CODE ->{
+                Code.IMAGE_REQUEST_CODE ->{
                     val uri = data!!.data
 
                     bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(uri!!))
@@ -98,7 +94,7 @@ class ChangeAvatarActivity : AppCompatActivity() {
                     Glide.with(this).load(bitmap).into(binding.mainAvatar)
                 }
 
-                REQUEST_CODE_CAPTURE_CROP ->{
+                Code.REQUEST_CODE_CAPTURE_CROP ->{
 
                 }
             }
@@ -146,6 +142,6 @@ class ChangeAvatarActivity : AppCompatActivity() {
 //            val imgCropUri = Uri.fromFile()
 //            intent.putExtra(MediaStore.EXTRA_OUTPUT,sourceUri)
 //        }
-        startActivityForResult(intent, REQUEST_CODE_CAPTURE_CROP)
+        startActivityForResult(intent, Code.REQUEST_CODE_CAPTURE_CROP)
     }
 }

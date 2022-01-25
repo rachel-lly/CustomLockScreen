@@ -11,11 +11,12 @@ import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityEditNoteAttributeBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.db.DataBase
+import com.example.customlockscreen.util.Code
 import com.example.customlockscreen.util.TimeManager.Companion.format
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
 import com.google.android.material.datepicker.MaterialDatePicker
 
-const val IS_DELETE = 233
+
 
 class EditNoteAttributeActivity : AppCompatActivity() {
 
@@ -40,7 +41,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        var sortNote = data?.getStringExtra(SORT_NOTE_TEXT);
+        var sortNote = data?.getStringExtra(Code.SORT_NOTE_TEXT);
         if(sortNote == null){
             sortNote = lastChoose
         }else{
@@ -61,7 +62,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
             finish()
         }
 
-        label = intent!!.getParcelableExtra(LABEL)!!
+        label = intent!!.getParcelableExtra(Code.LABEL)!!
 
         targetDayTime = label.targetDate
 
@@ -170,7 +171,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
         binding.noteAttributeLayout.chooseSortNoteLayout.setOnClickListener {
             val intent = Intent(this, SortNoteActivity::class.java)
-            startActivityForResult(intent, RESULT_CODE)
+            startActivityForResult(intent, Code.RESULT_CODE)
         }
 
 
@@ -231,7 +232,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
             this.toast("删除数据成功")
 
             val intent = Intent()
-            setResult(IS_DELETE,intent)
+            setResult(Code.IS_DELETE,intent)
             finish()
         }
 

@@ -11,6 +11,7 @@ import com.example.customlockscreen.databinding.ActivitySortNoteBinding
 import com.example.customlockscreen.model.bean.SortNote
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.model.db.DataViewModel
+import com.example.customlockscreen.util.Code
 
 class SortNoteActivity : AppCompatActivity() {
 
@@ -42,8 +43,8 @@ class SortNoteActivity : AppCompatActivity() {
         onClickListener =object: SortNoteAdapter.ClickListener{
             override fun onClick(sortNoteName: String) {
                 val intent = Intent()
-                intent.putExtra(SORT_NOTE_TEXT,sortNoteName)
-                setResult(RESULT_CODE,intent)
+                intent.putExtra(Code.SORT_NOTE_TEXT,sortNoteName)
+                setResult(Code.RESULT_CODE,intent)
                 finish()
             }
 

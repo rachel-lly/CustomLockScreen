@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-const val LABEL_TEXT = "LABEL_TEXT"
+
 
 class TimeManager {
 
@@ -94,7 +94,7 @@ class TimeManager {
         if(isLargerM){
             for(label in remindList){
                 //若设置多个定时任务 requestCode要设置多个 唯一性
-               alarmIntent.putExtra(LABEL_TEXT, label.text)
+               alarmIntent.putExtra(Code.LABEL_TEXT, label.text)
                 alarmIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                 val pendingIntent = PendingIntent.getService(context, label.id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
                 Log.e("Time", "${label.text}--${label.id}")
@@ -112,7 +112,7 @@ class TimeManager {
         }else{
             for(label in remindList){
 
-                alarmIntent.putExtra(LABEL_TEXT, label.text)
+                alarmIntent.putExtra(Code.LABEL_TEXT, label.text)
                 alarmIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                 val pendingIntent = PendingIntent.getService(context, label.id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 

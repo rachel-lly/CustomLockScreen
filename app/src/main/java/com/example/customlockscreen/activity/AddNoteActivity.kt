@@ -10,13 +10,13 @@ import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityAddNoteBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.db.DataBase
+import com.example.customlockscreen.util.Code
 import com.example.customlockscreen.util.TimeManager.Companion.format
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlin.time.ExperimentalTime
 
-const val SORT_NOTE_TEXT = "SORT_NOTE_TEXT"
-const val RESULT_CODE = 0
+
 
 
 class AddNoteActivity : AppCompatActivity() {
@@ -41,7 +41,7 @@ class AddNoteActivity : AppCompatActivity() {
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val sortNote = data?.getStringExtra(SORT_NOTE_TEXT);
+        val sortNote = data?.getStringExtra(Code.SORT_NOTE_TEXT);
         if(sortNote == null){
 
             if(lastChoose!=null){
@@ -150,7 +150,7 @@ class AddNoteActivity : AppCompatActivity() {
 
         binding.noteAttributeLayout.chooseSortNoteLayout.setOnClickListener {
             val intent = Intent(this, SortNoteActivity::class.java)
-            startActivityForResult(intent, RESULT_CODE)
+            startActivityForResult(intent, Code.RESULT_CODE)
         }
 
 

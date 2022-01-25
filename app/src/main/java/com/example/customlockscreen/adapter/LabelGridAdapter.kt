@@ -10,9 +10,9 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.customlockscreen.R
 import com.example.customlockscreen.activity.DetailActivity
-import com.example.customlockscreen.activity.LABEL
 import com.example.customlockscreen.databinding.CardItemGridBinding
 import com.example.customlockscreen.model.bean.Label
+import com.example.customlockscreen.util.Code
 import java.text.SimpleDateFormat
 import kotlin.math.abs
 
@@ -39,7 +39,7 @@ class LabelGridAdapter(val context: Context, var labelList:List<Label>) :
             val label = labelList[position]
 
             val intent = Intent(context, DetailActivity::class.java).apply {
-                putExtra(LABEL,label)
+                putExtra(Code.LABEL,label)
             }
             context.startActivity(intent)
         }
