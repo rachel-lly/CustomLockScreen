@@ -198,6 +198,8 @@ class EditNoteAttributeActivity : AppCompatActivity() {
                     }
 
                     label.isTop = binding.noteAttributeLayout.toTopSwitch.isChecked
+                    label.targetDate = targetDayTime
+                    label.refreshDay()
 
                     val sortNoteName = binding.noteAttributeLayout.chooseSortTv.text.toString()
                     if(sortNoteName.isNotEmpty()){
@@ -218,6 +220,10 @@ class EditNoteAttributeActivity : AppCompatActivity() {
                         labelDao.updateLabel(label)
                         this.toast("修改数据成功,$label")
 
+                        val intent = Intent()
+                        intent.putExtra(Code.IS_DELETE,false)
+                        intent.putExtra(Code.LABEL,label)
+                        setResult(Code.RESULT_CODE,intent)
                         finish()
                     }
 
@@ -230,9 +236,9 @@ class EditNoteAttributeActivity : AppCompatActivity() {
         binding.deleteNoteSure.setOnClickListener {
             labelDao.deleteLabel(label)
             this.toast("删除数据成功")
-
             val intent = Intent()
-            setResult(Code.IS_DELETE,intent)
+            intent.putExtra(Code.IS_DELETE,true)
+            setResult(Code.RESULT_CODE,intent)
             finish()
         }
 

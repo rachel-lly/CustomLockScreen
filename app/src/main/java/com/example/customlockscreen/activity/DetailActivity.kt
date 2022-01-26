@@ -68,23 +68,28 @@ class DetailActivity : AppCompatActivity() {
             label= intent.getParcelableExtra(Code.LABEL)!!
             labelIsLock = intent!!.getBooleanExtra(Code.LABEL_IS_LOCK, false)
 
-            binding.detailCard.labelDay.updatePadding(0, 25, 0, 25)
-
-
-
-            binding.detailCard.labelText.text = label.text
-            binding.detailCard.labelDate.text = format.format(label.targetDate)
-
-            val day = label.day
-
-            binding.detailCard.labelDay.text = abs(day).toString()
-            if(day>=0){
-                binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_future_dark, theme))
-            }else{
-                binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_history_dark, theme))
-            }
+            freshLabel(label)
 
             setContentView(binding.root)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun freshLabel(label: Label){
+        this.label = label
+        binding.detailCard.labelDay.updatePadding(0, 25, 0, 25)
+
+
+        binding.detailCard.labelText.text = label.text
+        binding.detailCard.labelDate.text = format.format(label.targetDate)
+
+        val day = label.day
+
+        binding.detailCard.labelDay.text = abs(day).toString()
+        if(day>=0){
+            binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_future_dark, theme))
+        }else{
+            binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_history_dark, theme))
+        }
     }
 
     private fun takeScreenShotToShare() {
@@ -97,14 +102,24 @@ class DetailActivity : AppCompatActivity() {
         startActivityForResult(mediaProjectionManager!!.createScreenCaptureIntent(), Code.EVENT_SCREENSHOT_LOCK)
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     @SuppressLint("WrongConstant")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         super.onActivityResult(requestCode, resultCode, data)
+
         when(requestCode){
 
-            Code.IS_DELETE ->{
-                finish()
+            Code.EDIT_LABLE ->{
+                if(data!=null){
+                    val isDelete = data.getBooleanExtra(Code.IS_DELETE,true)
+                    if(isDelete){
+                        finish()
+                    }else{
+                        val label = data.getParcelableExtra<Label>(Code.LABEL)!!
+                        freshLabel(label)
+                    }
+                }
             }
 
             Code.EVENT_SCREENSHOT_LOCK,Code.EVENT_SCREENSHOT_SHARE->{
@@ -205,7 +220,7 @@ class DetailActivity : AppCompatActivity() {
             R.id.edit -> {
                 val intent = Intent(this, EditNoteAttributeActivity::class.java)
                 intent.putExtra(Code.LABEL, label)
-                startActivityForResult(intent, Code.IS_DELETE)
+                startActivityForResult(intent,Code.EDIT_LABLE)
             }
 
             R.id.share -> {

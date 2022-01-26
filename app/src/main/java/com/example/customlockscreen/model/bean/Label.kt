@@ -86,7 +86,9 @@ data class Label(
         }
     }
 
-
+    fun refreshDay(){
+        day = targetDate/(1000*3600*24)-System.currentTimeMillis()/(1000*3600*24)
+    }
 }
 
 

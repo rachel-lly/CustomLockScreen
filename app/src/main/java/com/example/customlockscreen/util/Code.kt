@@ -10,11 +10,12 @@ class Code {
         const val LABEL_TEXT = "LABEL_TEXT"
         const val SORT_NOTE_TEXT = "SORT_NOTE_TEXT"
         const val SORT_NOTE = "SORT_NOTE"
+        const val IS_DELETE = "IS_DELETE"
 
         const val RESULT_CODE = 0
         const val EVENT_SCREENSHOT_SHARE = 22 //截图分享
         const val EVENT_SCREENSHOT_LOCK = 23 //截图设为锁屏
-        const val IS_DELETE = 233
+        const val EDIT_LABLE = 233
         const val REQUEST_CODE_CAPTURE_CROP = 11111
         const val IMAGE_REQUEST_CODE = 12
 
