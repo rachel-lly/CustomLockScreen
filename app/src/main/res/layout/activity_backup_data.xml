@@ -1,117 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.activity.AddSortNoteActivity"
-    android:background="@color/color_background_gray">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/backup_data_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/colorPrimaryDark"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/OverflowMenuStyle"
-        app:title="备份数据管理"
-        />
+    >
 
     <RelativeLayout
-        android:id="@+id/backup_picture_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/backup_data_toolbar"
-        android:background="@drawable/item_pressed_state"
-        android:paddingStart="30dp"
-        android:paddingEnd="20dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:layout_marginTop="10dp"
-        >
+        android:layout_height="match_parent"
+        tools:context=".view.activity.AddSortNoteActivity"
+        android:background="@color/color_background_gray">
 
-        <ImageView
-            android:id="@+id/backup_picture_icon"
-            android:src="@mipmap/backup_picture"
-            style="@style/linear_item_icon"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/backup_data_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/OverflowMenuStyle"
+            app:title="备份数据管理"
             />
 
-        <TextView
-            android:id="@+id/backup_picture_tx"
-            android:text="清空缓存图片"
-            android:layout_toEndOf="@+id/backup_picture_icon"
-            style="@style/linear_item_text_behind_icon"
+        <RelativeLayout
+            android:id="@+id/backup_picture_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/backup_data_toolbar"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/item_pressed_state"
+            android:paddingStart="30dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="15dp">
+
+            <ImageView
+                android:id="@+id/backup_picture_icon"
+                style="@style/linear_item_icon"
+                android:src="@mipmap/backup_picture" />
+
+            <TextView
+                android:id="@+id/backup_picture_tx"
+                style="@style/linear_item_text_behind_icon"
+                android:layout_toEndOf="@+id/backup_picture_icon"
+                android:text="清空缓存图片" />
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/line"
+            style="@style/horizon_line"
+            android:layout_below="@+id/backup_picture_layout"
             />
+
+
+        <RelativeLayout
+            android:id="@+id/backup_label_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line"
+            android:background="@drawable/item_pressed_state"
+            android:paddingStart="30dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            >
+
+            <ImageView
+                android:id="@+id/backup_label_icon"
+                android:src="@mipmap/delete_label"
+                style="@style/linear_item_icon"
+                />
+
+            <TextView
+                android:id="@+id/backup_label_tx"
+                android:text="清空事件记录"
+                android:layout_toEndOf="@+id/backup_label_icon"
+                style="@style/linear_item_text_behind_icon"
+                />
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/line2"
+            style="@style/horizon_line"
+            android:layout_below="@+id/backup_label_layout"
+            />
+
+
+        <RelativeLayout
+            android:id="@+id/backup_sortnote_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line2"
+            android:background="@drawable/item_pressed_state"
+            android:paddingStart="30dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            >
+
+            <ImageView
+                android:id="@+id/backup_sortnote_icon"
+                android:src="@mipmap/delete_waring"
+                style="@style/linear_item_icon"
+                />
+
+            <TextView
+                android:id="@+id/backup_sortnote_tx"
+                android:text="清空分类本"
+                android:layout_toEndOf="@+id/backup_sortnote_icon"
+                style="@style/linear_item_text_behind_icon"
+                />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
-    <View
-        android:id="@+id/line"
-        style="@style/horizon_line"
-        android:layout_below="@+id/backup_picture_layout"
-        />
-
-
-    <RelativeLayout
-        android:id="@+id/backup_label_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/line"
-        android:background="@drawable/item_pressed_state"
-        android:paddingStart="30dp"
-        android:paddingEnd="20dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        >
-
-        <ImageView
-            android:id="@+id/backup_label_icon"
-            android:src="@mipmap/delete_label"
-            style="@style/linear_item_icon"
-            />
-
-        <TextView
-            android:id="@+id/backup_label_tx"
-            android:text="清空事件记录"
-            android:layout_toEndOf="@+id/backup_label_icon"
-            style="@style/linear_item_text_behind_icon"
-            />
-
-    </RelativeLayout>
-
-    <View
-        android:id="@+id/line2"
-        style="@style/horizon_line"
-        android:layout_below="@+id/backup_label_layout"
-        />
-
-
-    <RelativeLayout
-        android:id="@+id/backup_sortnote_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/line2"
-        android:background="@drawable/item_pressed_state"
-        android:paddingStart="30dp"
-        android:paddingEnd="20dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        >
-
-        <ImageView
-            android:id="@+id/backup_sortnote_icon"
-            android:src="@mipmap/delete_waring"
-            style="@style/linear_item_icon"
-            />
-
-        <TextView
-            android:id="@+id/backup_sortnote_tx"
-            android:text="清空分类本"
-            android:layout_toEndOf="@+id/backup_sortnote_icon"
-            style="@style/linear_item_text_behind_icon"
-            />
-
-    </RelativeLayout>
-
-</RelativeLayout>
+</layout>

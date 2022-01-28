@@ -1,45 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.activity.AddSortNoteActivity"
-    android:background="@color/color_background_gray">
+    >
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/add_sort_note_toolbar"
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.customlockscreen.viewmodel.SortNoteViewModel" />
+    </data>
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/colorPrimaryDark"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/OverflowMenuStyle"
-        app:title="新增分类本"
-        />
+        android:layout_height="match_parent"
+        tools:context=".view.activity.AddSortNoteActivity"
+        android:background="@color/color_background_gray">
 
-    <include
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/add_sort_note_card"
-        layout="@layout/sort_note_attribute_layout"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/add_sort_note_toolbar"
-        />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/add_sort_note_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/OverflowMenuStyle"
+            app:title="新增分类本"
+            />
 
-    <Button
-        android:id="@+id/add_note_sure"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="添加"
-        android:textColor="@color/white"
-        android:layout_below="@id/add_sort_note_card"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@color/colorPrimaryDark"
-        />
+        <include
+            android:id="@+id/add_sort_note_card"
+            layout="@layout/sort_note_attribute_layout"
+            app:viewModelChild="@{viewmodel}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/add_sort_note_toolbar"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp" />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/add_note_sure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="添加"
+            android:textColor="@color/white"
+            android:layout_below="@id/add_sort_note_card"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/colorPrimaryDark"
+            />
+
+    </RelativeLayout>
+
+</layout>

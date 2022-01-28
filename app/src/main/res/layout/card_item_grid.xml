@@ -1,80 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="6dp"
-    android:layout_marginBottom="6dp"
-    android:padding="6dp"
+    xmlns:tools="http://schemas.android.com/tools"
     >
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="wrap_content"
+    <data>
+        <variable
+            name="viewModelChild"
+            type="com.example.customlockscreen.viewmodel.LabelViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="15dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:padding="6dp"
         >
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
             >
 
-            <TextView
-                android:id="@+id/label_text"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:textSize="16sp"
-                android:text="星期六还有"
-                android:textColor="#fff"
-                android:fontFamily="@font/montserrat_medium"
-                android:background="@color/note_list_future_dark"
-                android:maxLines="1"
-                android:layout_alignParentTop="true"
-                />
+                >
 
-            <TextView
-                android:id="@+id/label_day"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/label_text"
-                android:gravity="center"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
-                android:textSize="40sp"
-                android:text="7"
-                android:fontFamily="@font/montserrat_medium"
-                android:textColor="@color/color_bold"
-                android:background="@color/grid_item_color"
-                android:maxLines="1"
-                />
+                <TextView
+                    android:id="@+id/label_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/note_list_future_dark"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:text="@{viewModelChild.label.text}"
+                    android:textColor="#fff"
+                    android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/label_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/label_day"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:gravity="center"
-                android:text="2020-04-23 星期五"
-                android:textSize="12sp"
-                android:fontFamily="@font/montserrat_medium"
-                android:textColor="@color/color_normal"
-                android:background="@color/grid_item_day_color"
-                android:maxLines="1"
-                />
+                <TextView
+                    android:id="@+id/label_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/label_text"
+                    android:gravity="center"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:textSize="40sp"
+                    android:text="@{String.valueOf(Math.abs(viewModelChild.label.day))}"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/color_bold"
+                    android:background="@color/grid_item_color"
+                    android:maxLines="1"
+                    />
 
-
-
-        </RelativeLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
+                <TextView
+                    android:id="@+id/label_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/label_day"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:gravity="center"
+                    android:text="2020-04-23 星期五"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/color_normal"
+                    android:background="@color/grid_item_day_color"
+                    android:maxLines="1"
+                    />
 
 
 
-</LinearLayout>
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+
+    </LinearLayout>
+</layout>
+
+
+
+

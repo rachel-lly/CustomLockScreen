@@ -1,56 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AddNoteActivity"
-    android:background="@color/color_background_gray"
     >
 
-    <RelativeLayout
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.customlockscreen.viewmodel.LabelViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:context=".AddNoteActivity"
+        android:background="@color/color_background_gray"
         >
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/add_note_toolbar"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
-            android:background="@color/colorPrimaryDark"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/OverflowMenuStyle"
-            app:title="新增事件"
-            />
+            android:layout_height="match_parent"
+            >
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/add_note_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:background="@color/colorPrimaryDark"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/OverflowMenuStyle"
+                app:title="新增事件"
+                />
 
 
-        <include
-            android:id="@+id/note_attribute_layout"
-            layout="@layout/note_attribute_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/add_note_toolbar"
-            android:layout_marginTop="0dp" />
+            <include
+                android:id="@+id/note_attribute_layout"
+                layout="@layout/note_attribute_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/add_note_toolbar"
+                android:layout_marginTop="0dp"
+                app:viewModelChild="@{viewmodel}" />
 
-        <Button
-            android:id="@+id/add_note_sure"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="保存"
-            android:textColor="@color/white"
-            android:layout_below="@id/note_attribute_layout"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:background="@color/colorPrimaryDark"
-            />
-
-
-
-    </RelativeLayout>
+            <Button
+                android:id="@+id/add_note_sure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="保存"
+                android:textColor="@color/white"
+                android:layout_below="@id/note_attribute_layout"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/colorPrimaryDark"
+                />
 
 
 
+        </RelativeLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

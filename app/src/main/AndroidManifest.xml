@@ -28,7 +28,8 @@
         <activity android:name="com.example.customlockscreen.view.activity.AddNoteActivity" />
         <activity android:name="com.example.customlockscreen.view.activity.DetailActivity" />
         <activity android:name="com.example.customlockscreen.view.activity.SortNoteActivity" />
-        <activity android:name="com.example.customlockscreen.view.activity.HomeActivity">
+        <activity android:name="com.example.customlockscreen.view.activity.HomeActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -57,7 +58,8 @@
 
         <receiver
             android:name=".service.AlertBootReceiver"
-            android:enabled="false">
+            android:enabled="false"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>

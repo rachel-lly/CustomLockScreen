@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.example.customlockscreen.R
 import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityAddNoteBinding
@@ -13,6 +15,7 @@ import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.util.Code
 import com.example.customlockscreen.util.TimeManager.Companion.format
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
+import com.example.customlockscreen.viewmodel.LabelViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlin.time.ExperimentalTime
 
@@ -73,7 +76,17 @@ class AddNoteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityAddNoteBinding.inflate(layoutInflater)
+        binding =  DataBindingUtil.setContentView(this,R.layout.activity_add_note)
+
+        //ViewModel
+        val labelViewModel = ViewModelProvider(this)[LabelViewModel::class.java]
+        binding.viewmodel = labelViewModel
+        labelViewModel.label.observe(this){
+
+        }
+
+        binding.lifecycleOwner = this
+
 
         binding.noteAttributeLayout.addNoteDate.text = today
 
@@ -208,6 +221,5 @@ class AddNoteActivity : AppCompatActivity() {
             }
         }
 
-        setContentView(binding.root)
     }
 }

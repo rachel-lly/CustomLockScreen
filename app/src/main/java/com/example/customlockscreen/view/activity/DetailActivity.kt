@@ -16,6 +16,9 @@ import android.util.TypedValue
 import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.updatePadding
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.example.customlockscreen.R
 import com.example.customlockscreen.util.PictureUtil
 import com.example.customlockscreen.databinding.ActivityDetailBinding
@@ -23,11 +26,11 @@ import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.util.Code
 import com.example.customlockscreen.util.TimeManager.Companion.format
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
+import com.example.customlockscreen.viewmodel.LabelViewModel
 import com.example.library.PermissionX
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.lang.Exception
 import java.nio.ByteBuffer
-import kotlin.math.abs
 
 
 
@@ -50,41 +53,44 @@ class DetailActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
+        super.onCreate(savedInstanceState)
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_detail)
 
-            binding = ActivityDetailBinding.inflate(layoutInflater)
+        setSupportActionBar(binding.detailToolbar)
+        binding.detailToolbar.setTitleTextColor(Color.WHITE)
 
-            setSupportActionBar(binding.detailToolbar)
-            binding.detailToolbar.setTitleTextColor(Color.WHITE)
+        steepStatusBar()
 
-            steepStatusBar()
+        binding.detailToolbar.setNavigationIcon(R.mipmap.back)
+        binding.detailToolbar.setNavigationOnClickListener {
+            finish()
+        }
 
-            binding.detailToolbar.setNavigationIcon(R.mipmap.back)
-            binding.detailToolbar.setNavigationOnClickListener {
-                finish()
-            }
+        label= intent.getParcelableExtra(Code.LABEL)!!
+        labelIsLock = intent!!.getBooleanExtra(Code.LABEL_IS_LOCK, false)
 
-            label= intent.getParcelableExtra(Code.LABEL)!!
-            labelIsLock = intent!!.getBooleanExtra(Code.LABEL_IS_LOCK, false)
+        freshLabel(label)
 
-            freshLabel(label)
+        //ViewModel
 
-            setContentView(binding.root)
+        val labelViewModel = ViewModelProvider(this)[LabelViewModel::class.java]
+        binding.viewModel = labelViewModel
+        labelViewModel.label.observe(this){
+            freshLabel(it)
+        }
+
+        binding.lifecycleOwner = this
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun freshLabel(label: Label){
         this.label = label
+
         binding.detailCard.labelDay.updatePadding(0, 25, 0, 25)
 
-
-        binding.detailCard.labelText.text = label.text
         binding.detailCard.labelDate.text = format.format(label.targetDate)
 
-        val day = label.day
-
-        binding.detailCard.labelDay.text = abs(day).toString()
-        if(day>=0){
+        if(label.day>=0){
             binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_future_dark, theme))
         }else{
             binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_history_dark, theme))

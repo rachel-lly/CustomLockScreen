@@ -1,33 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".DetailActivity"
-    android:background="@drawable/bg"
-    android:clipToPadding="true"
-    android:fitsSystemWindows="true">
+    >
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/detail_toolbar"
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.customlockscreen.viewmodel.LabelViewModel" />
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        app:title="事件详情"
-        android:layout_height="?android:attr/actionBarSize"
-        />
+        android:layout_height="match_parent"
+        tools:context=".DetailActivity"
+        android:background="@drawable/bg"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/detail_toolbar"
+            android:layout_width="match_parent"
+            app:title="事件详情"
+            android:layout_height="?android:attr/actionBarSize"
+            />
+
+        <include
+            android:id="@+id/detail_card"
+            layout="@layout/card_item_grid"
+            app:viewModelChild="@{viewModel}"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_centerVertical="true"
+            />
 
 
-
-    <include
-        android:id="@+id/detail_card"
-        layout="@layout/card_item_grid"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_centerVertical="true"
-        />
-
-
-</RelativeLayout>
+    </RelativeLayout>
+</layout>

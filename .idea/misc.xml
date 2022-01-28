@@ -3,7 +3,31 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/activity_add_note.xml" value="0.33" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/activity_add_sort_note.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/activity_backup_data.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/activity_change_avatar.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/activity_dark_theme_setting.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/activity_detail.xml" value="0.33" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/activity_edit_note_attribute.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/activity_edit_sort_note.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/activity_home.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/activity_lock_screen_setting.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/activity_sort_note.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/activity_time_remind.xml" value="0.17806484295845998" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/card_item_grid.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/card_item_linear.xml" value="0.36614583333333334" />
         <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/fragment_mine.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/fragment_note_list.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/fragment_note_sort.xml" value="0.17806484295845998" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/fragment_setting.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/header_layout.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/heaser_layout_sort_note_list_item.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/icon_list_item.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/note_attribute_layout.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/sort_note_attribute_layout.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/sort_note_card_item.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidWorkplace/CustomLockScreen/app/src/main/res/layout/sort_note_list_item.xml" value="0.17806484295845998" />
       </map>
     </option>
   </component>
