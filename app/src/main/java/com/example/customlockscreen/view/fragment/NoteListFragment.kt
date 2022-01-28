@@ -1,4 +1,4 @@
-package com.example.customlockscreen.fragment
+package com.example.customlockscreen.view.fragment
 
 import android.content.Intent
 import android.os.Build
@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.*
 import com.example.customlockscreen.util.SharedPreferenceCommission
-import com.example.customlockscreen.activity.AddNoteActivity
+import com.example.customlockscreen.view.activity.AddNoteActivity
 import com.example.customlockscreen.adapter.LabelGridAdapter
 import com.example.customlockscreen.adapter.LabelLinearAdapter
 import com.example.customlockscreen.databinding.FragmentNoteListBinding

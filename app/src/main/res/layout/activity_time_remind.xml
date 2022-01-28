@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/color_background_gray"
-    tools:context=".activity.TimeRemindActivity">
+    tools:context=".view.activity.TimeRemindActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/detail_toolbar"

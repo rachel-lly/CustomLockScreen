@@ -1,4 +1,4 @@
-package com.example.customlockscreen.fragment
+package com.example.customlockscreen.view.fragment
 
 import android.app.ActivityOptions
 import android.content.Intent
@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.customlockscreen.R
-import com.example.customlockscreen.activity.ChangeAvatarActivity
+import com.example.customlockscreen.view.activity.ChangeAvatarActivity
 import com.example.customlockscreen.application.MyApplication
 import com.example.customlockscreen.databinding.FragmentMineBinding
 import com.example.customlockscreen.model.db.DataBase

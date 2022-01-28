@@ -8,7 +8,7 @@ import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.example.customlockscreen.R
-import com.example.customlockscreen.activity.DetailActivity
+import com.example.customlockscreen.view.activity.DetailActivity
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.util.Code
 

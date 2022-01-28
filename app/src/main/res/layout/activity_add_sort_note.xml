@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.AddSortNoteActivity"
+    tools:context=".view.activity.AddSortNoteActivity"
     android:background="@color/color_background_gray">
 
     <androidx.appcompat.widget.Toolbar

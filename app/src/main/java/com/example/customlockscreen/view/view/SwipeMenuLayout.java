@@ -1,4 +1,4 @@
-package com.example.customlockscreen.view;
+package com.example.customlockscreen.view.view;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

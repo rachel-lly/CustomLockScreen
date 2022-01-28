@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.customlockscreen.R
-import com.example.customlockscreen.activity.DetailActivity
+import com.example.customlockscreen.view.activity.DetailActivity
 import com.example.customlockscreen.databinding.CardItemGridBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.util.Code

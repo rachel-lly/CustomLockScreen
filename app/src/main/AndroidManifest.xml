@@ -17,18 +17,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.DarkThemeSettingActivity"></activity>
-        <activity android:name=".activity.ChangeAvatarActivity" />
-        <activity android:name=".activity.LockScreenSettingActivity" />
-        <activity android:name=".activity.EditSortNoteActivity" />
-        <activity android:name=".activity.BackupDataActivity" />
-        <activity android:name=".activity.EditNoteAttributeActivity" />
-        <activity android:name=".activity.TimeRemindActivity" />
-        <activity android:name=".activity.AddSortNoteActivity" />
-        <activity android:name=".activity.AddNoteActivity" />
-        <activity android:name=".activity.DetailActivity" />
-        <activity android:name=".activity.SortNoteActivity" />
-        <activity android:name=".activity.HomeActivity">
+        <activity android:name="com.example.customlockscreen.view.activity.DarkThemeSettingActivity"></activity>
+        <activity android:name="com.example.customlockscreen.view.activity.ChangeAvatarActivity" />
+        <activity android:name="com.example.customlockscreen.view.activity.LockScreenSettingActivity" />
+        <activity android:name="com.example.customlockscreen.view.activity.EditSortNoteActivity" />
+        <activity android:name="com.example.customlockscreen.view.activity.BackupDataActivity" />
+        <activity android:name="com.example.customlockscreen.view.activity.EditNoteAttributeActivity" />
+        <activity android:name="com.example.customlockscreen.view.activity.TimeRemindActivity" />
+        <activity android:name="com.example.customlockscreen.view.activity.AddSortNoteActivity" />
+        <activity android:name="com.example.customlockscreen.view.activity.AddNoteActivity" />
+        <activity android:name="com.example.customlockscreen.view.activity.DetailActivity" />
+        <activity android:name="com.example.customlockscreen.view.activity.SortNoteActivity" />
+        <activity android:name="com.example.customlockscreen.view.activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

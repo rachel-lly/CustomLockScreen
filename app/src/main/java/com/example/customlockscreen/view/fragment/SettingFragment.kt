@@ -1,4 +1,4 @@
-package com.example.customlockscreen.fragment
+package com.example.customlockscreen.view.fragment
 
 import android.app.ActivityOptions
 import android.content.Intent
@@ -10,10 +10,10 @@ import androidx.annotation.MenuRes
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.example.customlockscreen.R
-import com.example.customlockscreen.activity.BackupDataActivity
-import com.example.customlockscreen.activity.DarkThemeSettingActivity
-import com.example.customlockscreen.activity.LockScreenSettingActivity
-import com.example.customlockscreen.activity.TimeRemindActivity
+import com.example.customlockscreen.view.activity.BackupDataActivity
+import com.example.customlockscreen.view.activity.DarkThemeSettingActivity
+import com.example.customlockscreen.view.activity.LockScreenSettingActivity
+import com.example.customlockscreen.view.activity.TimeRemindActivity
 import com.example.customlockscreen.databinding.FragmentSettingBinding
 import com.example.customlockscreen.model.bean.MessageEvent
 import com.example.customlockscreen.util.SharedPreferenceCommission

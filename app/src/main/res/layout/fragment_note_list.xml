@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:padding="5dp"
     android:background="@color/white"
-    tools:context=".fragment.NoteListFragment">
+    tools:context=".view.fragment.NoteListFragment">
 
 
     <RelativeLayout

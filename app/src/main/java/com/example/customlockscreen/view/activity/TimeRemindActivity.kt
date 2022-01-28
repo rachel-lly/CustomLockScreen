@@ -1,4 +1,4 @@
-package com.example.customlockscreen.activity
+package com.example.customlockscreen.view.activity
 
 import android.Manifest
 import android.app.AlarmManager

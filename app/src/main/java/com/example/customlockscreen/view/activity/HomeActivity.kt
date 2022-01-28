@@ -1,4 +1,4 @@
-package com.example.customlockscreen.activity
+package com.example.customlockscreen.view.activity
 
 import android.os.Bundle
 import android.view.Gravity
@@ -15,10 +15,10 @@ import com.example.customlockscreen.R
 import com.example.customlockscreen.adapter.HeaderSortNoteListAdapter
 import com.example.customlockscreen.adapter.PagerAdapter
 import com.example.customlockscreen.databinding.ActivityHomeBinding
-import com.example.customlockscreen.fragment.MineFragment
-import com.example.customlockscreen.fragment.NoteListFragment
-import com.example.customlockscreen.fragment.NoteSortFragment
-import com.example.customlockscreen.fragment.SettingFragment
+import com.example.customlockscreen.view.fragment.MineFragment
+import com.example.customlockscreen.view.fragment.NoteListFragment
+import com.example.customlockscreen.view.fragment.NoteSortFragment
+import com.example.customlockscreen.view.fragment.SettingFragment
 import com.example.customlockscreen.model.bean.MessageEvent
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.util.SharedPreferenceCommission

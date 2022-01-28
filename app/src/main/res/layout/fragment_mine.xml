@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.MineFragment"
+    tools:context=".view.fragment.MineFragment"
     android:background="@color/mine_fragment_color"
     >
 
@@ -41,7 +41,7 @@
             android:layout_marginTop="5dp"
             />
 
-        <com.example.customlockscreen.view.CircleImageView
+        <com.example.customlockscreen.view.view.CircleImageView
             android:id="@+id/mine_avater"
             style="@style/MaterialAnimations"
             android:layout_width="80dp"

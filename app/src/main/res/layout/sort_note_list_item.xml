@@ -9,7 +9,7 @@
     >
 
 
-    <com.example.customlockscreen.view.SwipeMenuLayout
+    <com.example.customlockscreen.view.view.SwipeMenuLayout
         android:id="@+id/card_sort_note_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -135,7 +135,7 @@
 
         </LinearLayout>
 
-    </com.example.customlockscreen.view.SwipeMenuLayout>
+    </com.example.customlockscreen.view.view.SwipeMenuLayout>
 
 
     <View

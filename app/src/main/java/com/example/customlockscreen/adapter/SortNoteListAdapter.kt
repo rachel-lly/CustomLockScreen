@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.customlockscreen.activity.EditSortNoteActivity
+import com.example.customlockscreen.view.activity.EditSortNoteActivity
 import com.example.customlockscreen.databinding.SortNoteListItemBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.bean.SortNote

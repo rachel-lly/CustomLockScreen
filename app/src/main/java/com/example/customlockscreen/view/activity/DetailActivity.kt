@@ -1,4 +1,4 @@
-package com.example.customlockscreen.activity
+package com.example.customlockscreen.view.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -16,7 +16,6 @@ import android.util.TypedValue
 import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.updatePadding
 import com.example.customlockscreen.R
 import com.example.customlockscreen.util.PictureUtil
 import com.example.customlockscreen.databinding.ActivityDetailBinding
