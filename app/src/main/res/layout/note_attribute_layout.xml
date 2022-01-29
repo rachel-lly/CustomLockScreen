@@ -261,7 +261,7 @@
                         android:layout_marginStart="50dp"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/montserrat_medium"
-                        android:text="@{viewmodelchild.getDate(viewmodelchild.label.endDate)}"
+                        android:text="2021-09-9-星期三"
                         android:textColor="@color/text_colorPrimary"
                         android:textSize="14sp" />
 

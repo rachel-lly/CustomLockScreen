@@ -47,10 +47,10 @@ class LabelGridAdapter(val context: Context, var labelList:List<Label>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val bind =  DataBindingUtil.bind<CardItemGridBinding>(holder.itemView)
 
-        bind!!.viewmodel!!.label.value = labelList[position]
+        bind!!.label = labelList[position]
 
 
-        if(bind.viewmodel!!.label.value!!.day>=0){
+        if(bind.label!!.day>=0){
             bind.labelText.setBackgroundColor(context.resources.getColor(R.color.note_list_future_dark,context.theme))
         }else{
             bind.labelText.setBackgroundColor(context.resources.getColor(R.color.note_list_history_dark,context.theme))

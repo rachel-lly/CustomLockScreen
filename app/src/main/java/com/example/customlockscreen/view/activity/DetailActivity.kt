@@ -60,9 +60,8 @@ class DetailActivity : AppCompatActivity() {
         label= intent.getParcelableExtra(Code.LABEL)!!
         labelIsLock = intent!!.getBooleanExtra(Code.LABEL_IS_LOCK, false)
 
-        //ViewModel
-        val labelViewModel = ViewModelProvider(this)[LabelViewModel::class.java]
-        binding.detailCard.viewmodel = labelViewModel
+
+        binding.detailCard.label = label
         binding.lifecycleOwner = this
 
 
@@ -81,7 +80,7 @@ class DetailActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun freshLabel(label: Label){
-        binding.detailCard.viewmodel!!.label.value = label
+        binding.detailCard.label = label
 
         binding.detailCard.labelDay.updatePadding(0, 25, 0, 25)
 

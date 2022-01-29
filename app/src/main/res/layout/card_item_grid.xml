@@ -6,8 +6,8 @@
 
         <import type="com.example.customlockscreen.util.TimeManager"/>
         <variable
-            name="viewmodel"
-            type="com.example.customlockscreen.viewmodel.LabelViewModel" />
+            name="label"
+            type="com.example.customlockscreen.model.bean.Label" />
     </data>
 
     <LinearLayout
@@ -40,7 +40,7 @@
                     android:maxLines="1"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
-                    android:text="@{viewmodel.label.text}"
+                    android:text="@{label.text}"
                     android:textColor="#fff"
                     android:textSize="16sp" />
 
@@ -55,7 +55,7 @@
                     android:maxLines="1"
                     android:paddingTop="6dp"
                     android:paddingBottom="6dp"
-                    android:text="@{String.valueOf(Math.abs(viewmodel.label.day))}"
+                    android:text="@{String.valueOf(Math.abs(label.day))}"
                     android:textColor="@color/color_bold"
                     android:textSize="40sp" />
 
@@ -70,7 +70,7 @@
                     android:maxLines="1"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
-                    android:text="@{viewmodel.getDate(viewmodel.label.targetDate)}"
+                    android:text="@{label.getDate(label.targetDate)}"
                     android:textColor="@color/color_normal"
                     android:textSize="12sp" />
 

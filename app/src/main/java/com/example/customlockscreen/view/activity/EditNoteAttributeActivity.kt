@@ -59,8 +59,12 @@ class EditNoteAttributeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding =  DataBindingUtil.setContentView(this,R.layout.activity_edit_note_attribute)
+
+        label = intent!!.getParcelableExtra(Code.LABEL)!!
+
         //ViewModel
         val labelViewModel = ViewModelProvider(this)[LabelViewModel::class.java]
+        labelViewModel.label.value = label
         binding.noteAttributeLayout.viewmodelchild = labelViewModel
         binding.lifecycleOwner = this
 
@@ -69,15 +73,14 @@ class EditNoteAttributeActivity : AppCompatActivity() {
             finish()
         }
 
-        label = intent!!.getParcelableExtra(Code.LABEL)!!
 
-        targetDayTime = label.targetDate
 
-        binding.noteAttributeLayout.addNoteEt.text = SpannableStringBuilder(label.text)
-        binding.noteAttributeLayout.addNoteEt.setSelection(label.text.length)
-        binding.noteAttributeLayout.addNoteEt.requestFocus()
+//
+//        binding.noteAttributeLayout.addNoteEt.text = SpannableStringBuilder(label.text)
+//        binding.noteAttributeLayout.addNoteEt.setSelection(label.text.length)
+//        binding.noteAttributeLayout.addNoteEt.requestFocus()
 
-        binding.noteAttributeLayout.addNoteDate.text = format.format(label.targetDate)
+
 
         val todayTime = MaterialDatePicker.todayInUtcMilliseconds()
 
@@ -88,14 +91,11 @@ class EditNoteAttributeActivity : AppCompatActivity() {
         }
 
         label.sortNote.also{
-            binding.noteAttributeLayout.chooseSortTv.text = it
+
             lastChoose = it
         }
 
-        binding.noteAttributeLayout.toTopSwitch.isChecked = label.isTop
 
-
-        binding.noteAttributeLayout.endTimeSwitch.isChecked = label.isEnd
 
         if(label.isEnd){
             endTime = label.endDate
@@ -111,6 +111,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
             isFirst = false
 
         }else{
+            binding.noteAttributeLayout.endTimeDate.text = format.format(System.currentTimeMillis())
             binding.noteAttributeLayout.endTimeDate.visibility = View.GONE
         }
 

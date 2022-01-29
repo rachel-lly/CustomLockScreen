@@ -119,7 +119,7 @@ class NoteSortFragment : Fragment() {
             sortNoteDao.insertSortNote(SortNote("学习",resources.getResourceEntryName(R.mipmap.cactus)))
         }
 
-        dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
+        dataViewModel = ViewModelProvider(this)[DataViewModel::class.java]
 
         dataViewModel.getAllSortNotesByObserve().observe(viewLifecycleOwner,{
             adapter.sortNoteList = it

@@ -5,6 +5,7 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.customlockscreen.util.TimeManager
 
 @Entity(tableName = "LABEL_TABLE")
 data class Label(
@@ -89,6 +90,8 @@ data class Label(
     fun refreshDay(){
         day = targetDate/(1000*3600*24)-System.currentTimeMillis()/(1000*3600*24)
     }
+
+    fun getDate(targetDate: Long) = TimeManager.format.format(targetDate)
 }
 
 

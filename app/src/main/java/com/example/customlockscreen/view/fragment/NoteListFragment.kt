@@ -73,7 +73,7 @@ class NoteListFragment : Fragment() {
 
         labelList = ArrayList()
 
-        val isFirst by SharedPreferenceCommission(requireContext(), "isFirst", true)
+        var isFirst by SharedPreferenceCommission(requireContext(), "isFirst", true)
 
         if(isFirst){
             val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"))
