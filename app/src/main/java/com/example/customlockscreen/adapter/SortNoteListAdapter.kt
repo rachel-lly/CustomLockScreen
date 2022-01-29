@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.customlockscreen.R
+import com.example.customlockscreen.databinding.HeaderLayoutSortNoteListItemBinding
 import com.example.customlockscreen.view.activity.EditSortNoteActivity
 import com.example.customlockscreen.databinding.SortNoteListItemBinding
 import com.example.customlockscreen.model.bean.Label
@@ -18,9 +21,6 @@ import kotlin.math.abs
 
 class SortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>,var labelList: List<Label>,deleteOnClickListener: deleteOnClickListener) :
         RecyclerView.Adapter<SortNoteListAdapter.ViewHolder>() {
-
-
-    private lateinit var  binding : SortNoteListItemBinding
 
     private val listener = deleteOnClickListener
 
@@ -43,18 +43,20 @@ class SortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding =  SortNoteListItemBinding.inflate(LayoutInflater.from(context))
+        val binding : SortNoteListItemBinding =
+            DataBindingUtil.inflate(LayoutInflater.from(context),
+                R.layout.sort_note_list_item,parent,false)
 
 
         val holder = ViewHolder(binding)
         holder.editSortNote.setOnClickListener {
-            val position = holder.adapterPosition
+            val position = holder.absoluteAdapterPosition
             val sortNote = sortNoteList[position]
             jumpToEditActivity(sortNote)
         }
 
         holder.deleteSortNote.setOnClickListener {
-            val position = holder.adapterPosition
+            val position = holder.absoluteAdapterPosition
             val sortNote = sortNoteList[position]
             listener.delete(sortNote)
         }
@@ -69,6 +71,7 @@ class SortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         val sortNote = sortNoteList[position]
         val sortNoteName = sortNote.name
         holder.sortNoteText.text = sortNoteName
@@ -104,7 +107,6 @@ class SortNoteListAdapter(val context: Context, var sortNoteList:List<SortNote>,
             holder.latestNoteName.visibility = View.INVISIBLE
             holder.latestNoteDay.visibility = View.INVISIBLE
         }
-
 
     }
 

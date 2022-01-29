@@ -4,12 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
 
-    <data>
-        <variable
-            name="viewModel"
-            type="com.example.customlockscreen.viewmodel.LabelViewModel" />
-    </data>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,7 +22,6 @@
         <include
             android:id="@+id/detail_card"
             layout="@layout/card_item_grid"
-            app:viewModelChild="@{viewModel}"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_marginStart="40dp"

@@ -3,75 +3,74 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    ></layout>
+    >
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.activity.AddSortNoteActivity"
-    android:background="@color/color_background_gray">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/edit_sort_note_toolbar"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/colorPrimaryDark"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/OverflowMenuStyle"
-        app:title="编辑分类本"
-        />
+        android:layout_height="match_parent"
+        tools:context=".view.activity.AddSortNoteActivity"
+        android:background="@color/color_background_gray">
 
-    <include
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/edit_sort_note_card"
-        layout="@layout/sort_note_attribute_layout"
-        android:layout_below="@+id/edit_sort_note_toolbar"
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/edit_sort_note_card"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        >
-
-        <Button
-            android:id="@+id/edit_note_delete"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="删除"
-            android:textColor="@color/white"
-            android:layout_marginEnd="10dp"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/edit_sort_note_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
             android:background="@color/colorPrimaryDark"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/OverflowMenuStyle"
+            app:title="编辑分类本"
             />
 
-        <Button
-            android:id="@+id/edit_note_sure"
-            android:layout_weight="1"
-            android:layout_width="0dp"
+        <include
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="保存"
-            android:textColor="@color/white"
             android:layout_marginStart="10dp"
-            android:background="@color/colorPrimaryDark"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/edit_sort_note_card"
+            layout="@layout/sort_note_attribute_layout"
+            android:layout_below="@+id/edit_sort_note_toolbar"
             />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/edit_sort_note_card"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            >
+
+            <Button
+                android:id="@+id/edit_note_delete"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="删除"
+                android:textColor="@color/white"
+                android:layout_marginEnd="10dp"
+                android:background="@color/colorPrimaryDark"
+                />
+
+            <Button
+                android:id="@+id/edit_note_sure"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="保存"
+                android:textColor="@color/white"
+                android:layout_marginStart="10dp"
+                android:background="@color/colorPrimaryDark"
+                />
 
 
-    </LinearLayout>
+
+        </LinearLayout>
 
 
 
 
-</RelativeLayout>
+    </RelativeLayout>
+</layout>
+

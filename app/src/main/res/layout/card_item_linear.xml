@@ -2,88 +2,96 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    ></layout>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
     >
 
+    <data>
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_height="wrap_content"
+        <variable
+            name="label"
+            type="com.example.customlockscreen.model.bean.Label" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        app:cardCornerRadius="10dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         >
 
-        <LinearLayout
-            android:id="@+id/content_layout"
-            android:layout_width="match_parent"
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_width="match_parent"
+            app:cardCornerRadius="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             >
 
-            <TextView
-                android:id="@+id/label_text"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="15sp"
-                android:text="星期六还有"
-                android:textColor="@color/linear_item_text_color"
-                android:fontFamily="@font/montserrat_medium"
-                android:maxLines="1"
-                android:layout_weight="3"
+            <LinearLayout
+                android:id="@+id/content_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:paddingStart="15dp"
-                android:paddingTop="3dp"
-                android:paddingBottom="3dp"
-                />
+                >
 
-            <TextView
-                android:id="@+id/label_day"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="16sp"
-                android:text="8"
-                android:textColor="@color/linear_item_text_day_color"
-                android:fontFamily="@font/montserrat_medium"
-                android:maxLines="1"
-                android:layout_weight="0.8"
-                android:gravity="center"
-                android:background="@color/note_list_future_light"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                />
+                <TextView
+                    android:id="@+id/label_text"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:textSize="15sp"
+                    android:text="@{label.text}"
+                    android:textColor="@color/linear_item_text_color"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:maxLines="1"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:paddingStart="15dp"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    />
 
-
-            <TextView
-                android:id="@+id/day_just_text"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:textSize="15sp"
-                android:text="天"
-                android:fontFamily="@font/montserrat_medium"
-                android:textColor="@color/linear_item_text_day_color"
-                android:maxLines="1"
-                android:layout_weight="0.5"
-                android:gravity="center"
-                android:background="@color/note_list_future_dark"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                />
+                <TextView
+                    android:id="@+id/label_day"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:textSize="16sp"
+                    android:text="@{String.valueOf(Math.abs(label.day))}"
+                    android:textColor="@color/linear_item_text_day_color"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:maxLines="1"
+                    android:layout_weight="0.8"
+                    android:gravity="center"
+                    android:background="@color/note_list_future_light"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    />
 
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/day_just_text"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:textSize="15sp"
+                    android:text="天"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/linear_item_text_day_color"
+                    android:maxLines="1"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:background="@color/note_list_future_dark"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    />
+
+
+            </LinearLayout>
 
 
 
-    </com.google.android.material.card.MaterialCardView>
+        </com.google.android.material.card.MaterialCardView>
 
 
-</LinearLayout>
+    </LinearLayout>
+
+</layout>
+

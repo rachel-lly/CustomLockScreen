@@ -3,59 +3,57 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    ></layout>
-<RelativeLayout
-    android:id="@+id/container"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.fragment.MineFragment"
-    android:background="@color/mine_fragment_color"
     >
 
     <RelativeLayout
-        android:id="@+id/mine_header_layout"
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_height="match_parent"
+        tools:context=".view.fragment.MineFragment"
+        android:background="@color/mine_fragment_color"
         >
 
-        <TextView
-            android:id="@+id/mine_time"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/mine_header_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="May 9,2020"
-            android:fontFamily="@font/montserrat_medium"
-            android:textColor="@color/color_normal"
-            android:layout_marginTop="5dp"
-            />
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginTop="40dp"
+            >
 
-        <TextView
-            android:id="@+id/mine_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ME"
-            android:fontFamily="@font/montserrat_bold"
-            android:textColor="@color/color_bold"
-            android:textSize="25sp"
-            android:layout_below="@id/mine_time"
-            android:layout_marginTop="5dp"
-            />
+            <TextView
+                android:id="@+id/mine_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="May 9,2020"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/color_normal"
+                android:layout_marginTop="5dp"
+                />
 
-        <com.example.customlockscreen.view.view.CircleImageView
-            android:id="@+id/mine_avater"
-            style="@style/MaterialAnimations"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/avater"
-            android:transitionName="avatar" />
+            <TextView
+                android:id="@+id/mine_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ME"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/color_bold"
+                android:textSize="25sp"
+                android:layout_below="@id/mine_time"
+                android:layout_marginTop="5dp"
+                />
 
-    </RelativeLayout>
+            <com.example.customlockscreen.view.view.CircleImageView
+                android:id="@+id/mine_avater"
+                style="@style/MaterialAnimations"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/avater"
+                android:transitionName="avatar" />
+
+        </RelativeLayout>
 
 
         <com.google.android.material.card.MaterialCardView
@@ -227,4 +225,6 @@
 
 
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</layout>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <import type="com.example.customlockscreen.util.TimeManager"/>
         <variable
-            name="viewModelChild"
+            name="viewmodel"
             type="com.example.customlockscreen.viewmodel.LabelViewModel" />
     </data>
 
@@ -40,7 +40,7 @@
                     android:maxLines="1"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
-                    android:text="@{viewModelChild.label.text}"
+                    android:text="@{viewmodel.label.text}"
                     android:textColor="#fff"
                     android:textSize="16sp" />
 
@@ -49,32 +49,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/label_text"
+                    android:background="@color/grid_item_color"
+                    android:fontFamily="@font/montserrat_medium"
                     android:gravity="center"
+                    android:maxLines="1"
                     android:paddingTop="6dp"
                     android:paddingBottom="6dp"
-                    android:textSize="40sp"
-                    android:text="@{String.valueOf(Math.abs(viewModelChild.label.day))}"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@{String.valueOf(Math.abs(viewmodel.label.day))}"
                     android:textColor="@color/color_bold"
-                    android:background="@color/grid_item_color"
-                    android:maxLines="1"
-                    />
+                    android:textSize="40sp" />
 
                 <TextView
                     android:id="@+id/label_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/label_day"
+                    android:background="@color/grid_item_day_color"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:gravity="center"
+                    android:maxLines="1"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
-                    android:gravity="center"
-                    android:text="2020-04-23 星期五"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/montserrat_medium"
+                    android:text="@{viewmodel.getDate(viewmodel.label.targetDate)}"
                     android:textColor="@color/color_normal"
-                    android:background="@color/grid_item_day_color"
-                    android:maxLines="1"
-                    />
+                    android:textSize="12sp" />
 
 
 

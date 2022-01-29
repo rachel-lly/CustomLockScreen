@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.annotation.RequiresApi
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -66,17 +67,13 @@ class NoteListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        
-        binding = FragmentNoteListBinding.inflate(LayoutInflater.from(this.context))
-
-
         refreshRoomLabelListDay()
 
         setHasOptionsMenu(true)
 
         labelList = ArrayList()
 
-        val isFirst by SharedPreferenceCommission(context!!, "isFirst", true)
+        val isFirst by SharedPreferenceCommission(requireContext(), "isFirst", true)
 
         if(isFirst){
             val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"))
@@ -86,53 +83,8 @@ class NoteListFragment : Fragment() {
             labelDao.insertLabel(Label("新年",calendar.timeInMillis,System.currentTimeMillis()))
         }
 
-        val style by SharedPreferenceCommission(context!!, "sortStyle", "按事件时间")
-
-        dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
-
-        dataViewModel.getAllLabelsByObserve().observe(this, {
-            labelList = it
-
-            if (labelList.isEmpty()) {
-                binding.listNullLogo.visibility = View.VISIBLE
-            } else {
-                binding.listNullLogo.visibility = View.GONE
-            }
-
-            if (style.equals("按事件时间")) {
-                Collections.sort(labelList, targetTimeComparator)
-            } else {
-                Collections.sort(labelList, addTimeComparator)
-            }
-
-            refreshTopLabel()
-            refreshList()
-
-        })
-
-        if(style.equals("按事件时间")){
-            Collections.sort(labelList, targetTimeComparator)
-        }else{
-            Collections.sort(labelList, addTimeComparator)
-        }
-
-        labelLinearAdapter = this.context?.let { LabelLinearAdapter(it, labelList, false) }!!
-        labelGridAdapter = this.context?.let { LabelGridAdapter(it, labelList) }!!
 
 
-        binding.homeRecyclerview.adapter = labelLinearAdapter
-        binding.homeRecyclerview.layoutManager = GridLayoutManager(this.context, 1)
-
-        labelLinearAdapter.notifyDataSetChanged()
-        labelGridAdapter.notifyDataSetChanged()
-
-        binding.homeSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark)
-        binding.homeSwipeRefreshLayout.setOnRefreshListener {
-            refreshList()
-            binding.homeSwipeRefreshLayout.isRefreshing = false
-        }
-
-        refreshTopLabel()
 
     }
 
@@ -196,12 +148,63 @@ class NoteListFragment : Fragment() {
 
 
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
 
         EventBus.getDefault().register(this)
+
+        binding = DataBindingUtil.inflate(LayoutInflater.from(this.context), R.layout.fragment_note_list,container,false)
+        val style by SharedPreferenceCommission(requireContext(), "sortStyle", "按事件时间")
+
+        dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
+
+        dataViewModel.getAllLabelsByObserve().observe(viewLifecycleOwner, {
+            labelList = it
+
+            if (labelList.isEmpty()) {
+                binding.listNullLogo.visibility = View.VISIBLE
+            } else {
+                binding.listNullLogo.visibility = View.GONE
+            }
+
+            if (style.equals("按事件时间")) {
+                Collections.sort(labelList, targetTimeComparator)
+            } else {
+                Collections.sort(labelList, addTimeComparator)
+            }
+
+            refreshTopLabel()
+            refreshList()
+
+        })
+
+        if(style.equals("按事件时间")){
+            Collections.sort(labelList, targetTimeComparator)
+        }else{
+            Collections.sort(labelList, addTimeComparator)
+        }
+
+        labelLinearAdapter = requireContext().let { LabelLinearAdapter(it, labelList, false) }
+        labelGridAdapter = requireContext().let { LabelGridAdapter(it, labelList) }
+
+
+        binding.homeRecyclerview.adapter = labelLinearAdapter
+        binding.homeRecyclerview.layoutManager = GridLayoutManager(this.context, 1)
+
+        labelLinearAdapter.notifyDataSetChanged()
+        labelGridAdapter.notifyDataSetChanged()
+
+        binding.homeSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark)
+        binding.homeSwipeRefreshLayout.setOnRefreshListener {
+            refreshList()
+            binding.homeSwipeRefreshLayout.isRefreshing = false
+        }
+
+        refreshTopLabel()
+
 
         return binding.root
     }
@@ -246,7 +249,7 @@ class NoteListFragment : Fragment() {
         }
 
         if(!isChange){
-            val sortStyle by SharedPreferenceCommission(context!!, "sortStyle", "按事件时间")
+            val sortStyle by SharedPreferenceCommission(requireContext(), "sortStyle", "按事件时间")
 
             if(sortStyle.equals("按添加时间")){
                 Collections.sort(labelList, addTimeComparator)
@@ -272,7 +275,7 @@ class NoteListFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     fun refreshTopLabel(){
 
-        val topEventName by SharedPreferenceCommission(context!!, "topLabelName", "-1")
+        val topEventName by SharedPreferenceCommission(requireContext(), "topLabelName", "-1")
 
         if(topEventName.equals("-1")){
             defaultTopLabel()

@@ -8,8 +8,8 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.customlockscreen.R
-import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityAddNoteBinding
+import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.util.Code
@@ -20,11 +20,9 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import kotlin.time.ExperimentalTime
 
 
-
-
 class AddNoteActivity : AppCompatActivity() {
 
-    private lateinit var binding:ActivityAddNoteBinding
+    private lateinit var binding: ActivityAddNoteBinding
 
     private val END_TIME_TAG = "END_TIME_TAG"
     private val ADD_NOTE_TIME_TAG = "ADD_NOTE_TIME_TAG"
@@ -80,7 +78,7 @@ class AddNoteActivity : AppCompatActivity() {
 
         //ViewModel
         val labelViewModel = ViewModelProvider(this)[LabelViewModel::class.java]
-        binding.viewmodel = labelViewModel
+        binding.noteAttributeLayout.viewmodelchild = labelViewModel
         labelViewModel.label.observe(this){
 
         }

@@ -1,258 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    ></layout>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     >
 
     <RelativeLayout
-        android:id="@+id/drawlayout_header"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/colorPrimaryDark"
-        >
-        <LinearLayout
-            android:id="@+id/top_text_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="8dp"
-            >
-            <ImageView
-                android:id="@+id/top_icon"
-                android:src="@mipmap/top_icon"
-                android:layout_height="20dp"
-                android:layout_width="20dp"
-                android:layout_gravity="bottom"
-                />
-
-            <TextView
-                android:id="@+id/top_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/drawer_top_text"
-                android:fontFamily="@font/montserrat_medium"
-                android:textSize="15sp"
-                android:textColor="#fff"
-                android:layout_marginStart="5dp"
-                />
-        </LinearLayout>
-
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/title_label_list"
-        android:layout_below="@id/drawlayout_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="首页事件分类"
-        android:fontFamily="@font/montserrat_medium"
-        android:textColor="@color/text_more_gray"
-        android:textSize="13sp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        />
-
-    <RelativeLayout
-        android:id="@+id/all_labels_layout"
-        android:layout_below="@id/title_label_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/item_pressed_state"
         >
 
         <RelativeLayout
-            android:id="@+id/card_sort_note_layout"
+            android:id="@+id/drawlayout_header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingEnd="20dp"
+            android:layout_height="80dp"
+            android:background="@color/colorPrimaryDark"
             >
-
-
-            <ImageView
-                android:id="@+id/all_labels_icon"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/earth"
-                />
-
-            <TextView
-                android:id="@+id/all_labels_tx"
+            <LinearLayout
+                android:id="@+id/top_text_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="10dp"
-                android:textSize="12sp"
-                android:text="全部事件"
-                android:fontFamily="@font/montserrat_medium"
-                android:textColor="@color/text_more_gray"
-                android:layout_toEndOf="@id/all_labels_icon"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="8dp"
+                >
+                <ImageView
+                    android:id="@+id/top_icon"
+                    android:src="@mipmap/top_icon"
+                    android:layout_height="20dp"
+                    android:layout_width="20dp"
+                    android:layout_gravity="bottom"
+                    />
+
+                <TextView
+                    android:id="@+id/top_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/drawer_top_text"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textSize="15sp"
+                    android:textColor="#fff"
+                    android:layout_marginStart="5dp"
+                    />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/title_label_list"
+            android:layout_below="@id/drawlayout_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="首页事件分类"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/text_more_gray"
+            android:textSize="13sp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            />
+
+        <RelativeLayout
+            android:id="@+id/all_labels_layout"
+            android:layout_below="@id/title_label_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/item_pressed_state"
+            >
+
+            <RelativeLayout
+                android:id="@+id/card_sort_note_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingEnd="20dp"
+                >
+
+
+                <ImageView
+                    android:id="@+id/all_labels_icon"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/earth"
+                    />
+
+                <TextView
+                    android:id="@+id/all_labels_tx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:textSize="12sp"
+                    android:text="全部事件"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/text_more_gray"
+                    android:layout_toEndOf="@id/all_labels_icon"
+                    />
+
+                <TextView
+                    android:id="@+id/all_labels_count"
+                    android:layout_width="20dp"
+                    android:layout_height="15dp"
+                    android:text="111"
+                    android:textSize="9sp"
+                    android:textColor="@color/text_more_gray"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/header_count_bg"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    />
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/drawlayout_headerlayout_recycleview"
+            android:layout_below="@id/all_labels_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            />
+
+
+
+        <LinearLayout
+            android:id="@+id/other_layout"
+            android:layout_below="@id/drawlayout_headerlayout_recycleview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <View
+                style="@style/header_layout_horizon_line"
                 />
 
-            <TextView
-                android:id="@+id/all_labels_count"
-                android:layout_width="20dp"
-                android:layout_height="15dp"
-                android:text="111"
-                android:textSize="9sp"
-                android:textColor="@color/text_more_gray"
-                android:fontFamily="@font/montserrat_medium"
-                android:gravity="center"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/header_count_bg"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
+            <LinearLayout
+                android:id="@+id/sort_note_manager_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/item_pressed_state"
+                >
+
+                <ImageView
+                    android:id="@+id/sort_note_icon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/sort_note_gray"
+                    android:layout_gravity="center"
+                    />
+
+                <TextView
+                    android:id="@+id/sort_tx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="13sp"
+                    android:text="管理分类本"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/text_more_gray"
+                    android:layout_gravity="center_vertical"
+                    />
+            </LinearLayout>
+
+            <View
+                style="@style/header_layout_horizon_line"
                 />
-        </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/mine_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/item_pressed_state"
+                >
+
+                <ImageView
+                    android:id="@+id/mine_icon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/mine_gray"
+                    android:layout_gravity="center"
+                    />
+
+                <TextView
+                    android:id="@+id/mine_tx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="13sp"
+                    android:text="我的"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/text_more_gray"
+                    android:layout_gravity="center_vertical"
+                    />
+            </LinearLayout>
+
+            <View
+                style="@style/header_layout_horizon_line"
+                />
+
+
+            <LinearLayout
+                android:id="@+id/setting_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/item_pressed_state"
+                >
+
+                <ImageView
+                    android:id="@+id/setting_icon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/setting_gray"
+                    android:layout_gravity="center"
+                    />
+
+                <TextView
+                    android:id="@+id/setting_tx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textSize="13sp"
+                    android:text="设置"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/text_more_gray"
+                    android:layout_gravity="center_vertical"
+                    />
+            </LinearLayout>
+
+            <View
+                style="@style/header_layout_horizon_line"
+                />
+
+        </LinearLayout>
+
+
+
+
     </RelativeLayout>
 
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/drawlayout_headerlayout_recycleview"
-        android:layout_below="@id/all_labels_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        />
-
-
-
-    <LinearLayout
-        android:id="@+id/other_layout"
-        android:layout_below="@id/drawlayout_headerlayout_recycleview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-
-        <View
-            style="@style/header_layout_horizon_line"
-            />
-
-        <LinearLayout
-            android:id="@+id/sort_note_manager_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:background="@drawable/item_pressed_state"
-            >
-
-            <ImageView
-                android:id="@+id/sort_note_icon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@mipmap/sort_note_gray"
-                android:layout_gravity="center"
-                />
-
-            <TextView
-                android:id="@+id/sort_tx"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:textSize="13sp"
-                android:text="管理分类本"
-                android:fontFamily="@font/montserrat_medium"
-                android:textColor="@color/text_more_gray"
-                android:layout_gravity="center_vertical"
-                />
-        </LinearLayout>
-
-        <View
-            style="@style/header_layout_horizon_line"
-            />
-
-
-        <LinearLayout
-            android:id="@+id/mine_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:background="@drawable/item_pressed_state"
-            >
-
-            <ImageView
-                android:id="@+id/mine_icon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@mipmap/mine_gray"
-                android:layout_gravity="center"
-                />
-
-            <TextView
-                android:id="@+id/mine_tx"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:textSize="13sp"
-                android:text="我的"
-                android:fontFamily="@font/montserrat_medium"
-                android:textColor="@color/text_more_gray"
-                android:layout_gravity="center_vertical"
-                />
-        </LinearLayout>
-
-        <View
-            style="@style/header_layout_horizon_line"
-            />
-
-
-        <LinearLayout
-            android:id="@+id/setting_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:background="@drawable/item_pressed_state"
-            >
-
-            <ImageView
-                android:id="@+id/setting_icon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@mipmap/setting_gray"
-                android:layout_gravity="center"
-                />
-
-            <TextView
-                android:id="@+id/setting_tx"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:textSize="13sp"
-                android:text="设置"
-                android:fontFamily="@font/montserrat_medium"
-                android:textColor="@color/text_more_gray"
-                android:layout_gravity="center_vertical"
-                />
-        </LinearLayout>
-
-        <View
-            style="@style/header_layout_horizon_line"
-            />
-
-    </LinearLayout>
-
-
-
-
-</RelativeLayout>
+</layout>

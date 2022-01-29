@@ -3,207 +3,206 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    ></layout>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/color_background_gray"
-    tools:context=".view.activity.TimeRemindActivity">
+    >
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/detail_toolbar"
+    <RelativeLayout
         android:layout_width="match_parent"
-        app:title="设置提醒方式"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/colorPrimaryDark"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/color_background_gray"
+        tools:context=".view.activity.TimeRemindActivity">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/today_event_time_remind_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#fff"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_below="@+id/detail_toolbar"
-        >
-
-        <LinearLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/detail_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+            app:title="设置提醒方式"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/today_event_time_remind_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="#fff"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_below="@+id/detail_toolbar"
             >
-            <RelativeLayout
-                android:id="@+id/today_event_time_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="15dp"
-                >
-
-                <ImageView
-                    android:id="@+id/today_event_time_iv"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@mipmap/remind"
-                    android:layout_centerVertical="true"
-                    />
-
-                <TextView
-                    style="@style/linear_item_text_behind_icon"
-                    android:layout_toEndOf="@id/today_event_time_iv"
-                    android:text="当日事件提醒"
-                    />
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/today_event_time_switch"
-                    android:layout_width="55dp"
-                    android:layout_height="20dp"
-                    android:theme="@style/switchStyle"
-                    android:layout_alignParentEnd="true"
-                    />
-
-            </RelativeLayout>
 
             <LinearLayout
-                android:id="@+id/today_event_time_date_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="15dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="#fff"
                 >
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@mipmap/time"
-                    android:layout_gravity="center_vertical"
-                    />
-
-                <TextView
-                    android:id="@+id/today_event_time_date"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/today_event_time_layout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="9：00"
-                    android:textSize="15sp"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:layout_marginStart="12dp"
-                    />
+                    android:orientation="horizontal"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/today_event_time_iv"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/remind"
+                        android:layout_centerVertical="true"
+                        />
+
+                    <TextView
+                        style="@style/linear_item_text_behind_icon"
+                        android:layout_toEndOf="@id/today_event_time_iv"
+                        android:text="当日事件提醒"
+                        />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/today_event_time_switch"
+                        android:layout_width="55dp"
+                        android:layout_height="20dp"
+                        android:theme="@style/switchStyle"
+                        android:layout_alignParentEnd="true"
+                        />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/today_event_time_date_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="15dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/time"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <TextView
+                        android:id="@+id/today_event_time_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="9：00"
+                        android:textSize="15sp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:layout_marginStart="12dp"
+                        />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
 
 
+        </com.google.android.material.card.MaterialCardView>
 
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/future_event_time_remind_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_below="@+id/today_event_time_remind_layout"
-        >
-
-        <LinearLayout
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/future_event_time_remind_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="#fff"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_below="@+id/today_event_time_remind_layout"
             >
-            <RelativeLayout
-                android:id="@+id/future_event_time_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="15dp"
-                >
-
-                <ImageView
-                    android:id="@+id/future_today_event_time_iv"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@mipmap/remind"
-                    android:layout_centerVertical="true"
-                    />
-
-                <TextView
-                    style="@style/linear_item_text_behind_icon"
-                    android:layout_toEndOf="@id/future_today_event_time_iv"
-                    android:text="未来事件提醒"
-                    />
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/future_event_time_switch"
-                    android:layout_width="55dp"
-                    android:layout_height="20dp"
-                    android:theme="@style/switchStyle"
-                    android:layout_alignParentEnd="true"
-                    />
-
-            </RelativeLayout>
 
             <LinearLayout
-                android:id="@+id/future_event_time_date_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="15dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="#fff"
                 >
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@mipmap/time"
-                    android:layout_gravity="center_vertical"
-                    />
-
-                <TextView
-                    android:id="@+id/future_event_time_date"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/future_event_time_layout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="9：00"
-                    android:textSize="15sp"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:layout_marginStart="12dp"
-                    />
+                    android:orientation="horizontal"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="15dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/future_today_event_time_iv"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/remind"
+                        android:layout_centerVertical="true"
+                        />
+
+                    <TextView
+                        style="@style/linear_item_text_behind_icon"
+                        android:layout_toEndOf="@id/future_today_event_time_iv"
+                        android:text="未来事件提醒"
+                        />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/future_event_time_switch"
+                        android:layout_width="55dp"
+                        android:layout_height="20dp"
+                        android:theme="@style/switchStyle"
+                        android:layout_alignParentEnd="true"
+                        />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/future_event_time_date_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="15dp"
+                    >
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@mipmap/time"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <TextView
+                        android:id="@+id/future_event_time_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="9：00"
+                        android:textSize="15sp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:layout_marginStart="12dp"
+                        />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-    </com.google.android.material.card.MaterialCardView>
-
-    <Button
-        android:id="@+id/time_remind_sure"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="保存"
-        android:textColor="@color/white"
-        android:layout_below="@id/future_event_time_remind_layout"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@color/colorPrimaryDark"
-        />
-</RelativeLayout>
+        <Button
+            android:id="@+id/time_remind_sure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="保存"
+            android:textColor="@color/white"
+            android:layout_below="@id/future_event_time_remind_layout"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/colorPrimaryDark"
+            />
+    </RelativeLayout>
+</layout>

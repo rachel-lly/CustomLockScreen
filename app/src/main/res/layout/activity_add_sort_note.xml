@@ -5,13 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
 
-    <data>
-        <variable
-            name="viewmodel"
-            type="com.example.customlockscreen.viewmodel.SortNoteViewModel" />
-    </data>
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,7 +24,6 @@
         <include
             android:id="@+id/add_sort_note_card"
             layout="@layout/sort_note_attribute_layout"
-            app:viewModelChild="@{viewmodel}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/add_sort_note_toolbar"

@@ -14,6 +14,7 @@ import android.view.Gravity
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
+import androidx.databinding.DataBindingUtil
 import com.example.customlockscreen.R
 import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityTimeRemindBinding
@@ -43,7 +44,9 @@ class TimeRemindActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 
-        binding = ActivityTimeRemindBinding.inflate(layoutInflater)
+        binding =  DataBindingUtil.setContentView(this,R.layout.activity_time_remind)
+
+        binding.lifecycleOwner = this
 
         val slide = Slide()
         slide.slideEdge = Gravity.LEFT
@@ -222,7 +225,6 @@ class TimeRemindActivity : AppCompatActivity() {
 
         }
 
-        setContentView(binding.root)
     }
 
 }

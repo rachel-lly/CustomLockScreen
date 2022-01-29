@@ -3,6 +3,7 @@ package com.example.customlockscreen.view.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.R
@@ -31,7 +32,9 @@ class SortNoteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivitySortNoteBinding.inflate(layoutInflater)
+        binding =  DataBindingUtil.setContentView(this,R.layout.activity_sort_note)
+
+        binding.lifecycleOwner = this
 
         binding.sortNoteToolbar.setNavigationIcon(R.mipmap.back)
         binding.sortNoteToolbar.setNavigationOnClickListener {
@@ -68,6 +71,6 @@ class SortNoteActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        setContentView(binding.root)
+
     }
 }

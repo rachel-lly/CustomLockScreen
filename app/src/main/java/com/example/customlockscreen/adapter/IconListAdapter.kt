@@ -4,7 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.customlockscreen.R
+import com.example.customlockscreen.databinding.HeaderLayoutSortNoteListItemBinding
 import com.example.customlockscreen.databinding.IconListItemBinding
 import com.example.customlockscreen.util.Code
 import java.util.HashMap
@@ -16,14 +19,11 @@ class IconListAdapter(val context: Context,clickListener: ClickListener,defaultP
         fun onClick(position: Int)
     }
 
-    private lateinit var  binding : IconListItemBinding
-
     private val mClickListener = clickListener
 
     private var holderList = HashMap<Int,IconListAdapter.ViewHolder>()
 
     private var lastposition = defaultPosition
-
 
 
     inner class ViewHolder(binding: IconListItemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -33,14 +33,16 @@ class IconListAdapter(val context: Context,clickListener: ClickListener,defaultP
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding =  IconListItemBinding.inflate(LayoutInflater.from(context))
+        val binding : IconListItemBinding =
+            DataBindingUtil.inflate(LayoutInflater.from(context),
+                R.layout.icon_list_item,parent,false)
 
 
         val holder = ViewHolder(binding)
 
-        holder.icon.setOnClickListener {
+        binding.icon.setOnClickListener {
 
-            val position = holder.adapterPosition
+            val position = holder.absoluteAdapterPosition
 
 
             holderList[lastposition]?.checkbox?.visibility = View.GONE
@@ -61,12 +63,17 @@ class IconListAdapter(val context: Context,clickListener: ClickListener,defaultP
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+        val bind = DataBindingUtil.bind<IconListItemBinding>(holder.itemView)
+
         if(position==lastposition){
             holder.checkbox.isChecked = true
             holder.checkbox.visibility = View.VISIBLE
         }
         holder.icon.setImageResource(Code.iconList[position])
         holderList[position] = holder
+
+        bind?.executePendingBindings()
     }
 
 

@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.example.customlockscreen.R
 import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityEditNoteAttributeBinding
@@ -14,6 +16,7 @@ import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.util.Code
 import com.example.customlockscreen.util.TimeManager.Companion.format
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
+import com.example.customlockscreen.viewmodel.LabelViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 
 
@@ -55,7 +58,11 @@ class EditNoteAttributeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityEditNoteAttributeBinding.inflate(layoutInflater)
+        binding =  DataBindingUtil.setContentView(this,R.layout.activity_edit_note_attribute)
+        //ViewModel
+        val labelViewModel = ViewModelProvider(this)[LabelViewModel::class.java]
+        binding.noteAttributeLayout.viewmodelchild = labelViewModel
+        binding.lifecycleOwner = this
 
         binding.editNoteAttributeToolbar.setNavigationIcon(R.mipmap.back)
         binding.editNoteAttributeToolbar.setNavigationOnClickListener {
@@ -242,7 +249,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
             finish()
         }
 
-        setContentView(binding.root)
+
     }
 
 

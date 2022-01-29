@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.transition.Slide
 import android.view.Gravity
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.example.customlockscreen.R
 import com.example.customlockscreen.databinding.ActivityBackupDataBinding
 import com.example.customlockscreen.model.db.DataBase
@@ -13,6 +15,7 @@ import com.example.customlockscreen.util.FileUtil.Companion.deleteDirectory
 import com.example.customlockscreen.util.FileUtil.Companion.getBitmapCacheDir
 import com.example.customlockscreen.util.FileUtil.Companion.isExistFile
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
+import com.example.customlockscreen.viewmodel.SortNoteViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class BackupDataActivity : AppCompatActivity() {
@@ -27,7 +30,9 @@ class BackupDataActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityBackupDataBinding.inflate(layoutInflater)
+        binding =  DataBindingUtil.setContentView(this,R.layout.activity_backup_data)
+
+        binding.lifecycleOwner = this
 
         val slide = Slide()
         slide.slideEdge = Gravity.LEFT
@@ -60,8 +65,6 @@ class BackupDataActivity : AppCompatActivity() {
             showDeleteSortNoteDialog()
         }
 
-
-        setContentView(binding.root)
     }
 
     private fun showDeleteSortNoteDialog() {

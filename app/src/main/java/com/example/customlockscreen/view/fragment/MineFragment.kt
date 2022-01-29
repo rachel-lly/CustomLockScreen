@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.customlockscreen.R
@@ -48,8 +49,15 @@ class MineFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = FragmentMineBinding.inflate(layoutInflater)
-        // TODO: 2022/1/25 头像 
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View {
+        binding = DataBindingUtil.inflate(LayoutInflater.from(this.context), R.layout.fragment_mine,container,false)
+
+
+
+        // TODO: 2022/1/25 头像
 //        val avatarPath = "${FileUtil.getAvatarCacheDir(this.context!!)}/avatar.png"
 //
 //        if(FileUtil.isExistFile(avatarPath)){
@@ -59,7 +67,7 @@ class MineFragment : Fragment() {
 //            Glide.with(this.context!!).load(R.drawable.avater).into(binding.mineAvater)
 //        }
 
-        Glide.with(this.context!!).load(R.drawable.avater).into(binding.mineAvater)
+        Glide.with(this.requireContext()).load(R.drawable.avater).into(binding.mineAvater)
 
         binding.mineTime.text = today
 
@@ -75,11 +83,11 @@ class MineFragment : Fragment() {
 
         dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
 
-        dataViewModel.getAllSortNotesByObserve().observe(this, {
+        dataViewModel.getAllSortNotesByObserve().observe(viewLifecycleOwner, {
             binding.sortNoteNum.text = it.size.toString()
         })
 
-        dataViewModel.getAllLabelsByObserve().observe(this, {
+        dataViewModel.getAllLabelsByObserve().observe(viewLifecycleOwner, {
             binding.eventNum.text = it.size.toString()
         })
 
@@ -89,10 +97,6 @@ class MineFragment : Fragment() {
 
         binding.useDayNum.text = day.toString()
 
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
         return binding.root
     }
 

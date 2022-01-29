@@ -1,145 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    ></layout>
-<RelativeLayout
-    android:id="@+id/drawer_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="5dp"
-    android:background="@color/white"
-    tools:context=".view.fragment.NoteListFragment">
-
-
+    xmlns:tools="http://schemas.android.com/tools">
     <RelativeLayout
-        android:id="@+id/header_layout"
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:paddingStart="5dp"
-        android:paddingEnd="5dp"
-        >
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:background="@color/white"
+        tools:context=".view.fragment.NoteListFragment">
 
 
         <RelativeLayout
+            android:id="@+id/header_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             >
 
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                >
+
+                <TextView
+                    android:id="@+id/home_header_top_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="蛤蛤"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textColor="@color/color_bold"
+                    />
+
+
+                <TextView
+                    android:id="@+id/home_header_top_date_just_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/home_header_top_text"
+                    android:text="目标: "
+                    android:textSize="12sp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/color_normal"
+                    />
+
+                <TextView
+                    android:id="@+id/home_header_top_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/home_header_top_text"
+                    android:layout_toEndOf="@+id/home_header_top_date_just_text"
+                    android:text="2022-1-1 星期六"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/color_normal"
+                    />
+
+            </RelativeLayout>
+
+
             <TextView
-                android:id="@+id/home_header_top_text"
+                android:id="@+id/home_header_top_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="蛤蛤"
-                android:textSize="18sp"
-                android:fontFamily="@font/montserrat_bold"
+                android:text="246"
+                android:textSize="40sp"
+                android:fontFamily="@font/montserrat_medium"
                 android:textColor="@color/color_bold"
-                 />
-
-
-            <TextView
-                android:id="@+id/home_header_top_date_just_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/home_header_top_text"
-                android:text="目标: "
-                android:textSize="12sp"
-                android:fontFamily="@font/montserrat_medium"
-                android:textColor="@color/color_normal"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="50dp"
                 />
 
-            <TextView
-                android:id="@+id/home_header_top_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/home_header_top_text"
-                android:layout_toEndOf="@+id/home_header_top_date_just_text"
-                android:text="2022-1-1 星期六"
-                android:textSize="12sp"
-                android:fontFamily="@font/montserrat_medium"
-                android:textColor="@color/color_normal"
+            <ImageView
+                android:id="@+id/icon_day"
+                android:layout_width="40dp"
+                android:layout_height="25dp"
+                android:src="@mipmap/day"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="10dp"
                 />
+
 
         </RelativeLayout>
 
-
-        <TextView
-            android:id="@+id/home_header_top_day"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="246"
-            android:textSize="40sp"
-            android:fontFamily="@font/montserrat_medium"
-            android:textColor="@color/color_bold"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="50dp"
-            />
-
-        <ImageView
-            android:id="@+id/icon_day"
-            android:layout_width="40dp"
-            android:layout_height="25dp"
-            android:src="@mipmap/day"
-            android:layout_alignParentEnd="true"
+        <View
+            android:id="@+id/line"
+            style="@style/horizon_line"
+            android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:layout_below="@id/header_layout"
             />
 
 
-    </RelativeLayout>
-
-    <View
-        android:id="@+id/line"
-        style="@style/horizon_line"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_below="@id/header_layout"
-        />
-
-
-    <RelativeLayout
-        android:id="@+id/home_label_list_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/line"
-        >
-
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/home_swipeRefreshLayout"
+        <RelativeLayout
+            android:id="@+id/home_label_list_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/line"
             >
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/home_recyclerview"
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/home_swipeRefreshLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                />
+                >
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/list_null_logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/list_null_bg"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            />
+
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/list_null_logo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@mipmap/list_null_bg"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        />
-
-
-</RelativeLayout>
+</layout>

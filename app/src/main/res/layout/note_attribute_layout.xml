@@ -98,7 +98,7 @@
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/montserrat_medium"
-                    android:text="@{TimeManager.Companion.format.format(viewmodelchild.label.targetDate)}"
+                    android:text="@{viewmodelchild.getDate(viewmodelchild.label.targetDate)}"
                     android:textColor="@color/text_colorPrimary"
                     android:textSize="14sp" />
 
@@ -261,7 +261,7 @@
                         android:layout_marginStart="50dp"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/montserrat_medium"
-                        android:text="@{TimeManager.Companion.format.format(viewmodelchild.label.endDate)}"
+                        android:text="@{viewmodelchild.getDate(viewmodelchild.label.endDate)}"
                         android:textColor="@color/text_colorPrimary"
                         android:textSize="14sp" />
 

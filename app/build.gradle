@@ -4,6 +4,8 @@ plugins {
     id 'kotlin-kapt'
 }
 
+
+
 android {
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
@@ -41,15 +43,22 @@ android {
         jvmTarget = '1.8'
     }
 
-    dataBinding{
-        enabled true
-    }
+
 
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
     }
 
+    dataBinding{
+        enabled true
+    }
+
+    apply plugin: 'kotlin-kapt'
+
+    kapt{
+        generateStubs true
+    }
 }
 
 dependencies {

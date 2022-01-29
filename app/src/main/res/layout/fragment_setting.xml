@@ -1,225 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    ></layout>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.fragment.SettingFragment"
-    android:background="@color/color_background_gray"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
-        android:layout_marginTop="10dp"
-        android:id="@+id/setting_dark_theme_layout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/item_pressed_state"
-        android:paddingStart="30dp"
-        android:paddingTop="15dp"
-        android:paddingEnd="10dp"
-        android:paddingBottom="15dp"
-        >
+        android:layout_height="match_parent"
+        tools:context=".view.fragment.SettingFragment"
+        android:background="@color/color_background_gray"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/dark_theme_icon"
-            android:src="@mipmap/moon"
-            style="@style/linear_item_icon"
-            />
-
-        <TextView
-            android:id="@+id/dark_theme_tx"
-            android:text="夜间模式"
-            android:layout_toEndOf="@+id/dark_theme_icon"
-            style="@style/linear_item_text_behind_icon"
-            />
-
-        <TextView
-            android:id="@+id/dark_theme_style"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:id="@+id/setting_dark_theme_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="跟随系统"
-            android:layout_marginEnd="20dp"
-            android:textColor="@color/text_more_gray"
-            android:fontFamily="@font/montserrat_medium"
-            android:textSize="14sp"
-            android:layout_marginStart="20dp"
-            android:layout_alignParentEnd="true"
+            android:background="@drawable/item_pressed_state"
+            android:paddingStart="30dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="15dp"
+            >
+
+            <ImageView
+                android:id="@+id/dark_theme_icon"
+                android:src="@mipmap/moon"
+                style="@style/linear_item_icon"
+                />
+
+            <TextView
+                android:id="@+id/dark_theme_tx"
+                android:text="夜间模式"
+                android:layout_toEndOf="@+id/dark_theme_icon"
+                style="@style/linear_item_text_behind_icon"
+                />
+
+            <TextView
+                android:id="@+id/dark_theme_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="跟随系统"
+                android:layout_marginEnd="20dp"
+                android:textColor="@color/text_more_gray"
+                android:fontFamily="@font/montserrat_medium"
+                android:textSize="14sp"
+                android:layout_marginStart="20dp"
+                android:layout_alignParentEnd="true"
+                />
+
+            <ImageView
+                android:src="@mipmap/right"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                />
+
+
+            <!--        <androidx.appcompat.widget.SwitchCompat-->
+            <!--            android:id="@+id/dark_theme_switch"-->
+            <!--            android:layout_width="55dp"-->
+            <!--            android:layout_height="20dp"-->
+            <!--            android:layout_alignParentEnd="true"-->
+            <!--            android:theme="@style/switchStyle" />-->
+
+        </RelativeLayout>
+
+        <View
+            style="@style/horizon_line"
             />
 
-        <ImageView
-            android:src="@mipmap/right"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            />
-
-
-<!--        <androidx.appcompat.widget.SwitchCompat-->
-<!--            android:id="@+id/dark_theme_switch"-->
-<!--            android:layout_width="55dp"-->
-<!--            android:layout_height="20dp"-->
-<!--            android:layout_alignParentEnd="true"-->
-<!--            android:theme="@style/switchStyle" />-->
-
-    </RelativeLayout>
-
-    <View
-        style="@style/horizon_line"
-        />
-
-    <RelativeLayout
-        android:layout_marginTop="10dp"
-        android:id="@+id/setting_sort_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/item_pressed_state"
-        android:paddingStart="30dp"
-        android:paddingEnd="20dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        >
-
-        <ImageView
-            android:id="@+id/sort_icon"
-            android:src="@mipmap/sort"
-            style="@style/linear_item_icon"
-            />
-
-        <TextView
-            android:id="@+id/sort_tx"
-            android:text="排序方式"
-            android:layout_toEndOf="@+id/sort_icon"
-            style="@style/linear_item_text_behind_icon"
-            />
-
-        <TextView
-            android:id="@+id/sort_style"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:id="@+id/setting_sort_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="按事件时间"
-            android:textColor="@color/text_colorPrimary"
-            android:fontFamily="@font/montserrat_medium"
-            android:textSize="14sp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="10dp"
-            android:layout_alignParentEnd="true"
+            android:background="@drawable/item_pressed_state"
+            android:paddingStart="30dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            >
+
+            <ImageView
+                android:id="@+id/sort_icon"
+                android:src="@mipmap/sort"
+                style="@style/linear_item_icon"
+                />
+
+            <TextView
+                android:id="@+id/sort_tx"
+                android:text="排序方式"
+                android:layout_toEndOf="@+id/sort_icon"
+                style="@style/linear_item_text_behind_icon"
+                />
+
+            <TextView
+                android:id="@+id/sort_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="按事件时间"
+                android:textColor="@color/text_colorPrimary"
+                android:fontFamily="@font/montserrat_medium"
+                android:textSize="14sp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_alignParentEnd="true"
+                />
+
+
+
+        </RelativeLayout>
+
+        <View
+            style="@style/horizon_line"
+            />
+
+        <RelativeLayout
+            android:id="@+id/setting_clock_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_pressed_state"
+            android:paddingStart="30dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            >
+
+            <ImageView
+                android:id="@+id/clock_icon"
+                android:src="@mipmap/clock"
+                style="@style/linear_item_icon"
+                />
+
+            <TextView
+                android:id="@+id/clock_tx"
+                android:text="提醒时间设置"
+                android:layout_toEndOf="@+id/clock_icon"
+                style="@style/linear_item_text_behind_icon"
+                />
+
+            <ImageView
+                android:src="@mipmap/right"
+                style="@style/item_end_icon"
+                />
+
+        </RelativeLayout>
+
+        <View
+            style="@style/horizon_line"
             />
 
 
+        <RelativeLayout
+            android:id="@+id/setting_backup_data_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_pressed_state"
+            android:paddingStart="30dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_marginTop="15dp"
+            >
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/backup_data_icon"
+                android:src="@mipmap/dataup"
+                style="@style/linear_item_icon"
+                />
 
-    <View
-        style="@style/horizon_line"
-        />
+            <TextView
+                android:id="@+id/backup_data_tx"
+                android:text="备份数据管理"
+                android:layout_toEndOf="@+id/backup_data_icon"
+                style="@style/linear_item_text_behind_icon"
+                />
 
-    <RelativeLayout
-        android:id="@+id/setting_clock_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/item_pressed_state"
-        android:paddingStart="30dp"
-        android:paddingEnd="10dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        >
+            <ImageView
+                android:src="@mipmap/right"
+                style="@style/item_end_icon"
+                />
 
-        <ImageView
-            android:id="@+id/clock_icon"
-            android:src="@mipmap/clock"
-            style="@style/linear_item_icon"
-            />
-
-        <TextView
-            android:id="@+id/clock_tx"
-            android:text="提醒时间设置"
-            android:layout_toEndOf="@+id/clock_icon"
-            style="@style/linear_item_text_behind_icon"
-            />
-
-        <ImageView
-            android:src="@mipmap/right"
-            style="@style/item_end_icon"
-            />
-
-    </RelativeLayout>
-
-    <View
-        style="@style/horizon_line"
-        />
+        </RelativeLayout>
 
 
-    <RelativeLayout
-        android:id="@+id/setting_backup_data_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/item_pressed_state"
-        android:paddingStart="30dp"
-        android:paddingEnd="10dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:layout_marginTop="15dp"
-        >
+        <RelativeLayout
+            android:id="@+id/set_lock_screen_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_pressed_state"
+            android:paddingStart="30dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:layout_marginTop="15dp"
+            >
 
-        <ImageView
-            android:id="@+id/backup_data_icon"
-            android:src="@mipmap/dataup"
-            style="@style/linear_item_icon"
-            />
+            <ImageView
+                android:id="@+id/set_lock_screen_icon"
+                android:src="@mipmap/lock_screen"
+                style="@style/linear_item_icon"
+                />
 
-        <TextView
-            android:id="@+id/backup_data_tx"
-            android:text="备份数据管理"
-            android:layout_toEndOf="@+id/backup_data_icon"
-            style="@style/linear_item_text_behind_icon"
-            />
+            <TextView
+                android:id="@+id/set_lock_screen_tx"
+                android:text="设置锁屏"
+                android:layout_toEndOf="@+id/set_lock_screen_icon"
+                style="@style/linear_item_text_behind_icon"
+                />
 
-        <ImageView
-            android:src="@mipmap/right"
-            style="@style/item_end_icon"
-            />
+            <ImageView
+                android:src="@mipmap/right"
+                style="@style/item_end_icon"
+                />
 
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:id="@+id/set_lock_screen_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/item_pressed_state"
-        android:paddingStart="30dp"
-        android:paddingEnd="10dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:layout_marginTop="15dp"
-        >
-
-        <ImageView
-            android:id="@+id/set_lock_screen_icon"
-            android:src="@mipmap/lock_screen"
-            style="@style/linear_item_icon"
-            />
-
-        <TextView
-            android:id="@+id/set_lock_screen_tx"
-            android:text="设置锁屏"
-            android:layout_toEndOf="@+id/set_lock_screen_icon"
-            style="@style/linear_item_text_behind_icon"
-            />
-
-        <ImageView
-            android:src="@mipmap/right"
-            style="@style/item_end_icon"
-            />
-
-    </RelativeLayout>
+        </RelativeLayout>
 
 
 
-</LinearLayout>
+    </LinearLayout>
+
+</layout>

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.transition.Slide
 import android.view.Gravity
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.R
 import com.example.customlockscreen.adapter.LabelLinearAdapter
@@ -27,7 +28,9 @@ class LockScreenSettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityLockScreenSettingBinding.inflate(layoutInflater)
+        binding =  DataBindingUtil.setContentView(this,R.layout.activity_lock_screen_setting)
+
+        binding.lifecycleOwner = this
 
         val slide = Slide()
         slide.slideEdge = Gravity.LEFT
@@ -52,6 +55,5 @@ class LockScreenSettingActivity : AppCompatActivity() {
         binding.lockScreenSettingRecyclerview.adapter = labelLinearAdapter
         binding.lockScreenSettingRecyclerview.layoutManager = GridLayoutManager(this, 1)
 
-        setContentView(binding.root)
     }
 }

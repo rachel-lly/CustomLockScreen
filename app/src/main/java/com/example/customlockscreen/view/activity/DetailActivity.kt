@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.customlockscreen.R
 import com.example.customlockscreen.util.PictureUtil
 import com.example.customlockscreen.databinding.ActivityDetailBinding
@@ -56,6 +57,15 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_detail)
 
+        label= intent.getParcelableExtra(Code.LABEL)!!
+        labelIsLock = intent!!.getBooleanExtra(Code.LABEL_IS_LOCK, false)
+
+        //ViewModel
+        val labelViewModel = ViewModelProvider(this)[LabelViewModel::class.java]
+        binding.detailCard.viewmodel = labelViewModel
+        binding.lifecycleOwner = this
+
+
         setSupportActionBar(binding.detailToolbar)
         binding.detailToolbar.setTitleTextColor(Color.WHITE)
 
@@ -66,29 +76,14 @@ class DetailActivity : AppCompatActivity() {
             finish()
         }
 
-        label= intent.getParcelableExtra(Code.LABEL)!!
-        labelIsLock = intent!!.getBooleanExtra(Code.LABEL_IS_LOCK, false)
-
         freshLabel(label)
-
-        //ViewModel
-
-        val labelViewModel = ViewModelProvider(this)[LabelViewModel::class.java]
-        binding.viewModel = labelViewModel
-        labelViewModel.label.observe(this){
-            freshLabel(it)
-        }
-
-        binding.lifecycleOwner = this
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun freshLabel(label: Label){
-        this.label = label
+        binding.detailCard.viewmodel!!.label.value = label
 
         binding.detailCard.labelDay.updatePadding(0, 25, 0, 25)
-
-        binding.detailCard.labelDate.text = format.format(label.targetDate)
 
         if(label.day>=0){
             binding.detailCard.labelText.setBackgroundColor(resources.getColor(R.color.note_list_future_dark, theme))

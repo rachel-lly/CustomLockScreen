@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.Menu
 import android.view.MenuItem
+import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.example.customlockscreen.R
 import com.example.customlockscreen.databinding.ActivityChangeAvatarBinding
@@ -33,7 +34,9 @@ class ChangeAvatarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityChangeAvatarBinding.inflate(layoutInflater)
+        binding =  DataBindingUtil.setContentView(this,R.layout.activity_change_avatar)
+
+        binding.lifecycleOwner = this
 
         supportActionBar?.setDisplayShowTitleEnabled(false)
         setSupportActionBar(binding.changeAvatarToolbar)
@@ -77,7 +80,6 @@ class ChangeAvatarActivity : AppCompatActivity() {
 
 
 
-        setContentView(binding.root)
     }
 
     // TODO: 2021/11/16 处理获取到的图片uri及裁剪后的图片

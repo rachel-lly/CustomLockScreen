@@ -2,11 +2,12 @@ package com.example.customlockscreen.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.customlockscreen.databinding.HeaserLayoutSortNoteListItemBinding
+import com.example.customlockscreen.R
+import com.example.customlockscreen.databinding.HeaderLayoutSortNoteListItemBinding
 import com.example.customlockscreen.model.bean.SortNote
 import com.example.customlockscreen.model.db.DataBase
 
@@ -18,26 +19,21 @@ class HeaderSortNoteListAdapter(val context: Context, var sortNoteList:List<Sort
     }
 
 
-    private lateinit var  binding : HeaserLayoutSortNoteListItemBinding
-
     private val labelDao = DataBase.dataBase.labelDao()
 
     private val mClickListener = onClickListener
 
-    inner class ViewHolder(binding: HeaserLayoutSortNoteListItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        val sortNoteText : TextView = binding.sortTx
-        val sortNoteIcon : ImageView = binding.sortIcon
-        val sortNoteCount : TextView = binding.sortCount
-    }
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding =  HeaserLayoutSortNoteListItemBinding.inflate(LayoutInflater.from(context))
+        val binding : HeaderLayoutSortNoteListItemBinding =
+            DataBindingUtil.inflate(LayoutInflater.from(context),R.layout.header_layout_sort_note_list_item,parent,false)
 
 
-        val holder = ViewHolder(binding)
+        val holder = ViewHolder(binding.root)
         holder.itemView.setOnClickListener {
 
-            val position = holder.adapterPosition
+            val position = holder.absoluteAdapterPosition
             val sortNote = sortNoteList[position]
 
             mClickListener.onClick(sortNote.name)
@@ -48,12 +44,19 @@ class HeaderSortNoteListAdapter(val context: Context, var sortNoteList:List<Sort
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val sortNote = sortNoteList[position]
-        holder.sortNoteText.text = sortNote.name
-        val iconId:Int = context.resources.getIdentifier(sortNote.iconName,"mipmap",context.packageName)
-        holder.sortNoteIcon.setImageResource(iconId)
 
-        holder.sortNoteCount.text = labelDao.getLabelCountBySameSort(sortNote.name).toString()
+        val bind = DataBindingUtil.bind<HeaderLayoutSortNoteListItemBinding>(holder.itemView)
+
+        bind?.sortnote = sortNoteList[position]
+
+        val iconId:Int =
+            context.resources.getIdentifier(bind?.sortnote?.iconName, "mipmap", context.packageName)
+        bind?.sortIcon?.setImageResource(iconId)
+
+        bind?.sortCount?.text = labelDao.getLabelCountBySameSort(bind?.sortnote!!.name).toString()
+
+        bind?.executePendingBindings()
+
     }
 
     override fun getItemCount() = sortNoteList.size

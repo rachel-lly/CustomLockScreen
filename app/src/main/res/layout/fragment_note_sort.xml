@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    ></layout>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/color_background_gray"
-    tools:context=".view.fragment.NoteSortFragment">
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    >
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="15dp"
-        android:id="@+id/sort_note_list_swipeRefreshLayout"
-        >
+        android:background="@color/color_background_gray"
+        tools:context=".view.fragment.NoteSortFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment_sort_note_recycleview"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:id="@+id/sort_note_list_swipeRefreshLayout"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragment_sort_note_recycleview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
 
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</layout>

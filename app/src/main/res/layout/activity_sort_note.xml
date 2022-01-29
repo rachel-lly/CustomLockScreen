@@ -2,47 +2,46 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    ></layout>
+    >
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.activity.SortNoteActivity"
-    android:background="@color/color_background_gray">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/sort_note_toolbar"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/colorPrimaryDark"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/OverflowMenuStyle"
-        app:title="选择事件分类"
-        />
+        android:layout_height="match_parent"
+        tools:context=".view.activity.SortNoteActivity"
+        android:background="@color/color_background_gray">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/sort_note_recycleview"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sort_note_toolbar"
-        />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/sort_note_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/OverflowMenuStyle"
+            app:title="选择事件分类"
+            />
 
-
-    <Button
-        android:id="@+id/add_note_sure"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="添加新分类"
-        android:layout_below="@id/sort_note_recycleview"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="@color/colorPrimaryDark"
-        />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/sort_note_recycleview"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sort_note_toolbar"
+            />
 
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/add_note_sure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="添加新分类"
+            android:layout_below="@id/sort_note_recycleview"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/colorPrimaryDark"
+            />
+
+
+    </RelativeLayout>
+</layout>
+

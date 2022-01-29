@@ -2,6 +2,8 @@ package com.example.customlockscreen.view.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.R
 import com.example.customlockscreen.adapter.IconListAdapter
@@ -10,6 +12,8 @@ import com.example.customlockscreen.model.bean.SortNote
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.util.Code
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
+import com.example.customlockscreen.viewmodel.LabelViewModel
+import com.example.customlockscreen.viewmodel.SortNoteViewModel
 
 class AddSortNoteActivity : AppCompatActivity() {
 
@@ -28,7 +32,17 @@ class AddSortNoteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 
-        binding = ActivityAddSortNoteBinding.inflate(layoutInflater)
+        binding =  DataBindingUtil.setContentView(this,R.layout.activity_add_sort_note)
+
+        //ViewModel
+        val sortNoteViewModel = ViewModelProvider(this)[SortNoteViewModel::class.java]
+        binding.addSortNoteCard.viewmodelchild = sortNoteViewModel
+        sortNoteViewModel.sortNote.observe(this){
+
+        }
+
+        binding.lifecycleOwner = this
+
 
         binding.addSortNoteToolbar.setNavigationIcon(R.mipmap.back)
         binding.addSortNoteToolbar.setNavigationOnClickListener {
@@ -56,7 +70,7 @@ class AddSortNoteActivity : AppCompatActivity() {
             saveSortNote()
         }
 
-        setContentView(binding.root)
+
     }
 
 

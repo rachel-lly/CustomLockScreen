@@ -7,6 +7,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.databinding.DataBindingUtil
 import com.example.customlockscreen.R
 import com.example.customlockscreen.databinding.ActivityDarkThemeSettingBinding
 import com.example.customlockscreen.model.bean.MessageEvent
@@ -24,7 +25,9 @@ class DarkThemeSettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         EventBus.getDefault().register(this)
 
-        binding = ActivityDarkThemeSettingBinding.inflate(LayoutInflater.from(this))
+        binding =  DataBindingUtil.setContentView(this,R.layout.activity_dark_theme_setting)
+
+        binding.lifecycleOwner = this
 
         val slide = Slide()
         slide.slideEdge = Gravity.LEFT
@@ -70,7 +73,7 @@ class DarkThemeSettingActivity : AppCompatActivity() {
             EventBus.getDefault().post(MessageEvent("夜"))
         }
 
-        setContentView(binding.root)
+
     }
 
     override fun onDestroy() {

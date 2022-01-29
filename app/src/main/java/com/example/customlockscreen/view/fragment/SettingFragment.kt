@@ -8,6 +8,7 @@ import android.view.*
 import android.widget.PopupMenu
 import androidx.annotation.MenuRes
 import androidx.annotation.RequiresApi
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.customlockscreen.R
 import com.example.customlockscreen.view.activity.BackupDataActivity
@@ -38,55 +39,12 @@ class SettingFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = FragmentSettingBinding.inflate(layoutInflater)
-
-        val sortStyle by SharedPreferenceCommission(context!!, "sortStyle", "按事件时间")
-        EventBus.getDefault().post(MessageEvent(sortStyle))
-        binding.sortStyle.text = sortStyle
-
-        val isFollowSystem by SharedPreferenceCommission(context!!,"isFollowSystem",true)
-        if(isFollowSystem){
-            binding.darkThemeStyle.text = "跟随系统"
-        }else{
-            val isDarkTheme by SharedPreferenceCommission(context!!,"isDarkTheme",false)
-            if(isDarkTheme){
-                binding.darkThemeStyle.text = "夜间模式"
-            }else{
-                binding.darkThemeStyle.text = "日间模式"
-            }
-        }
-
-
-        binding.settingSortLayout.setOnClickListener {
-            showMenu(it, R.menu.fragment_setting_sort_style_menu)
-        }
-        
-        binding.settingClockLayout.setOnClickListener {
-            val intent = Intent(context, TimeRemindActivity::class.java)
-            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
-        }
-        
-        binding.settingBackupDataLayout.setOnClickListener {
-            val intent = Intent(context, BackupDataActivity::class.java)
-            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
-        }
-
-        binding.setLockScreenLayout.setOnClickListener {
-            val intent = Intent(context, LockScreenSettingActivity::class.java)
-            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
-        }
-
-        binding.settingDarkThemeLayout.setOnClickListener {
-            val intent = Intent(context, DarkThemeSettingActivity::class.java)
-            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
-        }
     }
 
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun showMenu(v: View, @MenuRes menuRes: Int) {
-        val popup = PopupMenu(context!!, v)
+        val popup = PopupMenu(requireContext(), v)
         popup.menuInflater.inflate(menuRes, popup.menu)
         popup.gravity = Gravity.RIGHT
 
@@ -112,9 +70,53 @@ class SettingFragment : Fragment() {
         popup.show()
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         EventBus.getDefault().register(this)
+        binding = DataBindingUtil.inflate(LayoutInflater.from(this.context), R.layout.fragment_setting,container,false)
+
+        val sortStyle by SharedPreferenceCommission(requireContext(), "sortStyle", "按事件时间")
+        EventBus.getDefault().post(MessageEvent(sortStyle))
+        binding.sortStyle.text = sortStyle
+
+        val isFollowSystem by SharedPreferenceCommission(requireContext(),"isFollowSystem",true)
+        if(isFollowSystem){
+            binding.darkThemeStyle.text = "跟随系统"
+        }else{
+            val isDarkTheme by SharedPreferenceCommission(requireContext(),"isDarkTheme",false)
+            if(isDarkTheme){
+                binding.darkThemeStyle.text = "夜间模式"
+            }else{
+                binding.darkThemeStyle.text = "日间模式"
+            }
+        }
+
+
+        binding.settingSortLayout.setOnClickListener {
+            showMenu(it, R.menu.fragment_setting_sort_style_menu)
+        }
+
+        binding.settingClockLayout.setOnClickListener {
+            val intent = Intent(context, TimeRemindActivity::class.java)
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
+        }
+
+        binding.settingBackupDataLayout.setOnClickListener {
+            val intent = Intent(context, BackupDataActivity::class.java)
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
+        }
+
+        binding.setLockScreenLayout.setOnClickListener {
+            val intent = Intent(context, LockScreenSettingActivity::class.java)
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
+        }
+
+        binding.settingDarkThemeLayout.setOnClickListener {
+            val intent = Intent(context, DarkThemeSettingActivity::class.java)
+            startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
+        }
+
         return binding.root
     }
 
@@ -132,7 +134,7 @@ class SettingFragment : Fragment() {
 
             "按添加时间", "按事件时间" -> {
                 binding.sortStyle.text = msg
-                var style by SharedPreferenceCommission(context!!, "sortStyle", "按事件时间")
+                var style by SharedPreferenceCommission(requireContext(), "sortStyle", "按事件时间")
                 style = msg
             }
 

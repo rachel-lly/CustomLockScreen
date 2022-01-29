@@ -3,6 +3,8 @@ package com.example.customlockscreen.view.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.SpannableStringBuilder
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.R
 import com.example.customlockscreen.adapter.IconListAdapter
@@ -11,7 +13,7 @@ import com.example.customlockscreen.model.bean.SortNote
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.util.Code
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
-
+import com.example.customlockscreen.viewmodel.SortNoteViewModel
 
 
 class EditSortNoteActivity : AppCompatActivity() {
@@ -34,14 +36,25 @@ class EditSortNoteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityEditSortNoteBinding.inflate(layoutInflater)
+        binding =  DataBindingUtil.setContentView(this,R.layout.activity_edit_sort_note)
+
+        sortNote = intent?.getParcelableExtra(Code.SORT_NOTE)
+        //ViewModel
+        val sortNoteViewModel = ViewModelProvider(this)[SortNoteViewModel::class.java]
+        sortNoteViewModel.sortNote.value = sortNote
+        binding.editSortNoteCard.viewmodelchild = sortNoteViewModel
+
+        sortNoteViewModel.sortNote.observe(this){
+
+        }
+        binding.lifecycleOwner = this
 
         binding.editSortNoteToolbar.setNavigationIcon(R.mipmap.back)
         binding.editSortNoteToolbar.setNavigationOnClickListener {
             finish()
         }
 
-        sortNote = intent?.getParcelableExtra(Code.SORT_NOTE)
+
         val size = Code.iconList.size
         for(i in 0 until size){
             val s = resources.getResourceEntryName(Code.iconList[i])
@@ -95,7 +108,6 @@ class EditSortNoteActivity : AppCompatActivity() {
             }
         }
 
-        setContentView(binding.root)
     }
 
     private fun updateSortNote() {

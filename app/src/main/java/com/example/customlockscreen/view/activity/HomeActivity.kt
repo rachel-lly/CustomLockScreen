@@ -7,6 +7,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,7 +41,9 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
+        binding =  DataBindingUtil.setContentView(this,R.layout.activity_home)
+
+        binding.lifecycleOwner = this
 
         setSupportActionBar(binding.homeToolbar)
 
@@ -111,8 +114,6 @@ class HomeActivity : AppCompatActivity() {
 
         fragmentControl()
 
-
-        setContentView(binding.root)
     }
 
     private fun fragmentControl() {
