@@ -1,6 +1,7 @@
-package com.example.customlockscreen.model.db
+package com.example.customlockscreen.viewmodel
 
 import androidx.lifecycle.ViewModel
+import com.example.customlockscreen.model.db.DataBase
 
 class DataViewModel : ViewModel() {
 

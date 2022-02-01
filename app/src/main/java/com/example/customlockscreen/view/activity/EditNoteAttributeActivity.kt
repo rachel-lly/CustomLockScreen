@@ -1,24 +1,22 @@
 package com.example.customlockscreen.view.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.SpannableStringBuilder
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.customlockscreen.R
-import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityEditNoteAttributeBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.util.Code
+import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.util.TimeManager.Companion.format
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
 import com.example.customlockscreen.viewmodel.LabelViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
-
 
 
 class EditNoteAttributeActivity : AppCompatActivity() {
@@ -39,6 +37,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
     private val labelDao = DataBase.dataBase.labelDao()
 
     private lateinit var label:Label
+    private lateinit var labelViewModel: LabelViewModel
 
     private var lastChoose: String? = null
 
@@ -63,7 +62,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
         label = intent!!.getParcelableExtra(Code.LABEL)!!
 
         //ViewModel
-        val labelViewModel = ViewModelProvider(this)[LabelViewModel::class.java]
+        labelViewModel = ViewModelProvider(this)[LabelViewModel::class.java]
         labelViewModel.label.value = label
         binding.noteAttributeLayout.viewmodelchild = labelViewModel
         binding.lifecycleOwner = this
@@ -74,7 +73,6 @@ class EditNoteAttributeActivity : AppCompatActivity() {
         }
 
 
-
 //
 //        binding.noteAttributeLayout.addNoteEt.text = SpannableStringBuilder(label.text)
 //        binding.noteAttributeLayout.addNoteEt.setSelection(label.text.length)
@@ -83,7 +81,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
 
         val todayTime = MaterialDatePicker.todayInUtcMilliseconds()
-
+        binding.noteAttributeLayout.addNoteDate.text = today
         if(label.targetDate<todayTime){
             binding.noteAttributeLayout.addNoteDate.setTextColor(ContextCompat.getColor(this,R.color.color_passed))
         }else{
@@ -217,12 +215,12 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
                     val nameList = labelDao.getAllLabelsName()
 
-                    if(!lastName.equals(noteText)&&nameList.contains(noteText)){
+                    if(lastName != noteText &&nameList.contains(noteText)){
                         this.toast("该事件已存在")
                     }else{
                         if(label.isTop){
                             changeOnTopLabel(label.text)
-                        }else if(lastName.equals(noteText)){
+                        }else if(lastName == noteText){
                             changeOnTopLabel("-1")
                         }
                         labelDao.updateLabel(label)

@@ -43,10 +43,6 @@ class EditSortNoteActivity : AppCompatActivity() {
         val sortNoteViewModel = ViewModelProvider(this)[SortNoteViewModel::class.java]
         sortNoteViewModel.sortNote.value = sortNote
         binding.editSortNoteCard.viewmodelchild = sortNoteViewModel
-
-        sortNoteViewModel.sortNote.observe(this){
-
-        }
         binding.lifecycleOwner = this
 
         binding.editSortNoteToolbar.setNavigationIcon(R.mipmap.back)

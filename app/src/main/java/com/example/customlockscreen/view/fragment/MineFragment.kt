@@ -15,7 +15,7 @@ import com.example.customlockscreen.view.activity.ChangeAvatarActivity
 import com.example.customlockscreen.application.MyApplication
 import com.example.customlockscreen.databinding.FragmentMineBinding
 import com.example.customlockscreen.model.db.DataBase
-import com.example.customlockscreen.model.db.DataViewModel
+import com.example.customlockscreen.viewmodel.DataViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
 import java.util.*

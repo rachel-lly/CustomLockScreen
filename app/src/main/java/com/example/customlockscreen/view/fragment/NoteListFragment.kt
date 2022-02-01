@@ -18,7 +18,7 @@ import com.example.customlockscreen.databinding.FragmentNoteListBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.bean.MessageEvent
 import com.example.customlockscreen.model.db.DataBase
-import com.example.customlockscreen.model.db.DataViewModel
+import com.example.customlockscreen.viewmodel.DataViewModel
 import com.example.customlockscreen.util.TimeManager.Companion.format
 import com.example.customlockscreen.util.TimeManager.Companion.refreshRoomLabelListDay
 import org.greenrobot.eventbus.EventBus
@@ -73,7 +73,7 @@ class NoteListFragment : Fragment() {
 
         labelList = ArrayList()
 
-        var isFirst by SharedPreferenceCommission(requireContext(), "isFirst", true)
+        val isFirst by SharedPreferenceCommission(requireContext(), "isFirst", true)
 
         if(isFirst){
             val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"))
@@ -159,7 +159,7 @@ class NoteListFragment : Fragment() {
         binding = DataBindingUtil.inflate(LayoutInflater.from(this.context), R.layout.fragment_note_list,container,false)
         val style by SharedPreferenceCommission(requireContext(), "sortStyle", "按事件时间")
 
-        dataViewModel = ViewModelProvider(this).get(DataViewModel::class.java)
+        dataViewModel = ViewModelProvider(this)[DataViewModel::class.java]
 
         dataViewModel.getAllLabelsByObserve().observe(viewLifecycleOwner, {
             labelList = it
@@ -170,7 +170,7 @@ class NoteListFragment : Fragment() {
                 binding.listNullLogo.visibility = View.GONE
             }
 
-            if (style.equals("按事件时间")) {
+            if (style == "按事件时间") {
                 Collections.sort(labelList, targetTimeComparator)
             } else {
                 Collections.sort(labelList, addTimeComparator)
@@ -181,14 +181,14 @@ class NoteListFragment : Fragment() {
 
         })
 
-        if(style.equals("按事件时间")){
+        if(style == "按事件时间"){
             Collections.sort(labelList, targetTimeComparator)
         }else{
             Collections.sort(labelList, addTimeComparator)
         }
 
-        labelLinearAdapter = requireContext().let { LabelLinearAdapter(it, labelList, false) }
-        labelGridAdapter = requireContext().let { LabelGridAdapter(it, labelList) }
+        labelLinearAdapter = LabelLinearAdapter(requireContext(), labelList, false)
+        labelGridAdapter = LabelGridAdapter(requireContext(), labelList)
 
 
         binding.homeRecyclerview.adapter = labelLinearAdapter

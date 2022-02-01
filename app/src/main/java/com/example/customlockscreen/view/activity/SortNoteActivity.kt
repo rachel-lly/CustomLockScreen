@@ -11,7 +11,7 @@ import com.example.customlockscreen.adapter.SortNoteAdapter
 import com.example.customlockscreen.databinding.ActivitySortNoteBinding
 import com.example.customlockscreen.model.bean.SortNote
 import com.example.customlockscreen.model.db.DataBase
-import com.example.customlockscreen.model.db.DataViewModel
+import com.example.customlockscreen.viewmodel.DataViewModel
 import com.example.customlockscreen.util.Code
 
 class SortNoteActivity : AppCompatActivity() {

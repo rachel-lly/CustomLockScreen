@@ -14,7 +14,7 @@ import com.example.customlockscreen.databinding.FragmentNoteSortBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.bean.SortNote
 import com.example.customlockscreen.model.db.DataBase
-import com.example.customlockscreen.model.db.DataViewModel
+import com.example.customlockscreen.viewmodel.DataViewModel
 import com.example.customlockscreen.model.db.LabelDao
 import com.example.customlockscreen.model.db.SortNoteDao
 import com.example.customlockscreen.util.SharedPreferenceCommission
@@ -95,6 +95,9 @@ class NoteSortFragment : Fragment() {
                 MaterialAlertDialogBuilder(context!!)
                     .setTitle("提醒")
                     .setMessage("确定删除这个分类本?")
+                    .setNegativeButton(context!!.resources.getString(R.string.decline)){ _,_ ->
+
+                    }
                     .setPositiveButton(context!!.resources.getString(R.string.accept)) { _, _ ->
                         if(labelDao.getSameSortNoteLabelList(sortNote.name).isNotEmpty()){
                             context!!.toast("该分类本下有事件，删除失败")
