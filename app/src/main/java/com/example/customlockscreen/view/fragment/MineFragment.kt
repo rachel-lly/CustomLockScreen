@@ -22,7 +22,8 @@ import java.util.*
 
 class MineFragment : Fragment() {
 
-    private lateinit var binding : FragmentMineBinding
+    private var _binding : FragmentMineBinding ?= null
+    private val binding get() = _binding!!
 
     private val labelDao = DataBase.dataBase.labelDao()
 
@@ -53,7 +54,7 @@ class MineFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        binding = DataBindingUtil.inflate(LayoutInflater.from(this.context), R.layout.fragment_mine,container,false)
+        _binding = DataBindingUtil.inflate(LayoutInflater.from(this.context), R.layout.fragment_mine,container,false)
 
 
 
@@ -100,5 +101,8 @@ class MineFragment : Fragment() {
         return binding.root
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

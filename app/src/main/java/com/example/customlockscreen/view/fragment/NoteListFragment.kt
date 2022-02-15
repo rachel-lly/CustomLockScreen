@@ -38,7 +38,8 @@ class NoteListFragment : Fragment() {
 
     private var isFirst:Boolean = true
 
-    private lateinit var binding: FragmentNoteListBinding
+    private var _binding: FragmentNoteListBinding ?= null
+    private val binding get() = _binding!!
 
     private lateinit var labelLinearAdapter:LabelLinearAdapter
 
@@ -156,7 +157,7 @@ class NoteListFragment : Fragment() {
 
         EventBus.getDefault().register(this)
 
-        binding = DataBindingUtil.inflate(LayoutInflater.from(this.context), R.layout.fragment_note_list,container,false)
+        _binding = DataBindingUtil.inflate(LayoutInflater.from(this.context), R.layout.fragment_note_list,container,false)
         val style by KvCommission( "sortStyle", "按事件时间")
 
         dataViewModel = ViewModelProvider(this)[DataViewModel::class.java]
@@ -317,6 +318,11 @@ class NoteListFragment : Fragment() {
         }else{
             binding.homeHeaderTopDateJustText.text = "开始："
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
 

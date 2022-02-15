@@ -27,7 +27,8 @@ import org.greenrobot.eventbus.ThreadMode
 
 class SettingFragment : Fragment() {
 
-    private lateinit var binding:FragmentSettingBinding
+    private var _binding:FragmentSettingBinding ?= null
+    private val binding get() = _binding!!
 
     private var sortStyle :String ?= null
 
@@ -77,7 +78,7 @@ class SettingFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         EventBus.getDefault().register(this)
-        binding = DataBindingUtil.inflate(LayoutInflater.from(this.context), R.layout.fragment_setting,container,false)
+        _binding = DataBindingUtil.inflate(LayoutInflater.from(this.context), R.layout.fragment_setting,container,false)
 
         val sortStyle by KvCommission( "sortStyle", "按事件时间")
         EventBus.getDefault().post(MessageEvent(sortStyle))
@@ -153,6 +154,11 @@ class SettingFragment : Fragment() {
                 binding.darkThemeStyle.text = "跟随系统"
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
 

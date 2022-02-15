@@ -24,7 +24,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class NoteSortFragment : Fragment() {
 
 
-    private lateinit var binding: FragmentNoteSortBinding
+    private var _binding: FragmentNoteSortBinding ?= null
+    private val binding get() = _binding!!
+
     private lateinit var list:List<SortNote>
     private lateinit var labelList:List<Label>
 
@@ -88,7 +90,7 @@ class NoteSortFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        binding = DataBindingUtil.inflate(LayoutInflater.from(this.context), R.layout.fragment_note_sort,container,false)
+        _binding = DataBindingUtil.inflate(LayoutInflater.from(this.context), R.layout.fragment_note_sort,container,false)
 
         deleteListener = object : SortNoteListAdapter.deleteOnClickListener {
             override fun delete(sortNote: SortNote) {
@@ -145,5 +147,9 @@ class NoteSortFragment : Fragment() {
         return binding.root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }
