@@ -10,7 +10,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.customlockscreen.R
 import com.example.customlockscreen.databinding.ActivityDarkThemeSettingBinding
 import com.example.customlockscreen.model.bean.MessageEvent
-import com.example.customlockscreen.util.SharedPreferenceCommission
+import com.example.customlockscreen.util.KvCommission
 import com.example.customlockscreen.util.ThemeUtil
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -44,7 +44,7 @@ class DarkThemeSettingActivity : AppCompatActivity() {
             finishAfterTransition()
         }
 
-        var isFollowSystem by SharedPreferenceCommission(this,"isFollowSystem",true)
+        var isFollowSystem by KvCommission("isFollowSystem",true)
         binding.followSystemSwitch.isChecked = isFollowSystem
         if(isFollowSystem){
             EventBus.getDefault().post(MessageEvent("系统"))
@@ -83,11 +83,11 @@ class DarkThemeSettingActivity : AppCompatActivity() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(messageEvent: MessageEvent){
         val msg = messageEvent.msg
-        var isFollowSystem by SharedPreferenceCommission(this,"isFollowSystem",true)
+        var isFollowSystem by KvCommission("isFollowSystem",true)
         when(msg){
 
             "夜","日"->{
-                var isDarkTheme by SharedPreferenceCommission(this,"isDarkTheme",false)
+                var isDarkTheme by KvCommission("isDarkTheme",false)
                 isDarkTheme = msg=="夜"
                 isFollowSystem = false
                 if(isDarkTheme){

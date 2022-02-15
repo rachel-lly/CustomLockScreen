@@ -12,7 +12,7 @@ import com.example.customlockscreen.databinding.ActivityEditNoteAttributeBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.util.Code
-import com.example.customlockscreen.util.SharedPreferenceCommission
+import com.example.customlockscreen.util.KvCommission
 import com.example.customlockscreen.util.TimeManager.Companion.format
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
 import com.example.customlockscreen.viewmodel.LabelViewModel
@@ -254,7 +254,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
     private fun changeOnTopLabel(labelName : String){
 
-        var topLabelName by SharedPreferenceCommission(this,"topLabelName","-1")
+        var topLabelName by KvCommission("topLabelName","-1")
 
         val deleteOnTopLabel = labelDao.getLabelByName(topLabelName)
         if(deleteOnTopLabel!=null){

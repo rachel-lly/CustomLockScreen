@@ -64,8 +64,6 @@ class IconListAdapter(val context: Context,clickListener: ClickListener,defaultP
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val bind = DataBindingUtil.bind<IconListItemBinding>(holder.itemView)
-
         if(position==lastposition){
             holder.checkbox.isChecked = true
             holder.checkbox.visibility = View.VISIBLE
@@ -73,7 +71,6 @@ class IconListAdapter(val context: Context,clickListener: ClickListener,defaultP
         holder.icon.setImageResource(Code.iconList[position])
         holderList[position] = holder
 
-        bind?.executePendingBindings()
     }
 
 

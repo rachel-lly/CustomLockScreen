@@ -8,17 +8,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.R
-import com.example.customlockscreen.view.activity.AddSortNoteActivity
 import com.example.customlockscreen.adapter.SortNoteListAdapter
 import com.example.customlockscreen.databinding.FragmentNoteSortBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.bean.SortNote
 import com.example.customlockscreen.model.db.DataBase
-import com.example.customlockscreen.viewmodel.DataViewModel
 import com.example.customlockscreen.model.db.LabelDao
 import com.example.customlockscreen.model.db.SortNoteDao
-import com.example.customlockscreen.util.SharedPreferenceCommission
+import com.example.customlockscreen.util.KvCommission
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
+import com.example.customlockscreen.view.activity.AddSortNoteActivity
+import com.example.customlockscreen.viewmodel.DataViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class NoteSortFragment : Fragment() {
@@ -114,7 +114,7 @@ class NoteSortFragment : Fragment() {
         binding.fragmentSortNoteRecycleview.adapter = adapter
         binding.fragmentSortNoteRecycleview.layoutManager = GridLayoutManager(context,1)
 
-        var isFirst by SharedPreferenceCommission(requireContext(), "isFirst", true)
+        var isFirst by KvCommission( "isFirst", true)
 
         if(isFirst){
             sortNoteDao.insertSortNote(SortNote("生活",resources.getResourceEntryName(R.mipmap.cat)))

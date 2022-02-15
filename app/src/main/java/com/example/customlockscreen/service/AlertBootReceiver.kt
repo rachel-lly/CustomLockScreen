@@ -7,7 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import com.example.customlockscreen.application.MyApplication
-import com.example.customlockscreen.util.SharedPreferenceCommission
+import com.example.customlockscreen.util.KvCommission
 import com.example.customlockscreen.util.TimeManager
 
 class AlertBootReceiver : BroadcastReceiver() {
@@ -18,12 +18,15 @@ class AlertBootReceiver : BroadcastReceiver() {
 
                     val context =  MyApplication.getContext()
 
-                val isNowTimeRemind by SharedPreferenceCommission(context, "isNowTimeRemind", false)
+                val isNowTimeRemind by KvCommission("isNowTimeRemind", false)
 
-                val isFutureTimeRemind by SharedPreferenceCommission(context, "isFutureTimeRemind", false)
+                val isFutureTimeRemind by KvCommission("isFutureTimeRemind", false)
 
-                val nowRemind by SharedPreferenceCommission(context, "nowRemindTime", 540)
-                val futureRemind by SharedPreferenceCommission(context, "futureRemindTime", 540)
+                val nowRemind by KvCommission( "nowRemindTime", 540)
+                val futureRemind by KvCommission( "futureRemindTime", 540)
+
+
+
 
 
                 val alarmManager = MyApplication.getContext().getSystemService(Service.ALARM_SERVICE) as AlarmManager

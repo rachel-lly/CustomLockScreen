@@ -4,20 +4,23 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.view.*
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.annotation.MenuRes
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.customlockscreen.R
+import com.example.customlockscreen.databinding.FragmentSettingBinding
+import com.example.customlockscreen.model.bean.MessageEvent
+import com.example.customlockscreen.util.KvCommission
 import com.example.customlockscreen.view.activity.BackupDataActivity
 import com.example.customlockscreen.view.activity.DarkThemeSettingActivity
 import com.example.customlockscreen.view.activity.LockScreenSettingActivity
 import com.example.customlockscreen.view.activity.TimeRemindActivity
-import com.example.customlockscreen.databinding.FragmentSettingBinding
-import com.example.customlockscreen.model.bean.MessageEvent
-import com.example.customlockscreen.util.SharedPreferenceCommission
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -76,15 +79,15 @@ class SettingFragment : Fragment() {
         EventBus.getDefault().register(this)
         binding = DataBindingUtil.inflate(LayoutInflater.from(this.context), R.layout.fragment_setting,container,false)
 
-        val sortStyle by SharedPreferenceCommission(requireContext(), "sortStyle", "按事件时间")
+        val sortStyle by KvCommission( "sortStyle", "按事件时间")
         EventBus.getDefault().post(MessageEvent(sortStyle))
         binding.sortStyle.text = sortStyle
 
-        val isFollowSystem by SharedPreferenceCommission(requireContext(),"isFollowSystem",true)
+        val isFollowSystem by KvCommission("isFollowSystem",true)
         if(isFollowSystem){
             binding.darkThemeStyle.text = "跟随系统"
         }else{
-            val isDarkTheme by SharedPreferenceCommission(requireContext(),"isDarkTheme",false)
+            val isDarkTheme by KvCommission("isDarkTheme",false)
             if(isDarkTheme){
                 binding.darkThemeStyle.text = "夜间模式"
             }else{
@@ -134,7 +137,7 @@ class SettingFragment : Fragment() {
 
             "按添加时间", "按事件时间" -> {
                 binding.sortStyle.text = msg
-                var style by SharedPreferenceCommission(requireContext(), "sortStyle", "按事件时间")
+                var style by KvCommission( "sortStyle", "按事件时间")
                 style = msg
             }
 

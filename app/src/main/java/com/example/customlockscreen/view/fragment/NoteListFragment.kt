@@ -10,17 +10,17 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.customlockscreen.*
-import com.example.customlockscreen.util.SharedPreferenceCommission
-import com.example.customlockscreen.view.activity.AddNoteActivity
 import com.example.customlockscreen.adapter.LabelGridAdapter
 import com.example.customlockscreen.adapter.LabelLinearAdapter
 import com.example.customlockscreen.databinding.FragmentNoteListBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.bean.MessageEvent
 import com.example.customlockscreen.model.db.DataBase
-import com.example.customlockscreen.viewmodel.DataViewModel
+import com.example.customlockscreen.util.KvCommission
 import com.example.customlockscreen.util.TimeManager.Companion.format
 import com.example.customlockscreen.util.TimeManager.Companion.refreshRoomLabelListDay
+import com.example.customlockscreen.view.activity.AddNoteActivity
+import com.example.customlockscreen.viewmodel.DataViewModel
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -73,7 +73,7 @@ class NoteListFragment : Fragment() {
 
         labelList = ArrayList()
 
-        val isFirst by SharedPreferenceCommission(requireContext(), "isFirst", true)
+        val isFirst by KvCommission( "isFirst", true)
 
         if(isFirst){
             val calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT+8"))
@@ -157,7 +157,7 @@ class NoteListFragment : Fragment() {
         EventBus.getDefault().register(this)
 
         binding = DataBindingUtil.inflate(LayoutInflater.from(this.context), R.layout.fragment_note_list,container,false)
-        val style by SharedPreferenceCommission(requireContext(), "sortStyle", "按事件时间")
+        val style by KvCommission( "sortStyle", "按事件时间")
 
         dataViewModel = ViewModelProvider(this)[DataViewModel::class.java]
 
@@ -249,7 +249,7 @@ class NoteListFragment : Fragment() {
         }
 
         if(!isChange){
-            val sortStyle by SharedPreferenceCommission(requireContext(), "sortStyle", "按事件时间")
+            val sortStyle by KvCommission( "sortStyle", "按事件时间")
 
             if(sortStyle.equals("按添加时间")){
                 Collections.sort(labelList, addTimeComparator)
@@ -275,7 +275,7 @@ class NoteListFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     fun refreshTopLabel(){
 
-        val topEventName by SharedPreferenceCommission(requireContext(), "topLabelName", "-1")
+        val topEventName by KvCommission("topLabelName", "-1")
 
         if(topEventName.equals("-1")){
             defaultTopLabel()

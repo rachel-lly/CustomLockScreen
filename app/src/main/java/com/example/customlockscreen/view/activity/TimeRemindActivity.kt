@@ -16,10 +16,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
 import androidx.databinding.DataBindingUtil
 import com.example.customlockscreen.R
-import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.databinding.ActivityTimeRemindBinding
 import com.example.customlockscreen.service.AlertBootReceiver
 import com.example.customlockscreen.util.JumpToStartUpUtil
+import com.example.customlockscreen.util.KvCommission
 import com.example.customlockscreen.util.TimeManager
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
 import com.example.library.PermissionX
@@ -68,9 +68,9 @@ class TimeRemindActivity : AppCompatActivity() {
         val notificationManager: NotificationManagerCompat = NotificationManagerCompat.from(this);
         val isEnabled = notificationManager.areNotificationsEnabled()
 
-        var isNowTimeRemind by SharedPreferenceCommission(this, "isNowTimeRemind", false)
+        var isNowTimeRemind by KvCommission( "isNowTimeRemind", false)
 
-        var isFutureTimeRemind by SharedPreferenceCommission(this, "isFutureTimeRemind", false)
+        var isFutureTimeRemind by KvCommission( "isFutureTimeRemind", false)
 
         if(!isEnabled){
             isNowTimeRemind = false
@@ -78,8 +78,8 @@ class TimeRemindActivity : AppCompatActivity() {
         }
 
 
-        var nowRemind by SharedPreferenceCommission(this, "nowRemindTime", 540)
-        var futureRemind by SharedPreferenceCommission(this, "futureRemindTime", 540)
+        var nowRemind by KvCommission( "nowRemindTime", 540)
+        var futureRemind by KvCommission( "futureRemindTime", 540)
 
         nowRemindTime = nowRemind
         futureRemindTime = futureRemind

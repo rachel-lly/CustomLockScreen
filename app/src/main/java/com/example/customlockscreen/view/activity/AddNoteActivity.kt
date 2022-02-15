@@ -1,17 +1,17 @@
 package com.example.customlockscreen.view.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.example.customlockscreen.R
 import com.example.customlockscreen.databinding.ActivityAddNoteBinding
-import com.example.customlockscreen.util.SharedPreferenceCommission
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.model.db.DataBase
 import com.example.customlockscreen.util.Code
+import com.example.customlockscreen.util.KvCommission
 import com.example.customlockscreen.util.TimeManager.Companion.format
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -177,7 +177,7 @@ class AddNoteActivity : AppCompatActivity() {
 
                     addLabel.isTop = binding.noteAttributeLayout.toTopSwitch.isChecked
 
-                    var topLabelName by SharedPreferenceCommission(this,"topLabelName","-1")
+                    var topLabelName by KvCommission("topLabelName","-1")
                     if(addLabel.isTop){
 
                         if(!topLabelName.equals("-1")){

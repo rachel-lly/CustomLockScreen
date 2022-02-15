@@ -16,13 +16,13 @@ import com.example.customlockscreen.R
 import com.example.customlockscreen.adapter.HeaderSortNoteListAdapter
 import com.example.customlockscreen.adapter.PagerAdapter
 import com.example.customlockscreen.databinding.ActivityHomeBinding
+import com.example.customlockscreen.model.bean.MessageEvent
+import com.example.customlockscreen.model.db.DataBase
+import com.example.customlockscreen.util.KvCommission
 import com.example.customlockscreen.view.fragment.MineFragment
 import com.example.customlockscreen.view.fragment.NoteListFragment
 import com.example.customlockscreen.view.fragment.NoteSortFragment
 import com.example.customlockscreen.view.fragment.SettingFragment
-import com.example.customlockscreen.model.bean.MessageEvent
-import com.example.customlockscreen.model.db.DataBase
-import com.example.customlockscreen.util.SharedPreferenceCommission
 import org.greenrobot.eventbus.EventBus
 
 class HomeActivity : AppCompatActivity() {
@@ -185,11 +185,11 @@ class HomeActivity : AppCompatActivity() {
         //用户是否改变了该应用的模式切换
         //1. 没有改变过:按照系统设置的模式改变
         //2. 改变：按照应用的设置
-        val isFollowSystem by SharedPreferenceCommission(this,"isFollowSystem",true)
+        val isFollowSystem by KvCommission("isFollowSystem",true)
         if(isFollowSystem){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         }else{
-            val isDarkTheme by SharedPreferenceCommission(this,"isDarkTheme",false)
+            val isDarkTheme by KvCommission("isDarkTheme",false)
             if(isDarkTheme){
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }else{
