@@ -30,9 +30,9 @@
             <include
                 android:id="@+id/note_attribute_layout"
                 layout="@layout/note_attribute_layout"
-                android:layout_below="@+id/edit_note_attribute_toolbar"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"/>
+                android:layout_below="@+id/edit_note_attribute_toolbar" />
 
 
             <LinearLayout

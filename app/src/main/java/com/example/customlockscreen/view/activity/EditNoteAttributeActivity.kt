@@ -28,11 +28,11 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
     private var isFirst = true
 
-    private var targetDayTime:Long = MaterialDatePicker.todayInUtcMilliseconds()
+    private var targetDayTime:Long ?= null
 
     private var endTime:Long ?= null
 
-    private val today = format.format(targetDayTime)
+    private val today = format.format(MaterialDatePicker.todayInUtcMilliseconds())
 
     private val labelDao = DataBase.dataBase.labelDao()
 
@@ -81,7 +81,8 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
 
         val todayTime = MaterialDatePicker.todayInUtcMilliseconds()
-        binding.noteAttributeLayout.addNoteDate.text = today
+        binding.noteAttributeLayout.addNoteDate.text = format.format(label.targetDate)
+        targetDayTime = label.targetDate
         if(label.targetDate<todayTime){
             binding.noteAttributeLayout.addNoteDate.setTextColor(ContextCompat.getColor(this,R.color.color_passed))
         }else{
@@ -204,7 +205,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
                     }
 
                     label.isTop = binding.noteAttributeLayout.toTopSwitch.isChecked
-                    label.targetDate = targetDayTime
+                    label.targetDate = targetDayTime as Long
                     label.refreshDay()
 
                     val sortNoteName = binding.noteAttributeLayout.chooseSortTv.text.toString()
