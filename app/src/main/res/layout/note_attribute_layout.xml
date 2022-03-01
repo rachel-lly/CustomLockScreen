@@ -143,7 +143,7 @@
                             android:layout_gravity="bottom"
                             android:layout_marginStart="10dp"
                             android:fontFamily="@font/montserrat_medium"
-                            android:text="@{viewmodelchild.label.sortNote}"
+                            android:text=""
                             android:textColor="@color/text_colorPrimary"
                             android:textSize="14sp" />
 

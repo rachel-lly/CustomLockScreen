@@ -79,6 +79,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 //        binding.noteAttributeLayout.addNoteEt.requestFocus()
 
 
+        binding.noteAttributeLayout.chooseSortTv.text = label.sortNote
 
         val todayTime = MaterialDatePicker.todayInUtcMilliseconds()
         binding.noteAttributeLayout.addNoteDate.text = format.format(label.targetDate)
