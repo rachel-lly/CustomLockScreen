@@ -18,12 +18,14 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.example.customlockscreen.R
 import com.example.customlockscreen.util.PictureUtil
 import com.example.customlockscreen.databinding.ActivityDetailBinding
 import com.example.customlockscreen.model.bean.Label
 import com.example.customlockscreen.util.Code
 import com.example.customlockscreen.util.ToastUtil.Companion.toast
+import com.example.customlockscreen.viewmodel.DataViewModel
 import com.example.library.PermissionX
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.lang.Exception
@@ -35,6 +37,8 @@ class DetailActivity : AppCompatActivity() {
 
 
     private val TAG = "DetailActivity"
+
+    private lateinit var dataViewModel: DataViewModel
 
     private var mediaProjectionManager: MediaProjectionManager? = null
     private var mediaProjection: MediaProjection? = null
@@ -54,9 +58,12 @@ class DetailActivity : AppCompatActivity() {
 
         label= intent.getParcelableExtra(Code.LABEL)!!
         labelIsLock = intent!!.getBooleanExtra(Code.LABEL_IS_LOCK, false)
-
+        dataViewModel = ViewModelProvider(this)[DataViewModel::class.java]
 
         binding.detailCard.label = label
+        dataViewModel.getLabelByid(label.id).observe(this,{
+            binding.detailCard.label = it
+        })
         binding.lifecycleOwner = this
 
 
@@ -103,18 +110,6 @@ class DetailActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         when(requestCode){
-
-            Code.EDIT_LABLE ->{
-                if(data!=null){
-                    val isDelete = data.getBooleanExtra(Code.IS_DELETE,true)
-                    if(isDelete){
-                        finish()
-                    }else{
-                        val label = data.getParcelableExtra<Label>(Code.LABEL)!!
-                        freshLabel(label)
-                    }
-                }
-            }
 
             Code.EVENT_SCREENSHOT_LOCK,Code.EVENT_SCREENSHOT_SHARE->{
                 val displayMetrics = resources.displayMetrics
@@ -213,8 +208,8 @@ class DetailActivity : AppCompatActivity() {
         when(item.itemId){
             R.id.edit -> {
                 val intent = Intent(this, EditNoteAttributeActivity::class.java)
-                intent.putExtra(Code.LABEL, label)
-                startActivityForResult(intent,Code.EDIT_LABLE)
+                intent.putExtra(Code.LABEL, label.id)
+                startActivity(intent)
             }
 
             R.id.share -> {

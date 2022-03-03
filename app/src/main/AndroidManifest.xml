@@ -17,7 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.customlockscreen.view.activity.DarkThemeSettingActivity"></activity>
+        <activity android:name="com.example.customlockscreen.view.activity.DarkThemeSettingActivity" />
         <activity android:name="com.example.customlockscreen.view.activity.ChangeAvatarActivity" />
         <activity android:name="com.example.customlockscreen.view.activity.LockScreenSettingActivity" />
         <activity android:name="com.example.customlockscreen.view.activity.EditSortNoteActivity" />
@@ -29,6 +29,7 @@
         <activity android:name="com.example.customlockscreen.view.activity.DetailActivity" />
         <activity android:name="com.example.customlockscreen.view.activity.SortNoteActivity" />
         <activity android:name="com.example.customlockscreen.view.activity.HomeActivity"
+            android:launchMode="singleTask"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

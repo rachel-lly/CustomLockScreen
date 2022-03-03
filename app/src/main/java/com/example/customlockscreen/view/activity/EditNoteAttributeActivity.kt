@@ -35,6 +35,7 @@ class EditNoteAttributeActivity : AppCompatActivity() {
     private val today = format.format(MaterialDatePicker.todayInUtcMilliseconds())
 
     private val labelDao = DataBase.dataBase.labelDao()
+    private var id: Int ?= null
 
     private lateinit var label:Label
     private lateinit var labelViewModel: LabelViewModel
@@ -59,8 +60,8 @@ class EditNoteAttributeActivity : AppCompatActivity() {
 
         binding =  DataBindingUtil.setContentView(this,R.layout.activity_edit_note_attribute)
 
-        label = intent!!.getParcelableExtra(Code.LABEL)!!
-
+        id = intent!!.getIntExtra(Code.LABEL,0)
+        label = DataBase.dataBase.labelDao().getLabelById(id!!)
         //ViewModel
         labelViewModel = ViewModelProvider(this)[LabelViewModel::class.java]
         labelViewModel.label.value = label
@@ -226,12 +227,9 @@ class EditNoteAttributeActivity : AppCompatActivity() {
                             changeOnTopLabel("-1")
                         }
                         labelDao.updateLabel(label)
-                        this.toast("修改数据成功,$label")
+                        this.toast("修改数据成功")
 
-                        val intent = Intent()
-                        intent.putExtra(Code.IS_DELETE,false)
-                        intent.putExtra(Code.LABEL,label)
-                        setResult(Code.RESULT_CODE,intent)
+
                         finish()
                     }
 
@@ -244,10 +242,8 @@ class EditNoteAttributeActivity : AppCompatActivity() {
         binding.deleteNoteSure.setOnClickListener {
             labelDao.deleteLabel(label)
             this.toast("删除数据成功")
-            val intent = Intent()
-            intent.putExtra(Code.IS_DELETE,true)
-            setResult(Code.RESULT_CODE,intent)
-            finish()
+            val intent = Intent(this,HomeActivity::class.java)
+            startActivity(intent)
         }
 
 

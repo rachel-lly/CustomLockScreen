@@ -118,7 +118,7 @@ class EditSortNoteActivity : AppCompatActivity() {
 
             sortNote!!.name = sortNoteName
             sortNote!!.iconName = iconName
-            this.toast("${sortNote}")
+
             val nameList = sortNoteDao.getAllSortNotesName()
 
 

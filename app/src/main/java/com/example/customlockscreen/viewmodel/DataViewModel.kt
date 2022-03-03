@@ -15,4 +15,6 @@ class DataViewModel : ViewModel() {
 
     fun getAllSortNotesByObserve() = sortNoteDao.getAllSortNotesByObserve()
 
+    fun getLabelByid(id : Int) = labelDao.getLabel(id)
+
 }

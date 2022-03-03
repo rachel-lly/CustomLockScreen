@@ -45,4 +45,10 @@ interface LabelDao {
 
     @Query("UPDATE label_table SET sortNote =:sortNote WHERE id =:id")
     fun updateLabelBySortNote(sortNote: String,id: Int)
+
+    @Query("SELECT * FROM label_table WHERE id =:id")
+    fun getLabel(id:Int):LiveData<Label>
+
+    @Query("SELECT * FROM label_table WHERE id =:id")
+    fun getLabelById(id:Int):Label
 }
